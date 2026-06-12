@@ -47,6 +47,7 @@ export default function MorphingLines() {
 
   // Elements to animate along scroll
   const copyRef = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const chaosSvgRef = useRef<SVGSVGElement>(null);
   const orderedSvgRef = useRef<SVGSVGElement>(null);
 
@@ -347,6 +348,22 @@ export default function MorphingLines() {
       }
     }
 
+    // Update scroll indicator opacity and transform
+    const scrollIndicator = scrollIndicatorRef.current;
+    if (scrollIndicator) {
+      const indicatorOpacity = Math.max(0, 1 - p * 3);
+      scrollIndicator.style.opacity = indicatorOpacity.toString();
+
+      const translateY = p * -100;
+      scrollIndicator.style.transform = `translate3d(0, ${translateY}px, 0)`;
+
+      if (indicatorOpacity > 0.01) {
+        scrollIndicator.style.pointerEvents = "auto";
+      } else {
+        scrollIndicator.style.pointerEvents = "none";
+      }
+    }
+
 
 
     // Section 2: About Content Opacity & Transform (Fades in from p = 0.15 to 0.45)
@@ -484,29 +501,32 @@ export default function MorphingLines() {
             is my job.
           </h1>
 
-          {/* Sub-row */}
-          <div className="flex flex-col md:flex-row md:justify-between items-start md:items-end gap-8 w-full">
-            {/* Left Column: Supporting Copy */}
-            <div className="max-w-[480px]">
-              <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-left">
-                I turn ideas into products, systems and experiences.
-                <br />
-                By making the right decisions across design, tech and product.
-              </p>
-            </div>
+          {/* Supporting Copy */}
+          <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-left max-w-[480px]">
+            I turn ideas into products, systems and experiences.
+            <br />
+            By making the right decisions across design, tech and product.
+          </p>
+        </div>
 
-            {/* Right Column: Scroll Indicator */}
-            <div className="flex items-end gap-4">
-              {/* Line & Dot */}
-              <div className="flex flex-col items-center">
-                <div className="w-[1.5px] h-[32px] bg-primary/40" />
-                <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
-              </div>
-              {/* Text */}
-              <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
-                SCROLL TO UNTANGLE
-              </span>
+        {/* Scroll Indicator - Fixed to bottom of viewport (50px up from bottom), aligned to right side of navigation */}
+        <div
+          ref={scrollIndicatorRef}
+          className="absolute bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[calc(100%-32px)] md:w-[min(76vw,1260px)] flex justify-end transition-opacity duration-0"
+          style={{
+            willChange: "opacity, transform",
+          }}
+        >
+          <div className="flex items-end gap-4">
+            {/* Line & Dot */}
+            <div className="flex flex-col items-center">
+              <div className="w-[1.5px] h-[32px] bg-primary/40" />
+              <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
             </div>
+            {/* Text */}
+            <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
+              SCROLL TO UNTANGLE
+            </span>
           </div>
         </div>
 

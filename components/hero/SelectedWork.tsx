@@ -4,7 +4,7 @@ import CaseStudyCard from "./CaseStudyCard";
 
 export default function SelectedWork() {
   return (
-    <section className="w-full bg-white p-[20px] md:p-[30px] overflow-hidden">
+    <section className="w-full bg-white p-[20px] md:p-[30px] overflow-hidden rounded-[100px] md:rounded-[110px]">
       <div className="w-full bg-[#fbf5f5] rounded-[80px] pt-16 pb-24 overflow-hidden relative">
         
         {/* Header Section: Two-column layout on desktop */}
