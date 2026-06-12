@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { CHAOS_PATHS } from "@/lib/paths";
+import { useEffect, useRef, useState } from "react";
 
 interface Point {
   x: number;
@@ -16,20 +15,47 @@ interface PathData {
   element: SVGPathElement;
 }
 
+// The three initial paths extracted from 'New - SVG Initial.svg'
+const INITIAL_PATHS = [
+  {
+    name: "Path_One",
+    d: "M1916.94,735.91c-84.03,1.13-91.6-198.01-257.16-132.62-71.69,28.31-141.07,60.43-211.43,91.78-70.36,31.35-150.2,51.41-220.51,22.54-26.66-10.95-51.12-28.65-79.11-34.74-96.5-21-191.02,100.65-284.11,66.32-41.73-15.39-68.74-58.34-92.38-99-23.64-40.66-49.48-84.09-90.49-101.58-41.01-17.49-99.78,8.21-101.64,56.82-1.45,37.99,33.64,67.94,68.2,68.69,34.56.75,64.71-23.36,93.46-45.01,95.36-71.83,54.7-245.53-47.09-274.73C515.2,302.88,59.17,662.74-4.24,663.59"
+  },
+  {
+    name: "Path_Two",
+    d: "M-.05,290.93c201-.98,404.76-10.61,592.22-93.11,32.67-14.38,71.17-46.41,59.05-82.72-9.24-27.66-45.47-32.85-67.51-15.76s-31.89,48.05-35.93,77.51c-6.94,50.58,2.72,109.24,40.82,136.46,39.05,27.9,92.38,12.03,132.22-16.23,39.84-28.26,73.28-67.75,115.45-91.28,60.68-33.85,138.46-28.36,189.73,19.23s69.5,136.94,36.91,203.5c-21.5,43.91-79.81,73.52-109.3,37.07-7.85-9.7-12.11-22.54-14-35.54-8.71-60.1,39.8-123.77,94.38-122.71,63.2,1.23,104.13,70.64,135.98,131.04,46.38,87.95,98.23,174.91,171.04,236.37,63.49,53.6,140.43,85.31,219.22,101.01,54.29,10.82,110.19,8.2,162.95-13.65,148.78-61.61,53.15-356.98,196.83-356.98"
+  },
+  {
+    name: "Path_Three",
+    d: "M-.05,301.45c98.31,0,253.19,59.44,353.48,120.89,56.22,34.45,112.48,73.1,144.9,142.33,61.78,131.9-74.42,242.07-186.32,200.43-228.74-85.11,111.9-415.52,384.41-307.05,77.1,30.69,148.97,79.01,226.28,109.51,93.9,37.05,194.14,45,293.26,52.71,45.8,3.56,92.79,6.96,137.32-10.04,90.16-34.42,150.59-159.1,141.03-274.78-18.76-226.95-271.48-215.04-240.25-37.86,9.89,56.13,47.82,89.02,91.6,103.2,93.87,30.4,201.3,53.5,284.94-14.83,55.47-45.31,88.58-121.96,128.94-187.94,40.36-65.98,95.91-120.19,160.44-120.19"
+  }
+];
+
 export default function MorphingLines() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // SVG Translation Parameters for vertical positioning
+  const initialTranslateY = 0; // %
+  const finalTranslateY = -12; // %
+
   const containerRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const svgWrapperRef = useRef<HTMLDivElement>(null);
   const originalSvgRef = useRef<SVGSVGElement>(null);
   const outputSvgRef = useRef<SVGSVGElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   // Elements to animate along scroll
   const copyRef = useRef<HTMLDivElement>(null);
-  const hintRef = useRef<HTMLDivElement>(null);
-
-  // Hidden sources refs
   const chaosSvgRef = useRef<SVGSVGElement>(null);
   const orderedSvgRef = useRef<SVGSVGElement>(null);
+
+
+
+  // Section & scroll container refs
+  const scrollContentRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const industriesRef = useRef<HTMLDivElement>(null);
 
   // Animation refs
   const initCountRef = useRef(0);
@@ -40,7 +66,6 @@ export default function MorphingLines() {
 
   useEffect(() => {
     // Determine sample points count based on screen size (Mobile optimization)
-    // 180 points on desktop and 100 on mobile provides buttery smooth rendering
     const pointsCount = window.innerWidth < 768 ? 100 : 180;
 
     let animationFrameId: number;
@@ -92,100 +117,65 @@ export default function MorphingLines() {
       console.time("svg-sampling");
 
       const chaosPaths = Array.from(chaosSvg.querySelectorAll("path"));
-      const orderedLines = Array.from(orderedSvg.querySelectorAll("polyline, path"));
-
-      const chaosViewBox = chaosSvg.viewBox.baseVal;
-      const orderedViewBox = orderedSvg.viewBox.baseVal;
-
-      const xScale = chaosViewBox.width / orderedViewBox.width;
-      const orderedYOffset = (chaosViewBox.height - orderedViewBox.height) / 2;
-      const chaosWidth = chaosViewBox.width;
+      const orderedLines = Array.from(orderedSvg.querySelectorAll("line"));
 
       // Helper to sample points along an SVG geometry element
       const sampleGeometry = (
         el: SVGGeometryElement,
-        count: number,
-        transformPoint?: (p: DOMPoint) => Point
+        count: number
       ): Point[] => {
         const length = el.getTotalLength();
         const points: Point[] = [];
         for (let i = 0; i < count; i++) {
           const distance = length * (i / (count - 1));
           const p = el.getPointAtLength(distance);
-          points.push(
-            transformPoint
-              ? transformPoint(p)
-              : { x: p.x, y: p.y }
-          );
+          points.push({ x: p.x, y: p.y });
         }
         return points;
       };
 
-      // Helper to calculate average Y of points (for spatial sorting)
-      const getAverageY = (points: Point[]): number => {
-        return points.reduce((sum, p) => sum + p.y, 0) / points.length;
+      // Helper to normalize path and parent IDs to match names
+      const getNormalizedName = (el: SVGElement): string => {
+        const id = el.id || "";
+        const parentId = el.parentElement?.id || "";
+        const combined = (id + "_" + parentId).toLowerCase();
+
+        if (combined.includes("one")) return "Path_One";
+        if (combined.includes("two")) return "Path_Two";
+        if (combined.includes("three")) return "Path_Three";
+        return id;
       };
 
-      // Extract chaos paths with their sampled points and original indices
-      const sampledChaos = chaosPaths.map((pathEl, origIndex) => {
-        const fromPoints = sampleGeometry(pathEl as SVGGeometryElement, pointsCount);
-        const avgY = getAverageY(fromPoints);
-        const fromStrokeWidth = pathEl.classList.contains("st0") ? 0.5 : 1.0;
-        return {
-          origIndex,
-          fromPoints,
-          avgY,
-          fromStrokeWidth,
-          element: pathEl,
-        };
-      });
+      const pairedPaths: PathData[] = [];
+      const targetNames = ["Path_One", "Path_Two", "Path_Three"];
 
-      // Extract ordered lines/paths with their sampled and mapped points
-      const sampledOrdered = orderedLines.map((lineEl, origIndex) => {
-        const toPoints = sampleGeometry(lineEl as SVGGeometryElement, pointsCount, (p) => ({
-          x: p.x * xScale,
-          y: p.y + orderedYOffset,
-        }));
+      for (let i = 0; i < targetNames.length; i++) {
+        const name = targetNames[i];
+        const chaosEl = chaosPaths.find(p => getNormalizedName(p) === name);
+        const orderedEl = orderedLines.find(l => getNormalizedName(l) === name);
 
-        // Re-distribute X coordinates progressively from left to right along the line width
-        // to untangle chaotic overlaps and eliminate horizontal zigzag artifacts
-        for (let j = 0; j < toPoints.length; j++) {
-          toPoints[j].x = (j / (toPoints.length - 1)) * chaosWidth;
+        if (!chaosEl || !orderedEl) {
+          console.error(`Could not find path pair for ${name}`);
+          continue;
         }
 
-        const avgY = getAverageY(toPoints);
-        const toStrokeWidth = lineEl.classList.contains("st0") ? 0.5 : 1.0;
-        return {
-          origIndex,
-          toPoints,
-          avgY,
-          toStrokeWidth,
-          element: lineEl,
-        };
-      });
+        const fromPoints = sampleGeometry(chaosEl as SVGGeometryElement, pointsCount);
+        const toPoints = sampleGeometry(orderedEl as SVGGeometryElement, pointsCount);
 
-      // Sort both by average Y to align them vertically:
-      const sortedChaos = [...sampledChaos].sort((a, b) => a.avgY - b.avgY);
-      const sortedOrdered = [...sampledOrdered].sort((a, b) => a.avgY - b.avgY);
-
-      const pairedPaths: PathData[] = [];
-
-      for (let i = 0; i < sortedChaos.length; i++) {
-        const chaos = sortedChaos[i];
-
-        // Find corresponding ordered line
-        const orderedTargetIndex = i;
-        const ordered = sortedOrdered[orderedTargetIndex] || sortedOrdered[sortedOrdered.length - 1];
+        // Reverse target coordinates for Path_One to match starting directions
+        if (name === "Path_One") {
+          toPoints.reverse();
+        }
 
         // Bind to the statically rendered React output path element
         const outputPath = pathRefs.current[i];
         if (!outputPath) continue;
 
         pairedPaths.push({
-          fromPoints: chaos.fromPoints,
-          toPoints: ordered.toPoints,
-          fromStrokeWidth: chaos.fromStrokeWidth,
-          toStrokeWidth: ordered.toStrokeWidth,
+          fromPoints,
+          toPoints,
+          fromStrokeWidth: 1.0,
+          toStrokeWidth: 1.0,
           element: outputPath,
         });
       }
@@ -193,7 +183,7 @@ export default function MorphingLines() {
       pathDataRef.current = pairedPaths;
       console.timeEnd("svg-sampling");
       console.log(`[svg-sampling] Chaos paths count: ${chaosPaths.length}`);
-      console.log(`[svg-sampling] Ordered paths count: ${orderedLines.length}`);
+      console.log(`[svg-sampling] Ordered lines count: ${orderedLines.length}`);
       console.log(`[svg-sampling] Sample points count: ${pointsCount}`);
 
       isLoadedRef.current = true;
@@ -227,13 +217,9 @@ export default function MorphingLines() {
       startLoop();
     };
 
-    // Use passive scroll listener for high performance scrolling
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Initial call to set initial scroll position
     handleScroll();
 
-    // Resize handler to re-initialize sample points and mapping if dimensions change
     let resizeTimeout: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
@@ -260,15 +246,14 @@ export default function MorphingLines() {
     const svgWrapper = svgWrapperRef.current;
     const originalSvg = originalSvgRef.current;
     const outputSvg = outputSvgRef.current;
+    const nav = navRef.current;
     if (!container || !viewport || !svgWrapper || !outputSvg) return;
 
-    // ────────────────────────────────────────────────────────
-    // PROGRESS MAPPING & TIMING
-    // ────────────────────────────────────────────────────────
-    // Morph starts immediately at 0.0 and completes by 0.65 (slower transition)
+    const vh = window.innerHeight;
+
+    // Morph starts immediately at 0.0 and completes by 0.65
     const morphStart = 0.0;
     const morphEnd = 0.65;
-
     const morphRaw = Math.max(0, Math.min(1, (p - morphStart) / (morphEnd - morphStart)));
 
     // easeInOutCubic for line coordinates interpolation
@@ -277,33 +262,16 @@ export default function MorphingLines() {
     };
     const t = easeInOutCubic(morphRaw);
 
-    // smoothstep function for color and translation interpolation
     const smoothstep = (edge0: number, edge1: number, x: number) => {
       const val = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
       return val * val * (3 - 2 * val);
     };
 
-    // Keep background consistently dark as per user visual request
-    viewport.style.backgroundColor = "rgb(10, 10, 10)";
-
-    // Keep lines consistently light
-    const strokeColor = "rgb(245, 240, 232)";
-
-    // bgT controls the stroke-width transition
-    const bgT = smoothstep(0.0, 0.65, p);
-
-    // ────────────────────────────────────────────────────────
-    // VERTICAL POSITION ADJUSTMENT
-    // ────────────────────────────────────────────────────────
-    // Shifts the SVG wrapper upward:
-    // - Starts at -18% translation (giving more breathing room to scroll indicator)
-    // - Transitions to -38% translation (lifts lines up to landing layout)
-    const svgTranslateY = -18 - 20 * t;
+    // Shifts the SVG wrapper upward based on scroll progress parameters
+    const svgTranslateY = initialTranslateY + (finalTranslateY - initialTranslateY) * t;
     svgWrapper.style.transform = `translate3d(0, ${svgTranslateY}%, 0)`;
 
-    // ────────────────────────────────────────────────────────
     // OPACITY CROSS-FADE BETWEEN ORIGINAL AND SAMPLED MORPH
-    // ────────────────────────────────────────────────────────
     const fadeStart = 0.0;
     const fadeEnd = 0.05;
 
@@ -319,14 +287,12 @@ export default function MorphingLines() {
     if (originalSvg) {
       originalSvg.style.opacity = originalOpacity.toString();
       originalSvg.style.visibility = originalOpacity === 0 ? "hidden" : "visible";
-      originalSvg.style.color = strokeColor;
     }
 
     outputSvg.style.opacity = morphOpacity.toString();
     outputSvg.style.visibility = morphOpacity === 0 ? "hidden" : "visible";
-    outputSvg.style.color = strokeColor;
 
-    // Update path shapes and stroke properties directly in the DOM
+    // Update path shapes directly in the DOM
     const paths = pathDataRef.current;
 
     if (paths.length > 0) {
@@ -335,7 +301,6 @@ export default function MorphingLines() {
         const fromPoints = path.fromPoints;
         const toPoints = path.toPoints;
 
-        // 1. Interpolate coordinates (Precomputed arrays interpolation ONLY, no DOM layout reads)
         let d = "";
         if (fromPoints.length > 0) {
           const x0 = fromPoints[0].x + (toPoints[0].x - fromPoints[0].x) * t;
@@ -349,36 +314,72 @@ export default function MorphingLines() {
           }
         }
 
-        // 2. Interpolate stroke width
-        const strokeWidth = path.fromStrokeWidth + (path.toStrokeWidth - path.fromStrokeWidth) * bgT;
-
         path.element.setAttribute("d", d);
-        path.element.setAttribute("stroke-width", strokeWidth.toFixed(2));
       }
     }
 
-    // 3. Update copy block opacity and transform
-    // Fades in immediately after morph is almost complete (starts at 0.60, complete by 0.85)
+    // Update copy block opacity and transform
     const copy = copyRef.current;
     if (copy) {
-      const copyT = smoothstep(0.60, 0.85, p);
-      copy.style.opacity = copyT.toString();
-      copy.style.transform = `translate3d(0, ${(1 - copyT) * 24}px, 0)`;
-      if (copyT > 0.1) {
+      // Fade out as scroll progress increases
+      const copyOpacity = Math.max(0, 1 - p * 3);
+      copy.style.opacity = copyOpacity.toString();
+
+      const translateY = p * -100;
+      copy.style.transform = `translate3d(0, ${translateY}px, 0)`;
+
+      if (copyOpacity > 0.01) {
         copy.style.pointerEvents = "auto";
-        copy.style.userSelect = "auto";
       } else {
         copy.style.pointerEvents = "none";
-        copy.style.userSelect = "none";
       }
     }
 
-    // 4. Update scroll hint opacity and transform
-    const hint = hintRef.current;
-    if (hint) {
-      const hintT = Math.max(0, 1 - p * 10); // Completely gone by 10% scroll
-      hint.style.opacity = hintT.toString();
-      hint.style.transform = `translate3d(0, ${p * -40}px, 0)`;
+
+
+    // Section 2: About Content Opacity & Transform (Fades in from p = 0.15 to 0.45)
+    const about = aboutRef.current;
+    if (about) {
+      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.15) / 0.3));
+      about.style.opacity = aboutOpacity.toString();
+      const translateY = (1 - aboutOpacity) * 40;
+      about.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      if (aboutOpacity > 0.01) {
+        about.style.pointerEvents = "auto";
+      } else {
+        about.style.pointerEvents = "none";
+      }
+    }
+
+    // Section 3: Industries Opacity (Fades in from p = 0.35 to 0.65)
+    const industries = industriesRef.current;
+    if (industries) {
+      const indOpacity = Math.max(0, Math.min(1, (p - 0.35) / 0.3));
+      industries.style.opacity = indOpacity.toString();
+      if (indOpacity > 0.01) {
+        industries.style.pointerEvents = "auto";
+      } else {
+        industries.style.pointerEvents = "none";
+      }
+    }
+
+    // Translate scroll wrapper for continuous page scrolling when p > 0.5
+    const scrollContent = scrollContentRef.current;
+    if (scrollContent) {
+      let scrollY = 0;
+      if (p > 0.5) {
+        scrollY = (p - 0.5) * 2 * -vh;
+      }
+      scrollContent.style.transform = `translate3d(0, ${scrollY}px, 0)`;
+    }
+
+    // Update navbar scroll state
+    if (nav) {
+      if (p > 0.05) {
+        nav.classList.add("is-scrolled");
+      } else {
+        nav.classList.remove("is-scrolled");
+      }
     }
   };
 
@@ -386,160 +387,347 @@ export default function MorphingLines() {
     <div
       ref={containerRef}
       className="relative w-full"
-      style={{ height: "200vh" }}
+      style={{ height: "300vh" }}
     >
       {/* Sticky Frame viewport */}
       <div
         ref={viewportRef}
-        className="sticky top-0 left-0 w-full h-screen overflow-hidden transition-colors duration-0"
+        className="hero-viewport sticky top-0 left-0 w-full h-screen overflow-hidden transition-colors duration-0"
         style={{
-          backgroundColor: "rgb(10,10,10)",
-          willChange: "background-color",
+          willChange: "background",
         }}
       >
-        {/* Navbar - Fixed inside the sticky container, difference mix-blend */}
-        <nav className="absolute top-0 left-0 right-0 z-50 flex items-start justify-between px-6 md:px-16 py-8 select-none mix-blend-difference pointer-events-auto">
-          <a href="#" className="text-white font-mono text-xs md:text-sm tracking-widest uppercase leading-tight hover:opacity-60 transition-opacity duration-200">
-            Flor
-            <br />
-            Requejo
-          </a>
-          <div className="flex gap-6 md:gap-12">
-            {["About", "Projects", "Contact", "Online CV"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(" ", "-")}`}
-                className="text-white font-mono text-[10px] md:text-xs tracking-[0.15em] uppercase hover:opacity-50 transition-opacity duration-200"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        </nav>
-
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          {/* Mobile-only vertical shift container: shifts layout upward by 8% of viewport height only on mobile (<768px) */}
+          {/* Mobile-only vertical shift container */}
           <div className="-translate-y-[8%] md:translate-y-0 w-full h-full absolute inset-0 overflow-visible">
             {/* SVG Wrapper - Translates vertically based on scroll progress */}
             <div
               ref={svgWrapperRef}
               className="absolute inset-0 w-full h-full overflow-visible will-change-[transform]"
-              style={{ transform: "translate3d(0, -18%, 0)" }}
+              style={{ transform: "translate3d(0, 0%, 0)" }}
             >
               {/* 1. ORIGINAL NATIVE BEZIER CHAOS SVG (Active initially, fades out when user scrolls past 0.03) */}
               <svg
                 ref={originalSvgRef}
-                viewBox="0 0 1287.62 1035.52"
+                viewBox="0 0 1920 881.35"
                 preserveAspectRatio="xMidYMid slice"
                 className="absolute inset-0 w-full h-full overflow-visible transition-opacity duration-0"
                 style={{ opacity: 1, willChange: "opacity" }}
               >
-                {CHAOS_PATHS.map((d, i) => {
-                  const isSt0 = [1, 3, 5, 8, 9, 13, 16, 22].includes(i);
-                  return (
-                    <path
-                      key={i}
-                      d={d}
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={isSt0 ? 0.5 : 1.0}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  );
-                })}
+                {INITIAL_PATHS.map((item) => (
+                  <path
+                    key={item.name}
+                    d={item.d}
+                    fill="none"
+                    className={`svg-line-${item.name === "Path_One" ? "one" : item.name === "Path_Two" ? "two" : "three"}`}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
               </svg>
 
               {/* 2. SAMPLED MORPHING SVG (Hidden initially, active & fades in when user scrolls past 0.03) */}
               <svg
                 ref={outputSvgRef}
-                viewBox="0 0 1287.62 1035.52"
+                viewBox="0 0 1920 881.35"
                 preserveAspectRatio="xMidYMid slice"
                 className="absolute inset-0 w-full h-full overflow-visible transition-opacity duration-0 pointer-events-none"
                 style={{ opacity: 0, willChange: "opacity" }}
               >
-                {CHAOS_PATHS.map((d, i) => {
-                  const isSt0 = [1, 3, 5, 8, 9, 13, 16, 22].includes(i);
-                  return (
-                    <path
-                      key={i}
-                      ref={(el) => {
-                        pathRefs.current[i] = el;
-                      }}
-                      d={d}
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={isSt0 ? 0.5 : 1.0}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  );
-                })}
+                {INITIAL_PATHS.map((item, i) => (
+                  <path
+                    key={item.name}
+                    ref={(el) => {
+                      pathRefs.current[i] = el;
+                    }}
+                    d={item.d}
+                    fill="none"
+                    className={`svg-line-${item.name === "Path_One" ? "one" : item.name === "Path_Two" ? "two" : "three"}`}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
               </svg>
             </div>
           </div>
         </div>
 
-        {/* Hero Editorial Composition (Reveals below lines in the final state over dark background) */}
+        {/* Hero Content Wrapper - Aligned to navigation width, sitting visually on the left */}
         <div
           ref={copyRef}
-          className="absolute left-6 md:left-16 lg:left-24 top-[18vh] md:top-[21vh] max-w-[840px] z-20 pointer-events-none opacity-0 select-none flex flex-col gap-6 md:gap-8"
-          style={{ willChange: "opacity, transform" }}
+          className="hero-content-container"
+          style={{
+            willChange: "opacity, transform",
+            opacity: 1
+          }}
         >
-          {/* Headline - Premium serif */}
-          <h1 className="font-serif text-[42px] md:text-[68px] lg:text-[88px] tracking-tight leading-[0.92] text-stone-100 font-normal">
-            Creative thinking,
+          {/* Headline */}
+          <h1 className="font-serif text-[42px] md:text-[72px] leading-[1.1] md:leading-[72px] text-primary font-normal text-left max-w-[800px] tracking-tight">
+            Ideas are easy.
             <br />
-            grounded in
+            Making them work
             <br />
-            execution.
+            is my job.
           </h1>
 
-          {/* Subtitle - Mono */}
-          <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-stone-400">
-            — From chaos to something that works.
-          </span>
+          {/* Sub-row */}
+          <div className="flex flex-col md:flex-row md:justify-between items-start md:items-stretch gap-8">
+            {/* Left Column: Supporting Copy & Scroll Indicator */}
+            <div className="flex flex-col justify-between items-start gap-8 md:gap-0">
+              {/* Supporting Copy */}
+              <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-left max-w-[480px]">
+                I turn ideas into products, systems and experiences.
+                <br />
+                By making the right decisions across design, tech and product.
+              </p>
 
-          {/* Paragraph and CTA block */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-16 items-start mt-2">
-            <p className="font-mono text-[10px] md:text-xs leading-relaxed text-stone-400 max-w-sm">
-              I turn ideas into systems that actually work.
-              <br />
-              By making the right decisions across design, tech and product.
-            </p>
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-stone-100 border-b border-stone-100/30 pb-1 hover:border-stone-100 transition-colors group pointer-events-auto"
-            >
-              View Work
-              <span className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">
-                ↗
+              {/* Scroll Indicator - Desktop only */}
+              <div className="hidden md:flex items-end gap-4">
+                {/* Line & Dot */}
+                <div className="flex flex-col items-center">
+                  <div className="w-[1.5px] h-[32px] bg-primary/40" />
+                  <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
+                </div>
+                {/* Text */}
+                <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
+                  SCROLL TO UNTANGLE
+                </span>
+              </div>
+            </div>
+
+            {/* Right Column: Stacked Buttons */}
+            <div className="flex flex-col gap-4 pointer-events-auto">
+              {[
+                "End-to-end product thinking",
+                "UX and customer experience",
+                "Web design and development"
+              ].map((text, i) => (
+                <a
+                  key={i}
+                  href="#projects"
+                  className="w-[340px] h-[50px] px-6 rounded-full border border-primary/35 bg-[#421B1B]/70 flex items-center justify-between text-primary font-sans font-medium text-[15px] leading-none hover:bg-[#421B1B]/90 transition-colors duration-200"
+                >
+                  <span className="text-primary font-sans font-medium text-[15px] leading-none">
+                    {text}
+                  </span>
+                  <span className="text-primary text-[15px]">→</span>
+                </a>
+              ))}
+            </div>
+
+            {/* Scroll Indicator - Mobile only (sits at bottom of Hero on mobile) */}
+            <div className="flex md:hidden items-end gap-4 mt-4">
+              {/* Line & Dot */}
+              <div className="flex flex-col items-center">
+                <div className="w-[1.5px] h-[32px] bg-primary/40" />
+                <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
+              </div>
+              {/* Text */}
+              <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
+                SCROLL TO UNTANGLE
               </span>
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll Hint Outer Wrapper (handles centering independently from javascript X translations) */}
-        <div
-          className="scroll-hint-mobile-fix absolute bottom-12 left-1/2 -translate-x-1/2 z-40 pointer-events-none select-none"
-        >
-          {/* Scroll Hint Inner Animated Element */}
-          <div
-            ref={hintRef}
-            className="flex flex-col items-center gap-3 transition-opacity duration-300"
-            style={{ willChange: "opacity, transform" }}
-          >
-            <span className="text-white font-mono text-[9px] md:text-[10px] tracking-[0.3em] uppercase opacity-60">
-              Scroll to transform
-            </span>
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-px h-8 bg-white/40" />
-              <div className="w-2 h-2 rounded-full bg-white/60 animate-pulse" />
             </div>
           </div>
         </div>
+
+        {/* 2. Scroll content wrapper (contains scrolling Section 2 and Section 3) */}
+        <div
+          ref={scrollContentRef}
+          className="absolute inset-0 w-full h-full will-change-transform flex flex-col"
+          style={{ transform: "translate3d(0, 0, 0)" }}
+        >
+          {/* Section 2: About Content Wrapper */}
+          <div
+            ref={aboutRef}
+            className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col md:flex-row items-stretch gap-8 md:gap-16 relative"
+            style={{
+              paddingTop: "calc(38vh + 120px)",
+              paddingLeft: "var(--section2-pad-left)",
+              paddingRight: "var(--section2-pad-right)",
+              willChange: "opacity, transform",
+            }}
+          >
+            {/* Left Side: Text Content */}
+            <div className="flex flex-col justify-between items-start text-left gap-6 max-w-[580px] pointer-events-auto">
+              <div className="flex flex-col gap-6">
+                <span className="font-sans text-[14px] uppercase tracking-[3px] text-primary/75">
+                  Taking complexity and making it work.
+                </span>
+                <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-primary font-normal tracking-tight">
+                  15+ years of
+                  <br />
+                  solving problems.
+                </h2>
+                <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light">
+                  From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Side: Image and Overlapping Button */}
+            <div className="section2-image-panel pointer-events-auto">
+              <div className="relative h-full w-full overflow-visible">
+                <div className="h-full w-full overflow-hidden rounded-l-[32px]">
+                  <img
+                    src="/flor.png"
+                    alt="Flor Artwork"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+
+                <a
+                  href="#about"
+                  className="absolute left-0 -translate-x-1/2 bottom-8 h-[54px] px-8 rounded-full bg-primary text-bg font-sans font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity duration-200 shadow-lg z-10 whitespace-nowrap"
+                >
+                  <span>Read More About Me</span>
+                  <span className="text-[16px] font-bold">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Spacer of at least 100px */}
+          <div className="h-[100px] md:h-[120px] w-full flex-shrink-0" />
+
+          {/* Section 3: Industries Section */}
+          <div
+            ref={industriesRef}
+            className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col items-center justify-center gap-10 pb-[10vh]"
+            style={{
+              willChange: "opacity",
+            }}
+          >
+            <h3 className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light text-center tracking-wide pointer-events-auto">
+              Trusted by teams across many industries
+            </h3>
+
+            {/* Marquee Row 1 */}
+            <div className="marquee-container w-full overflow-hidden py-2 pointer-events-auto">
+              <div className="marquee-row-ltr">
+                {[
+                  "Healthcare", "Government", "Media & Broadcasting", "Finance",
+                  "Beauty & Personal Care", "Retail & Consumer Goods", "Non-Profit"
+                ].concat([
+                  "Healthcare", "Government", "Media & Broadcasting", "Finance",
+                  "Beauty & Personal Care", "Retail & Consumer Goods", "Non-Profit"
+                ]).map((item, index) => (
+                  <div
+                    key={`row1-${index}`}
+                    className="h-[120px] px-12 rounded-[24px] bg-[#321414] border border-primary/15 flex items-center justify-center text-primary uppercase font-sans tracking-[2px] text-[13px] font-semibold hover:border-primary/40 transition-colors duration-300"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Marquee Row 2 */}
+            <div className="marquee-container w-full overflow-hidden py-2 pointer-events-auto">
+              <div className="marquee-row-rtl">
+                {[
+                  "Construction", "Manufacturing", "Insurance",
+                  "Property & Real Estate", "Technology & SaaS", "Education"
+                ].concat([
+                  "Construction", "Manufacturing", "Insurance",
+                  "Property & Real Estate", "Technology & SaaS", "Education"
+                ]).map((item, index) => (
+                  <div
+                    key={`row2-${index}`}
+                    className="h-[120px] px-12 rounded-[24px] bg-[#321414] border border-primary/15 flex items-center justify-center text-primary uppercase font-sans tracking-[2px] text-[13px] font-semibold hover:border-primary/40 transition-colors duration-300"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Navbar - Fixed floating outline pill */}
+        <nav
+          ref={navRef}
+          className={`nav-outline-pill ${isMenuOpen ? "is-open" : ""}`}
+        >
+          {/* Top Row: Container that sits at the top of the nav pill */}
+          <div className="flex justify-between items-center w-full">
+            {/* Profile Section */}
+            <div className="flex items-center gap-[10px]">
+              <img
+                src="/Florencia-500x500.jpg"
+                alt="Flor Requejo"
+                className="w-[50px] h-[50px] rounded-full object-cover border border-primary/20"
+              />
+              <a href="#" className="text-primary font-serif text-[15px] tracking-wide leading-[1.05] font-normal hover:opacity-80 transition-opacity duration-200">
+                Flor
+                <br />
+                Requejo
+              </a>
+            </div>
+
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex gap-6 md:gap-12 font-sans items-center">
+              {["About", "Projects", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().replace(" ", "-")}`}
+                  className="text-primary font-sans text-[10px] md:text-xs tracking-[0.15em] uppercase hover:opacity-60 transition-opacity duration-200 font-medium"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+
+            {/* Desktop CV Download Button */}
+            <div className="hidden md:block">
+              <a
+                href="#online-cv"
+                className="h-[50px] px-6 rounded-full flex items-center justify-center bg-primary text-bg font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
+              >
+                Online CV
+              </a>
+            </div>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden w-[50px] h-[50px] rounded-full flex flex-col items-center justify-center gap-[5px] border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors duration-200 focus:outline-none"
+              aria-label="Toggle Menu"
+            >
+              <span className={`w-6 h-[2px] bg-primary transition-all duration-300 ${isMenuOpen ? "transform rotate-45 translate-y-[8px]" : ""}`} />
+              <span className={`w-6 h-[2px] bg-primary transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`w-6 h-[2px] bg-primary transition-all duration-300 ${isMenuOpen ? "transform -rotate-45 -translate-y-[8px]" : ""}`} />
+            </button>
+          </div>
+
+          {/* Mobile Navigation Dropdown Block */}
+          <div
+            className={`md:hidden flex flex-col items-center gap-6 mt-6 w-full border-t border-primary/10 pt-6 transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+              }`}
+          >
+            <div className="flex flex-col items-center gap-4 w-full">
+              {["About", "Projects", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  onClick={() => setIsMenuOpen(false)}
+                  href={`#${item.toLowerCase().replace(" ", "-")}`}
+                  className="text-primary font-sans text-xs tracking-[0.2em] uppercase hover:opacity-60 transition-opacity duration-200 font-medium"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+
+            <a
+              href="#online-cv"
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full max-w-[200px] h-[44px] rounded-full flex items-center justify-center bg-primary text-bg font-sans font-semibold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
+            >
+              Online CV
+            </a>
+          </div>
+        </nav>
       </div>
 
       {/* ────────────────────────────────────────────────────────
@@ -547,42 +735,29 @@ export default function MorphingLines() {
          ──────────────────────────────────────────────────────── */}
       <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
         {/* Chaos Path Source */}
-        <svg ref={chaosSvgRef} viewBox="0 0 1287.62 1035.52">
-          {CHAOS_PATHS.map((d, i) => (
-            <path
-              key={i}
-              className={[1, 3, 5, 8, 9, 13, 16, 22].includes(i) ? "st0" : "st1"}
-              d={d}
-            />
-          ))}
+        <svg ref={chaosSvgRef} viewBox="0 0 1920 881.35">
+          <g id="Path_3">
+            <path id="_x3C_Path_x5F_Three_x3E_" d="M-.05,301.45c98.31,0,253.19,59.44,353.48,120.89,56.22,34.45,112.48,73.1,144.9,142.33,61.78,131.9-74.42,242.07-186.32,200.43-228.74-85.11,111.9-415.52,384.41-307.05,77.1,30.69,148.97,79.01,226.28,109.51,93.9,37.05,194.14,45,293.26,52.71,45.8,3.56,92.79,6.96,137.32-10.04,90.16-34.42,150.59-159.1,141.03-274.78-18.76-226.95-271.48-215.04-240.25-37.86,9.89,56.13,47.82,89.02,91.6,103.2,93.87,30.4,201.3,53.5,284.94-14.83,55.47-45.31,88.58-121.96,128.94-187.94,40.36-65.98,95.91-120.19,160.44-120.19" />
+          </g>
+          <g id="Path_2">
+            <path id="_x3C_Path_x5F_two_x3E_" d="M-.05,290.93c201-.98,404.76-10.61,592.22-93.11,32.67-14.38,71.17-46.41,59.05-82.72-9.24-27.66-45.47-32.85-67.51-15.76s-31.89,48.05-35.93,77.51c-6.94,50.58,2.72,109.24,40.82,136.46,39.05,27.9,92.38,12.03,132.22-16.23,39.84-28.26,73.28-67.75,115.45-91.28,60.68-33.85,138.46-28.36,189.73,19.23s69.5,136.94,36.91,203.5c-21.5,43.91-79.81,73.52-109.3,37.07-7.85-9.7-12.11-22.54-14-35.54-8.71-60.1,39.8-123.77,94.38-122.71,63.2,1.23,104.13,70.64,135.98,131.04,46.38,87.95,98.23,174.91,171.04,236.37,63.49,53.6,140.43,85.31,219.22,101.01,54.29,10.82,110.19,8.2,162.95-13.65,148.78-61.61,53.15-356.98,196.83-356.98" />
+          </g>
+          <g id="Path_1">
+            <path id="_x3C_Path_x5F_One_x3E_" d="M1916.94,735.91c-84.03,1.13-91.6-198.01-257.16-132.62-71.69,28.31-141.07,60.43-211.43,91.78-70.36,31.35-150.2,51.41-220.51,22.54-26.66-10.95-51.12-28.65-79.11-34.74-96.5-21-191.02,100.65-284.11,66.32-41.73-15.39-68.74-58.34-92.38-99-23.64-40.66-49.48-84.09-90.49-101.58-41.01-17.49-99.78,8.21-101.64,56.82-1.45,37.99,33.64,67.94,68.2,68.69,34.56.75,64.71-23.36,93.46-45.01,95.36-71.83,54.7-245.53-47.09-274.73C515.2,302.88,59.17,662.74-4.24,663.59" />
+          </g>
         </svg>
 
-        {/* Ordered Polyline Source */}
-        <svg ref={orderedSvgRef} viewBox="0 0 1284.29 271.91">
-          <polyline className="st1" points="0 49.86 526.99 49.86 1069.59 49.86 1284.29 49.86" />
-          <polyline className="st0" points="0 6.42 178.27 6.42 572.53 6.42 1284.29 6.42" />
-          <polyline className="st1" points="0 56.53 395.57 56.53 196.49 56.53 515.28 56.53 441.11 56.53 654.51 56.53 1031.86 56.53 1284.29 56.53" />
-          <polyline className="st0" points="0 12.59 463.23 12.59 780.43 12.59 1215.33 12.59 1284.29 12.59" />
-          <polyline className="st1" points="0 63.2 347.42 63.2 594.65 63.2 705.26 63.2 517.88 63.2 625.8 63.2 588.15 63.2 858.8 63.2 1284.29 63.2" />
-          <polyline className="st0" points="0 18.76 338.32 18.76 625.8 18.76 985.02 18.76 1284.29 18.76" />
-          <polyline className="st1" points="0 69.87 266.75 69.87 357.83 69.87 608.97 69.87 824.97 69.87 1095.62 69.87 1284.29 69.87" />
-          <polyline className="st1" points="0 76.53 256.34 76.53 642.8 76.53 1034.46 76.53 1284.29 76.53" />
-          <polyline className="st0" points="0 24.93 248.53 24.93 443.71 24.93 625.8 24.93 805.45 24.93 1221.83 24.93 1284.29 24.93" />
-          <path className="st0" d="M1284.29,31.1H0" />
-          <polyline className="st1" points="0 83.2 411.18 83.2 642.8 83.2 595.95 83.2 726.08 83.2 871.81 83.2 975.91 83.2 1234.86 83.2 1284.29 83.2" />
-          <polyline className="st1" points="0 90.87 467.14 90.87 607.67 90.87 744.29 90.87 553.02 90.87 849.69 90.87 964.2 90.87 739.09 90.87 1221.83 90.87 1284.29 90.87" />
-          <polyline className="st1" points="0 99.54 134.03 99.54 387.76 99.54 553.02 99.54 766.41 99.54 726.08 99.54 688.34 99.54 903.04 99.54 1284.29 99.54" />
-          <polyline className="st0" points="0 37.27 378.65 37.27 759.91 37.27 1284.29 37.27" />
-          <polyline className="st1" points="0 109.21 374.75 109.21 585.55 109.21 864 109.21 1284.29 109.21" />
-          <polyline className="st1" points="0 120.88 430.7 120.88 844.49 120.88 1284.29 120.88" />
-          <path className="st0" d="M0,43.44h1284.29" />
-          <path className="st1" d="M0,133.55h1284.29" />
-          <path className="st1" d="M0,145.22h1284.29" />
-          <polyline className="st1" points="0 161.89 266.75 161.89 508.77 161.89 650.61 161.89 813.26 161.89 1284.29 161.89" />
-          <path className="st1" d="M0,188.56h1284.29" />
-          <path className="st1" d="M0,225.23h1284.29" />
-          <path className="st0" d="M0,271.65h369.2-34.59,784.4s129.51.59,165.28,0" />
-          <polyline className="st1" points="0 0 290.17 0 403.35 0 330.51 0 483.87 0 588.58 0 867.91 0 1112.55 0 1284.29 0" />
+        {/* Ordered Line Source */}
+        <svg ref={orderedSvgRef} viewBox="0 0 1920 881.35">
+          <g id="Path_3">
+            <line id="_x3C_Path_x5F_Three_x3E_" x1="-.05" y1="397.32" x2="1919.66" y2="397.32" />
+          </g>
+          <g id="Path_2">
+            <line id="_x3C_Path_x5F_Two_x3E_" x1="-.05" y1="328.36" x2="1919.66" y2="328.36" />
+          </g>
+          <g id="Path_1">
+            <line id="_x3C_Path_x5F_One_x3E_" x1="-.05" y1="259.39" x2="1919.66" y2="259.39" />
+          </g>
         </svg>
       </div>
     </div>

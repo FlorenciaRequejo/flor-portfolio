@@ -2,15 +2,29 @@
 
 @theme {
   --font-serif: var(--font-serif), Georgia, serif;
-  --font-mono: var(--font-mono), monospace;
+  --font-sans: var(--font-sans), Inter, sans-serif;
+
+  --color-primary: #FF8BD1;
+  --color-bg: #421B1B;
 }
 
 @layer base {
   :root {
-    --color-dark: #0a0a0a;
-    --color-light: #f0ece4;
-    --color-line-dark: rgba(255, 255, 255, 0.85);
-    --color-line-light: rgba(10, 10, 10, 0.75);
+    --color-dark: #421B1B;
+    --color-light: #FF8BD1;
+    --color-line-dark: #FF8BD1;
+    --color-line-light: #FF8BD1;
+    --line-color: #FF8BD1;
+
+    /* 3-Path SVG Morphing variables */
+    --stroke-1-color: #3c1818;
+    --stroke-2-color: #351414;
+    --stroke-3-color: #280e0e;
+    --stroke-width: 25px;
+
+    /* Section 2 Padding */
+    --section2-pad-left: 16px;
+    --section2-pad-right: 16px;
   }
 
   * {
@@ -27,6 +41,7 @@
   body {
     background-color: var(--color-dark);
     color: var(--color-light);
+    font-family: var(--font-sans), sans-serif;
     overflow-x: hidden;
   }
 
@@ -40,15 +55,182 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 139, 209, 0.2);
     border-radius: 2px;
   }
 }
 
 @media (max-width: 768px) {
-
   .scroll-hint-mobile-fix {
     bottom: 220px !important;
   }
+}
 
+.nav-outline-pill {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  user-select: none;
+  pointer-events: auto;
+  left: 0;
+  right: 0;
+  margin: 24px auto 0;
+  top: 0;
+  border-radius: 999px;
+
+  width: min(76vw, 1260px);
+  background: rgba(66, 27, 27, 0.22);
+  border: 1px solid var(--color-primary);
+
+  transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 600ms ease,
+    border-color 600ms ease;
+}
+
+.nav-outline-pill.is-scrolled {
+  width: min(88vw, 1440px);
+  background: rgba(66, 27, 27, 0.35);
+  border-color: rgba(255, 139, 209, 0.85);
+}
+
+@media (max-width: 768px) {
+  .nav-outline-pill {
+    width: calc(100% - 32px);
+    padding: 5px;
+    top: 16px;
+    margin: 0 auto;
+    height: 60px;
+    overflow: hidden;
+  }
+
+  .nav-outline-pill.is-open {
+    height: 270px;
+    border-radius: 24px;
+    background: rgba(66, 27, 27, 0.96) !important;
+  }
+
+  .nav-outline-pill.is-scrolled {
+    width: calc(100% - 32px);
+  }
+}
+
+.svg-line-one {
+  stroke: var(--stroke-1-color) !important;
+  stroke-width: var(--stroke-width) !important;
+}
+
+.svg-line-two {
+  stroke: var(--stroke-2-color) !important;
+  stroke-width: var(--stroke-width) !important;
+}
+
+.svg-line-three {
+  stroke: var(--stroke-3-color) !important;
+  stroke-width: var(--stroke-width) !important;
+}
+
+.hero-viewport {
+  background-color: var(--color-bg) !important;
+}
+
+.hero-content-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 64px;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 1;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 0 5px;
+  width: min(76vw, 1260px);
+}
+
+@media (max-width: 768px) {
+  .hero-content-container {
+    width: calc(100% - 32px);
+    bottom: 32px;
+    gap: 32px;
+  }
+}
+
+/* Infinite loop marquee animations */
+.marquee-row-ltr {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  animation: marquee-ltr 28s linear infinite;
+}
+
+.marquee-row-rtl {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  animation: marquee-rtl 28s linear infinite;
+}
+
+.marquee-container:hover .marquee-row-ltr,
+.marquee-container:hover .marquee-row-rtl {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Section 2 Padding Media Query Desktop override */
+@media (min-width: 768px) {
+  :root {
+    --section2-pad-left: calc((100vw - min(76vw, 1260px)) / 2);
+    --section2-pad-right: 0px;
+  }
+}
+
+/* Section 2 Image Panel Class */
+.section2-image-panel {
+  width: 100%;
+  height: 320px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .section2-image-panel {
+    position: absolute;
+    right: 0;
+    top: calc(38vh + 120px);
+
+    /* starts at column 5 of a 6-column layout */
+    left: calc((100vw - min(76vw, 1260px)) / 2 + (min(76vw, 1260px) / 6 * 4));
+
+    width: auto;
+    height: 260px;
+    overflow: visible;
+  }
 }

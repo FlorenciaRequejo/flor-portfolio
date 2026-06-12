@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-serif",
+  variable: "--font-sans",
 });
 
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+const bagossExtended = localFont({
+  src: "../public/fonts/BagossExtended-TRIAL-Medium.otf",
+  variable: "--font-serif",
+  weight: "500",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSerif.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${bagossExtended.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );
