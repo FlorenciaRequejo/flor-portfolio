@@ -269,7 +269,13 @@ export default function MorphingLines() {
 
     // Shifts the SVG wrapper upward based on scroll progress parameters
     const svgTranslateY = initialTranslateY + (finalTranslateY - initialTranslateY) * t;
-    svgWrapper.style.transform = `translate3d(0, ${svgTranslateY}%, 0)`;
+    
+    let transformStr = `translate3d(0, ${svgTranslateY}%, 0)`;
+    if (p > 0.65) {
+      const postMorphScroll = (p - 0.65) * 2 * vh;
+      transformStr = `translate3d(0, calc(${svgTranslateY}% - ${postMorphScroll}px), 0)`;
+    }
+    svgWrapper.style.transform = transformStr;
 
     // OPACITY CROSS-FADE BETWEEN ORIGINAL AND SAMPLED MORPH
     const fadeStart = 0.0;
@@ -282,6 +288,12 @@ export default function MorphingLines() {
       const fadeRaw = Math.min(1, (p - fadeStart) / (fadeEnd - fadeStart));
       originalOpacity = 1 - fadeRaw;
       morphOpacity = fadeRaw;
+    }
+
+    // After morph complete threshold (0.65), fade out the morphing lines slightly (from 1.0 to 0.3)
+    if (p > 0.65) {
+      const postMorphFade = Math.min(1, (p - 0.65) / (0.95 - 0.65));
+      morphOpacity = morphOpacity * (1.0 - postMorphFade * 0.7);
     }
 
     if (originalSvg) {
