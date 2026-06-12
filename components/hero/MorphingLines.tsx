@@ -485,52 +485,18 @@ export default function MorphingLines() {
           </h1>
 
           {/* Sub-row */}
-          <div className="flex flex-col md:flex-row md:justify-between items-start md:items-stretch gap-8">
-            {/* Left Column: Supporting Copy & Scroll Indicator */}
-            <div className="flex flex-col justify-between items-start gap-8 md:gap-0">
-              {/* Supporting Copy */}
-              <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-left max-w-[480px]">
+          <div className="flex flex-col md:flex-row md:justify-between items-start md:items-end gap-8 w-full">
+            {/* Left Column: Supporting Copy */}
+            <div className="max-w-[480px]">
+              <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-left">
                 I turn ideas into products, systems and experiences.
                 <br />
                 By making the right decisions across design, tech and product.
               </p>
-
-              {/* Scroll Indicator - Desktop only */}
-              <div className="hidden md:flex items-end gap-4">
-                {/* Line & Dot */}
-                <div className="flex flex-col items-center">
-                  <div className="w-[1.5px] h-[32px] bg-primary/40" />
-                  <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
-                </div>
-                {/* Text */}
-                <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
-                  SCROLL TO UNTANGLE
-                </span>
-              </div>
             </div>
 
-            {/* Right Column: Stacked Buttons */}
-            <div className="flex flex-col gap-4 pointer-events-auto">
-              {[
-                "End-to-end product thinking",
-                "UX and customer experience",
-                "Web design and development"
-              ].map((text, i) => (
-                <a
-                  key={i}
-                  href="#projects"
-                  className="w-[340px] h-[50px] px-6 rounded-full border border-primary/35 bg-[#421B1B]/70 flex items-center justify-between text-primary font-sans font-medium text-[15px] leading-none hover:bg-[#421B1B]/90 transition-colors duration-200"
-                >
-                  <span className="text-primary font-sans font-medium text-[15px] leading-none">
-                    {text}
-                  </span>
-                  <span className="text-primary text-[15px]">→</span>
-                </a>
-              ))}
-            </div>
-
-            {/* Scroll Indicator - Mobile only (sits at bottom of Hero on mobile) */}
-            <div className="flex md:hidden items-end gap-4 mt-4">
+            {/* Right Column: Scroll Indicator */}
+            <div className="flex items-end gap-4">
               {/* Line & Dot */}
               <div className="flex flex-col items-center">
                 <div className="w-[1.5px] h-[32px] bg-primary/40" />

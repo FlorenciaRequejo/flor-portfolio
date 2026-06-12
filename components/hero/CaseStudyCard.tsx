@@ -62,7 +62,7 @@ export default function CaseStudyCard({
       initial="initial"
       whileHover="hover"
       transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-      className={`relative flex flex-col overflow-hidden bg-white rounded-[32px] border transition-colors duration-300 w-full md:w-[400px] select-none ${
+      className={`relative flex flex-col overflow-hidden bg-white rounded-[32px] border transition-colors duration-300 w-full select-none ${
         featured ? "h-[490px] md:h-[510px]" : "h-[460px] md:h-[480px]"
       }`}
     >
