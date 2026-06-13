@@ -89,11 +89,11 @@ export default function SelectedWork() {
   }, [shouldLoadVideo]);
 
   return (
-    <section ref={sectionRef} className="w-full bg-white p-[20px] md:p-[30px] rounded-[100px] md:rounded-[110px]">
-      <div className="w-full bg-[#fbf5f5] rounded-[80px] pt-16 pb-24 relative">
+    <section ref={sectionRef} className="w-full bg-white p-[20px] md:p-[30px] rounded-[48px] md:rounded-[110px] relative z-10">
+      <div className="w-full bg-[#fbf5f5] rounded-[38px] md:rounded-[80px] pt-16 pb-24 relative">
         
         {/* Header Section: Two-column layout on desktop */}
-        <div className="mx-auto w-[min(76vw,1260px)] px-6 md:px-0 mb-16">
+        <div className="mx-auto w-[min(76vw,1260px)] px-6 md:px-0 mb-4">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-12 w-full">
             {/* Left Side: Eyebrow and Headline */}
             <div className="flex flex-col gap-4 max-w-[620px]">
@@ -115,7 +115,7 @@ export default function SelectedWork() {
         </div>
 
         {/* Carousel / Cards Row: Centered featured card, clipped side cards */}
-        <div className="w-full overflow-hidden flex justify-center mt-16 relative translate-y-[60px] md:translate-y-[80px] -mb-[60px] md:-mb-[80px] z-10">
+        <div className="w-full flex justify-center mt-2 md:mt-4 relative translate-y-[60px] md:translate-y-[80px] -mb-[60px] md:-mb-[80px] z-20">
           {/* Mobile swipe layout */}
           <div className="md:hidden w-full overflow-x-auto scrollbar-none snap-x snap-mandatory flex px-6 py-4">
             <div className="flex flex-nowrap gap-6 shrink-0">
@@ -160,7 +160,7 @@ export default function SelectedWork() {
           <div className="hidden md:flex justify-center items-stretch gap-10 shrink-0 w-max py-4 select-none">
             
             {/* Card 1: Web Design */}
-            <div className="shrink-0 w-[30vw] max-w-[420px] min-w-[280px] flex">
+            <div className="shrink-0 w-[36vw] max-w-[540px] min-w-[340px] flex">
               <CaseStudyCard
                 title="Web design and development"
                 description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
@@ -171,7 +171,7 @@ export default function SelectedWork() {
             </div>
 
             {/* Card 2: Product Thinking */}
-            <div className="shrink-0 w-[30vw] max-w-[420px] min-w-[280px] flex">
+            <div className="shrink-0 w-[36vw] max-w-[540px] min-w-[340px] flex">
               <CaseStudyCard
                 title="End-to-end product thinking"
                 description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
@@ -182,7 +182,7 @@ export default function SelectedWork() {
             </div>
 
             {/* Card 3: UX Experience */}
-            <div className="shrink-0 w-[30vw] max-w-[420px] min-w-[280px] flex">
+            <div className="shrink-0 w-[36vw] max-w-[540px] min-w-[340px] flex">
               <CaseStudyCard
                 title="UX and customer experience"
                 description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."

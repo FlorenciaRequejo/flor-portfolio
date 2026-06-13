@@ -419,7 +419,9 @@ export default function MorphingLines() {
     if (scrollContent) {
       let scrollY = 0;
       if (p > 0.5) {
-        scrollY = (p - 0.5) * 2 * -vh;
+        const isMobile = window.innerWidth < 768;
+        const multiplier = isMobile ? 2.4 : 1.3;
+        scrollY = (p - 0.5) * multiplier * -vh;
       }
       scrollContent.style.transform = `translate3d(0, ${scrollY}px, 0)`;
     }
@@ -515,7 +517,7 @@ export default function MorphingLines() {
           }}
         >
           {/* Headline */}
-          <h1 className="font-serif text-[42px] md:text-[72px] leading-[1.1] md:leading-[72px] text-primary font-normal text-left max-w-[800px] tracking-tight">
+          <h1 className="font-serif text-[42px] md:text-[72px] leading-[1.1] md:leading-[72px] text-primary font-normal text-center md:text-left max-w-[800px] tracking-tight">
             Ideas are easy.
             <br />
             Making them work
@@ -524,7 +526,7 @@ export default function MorphingLines() {
           </h1>
 
           {/* Supporting Copy */}
-          <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-left max-w-[480px]">
+          <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-center md:text-left max-w-[480px]">
             I turn ideas into products, systems and experiences.
             <br />
             By making the right decisions across design, tech and product.
@@ -534,19 +536,19 @@ export default function MorphingLines() {
         {/* Scroll Indicator - Fixed to bottom of viewport (50px up from bottom), aligned to right side of navigation */}
         <div
           ref={scrollIndicatorRef}
-          className="absolute bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[calc(100%-32px)] md:w-[min(76vw,1260px)] flex justify-end transition-opacity duration-0"
+          className="absolute bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[calc(100%-32px)] md:w-[min(76vw,1260px)] flex justify-center md:justify-end transition-opacity duration-0"
           style={{
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex items-end gap-4">
+          <div className="flex flex-col md:flex-row items-center md:items-end gap-4">
             {/* Line & Dot */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center order-2 md:order-1">
               <div className="w-[1.5px] h-[32px] bg-primary/40" />
               <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
             </div>
             {/* Text */}
-            <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
+            <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px] order-1 md:order-2">
               SCROLL TO UNTANGLE
             </span>
           </div>

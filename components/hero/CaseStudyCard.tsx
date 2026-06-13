@@ -21,17 +21,26 @@ export default function CaseStudyCard({
 }: CaseStudyCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Fallback to force video autoplay on iOS / safari if needed
+  // Control video playback based on hover state
   useEffect(() => {
-    if (videoSrc && videoRef.current) {
-      videoRef.current.play().catch((err) => {
-        console.warn("Autoplay failed/prevented:", err);
-      });
-    }
-  }, [videoSrc]);
+    const video = videoRef.current;
+    if (!video) return;
 
-  // Animation variants
+    if (isHovered) {
+      video.play().catch((err) => {
+        console.warn("Autoplay on hover prevented:", err);
+      });
+    } else {
+      video.pause();
+      if (video.readyState >= 1) {
+        video.currentTime = 0;
+      }
+    }
+  }, [isHovered]);
+
+  // Clean scale lift and soft shadow variants
   const cardVariants = {
     initial: {
       y: 0,
@@ -45,27 +54,19 @@ export default function CaseStudyCard({
     },
   };
 
-  const titleVariants = {
-    initial: { x: 0 },
-    hover: { x: 6 },
-  };
-
-  const arrowVariants = {
-    initial: { x: 0, opacity: 0.8 },
-    hover: { x: 8, opacity: 1 },
-  };
-
   return (
     <motion.a
       href={href}
       variants={cardVariants}
       initial="initial"
       whileHover="hover"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-      className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] w-full select-none p-5 h-[480px] md:h-[530px]"
+      className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] w-full select-none p-5 h-[420px] md:h-[470px]"
     >
       {/* Media Container */}
-      <div className="relative w-full h-[220px] md:h-[260px] rounded-[20px] overflow-hidden">
+      <div className="relative w-full h-[180px] md:h-[220px] rounded-[20px] overflow-hidden">
         <Image
           src="/case-study-poster.png"
           alt={title}
@@ -73,57 +74,41 @@ export default function CaseStudyCard({
           priority={false}
           sizes="(max-width: 768px) 100vw, 33vw"
           className={`object-cover object-center transition-opacity duration-500 ${
-            isVideoReady ? "opacity-0" : "opacity-100"
+            isHovered && isVideoReady ? "opacity-0" : "opacity-100"
           }`}
         />
         {videoSrc && (
           <video
             ref={videoRef}
             src={videoSrc}
-            autoPlay
             muted
             loop
             playsInline
             onLoadedData={() => setIsVideoReady(true)}
             className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
-              isVideoReady ? "opacity-100" : "opacity-0"
+              isHovered && isVideoReady ? "opacity-100" : "opacity-0"
             }`}
           />
         )}
       </div>
 
-      {/* Content Container */}
-      <div className="pt-0 mt-5 flex flex-col justify-between flex-grow text-left">
-        <div>
-          {/* Title and Arrow */}
-          <div className="flex items-center text-[#421B1B] font-sans font-semibold text-[18px] leading-tight">
-            <motion.span
-              variants={titleVariants}
-              transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-              className="inline-block"
-            >
-              {title}
-            </motion.span>
-            <motion.span
-              variants={arrowVariants}
-              transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-              className="inline-block ml-[6px]"
-            >
-              →
-            </motion.span>
-          </div>
+      {/* Content Container: Inset 10px more than media (total X + 10px) */}
+      <div className="relative pt-0 mt-5 flex-grow text-left px-[10px] pb-[10px]">
+        <div className="pr-[115px]">
+          <h3 className="text-[#421B1B] font-sans font-semibold text-[18px] leading-tight">
+            {title}
+          </h3>
 
-          {/* Description */}
           {description && (
-            <p className="font-sans text-[14px] leading-[22px] text-[#421B1B]/75 font-normal mt-3 max-w-[340px]">
+            <p className="font-sans text-[14px] leading-[22px] text-[#421B1B]/75 font-normal mt-3">
               {description}
             </p>
           )}
         </div>
 
-        {/* Read More pill */}
-        <div className="flex justify-end mt-4">
-          <div className="h-[38px] px-5 rounded-full bg-[#FAF6F0] border border-primary/20 text-[#421B1B] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5 shadow-sm">
+        {/* Minimal Read More pill floated bottom-right */}
+        <div className="absolute bottom-[10px] right-[10px]">
+          <div className="h-[38px] px-5 rounded-full bg-[#FAF6F0] text-[#421B1B] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5">
             <span>Read More</span>
             <span className="text-[14px]">↗</span>
           </div>
@@ -132,3 +117,4 @@ export default function CaseStudyCard({
     </motion.a>
   );
 }
+

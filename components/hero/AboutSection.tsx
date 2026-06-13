@@ -19,8 +19,8 @@ export default function AboutSection({ innerRef }: AboutSectionProps) {
       }}
     >
       {/* Left Side: Text Content */}
-      <div className="flex flex-col justify-between items-start text-left gap-6 max-w-[580px] pointer-events-auto">
-        <div className="flex flex-col gap-6">
+      <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 max-w-[580px] pointer-events-auto w-full">
+        <div className="flex flex-col gap-6 w-full">
           <span className="font-sans text-[14px] uppercase tracking-[3px] text-primary/75">
             Taking complexity and making it work.
           </span>
@@ -38,7 +38,7 @@ export default function AboutSection({ innerRef }: AboutSectionProps) {
       {/* Right Side: Image and Overlapping Button */}
       <div className="section2-image-panel pointer-events-auto">
         <div className="relative h-full w-full overflow-visible">
-          <div className="relative h-full w-full overflow-hidden rounded-l-[32px]">
+          <div className="relative h-full w-full overflow-hidden rounded-[32px] md:rounded-r-none md:rounded-l-[32px]">
             <Image
               src="/flor.webp"
               alt="Flor Artwork"
@@ -51,7 +51,7 @@ export default function AboutSection({ innerRef }: AboutSectionProps) {
 
           <a
             href="#about"
-            className="absolute left-0 -translate-x-1/2 bottom-8 h-[54px] px-8 rounded-full bg-primary text-bg font-sans font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity duration-200 shadow-lg z-10 whitespace-nowrap"
+            className="absolute left-1/2 md:left-0 -translate-x-1/2 bottom-8 h-[54px] px-8 rounded-full bg-primary text-bg font-sans font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity duration-200 shadow-lg z-10 whitespace-nowrap"
           >
             <span>Read More About Me</span>
             <span className="text-[16px] font-bold">↗</span>
