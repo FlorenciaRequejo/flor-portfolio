@@ -1,10 +1,95 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import CaseStudyCard from "./CaseStudyCard";
 
 export default function SelectedWork() {
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [videoBlobUrl, setVideoBlobUrl] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let idleId: any;
+    let observer: IntersectionObserver | null = null;
+
+    const triggerLoad = () => {
+      setShouldLoadVideo(true);
+      if (observer) observer.disconnect();
+      if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      } else {
+        clearTimeout(idleId);
+      }
+    };
+
+    // 1. Idle loading fallback
+    if (typeof window !== "undefined") {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(triggerLoad);
+      } else {
+        idleId = setTimeout(triggerLoad, 4000);
+      }
+    }
+
+    // 2. Viewport entrance loading
+    if (sectionRef.current) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            triggerLoad();
+          }
+        },
+        { rootMargin: "300px" } // trigger loading before it enters viewport
+      );
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (observer) observer.disconnect();
+      if (typeof window !== "undefined") {
+        if ("requestIdleCallback" in window) {
+          window.cancelIdleCallback(idleId);
+        } else {
+          clearTimeout(idleId);
+        }
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+
+    let active = true;
+    let createdUrl: string | null = null;
+
+    fetch("/case-study-video.mp4")
+      .then((res) => {
+        if (!res.ok) throw new Error("Video load failed");
+        return res.blob();
+      })
+      .then((blob) => {
+        if (active) {
+          createdUrl = URL.createObjectURL(blob);
+          setVideoBlobUrl(createdUrl);
+        }
+      })
+      .catch((err) => {
+        console.error("Video preloading failed, falling back to static URL:", err);
+        if (active) {
+          setVideoBlobUrl("/case-study-video.mp4");
+        }
+      });
+
+    return () => {
+      active = false;
+      if (createdUrl) {
+        URL.revokeObjectURL(createdUrl);
+      }
+    };
+  }, [shouldLoadVideo]);
+
   return (
-    <section className="w-full bg-white p-[20px] md:p-[30px] overflow-hidden rounded-[100px] md:rounded-[110px]">
+    <section ref={sectionRef} className="w-full bg-white p-[20px] md:p-[30px] overflow-hidden rounded-[100px] md:rounded-[110px]">
       <div className="w-full bg-[#fbf5f5] rounded-[80px] pt-16 pb-24 overflow-hidden relative">
         
         {/* Header Section: Two-column layout on desktop */}
@@ -39,7 +124,7 @@ export default function SelectedWork() {
               <div className="snap-center shrink-0 w-[80vw] sm:w-[360px]">
                 <CaseStudyCard
                   title="Web design and development"
-                  videoSrc="/case-study-video.mp4"
+                  videoSrc={videoBlobUrl || ""}
                   href="#projects"
                   featured={false}
                 />
@@ -50,7 +135,7 @@ export default function SelectedWork() {
                 <CaseStudyCard
                   title="End-to-end product thinking"
                   description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
-                  videoSrc="/case-study-video.mp4"
+                  videoSrc={videoBlobUrl || ""}
                   href="#projects"
                   featured={true}
                 />
@@ -60,7 +145,7 @@ export default function SelectedWork() {
               <div className="snap-center shrink-0 w-[80vw] sm:w-[360px] pr-6">
                 <CaseStudyCard
                   title="UX and customer experience"
-                  videoSrc="/case-study-video.mp4"
+                  videoSrc={videoBlobUrl || ""}
                   href="#projects"
                   featured={false}
                 />
@@ -76,7 +161,7 @@ export default function SelectedWork() {
             <div className="shrink-0 w-[32vw] max-w-[440px] min-w-[280px]">
               <CaseStudyCard
                 title="Web design and development"
-                videoSrc="/case-study-video.mp4"
+                videoSrc={videoBlobUrl || ""}
                 href="#projects"
                 featured={false}
               />
@@ -87,7 +172,7 @@ export default function SelectedWork() {
               <CaseStudyCard
                 title="End-to-end product thinking"
                 description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
-                videoSrc="/case-study-video.mp4"
+                videoSrc={videoBlobUrl || ""}
                 href="#projects"
                 featured={true}
               />
@@ -97,7 +182,7 @@ export default function SelectedWork() {
             <div className="shrink-0 w-[32vw] max-w-[440px] min-w-[280px]">
               <CaseStudyCard
                 title="UX and customer experience"
-                videoSrc="/case-study-video.mp4"
+                videoSrc={videoBlobUrl || ""}
                 href="#projects"
                 featured={false}
               />

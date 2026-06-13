@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
 interface CaseStudyCardProps {
   title: string;
@@ -19,10 +20,11 @@ export default function CaseStudyCard({
   featured,
 }: CaseStudyCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
 
   // Fallback to force video autoplay on iOS / safari if needed
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoSrc && videoRef.current) {
       videoRef.current.play().catch((err) => {
         console.warn("Autoplay failed/prevented:", err);
       });
@@ -72,15 +74,30 @@ export default function CaseStudyCard({
           featured ? "h-[250px] md:h-[270px]" : "h-[340px] md:h-[360px]"
         }`}
       >
-        <video
-          ref={videoRef}
-          src={videoSrc}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover object-center"
+        <Image
+          src="/case-study-poster.png"
+          alt={title}
+          fill
+          priority={false}
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className={`object-cover object-center transition-opacity duration-500 ${
+            isVideoReady ? "opacity-0" : "opacity-100"
+          }`}
         />
+        {videoSrc && (
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            onLoadedData={() => setIsVideoReady(true)}
+            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
+              isVideoReady ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )}
       </div>
 
       {/* Content Container */}

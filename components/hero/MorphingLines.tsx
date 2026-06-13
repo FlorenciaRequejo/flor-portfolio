@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+
+const AboutSection = dynamic(() => import("./AboutSection"), { ssr: false });
+const IndustriesSection = dynamic(() => import("./IndustriesSection"), { ssr: false });
 
 interface Point {
   x: number;
@@ -112,6 +117,23 @@ export default function MorphingLines() {
       const container = containerRef.current;
 
       if (!chaosSvg || !orderedSvg || !outputSvg || !container) return;
+
+      // Ensure SVG layout is ready and paths have geometry
+      const firstPath = chaosSvg.querySelector("path");
+      if (firstPath) {
+        try {
+          const length = firstPath.getTotalLength();
+          if (length === 0) {
+            console.warn("[svg-sampling] SVG length is 0, layout not ready. Retrying in next animation frame...");
+            requestAnimationFrame(init);
+            return;
+          }
+        } catch (e) {
+          console.warn("[svg-sampling] SVG geometry error, retrying in next animation frame...", e);
+          requestAnimationFrame(init);
+          return;
+        }
+      }
 
       initCountRef.current++;
       console.log(`[svg-sampling] Running init execution #${initCountRef.current}`);
@@ -536,111 +558,13 @@ export default function MorphingLines() {
           className="absolute inset-0 w-full h-full will-change-transform flex flex-col"
           style={{ transform: "translate3d(0, 0, 0)" }}
         >
-          {/* Section 2: About Content Wrapper */}
-          <div
-            ref={aboutRef}
-            className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col md:flex-row items-stretch gap-8 md:gap-16 relative"
-            style={{
-              paddingTop: "calc(38vh + 120px)",
-              paddingLeft: "var(--section2-pad-left)",
-              paddingRight: "var(--section2-pad-right)",
-              willChange: "opacity, transform",
-            }}
-          >
-            {/* Left Side: Text Content */}
-            <div className="flex flex-col justify-between items-start text-left gap-6 max-w-[580px] pointer-events-auto">
-              <div className="flex flex-col gap-6">
-                <span className="font-sans text-[14px] uppercase tracking-[3px] text-primary/75">
-                  Taking complexity and making it work.
-                </span>
-                <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-primary font-normal tracking-tight">
-                  15+ years of
-                  <br />
-                  solving problems.
-                </h2>
-                <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light">
-                  From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Side: Image and Overlapping Button */}
-            <div className="section2-image-panel pointer-events-auto">
-              <div className="relative h-full w-full overflow-visible">
-                <div className="h-full w-full overflow-hidden rounded-l-[32px]">
-                  <img
-                    src="/flor.png"
-                    alt="Flor Artwork"
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-
-                <a
-                  href="#about"
-                  className="absolute left-0 -translate-x-1/2 bottom-8 h-[54px] px-8 rounded-full bg-primary text-bg font-sans font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity duration-200 shadow-lg z-10 whitespace-nowrap"
-                >
-                  <span>Read More About Me</span>
-                  <span className="text-[16px] font-bold">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
+          <AboutSection innerRef={aboutRef} />
 
           {/* Spacer of at least 100px */}
           <div className="h-[100px] md:h-[120px] w-full flex-shrink-0" />
 
           {/* Section 3: Industries Section */}
-          <div
-            ref={industriesRef}
-            className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col items-center justify-center gap-10 pb-[10vh]"
-            style={{
-              willChange: "opacity",
-            }}
-          >
-            <h3 className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light text-center tracking-wide pointer-events-auto">
-              Trusted by teams across many industries
-            </h3>
-
-            {/* Marquee Row 1 */}
-            <div className="marquee-container w-full overflow-hidden py-2 pointer-events-auto">
-              <div className="marquee-row-ltr">
-                {[
-                  "Healthcare", "Government", "Media & Broadcasting", "Finance",
-                  "Beauty & Personal Care", "Retail & Consumer Goods", "Non-Profit"
-                ].concat([
-                  "Healthcare", "Government", "Media & Broadcasting", "Finance",
-                  "Beauty & Personal Care", "Retail & Consumer Goods", "Non-Profit"
-                ]).map((item, index) => (
-                  <div
-                    key={`row1-${index}`}
-                    className="h-[120px] px-12 rounded-[24px] bg-[#321414] border border-primary/15 flex items-center justify-center text-primary uppercase font-sans tracking-[2px] text-[13px] font-semibold hover:border-primary/40 transition-colors duration-300"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Marquee Row 2 */}
-            <div className="marquee-container w-full overflow-hidden py-2 pointer-events-auto">
-              <div className="marquee-row-rtl">
-                {[
-                  "Construction", "Manufacturing", "Insurance",
-                  "Property & Real Estate", "Technology & SaaS", "Education"
-                ].concat([
-                  "Construction", "Manufacturing", "Insurance",
-                  "Property & Real Estate", "Technology & SaaS", "Education"
-                ]).map((item, index) => (
-                  <div
-                    key={`row2-${index}`}
-                    className="h-[120px] px-12 rounded-[24px] bg-[#321414] border border-primary/15 flex items-center justify-center text-primary uppercase font-sans tracking-[2px] text-[13px] font-semibold hover:border-primary/40 transition-colors duration-300"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <IndustriesSection innerRef={industriesRef} />
         </div>
 
         {/* Navbar - Fixed floating outline pill */}
@@ -652,9 +576,12 @@ export default function MorphingLines() {
           <div className="flex justify-between items-center w-full">
             {/* Profile Section */}
             <div className="flex items-center gap-[10px]">
-              <img
+              <Image
                 src="/Florencia-500x500.jpg"
                 alt="Flor Requejo"
+                width={50}
+                height={50}
+                priority
                 className="w-[50px] h-[50px] rounded-full object-cover border border-primary/20"
               />
               <a href="#" className="text-primary font-serif text-[15px] tracking-wide leading-[1.05] font-normal hover:opacity-80 transition-opacity duration-200">
@@ -731,7 +658,17 @@ export default function MorphingLines() {
       {/* ────────────────────────────────────────────────────────
           HIDDEN SOURCE SVGS (Used solely for geometry sampling)
          ──────────────────────────────────────────────────────── */}
-      <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          width: 0,
+          height: 0,
+          overflow: "hidden",
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      >
         {/* Chaos Path Source */}
         <svg ref={chaosSvgRef} viewBox="0 0 1920 881.35">
           <g id="Path_3">
