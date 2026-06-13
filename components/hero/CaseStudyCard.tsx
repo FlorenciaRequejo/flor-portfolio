@@ -36,14 +36,12 @@ export default function CaseStudyCard({
     initial: {
       y: 0,
       scale: 1,
-      boxShadow: "0 10px 30px rgba(66, 27, 27, 0.03)",
-      borderColor: "rgba(255, 139, 209, 0.15)",
+      boxShadow: "0 10px 30px rgba(66, 27, 27, 0.04)",
     },
     hover: {
-      y: -8,
-      scale: 1.02,
-      boxShadow: "0 20px 40px rgba(255, 139, 209, 0.18), 0 0 0 1px #FF8BD1",
-      borderColor: "#FF8BD1",
+      y: -10,
+      scale: 1.025,
+      boxShadow: "0 30px 60px rgba(66, 27, 27, 0.12)",
     },
   };
 
@@ -64,16 +62,10 @@ export default function CaseStudyCard({
       initial="initial"
       whileHover="hover"
       transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-      className={`relative flex flex-col overflow-hidden bg-white rounded-[32px] border transition-colors duration-300 w-full select-none ${
-        featured ? "h-[490px] md:h-[510px]" : "h-[460px] md:h-[480px]"
-      }`}
+      className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] w-full select-none p-5 h-[480px] md:h-[530px]"
     >
       {/* Media Container */}
-      <div
-        className={`w-full overflow-hidden relative ${
-          featured ? "h-[250px] md:h-[270px]" : "h-[340px] md:h-[360px]"
-        }`}
-      >
+      <div className="relative w-full h-[220px] md:h-[260px] rounded-[20px] overflow-hidden">
         <Image
           src="/case-study-poster.png"
           alt={title}
@@ -101,7 +93,7 @@ export default function CaseStudyCard({
       </div>
 
       {/* Content Container */}
-      <div className="p-6 flex flex-col justify-between flex-grow text-left">
+      <div className="pt-0 mt-5 flex flex-col justify-between flex-grow text-left">
         <div>
           {/* Title and Arrow */}
           <div className="flex items-center text-[#421B1B] font-sans font-semibold text-[18px] leading-tight">
@@ -121,23 +113,21 @@ export default function CaseStudyCard({
             </motion.span>
           </div>
 
-          {/* Description (featured card only) */}
-          {featured && description && (
+          {/* Description */}
+          {description && (
             <p className="font-sans text-[14px] leading-[22px] text-[#421B1B]/75 font-normal mt-3 max-w-[340px]">
               {description}
             </p>
           )}
         </div>
 
-        {/* Read More pill (featured card only) */}
-        {featured && (
-          <div className="flex justify-end mt-4">
-            <div className="h-[38px] px-5 rounded-full bg-[#FAF6F0] border border-primary/20 text-[#421B1B] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5 shadow-sm hover:bg-[#FAF6F0]/90 transition-colors duration-200">
-              <span>Read More</span>
-              <span className="text-[14px]">↗</span>
-            </div>
+        {/* Read More pill */}
+        <div className="flex justify-end mt-4">
+          <div className="h-[38px] px-5 rounded-full bg-[#FAF6F0] border border-primary/20 text-[#421B1B] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5 shadow-sm">
+            <span>Read More</span>
+            <span className="text-[14px]">↗</span>
           </div>
-        )}
+        </div>
       </div>
     </motion.a>
   );
