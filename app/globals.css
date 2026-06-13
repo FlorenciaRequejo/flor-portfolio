@@ -25,6 +25,8 @@
     /* Section 2 Padding */
     --section2-pad-left: 16px;
     --section2-pad-right: 16px;
+    --about-padding-top: calc(20vh + 60px);
+    --hero-scroll-height: 220vh;
   }
 
   * {
@@ -212,8 +214,12 @@
   :root {
     --section2-pad-left: calc((100vw - min(76vw, 1260px)) / 2);
     --section2-pad-right: 0px;
+    --about-padding-top: calc(38vh + 120px);
+    --hero-scroll-height: 300vh;
   }
 }
+
+
 
 /* Section 2 Image Panel Class */
 .section2-image-panel {

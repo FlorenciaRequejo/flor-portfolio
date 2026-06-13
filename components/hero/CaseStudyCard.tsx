@@ -45,7 +45,7 @@ export default function CaseStudyCard({
     initial: {
       y: 0,
       scale: 1,
-      boxShadow: "0 10px 30px rgba(66, 27, 27, 0.04)",
+      boxShadow: "0 15px 45px rgba(66, 27, 27, 0.07)",
     },
     hover: {
       y: -10,
@@ -94,7 +94,8 @@ export default function CaseStudyCard({
 
       {/* Content Container: Inset 10px more than media (total X + 10px) */}
       <div className="relative pt-0 mt-5 flex-grow text-left px-[10px] pb-[10px]">
-        <div className="pr-[115px]">
+        {/* Text area: pr only on desktop, bottom padding on mobile to clear centered button */}
+        <div className="pb-16 md:pb-0 md:pr-[115px]">
           <h3 className="text-[#421B1B] font-sans font-semibold text-[18px] leading-tight">
             {title}
           </h3>
@@ -106,8 +107,8 @@ export default function CaseStudyCard({
           )}
         </div>
 
-        {/* Minimal Read More pill floated bottom-right */}
-        <div className="absolute bottom-[10px] right-[10px]">
+        {/* Minimal Read More pill: bottom-center on mobile, bottom-right on desktop */}
+        <div className="absolute bottom-[10px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[10px]">
           <div className="h-[38px] px-5 rounded-full bg-[#FAF6F0] text-[#421B1B] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5">
             <span>Read More</span>
             <span className="text-[14px]">↗</span>

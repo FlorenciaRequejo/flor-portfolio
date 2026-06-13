@@ -12,7 +12,7 @@ export default function AboutSection({ innerRef }: AboutSectionProps) {
       ref={innerRef}
       className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col md:flex-row items-stretch gap-8 md:gap-16 relative"
       style={{
-        paddingTop: "calc(38vh + 120px)",
+        paddingTop: "var(--about-padding-top)",
         paddingLeft: "var(--section2-pad-left)",
         paddingRight: "var(--section2-pad-right)",
         willChange: "opacity, transform",

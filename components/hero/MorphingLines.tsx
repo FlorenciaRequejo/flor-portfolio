@@ -420,7 +420,7 @@ export default function MorphingLines() {
       let scrollY = 0;
       if (p > 0.5) {
         const isMobile = window.innerWidth < 768;
-        const multiplier = isMobile ? 2.4 : 1.3;
+        const multiplier = isMobile ? 1.8 : 1.3;
         scrollY = (p - 0.5) * multiplier * -vh;
       }
       scrollContent.style.transform = `translate3d(0, ${scrollY}px, 0)`;
@@ -440,7 +440,7 @@ export default function MorphingLines() {
     <div
       ref={containerRef}
       className="relative w-full"
-      style={{ height: "300vh" }}
+      style={{ height: "var(--hero-scroll-height, 300vh)" }}
     >
       {/* Sticky Frame viewport */}
       <div
@@ -531,24 +531,35 @@ export default function MorphingLines() {
             <br />
             By making the right decisions across design, tech and product.
           </p>
+
+          {/* Mobile-only Scroll Indicator: sits below hero copy and is visible on all screen aspect ratios */}
+          <div className="md:hidden flex flex-col items-center gap-3 mt-4 pointer-events-none w-full">
+            <span className="font-sans text-[12px] tracking-[2.5px] uppercase text-primary">
+              SCROLL TO UNTANGLE
+            </span>
+            <div className="flex flex-col items-center">
+              <div className="w-[1.5px] h-[32px] bg-primary/40" />
+              <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
+            </div>
+          </div>
         </div>
 
-        {/* Scroll Indicator - Fixed to bottom of viewport (50px up from bottom), aligned to right side of navigation */}
+        {/* Scroll Indicator - Desktop only (fixed to bottom of viewport) */}
         <div
           ref={scrollIndicatorRef}
-          className="absolute bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[calc(100%-32px)] md:w-[min(76vw,1260px)] flex justify-center md:justify-end transition-opacity duration-0"
+          className="hidden md:flex absolute bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[min(76vw,1260px)] justify-end transition-opacity duration-0"
           style={{
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex flex-col md:flex-row items-center md:items-end gap-4">
+          <div className="flex items-end gap-4">
             {/* Line & Dot */}
-            <div className="flex flex-col items-center order-2 md:order-1">
+            <div className="flex flex-col items-center">
               <div className="w-[1.5px] h-[32px] bg-primary/40" />
               <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
             </div>
             {/* Text */}
-            <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px] order-1 md:order-2">
+            <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
               SCROLL TO UNTANGLE
             </span>
           </div>
