@@ -27,6 +27,8 @@
     --section2-pad-right: 16px;
     --about-padding-top: calc(20vh + 60px);
     --hero-scroll-height: 220vh;
+    --carousel-padding-left: 16px;
+    --carousel-padding-right: 0px;
   }
 
   * {
@@ -216,6 +218,8 @@
     --section2-pad-right: 0px;
     --about-padding-top: calc(38vh + 120px);
     --hero-scroll-height: 300vh;
+    --carousel-padding-left: calc((100vw - min(36vw, 540px)) / 2 - 20px);
+    --carousel-padding-right: calc((100vw - min(36vw, 540px)) / 2 - 20px);
   }
 }
 

@@ -63,7 +63,7 @@ export default function CaseStudyCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-      className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] w-full select-none p-5 h-[420px] md:h-[470px]"
+      className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] w-full select-none p-5 h-[400px] md:h-[440px]"
     >
       {/* Media Container */}
       <div className="relative w-full h-[180px] md:h-[220px] rounded-[20px] overflow-hidden">
@@ -93,7 +93,7 @@ export default function CaseStudyCard({
       </div>
 
       {/* Content Container: Inset 10px more than media (total X + 10px) */}
-      <div className="relative pt-0 mt-5 flex-grow text-left px-[10px] pb-[10px]">
+      <div className="relative pt-0 mt-4 flex-grow text-left px-[10px] pb-[10px]">
         {/* Text area: pr only on desktop, bottom padding on mobile to clear centered button */}
         <div className="pb-16 md:pb-0 md:pr-[115px]">
           <h3 className="text-[#421B1B] font-sans font-semibold text-[18px] leading-tight">
