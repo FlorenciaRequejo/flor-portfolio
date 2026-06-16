@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bagossExtended.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${bagossExtended.variable}`} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

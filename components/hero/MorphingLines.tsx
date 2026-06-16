@@ -37,7 +37,6 @@ const INITIAL_PATHS = [
 ];
 
 export default function MorphingLines() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // SVG Translation Parameters for vertical positioning
   const initialTranslateY = 0; // %
@@ -48,7 +47,6 @@ export default function MorphingLines() {
   const svgWrapperRef = useRef<HTMLDivElement>(null);
   const originalSvgRef = useRef<SVGSVGElement>(null);
   const outputSvgRef = useRef<SVGSVGElement>(null);
-  const navRef = useRef<HTMLElement>(null);
 
   // Elements to animate along scroll
   const copyRef = useRef<HTMLDivElement>(null);
@@ -269,7 +267,6 @@ export default function MorphingLines() {
     const svgWrapper = svgWrapperRef.current;
     const originalSvg = originalSvgRef.current;
     const outputSvg = outputSvgRef.current;
-    const nav = navRef.current;
     if (!container || !viewport || !svgWrapper || !outputSvg) return;
 
     const vh = window.innerHeight;
@@ -292,7 +289,7 @@ export default function MorphingLines() {
 
     // Shifts the SVG wrapper upward based on scroll progress parameters
     const svgTranslateY = initialTranslateY + (finalTranslateY - initialTranslateY) * t;
-    
+
     let transformStr = `translate3d(0, ${svgTranslateY}%, 0)`;
     if (p > 0.65) {
       const postMorphScroll = (p - 0.65) * 2 * vh;
@@ -425,15 +422,6 @@ export default function MorphingLines() {
       }
       scrollContent.style.transform = `translate3d(0, ${scrollY}px, 0)`;
     }
-
-    // Update navbar scroll state
-    if (nav) {
-      if (p > 0.05) {
-        nav.classList.add("is-scrolled");
-      } else {
-        nav.classList.remove("is-scrolled");
-      }
-    }
   };
 
   return (
@@ -527,9 +515,9 @@ export default function MorphingLines() {
 
           {/* Supporting Copy */}
           <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-center md:text-left max-w-[480px]">
-            I turn ideas into products, systems and experiences.
+            I turn ideas into products, systems and experiences,
             <br />
-            By making the right decisions across design, tech and product.
+            by making the right decisions.
           </p>
 
           {/* Mobile-only Scroll Indicator: sits below hero copy and is visible on all screen aspect ratios */}
@@ -580,92 +568,6 @@ export default function MorphingLines() {
           <IndustriesSection innerRef={industriesRef} />
         </div>
 
-        {/* Navbar - Fixed floating outline pill */}
-        <nav
-          ref={navRef}
-          className={`nav-outline-pill ${isMenuOpen ? "is-open" : ""}`}
-        >
-          {/* Top Row: Container that sits at the top of the nav pill */}
-          <div className="flex justify-between items-center w-full">
-            {/* Profile Section */}
-            <div className="flex items-center gap-[10px]">
-              <Image
-                src="/Florencia-500x500.jpg"
-                alt="Flor Requejo"
-                width={50}
-                height={50}
-                priority
-                className="w-[50px] h-[50px] rounded-full object-cover border border-primary/20"
-              />
-              <a href="#" className="text-primary font-serif text-[15px] tracking-wide leading-[1.05] font-normal hover:opacity-80 transition-opacity duration-200">
-                Flor
-                <br />
-                Requejo
-              </a>
-            </div>
-
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex gap-6 md:gap-12 font-sans items-center">
-              {["About", "Projects", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="text-primary font-sans text-[10px] md:text-xs tracking-[0.15em] uppercase hover:opacity-60 transition-opacity duration-200 font-medium"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-
-            {/* Desktop CV Download Button */}
-            <div className="hidden md:block">
-              <a
-                href="#online-cv"
-                className="h-[50px] px-6 rounded-full flex items-center justify-center bg-primary text-bg font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
-              >
-                Online CV
-              </a>
-            </div>
-
-            {/* Mobile Hamburger Toggle Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-[50px] h-[50px] rounded-full flex flex-col items-center justify-center gap-[5px] border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors duration-200 focus:outline-none"
-              aria-label="Toggle Menu"
-            >
-              <span className={`w-6 h-[2px] bg-primary transition-all duration-300 ${isMenuOpen ? "transform rotate-45 translate-y-[8px]" : ""}`} />
-              <span className={`w-6 h-[2px] bg-primary transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""}`} />
-              <span className={`w-6 h-[2px] bg-primary transition-all duration-300 ${isMenuOpen ? "transform -rotate-45 -translate-y-[8px]" : ""}`} />
-            </button>
-          </div>
-
-          {/* Mobile Navigation Dropdown Block */}
-          <div
-            className={`md:hidden flex flex-col items-center gap-6 mt-6 w-full border-t border-primary/10 pt-6 transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-              }`}
-          >
-            <div className="flex flex-col items-center gap-4 w-full">
-              {["About", "Projects", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  onClick={() => setIsMenuOpen(false)}
-                  href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="text-primary font-sans text-xs tracking-[0.2em] uppercase hover:opacity-60 transition-opacity duration-200 font-medium"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-
-            <a
-              href="#online-cv"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-full max-w-[200px] h-[44px] rounded-full flex items-center justify-center bg-primary text-bg font-sans font-semibold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
-            >
-              Online CV
-            </a>
-          </div>
-        </nav>
       </div>
 
       {/* ────────────────────────────────────────────────────────

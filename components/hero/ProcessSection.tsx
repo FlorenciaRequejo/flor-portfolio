@@ -13,18 +13,14 @@ interface ProcessStepProps {
 function ProcessStep({ number, title, description, isLast }: ProcessStepProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  // Track scroll progress of the specific item
-  // start 75%: when target's top reaches 75% of viewport height
-  // start 35%: when target's top reaches 35% of viewport height
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 75%", "start 35%"],
   });
 
   return (
-    <div ref={ref} className="flex gap-6 md:gap-10 items-stretch min-h-[140px] md:min-h-[170px]">
-      {/* Vertical line container */}
-      <div className="flex flex-col items-center flex-shrink-0 w-[3px]">
+    <div ref={ref} className="flex gap-8 md:gap-12 items-stretch min-h-[180px] md:min-h-[230px]">
+      <div className="flex flex-col items-center flex-shrink-0 w-[3px] mb-12 md:mb-16">
         <div className="w-[3px] flex-grow bg-white rounded-full overflow-hidden relative">
           <motion.div
             style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
@@ -33,15 +29,14 @@ function ProcessStep({ number, title, description, isLast }: ProcessStepProps) {
         </div>
       </div>
 
-      {/* Item content */}
-      <div className={`${isLast ? "pb-4" : "pb-12 md:pb-16"}`}>
-        <span className="inline-block font-sans text-[14px] font-semibold tracking-wider text-[#421B1B]/55 uppercase mb-2">
+      <div className={`${isLast ? "pb-4" : "pb-14 md:pb-20"}`}>
+        <span className="inline-block font-sans text-[14px] font-semibold tracking-wider text-[#421B1B]/55 uppercase mb-3">
           {number}
         </span>
-        <h3 className="font-serif text-[24px] md:text-[28px] text-[#421B1B] font-normal leading-tight mb-2.5">
+        <h3 className="font-serif text-[24px] md:text-[28px] text-[#421B1B] font-normal leading-tight mb-3">
           {title}
         </h3>
-        <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#421B1B]/75 font-normal max-w-[480px]">
+        <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#421B1B]/75 font-normal max-w-[520px]">
           {description}
         </p>
       </div>
@@ -81,10 +76,8 @@ export default function ProcessSection() {
       className="w-full bg-[#fbf5f5] p-[8px] md:p-[30px] rounded-[48px] md:rounded-[110px] relative z-10 -mt-[180px] md:-mt-[250px]"
     >
       <div className="w-full bg-[#f2eaea] rounded-[38px] md:rounded-[80px] py-16 md:py-24 relative">
-        <div className="mx-auto w-[min(76vw,1260px)] px-4 md:px-0">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
-            
-            {/* Left Column: Sticky Title and Intro */}
+        <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-18 items-start">
             <div className="md:col-span-5 md:sticky md:top-32 h-fit flex flex-col gap-6 md:gap-8 text-left">
               <span className="inline-block px-4 py-1.5 rounded-full bg-[#421B1B]/5 text-[#421B1B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
                 Process
@@ -99,7 +92,6 @@ export default function ProcessSection() {
               </p>
             </div>
 
-            {/* Right Column: Scrolling Process Items */}
             <div className="md:col-span-7 flex flex-col gap-0 pt-2 md:pt-4">
               {processItems.map((item, index) => (
                 <ProcessStep
@@ -111,7 +103,6 @@ export default function ProcessSection() {
                 />
               ))}
             </div>
-
           </div>
         </div>
       </div>

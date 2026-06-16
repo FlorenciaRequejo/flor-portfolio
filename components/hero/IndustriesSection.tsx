@@ -8,7 +8,7 @@ export default function IndustriesSection({ innerRef }: IndustriesSectionProps) 
   return (
     <div
       ref={innerRef}
-      className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col items-center justify-center gap-10 pb-[10vh]"
+      className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col items-center justify-center gap-4 pb-[300vh]"
       style={{
         willChange: "opacity",
       }}
@@ -18,7 +18,7 @@ export default function IndustriesSection({ innerRef }: IndustriesSectionProps) 
       </h3>
 
       {/* Marquee Row 1 */}
-      <div className="marquee-container w-full overflow-hidden py-2 pointer-events-auto">
+      <div className="marquee-container w-full overflow-hidden py-2 mt-[30px] pointer-events-auto">
         <div className="marquee-row-ltr">
           {[
             "Healthcare", "Government", "Media & Broadcasting", "Finance",

@@ -4,28 +4,119 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import CaseStudyCard from "./CaseStudyCard";
 
+const caseStudyCards = [
+  {
+    title: "Web design and development",
+    description:
+      "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
+    href: "/web-design-and-development",
+  },
+  {
+    title: "End-to-end product thinking",
+    description:
+      "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
+    href: "#projects",
+  },
+  {
+    title: "UX and customer experience",
+    description:
+      "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
+    href: "#projects",
+  },
+];
+
+const duplicatedCaseStudyCards = [...caseStudyCards, ...caseStudyCards, ...caseStudyCards];
+
+const testimonials = [
+  {
+    quote:
+      "Flossie is one of those rare creatives who just gets it. Whether it’s web, UX/UI, branding, or even structural design, she brings fresh ideas, great instincts, and an incredible eye for detail. She’s thoughtful in her approach, quick to solve problems, and always thinking about the user. Beyond her talent, she’s simply a lovely person to work with — positive, collaborative, and full of quiet confidence. I learned a lot working with her and would jump at the chance to do it again.",
+    name: "Jasjeevan Singh",
+    role: "Production Manager & Experienced Studio Leader",
+    avatarSrc: "/avatar-1.jpg",
+  },
+  {
+    quote:
+      "If you’re looking for someone to really add value to your AI development, website performance or add creativity to your team. I would without hesitation recommend Florencia she did amazing work for us at Miles Nelson and lot of the outward facing media platforms that we use were initiated by her.",
+    name: "David Eeles",
+    role: "GM sales and operations at Miles Nelson",
+    avatarSrc: "/avatar-2.jpg",
+  },
+  {
+    quote:
+      "Florencia is a standout tech leader—always ahead of the curve and deeply passionate about innovation. She combines sharp technical expertise with strong leadership, inspiring teams to push boundaries and deliver real impact.",
+    name: "Sam Blenkiron",
+    role: "Director",
+    avatarSrc: "/avatar-3.jpg",
+  },
+  {
+    quote:
+      "Con creatividad y un gusto exquisito, la excelencia como premisa, pasión por su profesión, compromiso y absoluta responsabilidad, Florencia imprime su marca personal en cada uno de sus trabajos. Tenerla como colaboradora hace que todo sea más simple y otorga la tranquilidad de saber que el resultado es siempre superador.",
+    name: "Paulina Abate",
+    role: "Creative",
+    avatarSrc: "/avatar-4.jpg",
+  },
+];
+
+const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
+interface TestimonialCardProps {
+  quote: string;
+  name: string;
+  role: string;
+  avatarSrc: string;
+}
+
+function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps) {
+  return (
+    <div className="bg-white rounded-[24px] p-6 md:p-8 flex flex-col justify-between min-h-[420px] md:min-h-[500px] w-[75vw] sm:w-[340px] md:w-[24vw] min-w-[320px] max-w-[420px] shadow-[0_10px_30px_rgba(66,27,27,0.04)] select-none shrink-0 snap-start">
+      <p className="font-sans text-[14px] leading-[26px] text-[#421B1B]/90 font-normal text-left">
+        “{quote}”
+      </p>
+
+      <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#421B1B]/8">
+        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#FAF6F0] flex-shrink-0">
+          <Image
+            src={avatarSrc}
+            alt={name}
+            fill
+            sizes="40px"
+            className="object-cover"
+          />
+        </div>
+
+        <div className="flex flex-col text-left">
+          <span className="font-sans text-[14px] font-semibold text-[#421B1B]">
+            {name}
+          </span>
+
+          <span className="font-sans text-[12px] text-[#421B1B]/60 font-medium">
+            {role}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function SelectedWork() {
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const [videoBlobUrl, setVideoBlobUrl] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
-  
-  // Projects Carousel state & refs
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSnapping, setIsSnapping] = useState(true);
   const isHovered = useRef(false);
   const isTouching = useRef(false);
-  const scrollDirectionRef = useRef(1); // 1 = right, -1 = left
   const settleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Testimonials Carousel state & refs
   const testimonialsContainerRef = useRef<HTMLDivElement>(null);
   const [isTestimonialsSnapping, setIsTestimonialsSnapping] = useState(true);
   const isTestimonialsHovered = useRef(false);
   const isTestimonialsTouching = useRef(false);
-  const testimonialsDirectionRef = useRef(1); // 1 = right, -1 = left
   const testimonialsSettleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scrollSpeed = 20; // speed in pixels per second
+  const scrollSpeed = 20;
 
   useEffect(() => {
     let idleId: any;
@@ -41,7 +132,6 @@ export default function SelectedWork() {
       }
     };
 
-    // 1. Idle loading fallback
     if (typeof window !== "undefined") {
       if ("requestIdleCallback" in window) {
         idleId = window.requestIdleCallback(triggerLoad);
@@ -50,7 +140,6 @@ export default function SelectedWork() {
       }
     }
 
-    // 2. Viewport entrance loading
     if (sectionRef.current) {
       observer = new IntersectionObserver(
         ([entry]) => {
@@ -58,7 +147,7 @@ export default function SelectedWork() {
             triggerLoad();
           }
         },
-        { rootMargin: "300px" } // trigger loading before it enters viewport
+        { rootMargin: "300px" }
       );
       observer.observe(sectionRef.current);
     }
@@ -107,25 +196,10 @@ export default function SelectedWork() {
     };
   }, [shouldLoadVideo]);
 
-  // Effect for Auto-Rotation programmatic loop
+  // Selected Work Auto-rotation effect
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
-
-    // Center Card 2 exactly in the viewport on desktop, start at 0 on mobile
-    const centerCarousel = () => {
-      if (window.innerWidth >= 768) {
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        if (maxScroll > 0) {
-          container.scrollLeft = maxScroll / 2;
-        }
-      } else {
-        container.scrollLeft = 0;
-      }
-    };
-
-    centerCarousel();
-    const loadTimeout = setTimeout(centerCarousel, 250);
 
     let animationId: number;
     let lastTime = performance.now();
@@ -135,26 +209,25 @@ export default function SelectedWork() {
       lastTime = time;
 
       if (!isHovered.current && !isTouching.current) {
-        // Optimize re-renders by setting snap state only at boundaries
         setIsSnapping((prev) => {
           if (prev) return false;
           return prev;
         });
 
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        if (maxScroll > 0) {
-          let currentScroll = container.scrollLeft;
-          let nextScroll = currentScroll + scrollDirectionRef.current * scrollSpeed * delta;
-
-          if (nextScroll >= maxScroll) {
-            nextScroll = maxScroll;
-            scrollDirectionRef.current = -1;
-          } else if (nextScroll <= 0) {
-            nextScroll = 0;
-            scrollDirectionRef.current = 1;
+        const flexWrapper = container.firstElementChild as HTMLElement;
+        if (flexWrapper) {
+          const cards = Array.from(flexWrapper.children) as HTMLElement[];
+          const originalCount = caseStudyCards.length;
+          if (cards.length >= originalCount * 2) {
+            const child1 = cards[0];
+            const child2 = cards[originalCount];
+            if (child1 && child2) {
+              const loopWidth = child2.offsetLeft - child1.offsetLeft;
+              if (loopWidth > 0) {
+                container.scrollLeft += scrollSpeed * delta;
+              }
+            }
           }
-
-          container.scrollLeft = nextScroll;
         }
       } else {
         setIsSnapping((prev) => {
@@ -171,16 +244,9 @@ export default function SelectedWork() {
       animationId = requestAnimationFrame(animate);
     }, 1500);
 
-    const handleResize = () => {
-      centerCarousel();
-    };
-    window.addEventListener("resize", handleResize);
-
     return () => {
-      clearTimeout(loadTimeout);
       clearTimeout(startTimeout);
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -207,7 +273,7 @@ export default function SelectedWork() {
     }, 2000);
   };
 
-  // Effect for Testimonials Auto-Rotation programmatic loop
+  // Testimonials Auto-rotation effect
   useEffect(() => {
     const container = testimonialsContainerRef.current;
     if (!container) return;
@@ -225,20 +291,20 @@ export default function SelectedWork() {
           return prev;
         });
 
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        if (maxScroll > 0) {
-          let currentScroll = container.scrollLeft;
-          let nextScroll = currentScroll + testimonialsDirectionRef.current * scrollSpeed * delta;
-
-          if (nextScroll >= maxScroll) {
-            nextScroll = maxScroll;
-            testimonialsDirectionRef.current = -1;
-          } else if (nextScroll <= 0) {
-            nextScroll = 0;
-            testimonialsDirectionRef.current = 1;
+        const flexWrapper = container.firstElementChild as HTMLElement;
+        if (flexWrapper) {
+          const cards = Array.from(flexWrapper.children) as HTMLElement[];
+          const originalCount = testimonials.length;
+          if (cards.length >= originalCount * 2) {
+            const child1 = cards[0];
+            const child2 = cards[originalCount];
+            if (child1 && child2) {
+              const loopWidth = child2.offsetLeft - child1.offsetLeft;
+              if (loopWidth > 0) {
+                container.scrollLeft += scrollSpeed * delta;
+              }
+            }
           }
-
-          container.scrollLeft = nextScroll;
         }
       } else {
         setIsTestimonialsSnapping((prev) => {
@@ -250,7 +316,6 @@ export default function SelectedWork() {
       animationId = requestAnimationFrame(animate);
     };
 
-    // Stagger start slightly to keep page loading visual flow calm
     const startTimeout = setTimeout(() => {
       lastTime = performance.now();
       animationId = requestAnimationFrame(animate);
@@ -285,14 +350,116 @@ export default function SelectedWork() {
     }, 2000);
   };
 
+  // Seamless scroll loops wrapping onScroll
+  const handleSelectedWorkScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+    const cards = Array.from(flexWrapper.children) as HTMLElement[];
+    const originalCount = caseStudyCards.length;
+    if (cards.length < originalCount * 2) return;
+
+    const child1 = cards[0];
+    const child2 = cards[originalCount];
+    if (!child1 || !child2) return;
+
+    const loopWidth = child2.offsetLeft - child1.offsetLeft;
+    if (loopWidth <= 0) return;
+
+    const scrollLeft = container.scrollLeft;
+
+    if (scrollLeft < loopWidth || scrollLeft >= 2 * loopWidth) {
+      const offset = ((scrollLeft - loopWidth) % loopWidth + loopWidth) % loopWidth;
+      container.scrollLeft = loopWidth + offset;
+    }
+  };
+
+  const handleTestimonialsScroll = () => {
+    const container = testimonialsContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+    const cards = Array.from(flexWrapper.children) as HTMLElement[];
+    const originalCount = testimonials.length;
+    if (cards.length < originalCount * 2) return;
+
+    const child1 = cards[0];
+    const child2 = cards[originalCount];
+    if (!child1 || !child2) return;
+
+    const loopWidth = child2.offsetLeft - child1.offsetLeft;
+    if (loopWidth <= 0) return;
+
+    const scrollLeft = container.scrollLeft;
+
+    if (scrollLeft < loopWidth || scrollLeft >= 2 * loopWidth) {
+      const offset = ((scrollLeft - loopWidth) % loopWidth + loopWidth) % loopWidth;
+      container.scrollLeft = loopWidth + offset;
+    }
+  };
+
+  // Center scroll positions on mount to the middle copy
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+
+    const initScroll = () => {
+      const cards = Array.from(flexWrapper.children) as HTMLElement[];
+      const originalCount = caseStudyCards.length;
+      if (cards.length >= originalCount * 2) {
+        const child1 = cards[0];
+        const child2 = cards[originalCount];
+        if (child1 && child2) {
+          const loopWidth = child2.offsetLeft - child1.offsetLeft;
+          if (loopWidth > 0) {
+            container.scrollLeft = loopWidth;
+          }
+        }
+      }
+    };
+
+    initScroll();
+    const t = setTimeout(initScroll, 150);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const container = testimonialsContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+
+    const initScroll = () => {
+      const cards = Array.from(flexWrapper.children) as HTMLElement[];
+      const originalCount = testimonials.length;
+      if (cards.length >= originalCount * 2) {
+        const child1 = cards[0];
+        const child2 = cards[originalCount];
+        if (child1 && child2) {
+          const loopWidth = child2.offsetLeft - child1.offsetLeft;
+          if (loopWidth > 0) {
+            container.scrollLeft = loopWidth;
+          }
+        }
+      }
+    };
+
+    initScroll();
+    const t = setTimeout(initScroll, 150);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <section ref={sectionRef} className="w-full bg-white p-[8px] pb-[220px] md:p-[30px] md:pb-[320px] rounded-[48px] md:rounded-[110px] relative z-[1]">
+    <section
+      ref={sectionRef}
+      className="w-full bg-white p-[8px] pb-[220px] md:p-[30px] md:pb-[320px] rounded-[48px] md:rounded-[110px] relative z-[1] md:mt-[40px]"
+    >
       <div className="w-full bg-[#fbf5f5] rounded-[38px] md:rounded-[80px] pt-10 pb-16 md:pt-16 md:pb-24 relative">
-        
-        {/* Header Section: Two-column layout on desktop */}
-        <div className="mx-auto w-[min(76vw,1260px)] px-4 md:px-0 mb-4">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-12 w-full">
-            {/* Left Side: Eyebrow and Headline */}
+        <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
             <div className="flex flex-col gap-4 max-w-[620px]">
               <span className="inline-block px-4 py-1.5 rounded-full bg-[#421B1B]/5 text-[#421B1B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
                 Selected Work
@@ -304,14 +471,12 @@ export default function SelectedWork() {
               </h2>
             </div>
 
-            {/* Right Side: Supporting Copy */}
             <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#421B1B]/75 font-normal max-w-[460px] md:mt-16">
               Every project is different. The common thread is turning complexity into something simple that people can actually use.
             </p>
           </div>
         </div>
 
-        {/* Carousel / Cards Row: Unified scrollable carousel for desktop and mobile */}
         <div
           ref={scrollContainerRef}
           onMouseEnter={handleMouseEnter}
@@ -319,83 +484,56 @@ export default function SelectedWork() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
-          className="w-full overflow-x-auto scrollbar-none flex mt-2 md:mt-4 relative translate-y-[60px] md:translate-y-[80px] -mb-[60px] md:-mb-[80px] z-20"
+          onScroll={handleSelectedWorkScroll}
+          className="w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8"
           style={{
-            scrollSnapType: isSnapping ? "x mandatory" : "none"
+            scrollSnapType: isSnapping ? "x mandatory" : "none",
           }}
         >
           <div
-            className="flex flex-nowrap gap-5 md:gap-10 shrink-0 py-4"
+            className="flex flex-nowrap gap-5 md:gap-10 shrink-0 py-8"
             style={{
               paddingLeft: "var(--carousel-padding-left)",
-              paddingRight: "var(--carousel-padding-right)"
+              paddingRight: "var(--carousel-padding-right)",
             }}
           >
-            
-            {/* Card 1: Web Design */}
-            <div className="snap-start shrink-0 w-[78vw] sm:w-[340px] md:w-[36vw] max-w-[540px] min-w-[340px] flex">
-              <CaseStudyCard
-                title="Web design and development"
-                description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
-                videoSrc={videoBlobUrl || ""}
-                href="#projects"
-                featured={false}
-              />
-            </div>
-
-            {/* Card 2: Product Thinking */}
-            <div className="snap-start shrink-0 w-[78vw] sm:w-[340px] md:w-[36vw] max-w-[540px] min-w-[340px] flex">
-              <CaseStudyCard
-                title="End-to-end product thinking"
-                description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
-                videoSrc={videoBlobUrl || ""}
-                href="#projects"
-                featured={false}
-              />
-            </div>
-
-            {/* Card 3: UX Experience */}
-            <div className="snap-start shrink-0 w-[78vw] sm:w-[340px] md:w-[36vw] max-w-[540px] min-w-[340px] flex">
-              <CaseStudyCard
-                title="UX and customer experience"
-                description="From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't."
-                videoSrc={videoBlobUrl || ""}
-                href="#projects"
-                featured={false}
-              />
-            </div>
-
-            {/* Mobile End Spacer */}
-            <div className="w-4 md:hidden shrink-0" />
+            {duplicatedCaseStudyCards.map((card, index) => (
+              <div
+                key={`${card.title}-${index}`}
+                className="snap-start shrink-0 w-[78vw] sm:w-[340px] md:w-[36vw] max-w-[540px] min-w-[340px] flex"
+              >
+                <CaseStudyCard
+                  title={card.title}
+                  description={card.description}
+                  videoSrc={videoBlobUrl || ""}
+                  href={card.href}
+                  featured={false}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Testimonials Divider / Section */}
-        <div className="mt-24 md:mt-32">
-          
-          {/* Testimonials Header */}
-          <div className="mx-auto w-[min(76vw,1260px)] px-4 md:px-0 mb-8 md:mb-12 text-left">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-12 w-full">
-              {/* Left Side */}
+        <div className="mt-20 md:mt-28">
+          <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
               <div className="flex flex-col gap-4 max-w-[620px]">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[#421B1B]/5 text-[#421B1B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
                   Testimonials
                 </span>
-                <h2 className="font-serif text-[36px] md:text-[52px] leading-[1.1] text-[#421B1B] font-normal tracking-tight">
-                  What people say
+                <h2 className="font-serif text-[36px] md:text-[64px] leading-[1.1] text-[#421B1B] font-normal tracking-tight">
+                  They Said It,
                   <br />
-                  after working with me
+                  Not Me
                 </h2>
               </div>
-              
-              {/* Right Side */}
+
               <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#421B1B]/75 font-normal max-w-[440px] md:mb-2">
                 A few words from people I’ve worked with across web, design, product and systems projects.
               </p>
             </div>
           </div>
 
-          {/* Testimonials Carousel */}
           <div
             ref={testimonialsContainerRef}
             onMouseEnter={handleTestimonialsMouseEnter}
@@ -403,109 +541,32 @@ export default function SelectedWork() {
             onTouchStart={handleTestimonialsTouchStart}
             onTouchEnd={handleTestimonialsTouchEnd}
             onTouchCancel={handleTestimonialsTouchEnd}
+            onScroll={handleTestimonialsScroll}
             className="w-full overflow-x-auto scrollbar-none flex relative z-20"
             style={{
-              scrollSnapType: isTestimonialsSnapping ? "x mandatory" : "none"
+              scrollSnapType: isTestimonialsSnapping ? "x mandatory" : "none",
             }}
           >
             <div
               className="flex flex-nowrap gap-5 md:gap-8 shrink-0 py-4"
               style={{
                 paddingLeft: "var(--carousel-padding-left)",
-                paddingRight: "var(--carousel-padding-right)"
+                paddingRight: "var(--carousel-padding-right)",
               }}
             >
-              {testimonials.map((t) => (
+              {duplicatedTestimonials.map((t, index) => (
                 <TestimonialCard
-                  key={t.name}
+                  key={`${t.name}-${index}`}
                   quote={t.quote}
                   name={t.name}
                   role={t.role}
                   avatarSrc={t.avatarSrc}
                 />
               ))}
-
-              {/* Mobile End Spacer */}
-              <div className="w-4 md:hidden shrink-0" />
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
-  );
-}
-
-// ==========================================
-// Testimonials Data & Card Component
-// ==========================================
-
-const testimonials = [
-  {
-    quote: "Florencia has a rare ability to turn messy ideas into clear, usable systems.",
-    name: "Sarah Mitchell",
-    role: "Marketing Manager",
-    avatarSrc: "/avatar-1.png",
-  },
-  {
-    quote: "She understands the design, the user experience and the technical side, which made the whole project easier.",
-    name: "James Carter",
-    role: "Business Owner",
-    avatarSrc: "/avatar-2.png",
-  },
-  {
-    quote: "Working with Florencia helped us move from scattered requirements to a solution that actually worked.",
-    name: "Emily Roberts",
-    role: "Operations Lead",
-    avatarSrc: "/avatar-3.png",
-  },
-  {
-    quote: "She asks the right questions, finds the gaps quickly and brings structure without overcomplicating things.",
-    name: "Liam Thompson",
-    role: "Project Manager",
-    avatarSrc: "/avatar-4.png",
-  },
-  {
-    quote: "The final result felt considered, practical and easy for our team to manage.",
-    name: "Rebecca Wilson",
-    role: "Director",
-    avatarSrc: "/avatar-5.png",
-  },
-];
-
-interface TestimonialCardProps {
-  quote: string;
-  name: string;
-  role: string;
-  avatarSrc: string;
-}
-
-function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps) {
-  return (
-    <div className="bg-white rounded-[24px] p-6 md:p-8 flex flex-col justify-between h-[280px] md:h-[300px] w-[75vw] sm:w-[300px] md:w-[20vw] min-w-[280px] max-w-[340px] shadow-[0_10px_30px_rgba(66,27,27,0.03)] select-none shrink-0 snap-start">
-      <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#421B1B]/95 font-normal italic text-left">
-        “{quote}”
-      </p>
-      <div className="flex items-center gap-4 mt-6">
-        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#FAF6F0] flex-shrink-0">
-          <Image
-            src={avatarSrc}
-            alt={name}
-            fill
-            sizes="40px"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col text-left">
-          <span className="font-sans text-[14px] font-semibold text-[#421B1B]">
-            {name}
-          </span>
-          <span className="font-sans text-[12px] text-[#421B1B]/60 font-medium">
-            {role}
-          </span>
-        </div>
-      </div>
-    </div>
   );
 }

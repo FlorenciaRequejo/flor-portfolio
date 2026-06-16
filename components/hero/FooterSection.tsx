@@ -42,7 +42,7 @@ export default function FooterSection() {
         >
           {/* Top CTA Area */}
           <div className="flex flex-col items-center text-center gap-6 md:gap-8 max-w-[760px] mx-auto">
-            <h2 className="font-serif text-[40px] sm:text-[48px] md:text-[80px] leading-[1.05] text-[#FF8BD1] font-normal tracking-tight">
+            <h2 className="font-serif text-[40px] sm:text-[48px] md:text-[72px] leading-[1.05] text-[#FF8BD1] font-normal tracking-tight">
               How I work.
               <br />
               What's my process
