@@ -118,6 +118,27 @@ export default function SelectedWork() {
 
   const scrollSpeed = 20;
 
+  // Viewport visibility states
+  const [isVisible, setIsVisible] = useState(false);
+  const [isTestimonialsVisible, setIsTestimonialsVisible] = useState(false);
+
+  // Mouse drag states for Selected Work
+  const startXRef = useRef(0);
+  const startScrollLeftRef = useRef(0);
+  const isMouseDownRef = useRef(false);
+  const wasDraggingRef = useRef(false);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const speedFactorRef = useRef(0);
+
+  // Mouse drag states for Testimonials
+  const testStartXRef = useRef(0);
+  const testStartScrollLeftRef = useRef(0);
+  const testIsMouseDownRef = useRef(false);
+  const testWasDraggingRef = useRef(false);
+  const [isTestimonialsMouseDown, setIsTestimonialsMouseDown] = useState(false);
+  const testSpeedFactorRef = useRef(0);
+
+  // Viewport enter observer for video preloading
   useEffect(() => {
     let idleId: any;
     let observer: IntersectionObserver | null = null;
@@ -164,6 +185,7 @@ export default function SelectedWork() {
     };
   }, []);
 
+  // Video data fetch preloader
   useEffect(() => {
     if (!shouldLoadVideo) return;
 
@@ -196,6 +218,42 @@ export default function SelectedWork() {
     };
   }, [shouldLoadVideo]);
 
+  // Selected Work Visibility Observer
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Testimonials Visibility Observer
+  useEffect(() => {
+    const container = testimonialsContainerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsTestimonialsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   // Selected Work Auto-rotation effect
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -208,11 +266,14 @@ export default function SelectedWork() {
       const delta = (time - lastTime) / 1000;
       lastTime = time;
 
-      if (!isHovered.current && !isTouching.current) {
+      if (!isHovered.current && !isTouching.current && !isMouseDownRef.current && isVisible) {
         setIsSnapping((prev) => {
           if (prev) return false;
           return prev;
         });
+
+        // Gently speed up when resuming auto movement
+        speedFactorRef.current = Math.min(1, speedFactorRef.current + delta * 2);
 
         const flexWrapper = container.firstElementChild as HTMLElement;
         if (flexWrapper) {
@@ -224,14 +285,16 @@ export default function SelectedWork() {
             if (child1 && child2) {
               const loopWidth = child2.offsetLeft - child1.offsetLeft;
               if (loopWidth > 0) {
-                container.scrollLeft += scrollSpeed * delta;
+                container.scrollLeft += scrollSpeed * delta * speedFactorRef.current;
               }
             }
           }
         }
       } else {
+        speedFactorRef.current = 0;
         setIsSnapping((prev) => {
-          if (!prev) return true;
+          const shouldSnap = !isMouseDownRef.current;
+          if (prev !== shouldSnap) return shouldSnap;
           return prev;
         });
       }
@@ -248,14 +311,10 @@ export default function SelectedWork() {
       clearTimeout(startTimeout);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isVisible]);
 
   const handleMouseEnter = () => {
     isHovered.current = true;
-  };
-
-  const handleMouseLeave = () => {
-    isHovered.current = false;
   };
 
   const handleTouchStart = () => {
@@ -285,11 +344,14 @@ export default function SelectedWork() {
       const delta = (time - lastTime) / 1000;
       lastTime = time;
 
-      if (!isTestimonialsHovered.current && !isTestimonialsTouching.current) {
+      if (!isTestimonialsHovered.current && !isTestimonialsTouching.current && !testIsMouseDownRef.current && isTestimonialsVisible) {
         setIsTestimonialsSnapping((prev) => {
           if (prev) return false;
           return prev;
         });
+
+        // Gently speed up when resuming auto movement
+        testSpeedFactorRef.current = Math.min(1, testSpeedFactorRef.current + delta * 2);
 
         const flexWrapper = container.firstElementChild as HTMLElement;
         if (flexWrapper) {
@@ -301,14 +363,16 @@ export default function SelectedWork() {
             if (child1 && child2) {
               const loopWidth = child2.offsetLeft - child1.offsetLeft;
               if (loopWidth > 0) {
-                container.scrollLeft += scrollSpeed * delta;
+                container.scrollLeft += scrollSpeed * delta * testSpeedFactorRef.current;
               }
             }
           }
         }
       } else {
+        testSpeedFactorRef.current = 0;
         setIsTestimonialsSnapping((prev) => {
-          if (!prev) return true;
+          const shouldSnap = !testIsMouseDownRef.current;
+          if (prev !== shouldSnap) return shouldSnap;
           return prev;
         });
       }
@@ -325,14 +389,10 @@ export default function SelectedWork() {
       clearTimeout(startTimeout);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isTestimonialsVisible]);
 
   const handleTestimonialsMouseEnter = () => {
     isTestimonialsHovered.current = true;
-  };
-
-  const handleTestimonialsMouseLeave = () => {
-    isTestimonialsHovered.current = false;
   };
 
   const handleTestimonialsTouchStart = () => {
@@ -348,6 +408,96 @@ export default function SelectedWork() {
     testimonialsSettleTimerRef.current = setTimeout(() => {
       isTestimonialsTouching.current = false;
     }, 2000);
+  };
+
+  // Selected Work Mouse Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    isMouseDownRef.current = true;
+    setIsMouseDown(true);
+    setIsSnapping(false);
+    wasDraggingRef.current = false;
+    startXRef.current = e.clientX;
+    startScrollLeftRef.current = container.scrollLeft;
+    speedFactorRef.current = 0;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDownRef.current) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const walk = e.clientX - startXRef.current;
+    if (Math.abs(walk) > 5) {
+      wasDraggingRef.current = true;
+    }
+    container.scrollLeft = startScrollLeftRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    if (!isMouseDownRef.current) return;
+    isMouseDownRef.current = false;
+    setIsMouseDown(false);
+    setIsSnapping(true);
+    speedFactorRef.current = 0;
+  };
+
+  const handleSelectedWorkMouseLeave = () => {
+    isHovered.current = false;
+    handleMouseUpOrLeave();
+  };
+
+  const handleContainerClickCapture = (e: React.MouseEvent) => {
+    if (wasDraggingRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      wasDraggingRef.current = false;
+    }
+  };
+
+  // Testimonials Mouse Drag handlers
+  const handleTestimonialsMouseDown = (e: React.MouseEvent) => {
+    const container = testimonialsContainerRef.current;
+    if (!container) return;
+    testIsMouseDownRef.current = true;
+    setIsTestimonialsMouseDown(true);
+    setIsTestimonialsSnapping(false);
+    testWasDraggingRef.current = false;
+    testStartXRef.current = e.clientX;
+    testStartScrollLeftRef.current = container.scrollLeft;
+    testSpeedFactorRef.current = 0;
+  };
+
+  const handleTestimonialsMouseMove = (e: React.MouseEvent) => {
+    if (!testIsMouseDownRef.current) return;
+    const container = testimonialsContainerRef.current;
+    if (!container) return;
+    const walk = e.clientX - testStartXRef.current;
+    if (Math.abs(walk) > 5) {
+      testWasDraggingRef.current = true;
+    }
+    container.scrollLeft = testStartScrollLeftRef.current - walk;
+  };
+
+  const handleTestimonialsMouseUpOrLeave = () => {
+    if (!testIsMouseDownRef.current) return;
+    testIsMouseDownRef.current = false;
+    setIsTestimonialsMouseDown(false);
+    setIsTestimonialsSnapping(true);
+    testSpeedFactorRef.current = 0;
+  };
+
+  const handleTestimonialsMouseLeaveCombined = () => {
+    isTestimonialsHovered.current = false;
+    handleTestimonialsMouseUpOrLeave();
+  };
+
+  const handleTestimonialsClickCapture = (e: React.MouseEvent) => {
+    if (testWasDraggingRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      testWasDraggingRef.current = false;
+    }
   };
 
   // Seamless scroll loops wrapping onScroll
@@ -480,12 +630,18 @@ export default function SelectedWork() {
         <div
           ref={scrollContainerRef}
           onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseLeave={handleSelectedWorkMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
           onScroll={handleSelectedWorkScroll}
-          className="w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onClickCapture={handleContainerClickCapture}
+          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${
+            isMouseDown ? "cursor-grabbing" : "cursor-grab"
+          }`}
           style={{
             scrollSnapType: isSnapping ? "x mandatory" : "none",
           }}
@@ -537,12 +693,18 @@ export default function SelectedWork() {
           <div
             ref={testimonialsContainerRef}
             onMouseEnter={handleTestimonialsMouseEnter}
-            onMouseLeave={handleTestimonialsMouseLeave}
+            onMouseLeave={handleTestimonialsMouseLeaveCombined}
             onTouchStart={handleTestimonialsTouchStart}
             onTouchEnd={handleTestimonialsTouchEnd}
             onTouchCancel={handleTestimonialsTouchEnd}
             onScroll={handleTestimonialsScroll}
-            className="w-full overflow-x-auto scrollbar-none flex relative z-20"
+            onMouseDown={handleTestimonialsMouseDown}
+            onMouseMove={handleTestimonialsMouseMove}
+            onMouseUp={handleTestimonialsMouseUpOrLeave}
+            onClickCapture={handleTestimonialsClickCapture}
+            className={`w-full overflow-x-auto scrollbar-none flex relative z-20 select-none ${
+              isTestimonialsMouseDown ? "cursor-grabbing" : "cursor-grab"
+            }`}
             style={{
               scrollSnapType: isTestimonialsSnapping ? "x mandatory" : "none",
             }}
