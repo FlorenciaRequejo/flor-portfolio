@@ -520,6 +520,22 @@ export default function MorphingLines() {
             by making the right decisions.
           </p>
 
+          {/* Mobile Pills - visible on mobile/tablet, hidden on desktop */}
+          <div className="md:hidden flex flex-wrap gap-2.5 justify-center mt-2 w-full max-w-[480px] pointer-events-auto">
+            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
+              15+ Years Experience
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
+              Design + Development
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
+              Concept to Launch
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
+              AI Problem Solving
+            </span>
+          </div>
+
           {/* Mobile-only Scroll Indicator: sits below hero copy and is visible on all screen aspect ratios */}
           <div className="md:hidden flex flex-col items-center gap-3 mt-4 pointer-events-none w-full">
             <span className="font-sans text-[12px] tracking-[2.5px] uppercase text-primary">
@@ -532,18 +548,36 @@ export default function MorphingLines() {
           </div>
         </div>
 
-        {/* Scroll Indicator - Desktop only (fixed to bottom of viewport) */}
+        {/* Scroll Indicator - Desktop only (fixed to bottom of viewport, line extended up) */}
         <div
           ref={scrollIndicatorRef}
-          className="hidden md:flex absolute bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[min(76vw,1260px)] justify-end transition-opacity duration-0"
+          className="hidden md:flex absolute top-[25vh] bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[min(76vw,1260px)] justify-end transition-opacity duration-0"
           style={{
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex items-end gap-4">
-            {/* Line & Dot */}
-            <div className="flex flex-col items-center">
-              <div className="w-[1.5px] h-[32px] bg-primary/40" />
+          <div className="flex items-end gap-4 h-full">
+            {/* Extended Line & Dot */}
+            <div className="flex flex-col items-center h-full relative">
+              {/* Tall vertical line */}
+              <div className="w-[1.5px] flex-grow bg-primary/40 relative">
+                {/* Pills container on the left side of the line */}
+                <div className="absolute right-6 top-[10%] flex flex-col gap-4 items-end pointer-events-auto">
+                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
+                    15+ Years Experience
+                  </span>
+                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
+                    Design + Development
+                  </span>
+                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
+                    Concept to Launch
+                  </span>
+                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
+                    AI Problem Solving
+                  </span>
+                </div>
+              </div>
+              {/* Dot */}
               <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
             </div>
             {/* Text */}
