@@ -29,6 +29,7 @@
     --hero-scroll-height: 220vh;
     --carousel-padding-left: 16px;
     --carousel-padding-right: 0px;
+    --selected-work-pad-left: 16px;
   }
 
   * {
@@ -219,6 +220,7 @@
     --hero-scroll-height: 300vh;
     --carousel-padding-left: calc((100vw - min(36vw, 540px)) / 2 - 20px);
     --carousel-padding-right: calc((100vw - min(36vw, 540px)) / 2 - 20px);
+    --selected-work-pad-left: 48px;
   }
 }
 

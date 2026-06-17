@@ -10,20 +10,28 @@ const caseStudyCards = [
     description:
       "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
     href: "/web-design-and-development",
+    imageSrc: "/Web Design and Development.png",
+    videoSrc: "/Web Design and Development.mp4",
   },
   {
     title: "End-to-end product thinking",
     description:
       "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
     href: "#projects",
+    imageSrc: "/End To End Product Thinking.jpg",
+    videoSrc: "/End To End Product Thinking.mp4",
   },
   {
     title: "UX and customer experience",
     description:
       "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
     href: "#projects",
+    imageSrc: "/Ux and User Experience.png",
+    videoSrc: "/Ux and User Experience.mp4",
   },
 ];
+
+const duplicatedCaseStudyCards = [...caseStudyCards, ...caseStudyCards, ...caseStudyCards];
 
 
 
@@ -100,9 +108,12 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
 }
 
 export default function SelectedWork() {
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-  const [videoBlobUrl, setVideoBlobUrl] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isSnapping, setIsSnapping] = useState(true);
+  const isHovered = useRef(false);
+  const isTouching = useRef(false);
+  const settleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const testimonialsContainerRef = useRef<HTMLDivElement>(null);
   const [isTestimonialsSnapping, setIsTestimonialsSnapping] = useState(true);
@@ -113,7 +124,16 @@ export default function SelectedWork() {
   const scrollSpeed = 20;
 
   // Viewport visibility states
+  const [isVisible, setIsVisible] = useState(false);
   const [isTestimonialsVisible, setIsTestimonialsVisible] = useState(false);
+
+  // Mouse drag states for Selected Work
+  const startXRef = useRef(0);
+  const startScrollLeftRef = useRef(0);
+  const isMouseDownRef = useRef(false);
+  const wasDraggingRef = useRef(false);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const speedFactorRef = useRef(0);
 
   // Mouse drag states for Testimonials
   const testStartXRef = useRef(0);
@@ -123,85 +143,103 @@ export default function SelectedWork() {
   const [isTestimonialsMouseDown, setIsTestimonialsMouseDown] = useState(false);
   const testSpeedFactorRef = useRef(0);
 
-  // Viewport enter observer for video preloading
+
+
+  // Selected Work Visibility Observer
   useEffect(() => {
-    let idleId: any;
-    let observer: IntersectionObserver | null = null;
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-    const triggerLoad = () => {
-      setShouldLoadVideo(true);
-      if (observer) observer.disconnect();
-      if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-        window.cancelIdleCallback(idleId);
-      } else {
-        clearTimeout(idleId);
-      }
-    };
-
-    if (typeof window !== "undefined") {
-      if ("requestIdleCallback" in window) {
-        idleId = window.requestIdleCallback(triggerLoad);
-      } else {
-        idleId = setTimeout(triggerLoad, 4000);
-      }
-    }
-
-    if (sectionRef.current) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            triggerLoad();
-          }
-        },
-        { rootMargin: "300px" }
-      );
-      observer.observe(sectionRef.current);
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     return () => {
-      if (observer) observer.disconnect();
-      if (typeof window !== "undefined") {
-        if ("requestIdleCallback" in window) {
-          window.cancelIdleCallback(idleId);
-        } else {
-          clearTimeout(idleId);
-        }
-      }
+      observer.disconnect();
     };
   }, []);
 
-  // Video data fetch preloader
+  // Selected Work Auto-rotation effect
   useEffect(() => {
-    if (!shouldLoadVideo) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-    let active = true;
-    let createdUrl: string | null = null;
+    let animationId: number;
+    let lastTime = performance.now();
 
-    fetch("/case-study-video.mp4")
-      .then((res) => {
-        if (!res.ok) throw new Error("Video load failed");
-        return res.blob();
-      })
-      .then((blob) => {
-        if (active) {
-          createdUrl = URL.createObjectURL(blob);
-          setVideoBlobUrl(createdUrl);
+    const animate = (time: number) => {
+      const delta = (time - lastTime) / 1000;
+      lastTime = time;
+
+      if (!isHovered.current && !isTouching.current && !isMouseDownRef.current && isVisible) {
+        setIsSnapping((prev) => {
+          if (prev) return false;
+          return prev;
+        });
+
+        // Gently speed up when resuming auto movement
+        speedFactorRef.current = Math.min(1, speedFactorRef.current + delta * 2);
+
+        const flexWrapper = container.firstElementChild as HTMLElement;
+        if (flexWrapper) {
+          const cards = Array.from(flexWrapper.children) as HTMLElement[];
+          const originalCount = caseStudyCards.length;
+          if (cards.length >= originalCount * 2) {
+            const child1 = cards[0];
+            const child2 = cards[originalCount];
+            if (child1 && child2) {
+              const loopWidth = child2.offsetLeft - child1.offsetLeft;
+              if (loopWidth > 0) {
+                container.scrollLeft += scrollSpeed * delta * speedFactorRef.current;
+              }
+            }
+          }
         }
-      })
-      .catch((err) => {
-        console.error("Video preloading failed, falling back to static URL:", err);
-        if (active) {
-          setVideoBlobUrl("/case-study-video.mp4");
-        }
-      });
+      } else {
+        speedFactorRef.current = 0;
+        setIsSnapping((prev) => {
+          const shouldSnap = !isMouseDownRef.current;
+          if (prev !== shouldSnap) return shouldSnap;
+          return prev;
+        });
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    const startTimeout = setTimeout(() => {
+      lastTime = performance.now();
+      animationId = requestAnimationFrame(animate);
+    }, 1500);
 
     return () => {
-      active = false;
-      if (createdUrl) {
-        URL.revokeObjectURL(createdUrl);
-      }
+      clearTimeout(startTimeout);
+      cancelAnimationFrame(animationId);
     };
-  }, [shouldLoadVideo]);
+  }, [isVisible]);
+
+  const handleMouseEnter = () => {
+    isHovered.current = true;
+  };
+
+  const handleTouchStart = () => {
+    isTouching.current = true;
+    setIsSnapping((prev) => {
+      if (!prev) return true;
+      return prev;
+    });
+  };
+
+  const handleTouchEnd = () => {
+    if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+    settleTimerRef.current = setTimeout(() => {
+      isTouching.current = false;
+    }, 2000);
+  };
 
   // Testimonials Visibility Observer
   useEffect(() => {
@@ -298,6 +336,102 @@ export default function SelectedWork() {
       isTestimonialsTouching.current = false;
     }, 2000);
   };
+
+  // Selected Work Mouse Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    isMouseDownRef.current = true;
+    setIsMouseDown(true);
+    setIsSnapping(false);
+    wasDraggingRef.current = false;
+    startXRef.current = e.clientX;
+    startScrollLeftRef.current = container.scrollLeft;
+    speedFactorRef.current = 0;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDownRef.current) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const walk = e.clientX - startXRef.current;
+    if (Math.abs(walk) > 5) {
+      wasDraggingRef.current = true;
+    }
+    container.scrollLeft = startScrollLeftRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    if (!isMouseDownRef.current) return;
+    isMouseDownRef.current = false;
+    setIsMouseDown(false);
+    setIsSnapping(true);
+    speedFactorRef.current = 0;
+  };
+
+  const handleSelectedWorkMouseLeave = () => {
+    isHovered.current = false;
+    handleMouseUpOrLeave();
+  };
+
+  const handleContainerClickCapture = (e: React.MouseEvent) => {
+    if (wasDraggingRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      wasDraggingRef.current = false;
+    }
+  };
+
+  const handleSelectedWorkScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+    const cards = Array.from(flexWrapper.children) as HTMLElement[];
+    const originalCount = caseStudyCards.length;
+    if (cards.length < originalCount * 2) return;
+
+    const child1 = cards[0];
+    const child2 = cards[originalCount];
+    if (!child1 || !child2) return;
+
+    const loopWidth = child2.offsetLeft - child1.offsetLeft;
+    if (loopWidth <= 0) return;
+
+    const scrollLeft = container.scrollLeft;
+
+    if (scrollLeft < loopWidth || scrollLeft >= 2 * loopWidth) {
+      const offset = ((scrollLeft - loopWidth) % loopWidth + loopWidth) % loopWidth;
+      container.scrollLeft = loopWidth + offset;
+    }
+  };
+
+  // Center scroll positions on mount to the middle copy
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+
+    const initScroll = () => {
+      const cards = Array.from(flexWrapper.children) as HTMLElement[];
+      const originalCount = caseStudyCards.length;
+      if (cards.length >= originalCount * 2) {
+        const child1 = cards[0];
+        const child2 = cards[originalCount];
+        if (child1 && child2) {
+          const loopWidth = child2.offsetLeft - child1.offsetLeft;
+          if (loopWidth > 0) {
+            container.scrollLeft = loopWidth;
+          }
+        }
+      }
+    };
+
+    initScroll();
+    const t = setTimeout(initScroll, 150);
+    return () => clearTimeout(t);
+  }, []);
 
   // Testimonials Mouse Drag handlers
   const handleTestimonialsMouseDown = (e: React.MouseEvent) => {
@@ -399,7 +533,7 @@ export default function SelectedWork() {
       ref={sectionRef}
       className="w-full bg-white p-[8px] pb-[220px] md:p-[30px] md:pb-[320px] rounded-[48px] md:rounded-[110px] relative z-[1] md:mt-[40px]"
     >
-      <div className="w-full bg-[#fbf5f5] rounded-[38px] md:rounded-[80px] pt-10 pb-16 md:pt-16 md:pb-24 relative">
+      <div className="w-full bg-[#fbf5f5] rounded-[38px] md:rounded-[80px] pt-10 pb-16 md:pt-16 md:pb-24 relative overflow-hidden">
         <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
             <div className="flex flex-col gap-4 max-w-[620px]">
@@ -419,14 +553,42 @@ export default function SelectedWork() {
           </div>
         </div>
 
-        <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mt-12 md:mt-16 relative z-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10">
-            {caseStudyCards.map((card) => (
-              <div key={card.title} className="w-full flex">
+        <div
+          ref={scrollContainerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleSelectedWorkMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          onScroll={handleSelectedWorkScroll}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onClickCapture={handleContainerClickCapture}
+          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${
+            isMouseDown ? "cursor-grabbing" : "cursor-grab"
+          }`}
+          style={{
+            scrollSnapType: isSnapping ? "x mandatory" : "none",
+          }}
+        >
+          <div
+            className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-8"
+            style={{
+              paddingLeft: "calc((100vw - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+              paddingRight: "calc((100vw - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+            }}
+          >
+            {duplicatedCaseStudyCards.map((card, index) => (
+              <div
+                key={`${card.title}-${index}`}
+                className="snap-start shrink-0 w-[82vw] md:w-[60vw] lg:w-[44vw] max-w-[680px] flex"
+              >
                 <CaseStudyCard
                   title={card.title}
                   description={card.description}
-                  videoSrc={videoBlobUrl || ""}
+                  videoSrc={card.videoSrc}
+                  imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
                 />

@@ -10,6 +10,7 @@ interface CaseStudyCardProps {
   title: string;
   description?: string;
   videoSrc: string;
+  imageSrc?: string;
   href: string;
   featured: boolean;
 }
@@ -18,6 +19,7 @@ export default function CaseStudyCard({
   title,
   description,
   videoSrc,
+  imageSrc,
   href,
   featured,
 }: CaseStudyCardProps) {
@@ -84,12 +86,12 @@ export default function CaseStudyCard({
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
         transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] w-full select-none p-5 h-[400px] md:h-[440px]"
+        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[480px] md:h-[540px] lg:h-[580px]"
       >
       {/* Media Container */}
-      <div className="relative w-full h-[180px] md:h-[220px] rounded-[20px] overflow-hidden">
+      <div className="relative w-full h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden">
         <Image
-          src="/case-study-poster.png"
+          src={imageSrc || "/case-study-poster.png"}
           alt={title}
           fill
           priority={false}
@@ -102,6 +104,7 @@ export default function CaseStudyCard({
           <video
             ref={videoRef}
             src={videoSrc}
+            preload="none"
             muted
             loop
             playsInline
