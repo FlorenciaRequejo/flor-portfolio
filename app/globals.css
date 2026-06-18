@@ -22,10 +22,6 @@
     --stroke-3-color: #280e0e;
     --stroke-width: 25px;
 
-    /* Section 2 Padding */
-    --section2-pad-left: 16px;
-    --section2-pad-right: 16px;
-    --about-padding-top: calc(20vh + 60px);
     --hero-scroll-height: 220vh;
     --carousel-padding-left: 16px;
     --carousel-padding-right: 0px;
@@ -81,24 +77,36 @@
   pointer-events: auto;
   left: 0;
   right: 0;
-  margin: 24px auto 0;
   top: 0;
-  border-radius: 999px;
+  margin: 24px auto 0;
 
   width: min(76vw, 1260px);
-  background-color: #421B1B !important;
-  border: 1px solid var(--color-primary);
+  border-radius: 999px;
 
-  transition: width 600ms cubic-bezier(0.75, 1, 0.36, 1),
+  background-color: rgba(66, 27, 27, 0.15) !important;
+  border: 1px solid rgba(255, 139, 209, 0.5);
+
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  transition:
+    width 600ms cubic-bezier(0.75, 1, 0.36, 1),
     height 600ms cubic-bezier(0.75, 1, 0.36, 1),
     border-radius 600ms cubic-bezier(0.75, 1, 0.36, 1),
-    border-color 600ms ease;
+    background-color 600ms ease,
+    border-color 600ms ease,
+    backdrop-filter 600ms ease,
+    -webkit-backdrop-filter 600ms ease;
 }
 
 .nav-outline-pill.is-scrolled {
   width: min(70vw, 1000px);
-  background-color: rgba(66, 27, 27, 0.92) !important;
+
+  background-color: rgba(66, 27, 27, 0.82) !important;
   border-color: rgba(255, 139, 209, 0.85);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 @media (max-width: 768px) {
@@ -214,10 +222,7 @@
 /* Section 2 Padding Media Query Desktop override */
 @media (min-width: 768px) {
   :root {
-    --section2-pad-left: calc((100vw - min(76vw, 1260px)) / 2);
-    --section2-pad-right: 0px;
-    --about-padding-top: calc(38vh + 120px);
-    --hero-scroll-height: 300vh;
+    --hero-scroll-height: 340vh;
     --carousel-padding-left: calc((100vw - min(36vw, 540px)) / 2 - 20px);
     --carousel-padding-right: calc((100vw - min(36vw, 540px)) / 2 - 20px);
     --selected-work-pad-left: 48px;
@@ -226,30 +231,7 @@
 
 
 
-/* Section 2 Image Panel Class */
-.section2-image-panel {
-  width: 100%;
-  height: 320px;
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  overflow: visible;
-}
 
-@media (min-width: 768px) {
-  .section2-image-panel {
-    position: absolute;
-    right: 0;
-    top: calc(38vh + 120px);
-
-    /* starts at column 5 of a 6-column layout */
-    left: calc((100vw - min(76vw, 1260px)) / 2 + (min(76vw, 1260px) / 6 * 4));
-
-    width: auto;
-    height: 260px;
-    overflow: visible;
-  }
-}
 
 /* Hide scrollbar utility for carousel horizontal sliders */
 .scrollbar-none::-webkit-scrollbar {

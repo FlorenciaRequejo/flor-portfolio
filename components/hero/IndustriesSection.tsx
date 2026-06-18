@@ -1,17 +1,9 @@
 "use client";
 
-interface IndustriesSectionProps {
-  innerRef: React.RefObject<HTMLDivElement | null>;
-}
-
-export default function IndustriesSection({ innerRef }: IndustriesSectionProps) {
+export default function IndustriesSection() {
   return (
-    <div
-      ref={innerRef}
-      className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col items-center justify-center gap-4 pb-[300vh]"
-      style={{
-        willChange: "opacity",
-      }}
+    <section
+      className="w-full flex flex-col items-center justify-center gap-4 pb-[10vh] select-text relative z-20"
     >
       <h3 className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light text-center tracking-wide pointer-events-auto">
         Trusted by teams across many industries
@@ -56,6 +48,6 @@ export default function IndustriesSection({ innerRef }: IndustriesSectionProps) 
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

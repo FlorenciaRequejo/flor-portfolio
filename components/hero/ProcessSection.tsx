@@ -72,6 +72,7 @@ export default function ProcessSection() {
 
   return (
     <section
+      id="process"
       ref={containerRef}
       className="w-full bg-[#fbf5f5] p-[8px] md:p-[30px] rounded-[48px] md:rounded-[110px] relative z-10 -mt-[180px] md:-mt-[250px]"
     >

@@ -89,6 +89,7 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
             alt={name}
             fill
             sizes="40px"
+            draggable="false"
             className="object-cover"
           />
         </div>
@@ -348,6 +349,7 @@ export default function SelectedWork() {
     startXRef.current = e.clientX;
     startScrollLeftRef.current = container.scrollLeft;
     speedFactorRef.current = 0;
+    document.documentElement.setAttribute('data-carousel-dragging', 'true');
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -367,6 +369,7 @@ export default function SelectedWork() {
     setIsMouseDown(false);
     setIsSnapping(true);
     speedFactorRef.current = 0;
+    document.documentElement.removeAttribute('data-carousel-dragging');
   };
 
   const handleSelectedWorkMouseLeave = () => {
@@ -444,6 +447,7 @@ export default function SelectedWork() {
     testStartXRef.current = e.clientX;
     testStartScrollLeftRef.current = container.scrollLeft;
     testSpeedFactorRef.current = 0;
+    document.documentElement.setAttribute('data-carousel-dragging', 'true');
   };
 
   const handleTestimonialsMouseMove = (e: React.MouseEvent) => {
@@ -463,6 +467,7 @@ export default function SelectedWork() {
     setIsTestimonialsMouseDown(false);
     setIsTestimonialsSnapping(true);
     testSpeedFactorRef.current = 0;
+    document.documentElement.removeAttribute('data-carousel-dragging');
   };
 
   const handleTestimonialsMouseLeaveCombined = () => {
@@ -530,8 +535,9 @@ export default function SelectedWork() {
 
   return (
     <section
+      id="projects"
       ref={sectionRef}
-      className="w-full bg-white p-[8px] pb-[220px] md:p-[30px] md:pb-[320px] rounded-[48px] md:rounded-[110px] relative z-[1] md:mt-[40px]"
+      className="w-full bg-white p-[8px] pb-[220px] md:p-[30px] md:pb-[320px] rounded-[48px] md:rounded-[110px] relative z-[1] mt-12 md:mt-24"
     >
       <div className="w-full bg-[#fbf5f5] rounded-[38px] md:rounded-[80px] pt-10 pb-16 md:pt-16 md:pb-24 relative overflow-hidden">
         <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
@@ -565,6 +571,7 @@ export default function SelectedWork() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUpOrLeave}
           onClickCapture={handleContainerClickCapture}
+          onDragStart={(e) => e.preventDefault()}
           className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${
             isMouseDown ? "cursor-grabbing" : "cursor-grab"
           }`}
@@ -597,7 +604,7 @@ export default function SelectedWork() {
           </div>
         </div>
 
-        <div className="mt-20 md:mt-28">
+        <div id="testimonials" className="mt-20 md:mt-28">
           <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">
             <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
               <div className="flex flex-col gap-4 max-w-[620px]">
@@ -629,6 +636,7 @@ export default function SelectedWork() {
             onMouseMove={handleTestimonialsMouseMove}
             onMouseUp={handleTestimonialsMouseUpOrLeave}
             onClickCapture={handleTestimonialsClickCapture}
+            onDragStart={(e) => e.preventDefault()}
             className={`w-full overflow-x-auto scrollbar-none flex relative z-20 select-none ${
               isTestimonialsMouseDown ? "cursor-grabbing" : "cursor-grab"
             }`}

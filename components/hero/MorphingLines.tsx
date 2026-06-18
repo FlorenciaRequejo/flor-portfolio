@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 
 const AboutSection = dynamic(() => import("./AboutSection"), { ssr: false });
-const IndustriesSection = dynamic(() => import("./IndustriesSection"), { ssr: false });
+
 
 interface Point {
   x: number;
@@ -59,7 +59,7 @@ export default function MorphingLines() {
   // Section & scroll container refs
   const scrollContentRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-  const industriesRef = useRef<HTMLDivElement>(null);
+
 
   // Animation refs
   const initCountRef = useRef(0);
@@ -78,11 +78,11 @@ export default function MorphingLines() {
     const smoothRender = () => {
       const progress = scrollProgressRef.current;
 
-      // Interpolate progress towards target with damping factor (0.075)
+      // Interpolate progress towards target with damping factor (0.12)
       const diff = progress.target - progress.current;
       let shouldContinue = false;
       if (Math.abs(diff) > 0.0001) {
-        progress.current += diff * 0.075;
+        progress.current += diff * 0.12;
         shouldContinue = true;
       } else {
         progress.current = progress.target;
@@ -97,14 +97,14 @@ export default function MorphingLines() {
         animationFrameId = requestAnimationFrame(smoothRender);
       } else {
         isLoopRunningRef.current = false;
-        console.log("[rAF-loop] Sleeping (progress stabilized)");
+        // console.log("[rAF-loop] Sleeping (progress stabilized)");
       }
     };
 
     const startLoop = () => {
       if (isLoopRunningRef.current) return;
       isLoopRunningRef.current = true;
-      console.log("[rAF-loop] Starting/Resuming smoothRender loop");
+      // console.log("[rAF-loop] Starting/Resuming smoothRender loop");
       animationFrameId = requestAnimationFrame(smoothRender);
     };
 
@@ -271,9 +271,9 @@ export default function MorphingLines() {
 
     const vh = window.innerHeight;
 
-    // Morph starts immediately at 0.0 and completes by 0.65
+    // Morph starts immediately at 0.0 and completes by 0.85
     const morphStart = 0.0;
-    const morphEnd = 0.65;
+    const morphEnd = 0.85;
     const morphRaw = Math.max(0, Math.min(1, (p - morphStart) / (morphEnd - morphStart)));
 
     // easeInOutCubic for line coordinates interpolation
@@ -291,8 +291,8 @@ export default function MorphingLines() {
     const svgTranslateY = initialTranslateY + (finalTranslateY - initialTranslateY) * t;
 
     let transformStr = `translate3d(0, ${svgTranslateY}%, 0)`;
-    if (p > 0.65) {
-      const postMorphScroll = (p - 0.65) * 2 * vh;
+    if (p > 0.85) {
+      const postMorphScroll = (p - 0.85) * 0.4 * vh;
       transformStr = `translate3d(0, calc(${svgTranslateY}% - ${postMorphScroll}px), 0)`;
     }
     svgWrapper.style.transform = transformStr;
@@ -310,9 +310,9 @@ export default function MorphingLines() {
       morphOpacity = fadeRaw;
     }
 
-    // After morph complete threshold (0.65), fade out the morphing lines slightly (from 1.0 to 0.3)
-    if (p > 0.65) {
-      const postMorphFade = Math.min(1, (p - 0.65) / (0.95 - 0.65));
+    // After morph complete threshold (0.85), fade out the morphing lines slightly (from 1.0 to 0.3)
+    if (p > 0.85) {
+      const postMorphFade = Math.min(1, (p - 0.85) / (0.98 - 0.85));
       morphOpacity = morphOpacity * (1.0 - postMorphFade * 0.7);
     }
 
@@ -353,11 +353,11 @@ export default function MorphingLines() {
     // Update copy block opacity and transform
     const copy = copyRef.current;
     if (copy) {
-      // Fade out as scroll progress increases
-      const copyOpacity = Math.max(0, 1 - p * 3);
+      // Fade out completely by p = 0.35 (slower, more controlled scroll fade)
+      const copyOpacity = Math.max(0, 1 - p * 2.85);
       copy.style.opacity = copyOpacity.toString();
 
-      const translateY = p * -100;
+      const translateY = p * -80;
       copy.style.transform = `translate3d(0, ${translateY}px, 0)`;
 
       if (copyOpacity > 0.01) {
@@ -370,10 +370,11 @@ export default function MorphingLines() {
     // Update scroll indicator opacity and transform
     const scrollIndicator = scrollIndicatorRef.current;
     if (scrollIndicator) {
-      const indicatorOpacity = Math.max(0, 1 - p * 3);
+      // Fade out completely by p = 0.35 to match the copy fade timing
+      const indicatorOpacity = Math.max(0, 1 - p * 2.85);
       scrollIndicator.style.opacity = indicatorOpacity.toString();
 
-      const translateY = p * -100;
+      const translateY = p * -80;
       scrollIndicator.style.transform = `translate3d(0, ${translateY}px, 0)`;
 
       if (indicatorOpacity > 0.01) {
@@ -383,14 +384,12 @@ export default function MorphingLines() {
       }
     }
 
-
-
-    // Section 2: About Content Opacity & Transform (Fades in from p = 0.15 to 0.45)
+    // Section 2: About Content Opacity & Transform (Fades in from p = 0.35 to 0.75)
     const about = aboutRef.current;
     if (about) {
-      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.15) / 0.3));
+      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.35) / 0.4));
       about.style.opacity = aboutOpacity.toString();
-      const translateY = (1 - aboutOpacity) * 40;
+      const translateY = (1 - aboutOpacity) * 30;
       about.style.transform = `translate3d(0, ${translateY}px, 0)`;
       if (aboutOpacity > 0.01) {
         about.style.pointerEvents = "auto";
@@ -399,17 +398,7 @@ export default function MorphingLines() {
       }
     }
 
-    // Section 3: Industries Opacity (Fades in from p = 0.35 to 0.65)
-    const industries = industriesRef.current;
-    if (industries) {
-      const indOpacity = Math.max(0, Math.min(1, (p - 0.35) / 0.3));
-      industries.style.opacity = indOpacity.toString();
-      if (indOpacity > 0.01) {
-        industries.style.pointerEvents = "auto";
-      } else {
-        industries.style.pointerEvents = "none";
-      }
-    }
+
 
     // Translate scroll wrapper for continuous page scrolling when p > 0.5
     const scrollContent = scrollContentRef.current;
@@ -515,9 +504,7 @@ export default function MorphingLines() {
 
           {/* Supporting Copy */}
           <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-center md:text-left max-w-[480px]">
-            I turn ideas into products, systems and experiences,
-            <br />
-            by making the right decisions.
+            I turn ideas into products, systems and experiences, by making the right decisions.
           </p>
 
           {/* Mobile Pills - visible on mobile/tablet, hidden on desktop */}
@@ -561,8 +548,8 @@ export default function MorphingLines() {
             <div className="flex flex-col items-center h-full relative">
               {/* Tall vertical line */}
               <div className="w-[1.5px] flex-grow bg-primary/40 relative">
-                {/* Pills container on the left side of the line */}
-                <div className="absolute right-6 top-[10%] flex flex-col gap-4 items-end pointer-events-auto">
+                {/* Pills container on the right side of the line */}
+                <div className="absolute left-6 top-[10%] flex flex-col gap-4 items-start pointer-events-auto">
                   <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
                     15+ Years Experience
                   </span>
@@ -587,19 +574,16 @@ export default function MorphingLines() {
           </div>
         </div>
 
-        {/* 2. Scroll content wrapper (contains scrolling Section 2 and Section 3) */}
+        {/* Section 2: About Content (Fades in during morph) */}
         <div
-          ref={scrollContentRef}
-          className="absolute inset-0 w-full h-full will-change-transform flex flex-col"
-          style={{ transform: "translate3d(0, 0, 0)" }}
+          ref={aboutRef}
+          className="absolute inset-0 w-full h-full flex items-end justify-center z-20 pointer-events-none pb-[4vh] md:pb-[7vh]"
+          style={{
+            opacity: 0,
+            willChange: "opacity, transform",
+          }}
         >
-          <AboutSection innerRef={aboutRef} />
-
-          {/* Spacer of at least 100px */}
-          <div className="h-[100px] md:h-[120px] w-full flex-shrink-0" />
-
-          {/* Section 3: Industries Section */}
-          <IndustriesSection innerRef={industriesRef} />
+          <AboutSection />
         </div>
 
       </div>

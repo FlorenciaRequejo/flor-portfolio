@@ -12,7 +12,7 @@ export default function HeroSection() {
 
 function HeroSectionInner() {
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full">
       <MorphingLines />
     </div>
   );

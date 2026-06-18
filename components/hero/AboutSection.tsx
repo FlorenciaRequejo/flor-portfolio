@@ -2,21 +2,11 @@
 
 import Image from "next/image";
 
-interface AboutSectionProps {
-  innerRef: React.RefObject<HTMLDivElement | null>;
-}
-
-export default function AboutSection({ innerRef }: AboutSectionProps) {
+export default function AboutSection() {
   return (
-    <div
-      ref={innerRef}
-      className="w-full flex-shrink-0 pointer-events-none opacity-0 select-none z-20 flex flex-col md:flex-row items-stretch gap-8 md:gap-16 relative"
-      style={{
-        paddingTop: "var(--about-padding-top)",
-        paddingLeft: "var(--section2-pad-left)",
-        paddingRight: "var(--section2-pad-right)",
-        willChange: "opacity, transform",
-      }}
+    <section
+      id="about"
+      className="w-full pl-4 md:pl-[calc((100vw-min(76vw,1260px))/2)] pr-4 md:pr-0 pt-6 md:pt-8 pb-20 md:pb-32 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 relative select-text"
     >
       {/* Left Side: Text Content */}
       <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 max-w-[580px] pointer-events-auto w-full">
@@ -36,7 +26,7 @@ export default function AboutSection({ innerRef }: AboutSectionProps) {
       </div>
 
       {/* Right Side: Image and Overlapping Button */}
-      <div className="section2-image-panel pointer-events-auto">
+      <div className="w-full md:w-[38vw] h-[320px] md:h-[260px] relative flex justify-end overflow-visible pointer-events-auto">
         <div className="relative h-full w-full overflow-visible">
           <div className="relative h-full w-full overflow-hidden rounded-[32px] md:rounded-r-none md:rounded-l-[32px]">
             <Image
@@ -58,6 +48,6 @@ export default function AboutSection({ innerRef }: AboutSectionProps) {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
