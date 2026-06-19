@@ -549,12 +549,12 @@ export default function SelectedWork() {
               <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-[#421B1B] font-normal tracking-tight">
                 A few problems
                 <br />
-                I've helped solve.
+                I've made work
               </h2>
             </div>
 
             <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#421B1B]/75 font-normal max-w-[460px] md:mt-16">
-              Every project is different. The common thread is turning complexity into something simple that people can actually use.
+              Each project presented a different challenge. Solving it required understanding what mattered, what didn't, and where to focus first.
             </p>
           </div>
         </div>
@@ -572,9 +572,8 @@ export default function SelectedWork() {
           onMouseUp={handleMouseUpOrLeave}
           onClickCapture={handleContainerClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${
-            isMouseDown ? "cursor-grabbing" : "cursor-grab"
-          }`}
+          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
+            }`}
           style={{
             scrollSnapType: isSnapping ? "x mandatory" : "none",
           }}
@@ -637,9 +636,8 @@ export default function SelectedWork() {
             onMouseUp={handleTestimonialsMouseUpOrLeave}
             onClickCapture={handleTestimonialsClickCapture}
             onDragStart={(e) => e.preventDefault()}
-            className={`w-full overflow-x-auto scrollbar-none flex relative z-20 select-none ${
-              isTestimonialsMouseDown ? "cursor-grabbing" : "cursor-grab"
-            }`}
+            className={`w-full overflow-x-auto scrollbar-none flex relative z-20 select-none ${isTestimonialsMouseDown ? "cursor-grabbing" : "cursor-grab"
+              }`}
             style={{
               scrollSnapType: isTestimonialsSnapping ? "x mandatory" : "none",
             }}

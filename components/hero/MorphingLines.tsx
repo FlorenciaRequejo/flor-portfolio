@@ -495,16 +495,12 @@ export default function MorphingLines() {
         >
           {/* Headline */}
           <h1 className="font-serif text-[42px] md:text-[72px] leading-[1.1] md:leading-[72px] text-primary font-normal text-center md:text-left max-w-[800px] tracking-tight">
-            Ideas are easy.
-            <br />
-            Making them work
-            <br />
-            is my job.
+            Ideas are messy. <br />Without structure, they'll stay as ideas.
           </h1>
 
           {/* Supporting Copy */}
           <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-center md:text-left max-w-[480px]">
-            I turn ideas into products, systems and experiences, by making the right decisions.
+            Combining design, development and strategic thinking, I turn them into products, systems and experiences.
           </p>
 
           {/* Mobile Pills - visible on mobile/tablet, hidden on desktop */}
@@ -519,14 +515,14 @@ export default function MorphingLines() {
               Concept to Launch
             </span>
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              AI Problem Solving
+              Problem Solving
             </span>
           </div>
 
           {/* Mobile-only Scroll Indicator: sits below hero copy and is visible on all screen aspect ratios */}
           <div className="md:hidden flex flex-col items-center gap-3 mt-4 pointer-events-none w-full">
             <span className="font-sans text-[12px] tracking-[2.5px] uppercase text-primary">
-              SCROLL TO UNTANGLE
+              FOLLOW THE PROCESS
             </span>
             <div className="flex flex-col items-center">
               <div className="w-[1.5px] h-[32px] bg-primary/40" />
@@ -549,7 +545,7 @@ export default function MorphingLines() {
               {/* Tall vertical line */}
               <div className="w-[1.5px] flex-grow bg-primary/40 relative">
                 {/* Pills container on the right side of the line */}
-                <div className="absolute left-6 top-[10%] flex flex-col gap-4 items-start pointer-events-auto">
+                <div className="absolute left-6 top-[0%] flex flex-col gap-4 items-start pointer-events-auto">
                   <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
                     15+ Years Experience
                   </span>
@@ -569,7 +565,7 @@ export default function MorphingLines() {
             </div>
             {/* Text */}
             <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
-              SCROLL TO UNTANGLE
+              FOLLOW THE PROCESS
             </span>
           </div>
         </div>
