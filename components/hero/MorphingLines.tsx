@@ -328,9 +328,10 @@ export default function MorphingLines() {
       let color1 = "";
       let color2 = "";
       let color3 = "";
-      let strokeWidth1 = 25;
-      let strokeWidth2 = 25;
-      let strokeWidth3 = 25;
+      let strokeWidth1 = 50;
+      let strokeWidth2 = 50;
+      let strokeWidth3 = 50;
+      let otherLinesOpacity = 1;
 
       if (p <= 0.7) {
         // Phase 1 & 2: Interpolate colors from initial dark theme (#3c1818, #351414, #280e0e) to premium glowing blues
@@ -352,20 +353,24 @@ export default function MorphingLines() {
         const b3 = Math.round(14 + (126 - 14) * colorFactor);
         color3 = `rgb(${r3}, ${g3}, ${b3})`;
 
-        strokeWidth1 = 25;
-        strokeWidth2 = 25;
-        strokeWidth3 = 25;
+        strokeWidth1 = 50;
+        strokeWidth2 = 50;
+        strokeWidth3 = 50;
+        otherLinesOpacity = 1;
       } else {
-        // Phase 3: p from 0.7 to 0.85: All three lines expand to cover the viewport
+        // Phase 3: p from 0.7 to 0.85: Line 1 expands to cover the viewport while other lines fade out
         const thicknessRaw = Math.max(0, Math.min(1, (p - 0.7) / (0.85 - 0.7)));
         const thicknessT = easeInOutCubic(thicknessRaw);
 
-        // Expand stroke width of all lines to merge and fill the screen
-        strokeWidth1 = 25 + (800 - 25) * thicknessT;
-        strokeWidth2 = 25 + (1200 - 25) * thicknessT;
-        strokeWidth3 = 25 + (800 - 25) * thicknessT;
+        // Expand stroke width of Path 1 (Line 1) to cover screen (reaching 500px and eventually 1500px)
+        strokeWidth1 = 50 + (1500 - 50) * thicknessT;
+        strokeWidth2 = 50;
+        strokeWidth3 = 50;
 
-        // Color blend: from p = 0.78 to 0.85 (delayed to keep expansion visible)
+        // Fade out other lines
+        otherLinesOpacity = 1 - thicknessT;
+
+        // Color blend: from p = 0.78 to 0.85 (delayed to keep cyan-blue expansion visible)
         const colorBlendRaw = Math.max(0, Math.min(1, (p - 0.78) / (0.85 - 0.78)));
         const colorBlendT = easeInOutCubic(colorBlendRaw);
 
@@ -420,11 +425,11 @@ export default function MorphingLines() {
         } else if (i === 1) {
           path.element.style.stroke = color2;
           path.element.style.strokeWidth = `${strokeWidth2}px`;
-          path.element.style.opacity = morphOpacity.toString();
+          path.element.style.opacity = (otherLinesOpacity * morphOpacity).toString();
         } else if (i === 2) {
           path.element.style.stroke = color3;
           path.element.style.strokeWidth = `${strokeWidth3}px`;
-          path.element.style.opacity = morphOpacity.toString();
+          path.element.style.opacity = (otherLinesOpacity * morphOpacity).toString();
         }
       }
     }
