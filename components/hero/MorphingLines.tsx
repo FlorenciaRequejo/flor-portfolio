@@ -271,9 +271,9 @@ export default function MorphingLines() {
 
     const vh = window.innerHeight;
 
-    // Morph starts immediately at 0.0 and completes by 0.85
+    // Morph starts immediately at 0.0 and completes by 0.70
     const morphStart = 0.0;
-    const morphEnd = 0.85;
+    const morphEnd = 0.70;
     const morphRaw = Math.max(0, Math.min(1, (p - morphStart) / (morphEnd - morphStart)));
 
     // easeInOutCubic for line coordinates interpolation
@@ -310,12 +310,6 @@ export default function MorphingLines() {
       morphOpacity = fadeRaw;
     }
 
-    // After morph complete threshold (0.85), fade out the morphing lines slightly (from 1.0 to 0.3)
-    if (p > 0.85) {
-      const postMorphFade = Math.min(1, (p - 0.85) / (0.98 - 0.85));
-      morphOpacity = morphOpacity * (1.0 - postMorphFade * 0.7);
-    }
-
     if (originalSvg) {
       originalSvg.style.opacity = originalOpacity.toString();
       originalSvg.style.visibility = originalOpacity === 0 ? "hidden" : "visible";
@@ -328,6 +322,52 @@ export default function MorphingLines() {
     const paths = pathDataRef.current;
 
     if (paths.length > 0) {
+      // Calculate color progress (from p = 0.0 to 0.2)
+      const colorFactor = Math.max(0, Math.min(1, p / 0.2));
+      
+      // Interpolate colors from initial dark theme (#3c1818, #351414, #280e0e) to glowing pink (#FF8BD1: 255, 139, 209)
+      const r1 = Math.round(60 + (255 - 60) * colorFactor);
+      const g1 = Math.round(24 + (139 - 24) * colorFactor);
+      const b1 = Math.round(24 + (209 - 24) * colorFactor);
+      const color1 = `rgb(${r1}, ${g1}, ${b1})`;
+
+      let color2 = "";
+      let strokeWidth2 = 25; // default
+      let otherOpacity = 1;
+
+      if (p <= 0.7) {
+        const r2 = Math.round(53 + (255 - 53) * colorFactor);
+        const g2 = Math.round(20 + (139 - 20) * colorFactor);
+        const b2 = Math.round(20 + (209 - 20) * colorFactor);
+        color2 = `rgb(${r2}, ${g2}, ${b2})`;
+        strokeWidth2 = 25;
+        otherOpacity = 1;
+      } else {
+        // p from 0.7 to 0.85: Path 2 thickens and transitions to background color
+        const thicknessRaw = Math.max(0, Math.min(1, (p - 0.7) / (0.85 - 0.7)));
+        const thicknessT = easeInOutCubic(thicknessRaw);
+
+        // Transition Path 2 color from bright pink (255, 139, 209) to dark background #421B1B (66, 27, 27)
+        const targetR = 66;
+        const targetG = 27;
+        const targetB = 27;
+        const r2 = Math.round(255 + (targetR - 255) * thicknessT);
+        const g2 = Math.round(139 + (targetG - 139) * thicknessT);
+        const b2 = Math.round(209 + (targetB - 209) * thicknessT);
+        color2 = `rgb(${r2}, ${g2}, ${b2})`;
+
+        // Expand stroke width of Path 2 to cover screen
+        strokeWidth2 = 25 + (2000 - 25) * thicknessT;
+
+        // Fade out other lines
+        otherOpacity = 1 - thicknessT;
+      }
+
+      const r3 = Math.round(40 + (255 - 40) * colorFactor);
+      const g3 = Math.round(14 + (139 - 14) * colorFactor);
+      const b3 = Math.round(14 + (209 - 14) * colorFactor);
+      const color3 = `rgb(${r3}, ${g3}, ${b3})`;
+
       for (let i = 0; i < paths.length; i++) {
         const path = paths[i];
         const fromPoints = path.fromPoints;
@@ -347,14 +387,27 @@ export default function MorphingLines() {
         }
 
         path.element.setAttribute("d", d);
+
+        // Apply dynamic color, stroke width, and opacity
+        if (i === 0) {
+          path.element.style.stroke = color1;
+          path.element.style.opacity = (otherOpacity * morphOpacity).toString();
+        } else if (i === 1) {
+          path.element.style.stroke = color2;
+          path.element.style.strokeWidth = `${strokeWidth2}px`;
+          path.element.style.opacity = morphOpacity.toString();
+        } else if (i === 2) {
+          path.element.style.stroke = color3;
+          path.element.style.opacity = (otherOpacity * morphOpacity).toString();
+        }
       }
     }
 
     // Update copy block opacity and transform
     const copy = copyRef.current;
     if (copy) {
-      // Fade out completely by p = 0.35 (slower, more controlled scroll fade)
-      const copyOpacity = Math.max(0, 1 - p * 2.85);
+      // Fade out completely by p = 0.20
+      const copyOpacity = Math.max(0, 1 - p / 0.20);
       copy.style.opacity = copyOpacity.toString();
 
       const translateY = p * -80;
@@ -367,14 +420,19 @@ export default function MorphingLines() {
       }
     }
 
-    // Update scroll indicator opacity and transform
+    // Update scroll indicator / pills opacity and transform
     const scrollIndicator = scrollIndicatorRef.current;
     if (scrollIndicator) {
-      // Fade out completely by p = 0.35 to match the copy fade timing
-      const indicatorOpacity = Math.max(0, 1 - p * 2.85);
+      // Stay visible, and fade out only between p = 0.70 and 0.85
+      let indicatorOpacity = 1;
+      if (p > 0.70) {
+        const fade = Math.max(0, Math.min(1, (p - 0.70) / (0.85 - 0.70)));
+        indicatorOpacity = 1 - fade;
+      }
       scrollIndicator.style.opacity = indicatorOpacity.toString();
 
-      const translateY = p * -80;
+      // Sits mostly in place (minor parallax)
+      const translateY = p * -20;
       scrollIndicator.style.transform = `translate3d(0, ${translateY}px, 0)`;
 
       if (indicatorOpacity > 0.01) {
@@ -384,10 +442,10 @@ export default function MorphingLines() {
       }
     }
 
-    // Section 2: About Content Opacity & Transform (Fades in from p = 0.35 to 0.75)
+    // Section 2: About Content Opacity & Transform (Fades in from p = 0.85 to 1.0)
     const about = aboutRef.current;
     if (about) {
-      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.35) / 0.4));
+      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.85) / 0.15));
       about.style.opacity = aboutOpacity.toString();
       const translateY = (1 - aboutOpacity) * 30;
       about.style.transform = `translate3d(0, ${translateY}px, 0)`;
@@ -397,8 +455,6 @@ export default function MorphingLines() {
         about.style.pointerEvents = "none";
       }
     }
-
-
 
     // Translate scroll wrapper for continuous page scrolling when p > 0.5
     const scrollContent = scrollContentRef.current;
