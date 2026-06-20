@@ -40,7 +40,7 @@ export default function MorphingLines() {
 
   // SVG Translation Parameters for vertical positioning
   const initialTranslateY = 0; // %
-  const finalTranslateY = -12; // %
+  const finalTranslateY = 13; // %
 
   const containerRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -325,48 +325,72 @@ export default function MorphingLines() {
       // Calculate color progress (from p = 0.0 to 0.2)
       const colorFactor = Math.max(0, Math.min(1, p / 0.2));
       
-      // Interpolate colors from initial dark theme (#3c1818, #351414, #280e0e) to glowing pink (#FF8BD1: 255, 139, 209)
-      const r1 = Math.round(60 + (255 - 60) * colorFactor);
-      const g1 = Math.round(24 + (139 - 24) * colorFactor);
-      const b1 = Math.round(24 + (209 - 24) * colorFactor);
-      const color1 = `rgb(${r1}, ${g1}, ${b1})`;
-
+      let color1 = "";
       let color2 = "";
-      let strokeWidth2 = 25; // default
-      let otherOpacity = 1;
+      let color3 = "";
+      let strokeWidth1 = 25;
+      let strokeWidth2 = 25;
+      let strokeWidth3 = 25;
 
       if (p <= 0.7) {
-        const r2 = Math.round(53 + (255 - 53) * colorFactor);
-        const g2 = Math.round(20 + (139 - 20) * colorFactor);
-        const b2 = Math.round(20 + (209 - 20) * colorFactor);
+        // Phase 1 & 2: Interpolate colors from initial dark theme (#3c1818, #351414, #280e0e) to premium glowing blues
+        // Cyan/Sky Blue for Path 1 (0, 210, 255)
+        const r1 = Math.round(60 + (0 - 60) * colorFactor);
+        const g1 = Math.round(24 + (210 - 24) * colorFactor);
+        const b1 = Math.round(24 + (255 - 24) * colorFactor);
+        color1 = `rgb(${r1}, ${g1}, ${b1})`;
+
+        // Electric Blue for Path 2 (0, 112, 243)
+        const r2 = Math.round(53 + (0 - 53) * colorFactor);
+        const g2 = Math.round(20 + (112 - 20) * colorFactor);
+        const b2 = Math.round(20 + (243 - 20) * colorFactor);
         color2 = `rgb(${r2}, ${g2}, ${b2})`;
+
+        // Indigo/Royal Blue for Path 3 (26, 35, 126)
+        const r3 = Math.round(40 + (26 - 40) * colorFactor);
+        const g3 = Math.round(14 + (35 - 14) * colorFactor);
+        const b3 = Math.round(14 + (126 - 14) * colorFactor);
+        color3 = `rgb(${r3}, ${g3}, ${b3})`;
+
+        strokeWidth1 = 25;
         strokeWidth2 = 25;
-        otherOpacity = 1;
+        strokeWidth3 = 25;
       } else {
-        // p from 0.7 to 0.85: Path 2 thickens and transitions to background color
+        // Phase 3: p from 0.7 to 0.85: All three lines expand to cover the viewport
         const thicknessRaw = Math.max(0, Math.min(1, (p - 0.7) / (0.85 - 0.7)));
         const thicknessT = easeInOutCubic(thicknessRaw);
 
-        // Transition Path 2 color from bright pink (255, 139, 209) to dark background #421B1B (66, 27, 27)
+        // Expand stroke width of all lines to merge and fill the screen
+        strokeWidth1 = 25 + (800 - 25) * thicknessT;
+        strokeWidth2 = 25 + (1200 - 25) * thicknessT;
+        strokeWidth3 = 25 + (800 - 25) * thicknessT;
+
+        // Color blend: from p = 0.78 to 0.85 (delayed to keep expansion visible)
+        const colorBlendRaw = Math.max(0, Math.min(1, (p - 0.78) / (0.85 - 0.78)));
+        const colorBlendT = easeInOutCubic(colorBlendRaw);
+
         const targetR = 66;
         const targetG = 27;
         const targetB = 27;
-        const r2 = Math.round(255 + (targetR - 255) * thicknessT);
-        const g2 = Math.round(139 + (targetG - 139) * thicknessT);
-        const b2 = Math.round(209 + (targetB - 209) * thicknessT);
+
+        // Path 1 (from Cyan to Background)
+        const r1 = Math.round(0 + (targetR - 0) * colorBlendT);
+        const g1 = Math.round(210 + (targetG - 210) * colorBlendT);
+        const b1 = Math.round(255 + (targetB - 255) * colorBlendT);
+        color1 = `rgb(${r1}, ${g1}, ${b1})`;
+
+        // Path 2 (from Electric Blue to Background)
+        const r2 = Math.round(0 + (targetR - 0) * colorBlendT);
+        const g2 = Math.round(112 + (targetG - 112) * colorBlendT);
+        const b2 = Math.round(243 + (targetB - 243) * colorBlendT);
         color2 = `rgb(${r2}, ${g2}, ${b2})`;
 
-        // Expand stroke width of Path 2 to cover screen
-        strokeWidth2 = 25 + (2000 - 25) * thicknessT;
-
-        // Fade out other lines
-        otherOpacity = 1 - thicknessT;
+        // Path 3 (from Indigo to Background)
+        const r3 = Math.round(26 + (targetR - 26) * colorBlendT);
+        const g3 = Math.round(35 + (targetG - 35) * colorBlendT);
+        const b3 = Math.round(126 + (targetB - 126) * colorBlendT);
+        color3 = `rgb(${r3}, ${g3}, ${b3})`;
       }
-
-      const r3 = Math.round(40 + (255 - 40) * colorFactor);
-      const g3 = Math.round(14 + (139 - 14) * colorFactor);
-      const b3 = Math.round(14 + (209 - 14) * colorFactor);
-      const color3 = `rgb(${r3}, ${g3}, ${b3})`;
 
       for (let i = 0; i < paths.length; i++) {
         const path = paths[i];
@@ -391,14 +415,16 @@ export default function MorphingLines() {
         // Apply dynamic color, stroke width, and opacity
         if (i === 0) {
           path.element.style.stroke = color1;
-          path.element.style.opacity = (otherOpacity * morphOpacity).toString();
+          path.element.style.strokeWidth = `${strokeWidth1}px`;
+          path.element.style.opacity = morphOpacity.toString();
         } else if (i === 1) {
           path.element.style.stroke = color2;
           path.element.style.strokeWidth = `${strokeWidth2}px`;
           path.element.style.opacity = morphOpacity.toString();
         } else if (i === 2) {
           path.element.style.stroke = color3;
-          path.element.style.opacity = (otherOpacity * morphOpacity).toString();
+          path.element.style.strokeWidth = `${strokeWidth3}px`;
+          path.element.style.opacity = morphOpacity.toString();
         }
       }
     }
