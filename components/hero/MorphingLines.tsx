@@ -257,6 +257,8 @@ export default function MorphingLines() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimeout);
+      document.body.style.backgroundColor = "";
+      document.documentElement.style.backgroundColor = "";
     };
   }, []);
 
@@ -271,9 +273,9 @@ export default function MorphingLines() {
 
     const vh = window.innerHeight;
 
-    // Morph starts immediately at 0.0 and completes by 0.70
+    // Morph starts immediately at 0.0 and completes by 0.45
     const morphStart = 0.0;
-    const morphEnd = 0.70;
+    const morphEnd = 0.45;
     const morphRaw = Math.max(0, Math.min(1, (p - morphStart) / (morphEnd - morphStart)));
 
     // easeInOutCubic for line coordinates interpolation
@@ -322,8 +324,8 @@ export default function MorphingLines() {
     const paths = pathDataRef.current;
 
     if (paths.length > 0) {
-      // Calculate color progress (from p = 0.0 to 0.2)
-      const colorFactor = Math.max(0, Math.min(1, p / 0.2));
+      // Calculate color progress (from p = 0.0 to 0.40)
+      const colorFactor = Math.max(0, Math.min(1, p / 0.40));
       
       let color1 = "";
       let color2 = "";
@@ -333,7 +335,7 @@ export default function MorphingLines() {
       let strokeWidth3 = 50;
       let otherLinesOpacity = 1;
 
-      if (p <= 0.7) {
+      if (p <= 0.45) {
         // Phase 1 & 2: Interpolate colors from initial dark theme (#3c1818, #351414, #280e0e) to premium glowing blues
         // Cyan/Sky Blue for Path 1 (0, 210, 255)
         const r1 = Math.round(60 + (0 - 60) * colorFactor);
@@ -357,44 +359,57 @@ export default function MorphingLines() {
         strokeWidth2 = 50;
         strokeWidth3 = 50;
         otherLinesOpacity = 1;
+
+        // Reset backgrounds to default dark theme
+        viewport.style.backgroundColor = "rgb(66, 27, 27)";
+        document.body.style.backgroundColor = "rgb(66, 27, 27)";
+        document.documentElement.style.backgroundColor = "rgb(66, 27, 27)";
       } else {
-        // Phase 3: p from 0.7 to 0.85: Line 1 expands to cover the viewport while other lines fade out
-        const thicknessRaw = Math.max(0, Math.min(1, (p - 0.7) / (0.85 - 0.7)));
+        // Phase 3: p from 0.45 to 0.85: The 3 lines get thicker and thicker in a smooth transition
+        const thicknessRaw = Math.max(0, Math.min(1, (p - 0.45) / (0.85 - 0.45)));
         const thicknessT = easeInOutCubic(thicknessRaw);
 
-        // Expand stroke width of Path 1 (Line 1) to cover screen (reaching 500px and eventually 1500px)
-        strokeWidth1 = 50 + (1500 - 50) * thicknessT;
-        strokeWidth2 = 50;
-        strokeWidth3 = 50;
+        // Expand stroke width of all 3 lines to cover the viewport
+        strokeWidth1 = 50 + (1200 - 50) * thicknessT;
+        strokeWidth2 = 50 + (1200 - 50) * thicknessT;
+        strokeWidth3 = 50 + (1200 - 50) * thicknessT;
 
-        // Fade out other lines
-        otherLinesOpacity = 1 - thicknessT;
+        // Keep all lines visible (no fade out)
+        otherLinesOpacity = 1;
 
-        // Color blend: from p = 0.78 to 0.85 (delayed to keep cyan-blue expansion visible)
-        const colorBlendRaw = Math.max(0, Math.min(1, (p - 0.78) / (0.85 - 0.78)));
+        // Color blend: from p = 0.60 to 0.85 (delayed to keep glowing blues visible initially as they expand)
+        const colorBlendRaw = Math.max(0, Math.min(1, (p - 0.60) / (0.85 - 0.60)));
         const colorBlendT = easeInOutCubic(colorBlendRaw);
 
-        const targetR = 66;
-        const targetG = 27;
-        const targetB = 27;
+        const targetR = 40; // #280e0e: R=40, G=14, B=14
+        const targetG = 14;
+        const targetB = 14;
 
-        // Path 1 (from Cyan to Background)
+        // Path 1 (from Cyan to #280e0e)
         const r1 = Math.round(0 + (targetR - 0) * colorBlendT);
         const g1 = Math.round(210 + (targetG - 210) * colorBlendT);
         const b1 = Math.round(255 + (targetB - 255) * colorBlendT);
         color1 = `rgb(${r1}, ${g1}, ${b1})`;
 
-        // Path 2 (from Electric Blue to Background)
+        // Path 2 (from Electric Blue to #280e0e)
         const r2 = Math.round(0 + (targetR - 0) * colorBlendT);
         const g2 = Math.round(112 + (targetG - 112) * colorBlendT);
         const b2 = Math.round(243 + (targetB - 243) * colorBlendT);
         color2 = `rgb(${r2}, ${g2}, ${b2})`;
 
-        // Path 3 (from Indigo to Background)
+        // Path 3 (from Indigo to #280e0e)
         const r3 = Math.round(26 + (targetR - 26) * colorBlendT);
         const g3 = Math.round(35 + (targetG - 35) * colorBlendT);
         const b3 = Math.round(126 + (targetB - 126) * colorBlendT);
         color3 = `rgb(${r3}, ${g3}, ${b3})`;
+
+        // Interpolate viewport and document backgrounds to `#280e0e`
+        const bgR = Math.round(66 + (targetR - 66) * colorBlendT);
+        const bgG = Math.round(27 + (targetG - 27) * colorBlendT);
+        const bgB = Math.round(27 + (targetB - 27) * colorBlendT);
+        viewport.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
+        document.body.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
+        document.documentElement.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
       }
 
       for (let i = 0; i < paths.length; i++) {
