@@ -5,7 +5,7 @@ export default function IndustriesSection() {
     <section
       className="w-full flex flex-col items-center justify-center gap-4 pb-[10vh] select-text relative z-20"
     >
-      <h3 className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light text-center tracking-wide pointer-events-auto">
+      <h3 className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B]/80 font-light text-center tracking-wide pointer-events-auto">
         Trusted by teams across many industries
       </h3>
 
@@ -21,7 +21,7 @@ export default function IndustriesSection() {
           ]).map((item, index) => (
             <div
               key={`row1-${index}`}
-              className="h-[120px] px-12 rounded-[24px] bg-[#321414] border border-primary/15 flex items-center justify-center text-primary uppercase font-sans tracking-[2px] text-[13px] font-semibold hover:border-primary/40 transition-colors duration-300"
+              className="h-[120px] px-12 rounded-[24px] bg-[#B8F74B] flex items-center justify-center text-[#089998] uppercase font-sans tracking-[2px] text-[13px] font-semibold"
             >
               {item}
             </div>
@@ -41,7 +41,7 @@ export default function IndustriesSection() {
           ]).map((item, index) => (
             <div
               key={`row2-${index}`}
-              className="h-[120px] px-12 rounded-[24px] bg-[#321414] border border-primary/15 flex items-center justify-center text-primary uppercase font-sans tracking-[2px] text-[13px] font-semibold hover:border-primary/40 transition-colors duration-300"
+              className="h-[120px] px-12 rounded-[24px] bg-[#B8F74B] flex items-center justify-center text-[#089998] uppercase font-sans tracking-[2px] text-[13px] font-semibold"
             >
               {item}
             </div>

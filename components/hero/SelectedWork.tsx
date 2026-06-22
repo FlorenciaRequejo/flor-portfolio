@@ -3,28 +3,29 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import CaseStudyCard from "./CaseStudyCard";
+import { motion, useScroll, useTransform, useMotionValue, useReducedMotion } from "framer-motion";
 
 const caseStudyCards = [
   {
-    title: "Web design and development",
+    title: "Design + development",
     description:
-      "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
+      "Rebuilt a fragile legacy news platform into a scalable publishing ecosystem by redesigning its architecture and separating infrastructure responsibilities.",
     href: "/web-design-and-development",
     imageSrc: "/Web Design and Development.png",
     videoSrc: "/Web Design and Development.mp4",
   },
   {
-    title: "End-to-end product thinking",
+    title: "Concept to launch",
     description:
-      "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
+      "An AI-powered system that automates website audits, transforming UX, SEO and performance data into actionable business recommendations.",
     href: "#projects",
     imageSrc: "/End To End Product Thinking.jpg",
     videoSrc: "/End To End Product Thinking.mp4",
   },
   {
-    title: "UX and customer experience",
+    title: "Brand identity",
     description:
-      "From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.",
+      "Developed a complete visual language, from logo design and app interfaces to marketing materials and brand collateral, creating a consistent and memorable experience across every touchpoint.",
     href: "#projects",
     imageSrc: "/Ux and User Experience.png",
     videoSrc: "/Ux and User Experience.mp4",
@@ -77,12 +78,12 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps) {
   return (
-    <div className="bg-white rounded-[24px] p-6 md:p-8 flex flex-col justify-between min-h-[420px] md:min-h-[500px] w-[75vw] sm:w-[340px] md:w-[24vw] min-w-[320px] max-w-[420px] shadow-[0_10px_30px_rgba(66,27,27,0.04)] select-none shrink-0 snap-start">
-      <p className="font-sans text-[14px] leading-[26px] text-[#421B1B]/90 font-normal text-left">
+    <div className="bg-white rounded-[24px] p-6 md:p-8 flex flex-col justify-between min-h-[420px] md:min-h-[500px] w-[75vw] sm:w-[340px] md:w-[24vw] min-w-[320px] max-w-[420px] shadow-[0_10px_30px_rgba(27,35,122,0.04)] select-none shrink-0 snap-start">
+      <p className="font-sans text-[14px] leading-[26px] text-[#1B237A]/90 font-normal text-left">
         “{quote}”
       </p>
 
-      <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#421B1B]/8">
+      <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#1B237A]/8">
         <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#FAF6F0] flex-shrink-0">
           <Image
             src={avatarSrc}
@@ -95,11 +96,11 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
         </div>
 
         <div className="flex flex-col text-left">
-          <span className="font-sans text-[14px] font-semibold text-[#421B1B]">
+          <span className="font-sans text-[14px] font-semibold text-[#1B237A]">
             {name}
           </span>
 
-          <span className="font-sans text-[12px] text-[#421B1B]/60 font-medium">
+          <span className="font-sans text-[12px] text-[#1B237A]/60 font-medium">
             {role}
           </span>
         </div>
@@ -111,6 +112,28 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
 export default function SelectedWork() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "start start"]
+  });
+
+  const shouldReduceMotion = useReducedMotion();
+
+  const borderProgress = shouldReduceMotion
+    ? useMotionValue(1)
+    : useTransform(scrollYProgress, [0.0, 1.0], [0, 1]);
+
+  const borderWidthStyle = useTransform(borderProgress, (v) => `calc(${v} * var(--max-border-width))`);
+
+  // Log values for debugging scroll progress
+  useEffect(() => {
+    console.log("SelectedWork mounted. shouldReduceMotion:", shouldReduceMotion);
+    return borderProgress.on("change", (latest) => {
+      console.log("borderProgress changed:", latest, "scrollYProgress:", scrollYProgress.get());
+    });
+  }, [borderProgress, scrollYProgress, shouldReduceMotion]);
+
   const [isSnapping, setIsSnapping] = useState(true);
   const isHovered = useRef(false);
   const isTouching = useRef(false);
@@ -534,134 +557,135 @@ export default function SelectedWork() {
   }, []);
 
   return (
-    <section
+    <motion.section
       id="projects"
       ref={sectionRef}
-      className="w-full bg-white p-[8px] pb-[220px] md:p-[30px] md:pb-[320px] rounded-[48px] md:rounded-[110px] relative z-[1] mt-12 md:mt-24"
+      className="w-full bg-[#089998] border-[#FDABFF] border-solid rounded-[48px] md:rounded-[110px] pt-10 pb-[284px] md:pt-16 md:pb-[416px] relative overflow-hidden z-[1] mt-12 md:mt-24"
+      style={{
+        borderWidth: borderWidthStyle,
+      }}
     >
-      <div className="w-full bg-[#fbf5f5] rounded-[38px] md:rounded-[80px] pt-10 pb-16 md:pt-16 md:pb-24 relative overflow-hidden">
-        <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
+      <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
+          <div className="flex flex-col gap-4 max-w-[620px]">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#B8F74B]/15 text-[#B8F74B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
+              SELECTED WORK
+            </span>
+            <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-[#B8F74B] font-normal tracking-tight">
+              A few problems
+              <br />
+              I've made work
+            </h2>
+          </div>
+
+          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
+            Each project presented a different challenge. Solving it required understanding what mattered, what didn't, and where to focus first.
+          </p>
+        </div>
+      </div>
+
+      <div
+        ref={scrollContainerRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleSelectedWorkMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        onScroll={handleSelectedWorkScroll}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onClickCapture={handleContainerClickCapture}
+        onDragStart={(e) => e.preventDefault()}
+        className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
+          }`}
+        style={{
+          scrollSnapType: isSnapping ? "x mandatory" : "none",
+        }}
+      >
+        <div
+          className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-8"
+          style={{
+            paddingLeft: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+            paddingRight: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+          }}
+        >
+          {duplicatedCaseStudyCards.map((card, index) => (
+            <div
+              key={`${card.title}-${index}`}
+              className="snap-start shrink-0 w-[82vw] md:w-[60vw] lg:w-[44vw] max-w-[680px] flex"
+            >
+              <CaseStudyCard
+                title={card.title}
+                description={card.description}
+                videoSrc={card.videoSrc}
+                imageSrc={card.imageSrc}
+                href={card.href}
+                featured={false}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div id="testimonials" className="mt-20 md:mt-28">
+        <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
             <div className="flex flex-col gap-4 max-w-[620px]">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#421B1B]/5 text-[#421B1B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
-                Selected Work
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#B8F74B]/15 text-[#B8F74B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
+                Testimonials
               </span>
-              <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-[#421B1B] font-normal tracking-tight">
-                A few problems
+              <h2 className="font-serif text-[36px] md:text-[64px] leading-[1.1] text-[#B8F74B] font-normal tracking-tight">
+                They Said It,
                 <br />
-                I've made work
+                Not Me
               </h2>
             </div>
 
-            <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#421B1B]/75 font-normal max-w-[460px] md:mt-16">
-              Each project presented a different challenge. Solving it required understanding what mattered, what didn't, and where to focus first.
+            <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#B8F74B] font-normal max-w-[440px] md:mb-2">
+              A few words from people I’ve worked with across web, design, product and systems projects.
             </p>
           </div>
         </div>
 
         <div
-          ref={scrollContainerRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleSelectedWorkMouseLeave}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onTouchCancel={handleTouchEnd}
-          onScroll={handleSelectedWorkScroll}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUpOrLeave}
-          onClickCapture={handleContainerClickCapture}
+          ref={testimonialsContainerRef}
+          onMouseEnter={handleTestimonialsMouseEnter}
+          onMouseLeave={handleTestimonialsMouseLeaveCombined}
+          onTouchStart={handleTestimonialsTouchStart}
+          onTouchEnd={handleTestimonialsTouchEnd}
+          onTouchCancel={handleTestimonialsTouchEnd}
+          onScroll={handleTestimonialsScroll}
+          onMouseDown={handleTestimonialsMouseDown}
+          onMouseMove={handleTestimonialsMouseMove}
+          onMouseUp={handleTestimonialsMouseUpOrLeave}
+          onClickCapture={handleTestimonialsClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
+          className={`w-full overflow-x-auto scrollbar-none flex relative z-20 select-none ${isTestimonialsMouseDown ? "cursor-grabbing" : "cursor-grab"
             }`}
           style={{
-            scrollSnapType: isSnapping ? "x mandatory" : "none",
+            scrollSnapType: isTestimonialsSnapping ? "x mandatory" : "none",
           }}
         >
           <div
-            className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-8"
+            className="flex flex-nowrap gap-5 md:gap-8 shrink-0 py-4"
             style={{
-              paddingLeft: "calc((100vw - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
-              paddingRight: "calc((100vw - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+              paddingLeft: "var(--carousel-padding-left)",
+              paddingRight: "var(--carousel-padding-right)",
             }}
           >
-            {duplicatedCaseStudyCards.map((card, index) => (
-              <div
-                key={`${card.title}-${index}`}
-                className="snap-start shrink-0 w-[82vw] md:w-[60vw] lg:w-[44vw] max-w-[680px] flex"
-              >
-                <CaseStudyCard
-                  title={card.title}
-                  description={card.description}
-                  videoSrc={card.videoSrc}
-                  imageSrc={card.imageSrc}
-                  href={card.href}
-                  featured={false}
-                />
-              </div>
+            {duplicatedTestimonials.map((t, index) => (
+              <TestimonialCard
+                key={`${t.name}-${index}`}
+                quote={t.quote}
+                name={t.name}
+                role={t.role}
+                avatarSrc={t.avatarSrc}
+              />
             ))}
           </div>
         </div>
-
-        <div id="testimonials" className="mt-20 md:mt-28">
-          <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
-              <div className="flex flex-col gap-4 max-w-[620px]">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[#421B1B]/5 text-[#421B1B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
-                  Testimonials
-                </span>
-                <h2 className="font-serif text-[36px] md:text-[64px] leading-[1.1] text-[#421B1B] font-normal tracking-tight">
-                  They Said It,
-                  <br />
-                  Not Me
-                </h2>
-              </div>
-
-              <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#421B1B]/75 font-normal max-w-[440px] md:mb-2">
-                A few words from people I’ve worked with across web, design, product and systems projects.
-              </p>
-            </div>
-          </div>
-
-          <div
-            ref={testimonialsContainerRef}
-            onMouseEnter={handleTestimonialsMouseEnter}
-            onMouseLeave={handleTestimonialsMouseLeaveCombined}
-            onTouchStart={handleTestimonialsTouchStart}
-            onTouchEnd={handleTestimonialsTouchEnd}
-            onTouchCancel={handleTestimonialsTouchEnd}
-            onScroll={handleTestimonialsScroll}
-            onMouseDown={handleTestimonialsMouseDown}
-            onMouseMove={handleTestimonialsMouseMove}
-            onMouseUp={handleTestimonialsMouseUpOrLeave}
-            onClickCapture={handleTestimonialsClickCapture}
-            onDragStart={(e) => e.preventDefault()}
-            className={`w-full overflow-x-auto scrollbar-none flex relative z-20 select-none ${isTestimonialsMouseDown ? "cursor-grabbing" : "cursor-grab"
-              }`}
-            style={{
-              scrollSnapType: isTestimonialsSnapping ? "x mandatory" : "none",
-            }}
-          >
-            <div
-              className="flex flex-nowrap gap-5 md:gap-8 shrink-0 py-4"
-              style={{
-                paddingLeft: "var(--carousel-padding-left)",
-                paddingRight: "var(--carousel-padding-right)",
-              }}
-            >
-              {duplicatedTestimonials.map((t, index) => (
-                <TestimonialCard
-                  key={`${t.name}-${index}`}
-                  quote={t.quote}
-                  name={t.name}
-                  role={t.role}
-                  avatarSrc={t.avatarSrc}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

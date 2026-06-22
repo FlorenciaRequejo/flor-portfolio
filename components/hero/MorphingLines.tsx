@@ -53,6 +53,10 @@ export default function MorphingLines() {
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const chaosSvgRef = useRef<SVGSVGElement>(null);
   const orderedSvgRef = useRef<SVGSVGElement>(null);
+  const indicatorChromeRef = useRef<HTMLDivElement>(null);
+  const pill1Ref = useRef<HTMLSpanElement>(null);
+  const pill2Ref = useRef<HTMLSpanElement>(null);
+  const pill3Ref = useRef<HTMLSpanElement>(null);
 
 
 
@@ -259,6 +263,8 @@ export default function MorphingLines() {
       clearTimeout(resizeTimeout);
       document.body.style.backgroundColor = "";
       document.documentElement.style.backgroundColor = "";
+      document.documentElement.style.removeProperty("--color-bg");
+      document.documentElement.style.removeProperty("--color-dark");
     };
   }, []);
 
@@ -326,7 +332,7 @@ export default function MorphingLines() {
     if (paths.length > 0) {
       // Calculate color progress (from p = 0.0 to 0.40)
       const colorFactor = Math.max(0, Math.min(1, p / 0.40));
-      
+
       let color1 = "";
       let color2 = "";
       let color3 = "";
@@ -336,23 +342,23 @@ export default function MorphingLines() {
       let otherLinesOpacity = 1;
 
       if (p <= 0.45) {
-        // Phase 1 & 2: Interpolate colors from initial dark theme (#3c1818, #351414, #280e0e) to premium glowing blues
-        // Cyan/Sky Blue for Path 1 (0, 210, 255)
-        const r1 = Math.round(60 + (0 - 60) * colorFactor);
-        const g1 = Math.round(24 + (210 - 24) * colorFactor);
-        const b1 = Math.round(24 + (255 - 24) * colorFactor);
+        // Phase 1 & 2: Interpolate colors from initial blue theme (#0B1F6B, #111D72, #091E68) to target colors
+        // Path 1 (from #0B1F6B to #ADEA54)
+        const r1 = Math.round(11 + (173 - 11) * colorFactor);
+        const g1 = Math.round(31 + (234 - 31) * colorFactor);
+        const b1 = Math.round(107 + (84 - 107) * colorFactor);
         color1 = `rgb(${r1}, ${g1}, ${b1})`;
 
-        // Electric Blue for Path 2 (0, 112, 243)
-        const r2 = Math.round(53 + (0 - 53) * colorFactor);
-        const g2 = Math.round(20 + (112 - 20) * colorFactor);
-        const b2 = Math.round(20 + (243 - 20) * colorFactor);
+        // Path 2 (from #111D72 to #FDABFF)
+        const r2 = Math.round(17 + (253 - 17) * colorFactor);
+        const g2 = Math.round(29 + (171 - 29) * colorFactor);
+        const b2 = Math.round(114 + (255 - 114) * colorFactor);
         color2 = `rgb(${r2}, ${g2}, ${b2})`;
 
-        // Indigo/Royal Blue for Path 3 (26, 35, 126)
-        const r3 = Math.round(40 + (26 - 40) * colorFactor);
-        const g3 = Math.round(14 + (35 - 14) * colorFactor);
-        const b3 = Math.round(14 + (126 - 14) * colorFactor);
+        // Path 3 (from #091E68 to #089998)
+        const r3 = Math.round(9 + (8 - 9) * colorFactor);
+        const g3 = Math.round(30 + (153 - 30) * colorFactor);
+        const b3 = Math.round(104 + (152 - 104) * colorFactor);
         color3 = `rgb(${r3}, ${g3}, ${b3})`;
 
         strokeWidth1 = 50;
@@ -360,10 +366,12 @@ export default function MorphingLines() {
         strokeWidth3 = 50;
         otherLinesOpacity = 1;
 
-        // Reset backgrounds to default dark theme
-        viewport.style.backgroundColor = "rgb(66, 27, 27)";
-        document.body.style.backgroundColor = "rgb(66, 27, 27)";
-        document.documentElement.style.backgroundColor = "rgb(66, 27, 27)";
+        // Reset backgrounds to default dark blue theme (#1B237A)
+        viewport.style.backgroundColor = "rgb(27, 35, 122)";
+        document.body.style.backgroundColor = "rgb(27, 35, 122)";
+        document.documentElement.style.backgroundColor = "rgb(27, 35, 122)";
+        document.documentElement.style.setProperty("--color-bg", "rgb(27, 35, 122)");
+        document.documentElement.style.setProperty("--color-dark", "rgb(27, 35, 122)");
       } else {
         // Phase 3: p from 0.45 to 0.85: The 3 lines get thicker and thicker in a smooth transition
         const thicknessRaw = Math.max(0, Math.min(1, (p - 0.45) / (0.85 - 0.45)));
@@ -381,35 +389,57 @@ export default function MorphingLines() {
         const colorBlendRaw = Math.max(0, Math.min(1, (p - 0.60) / (0.85 - 0.60)));
         const colorBlendT = easeInOutCubic(colorBlendRaw);
 
-        const targetR = 40; // #280e0e: R=40, G=14, B=14
-        const targetG = 14;
-        const targetB = 14;
+        const targetR = 8; // #089998: R=8, G=153, B=152
+        const targetG = 153;
+        const targetB = 152;
 
-        // Path 1 (from Cyan to #280e0e)
-        const r1 = Math.round(0 + (targetR - 0) * colorBlendT);
-        const g1 = Math.round(210 + (targetG - 210) * colorBlendT);
-        const b1 = Math.round(255 + (targetB - 255) * colorBlendT);
+        // Path 1 (from #ADEA54 to #089998)
+        const r1 = Math.round(173 + (targetR - 173) * colorBlendT);
+        const g1 = Math.round(234 + (targetG - 234) * colorBlendT);
+        const b1 = Math.round(84 + (targetB - 84) * colorBlendT);
         color1 = `rgb(${r1}, ${g1}, ${b1})`;
 
-        // Path 2 (from Electric Blue to #280e0e)
-        const r2 = Math.round(0 + (targetR - 0) * colorBlendT);
-        const g2 = Math.round(112 + (targetG - 112) * colorBlendT);
-        const b2 = Math.round(243 + (targetB - 243) * colorBlendT);
+        // Path 2 (from #FDABFF to #089998)
+        const r2 = Math.round(253 + (targetR - 253) * colorBlendT);
+        const g2 = Math.round(171 + (targetG - 171) * colorBlendT);
+        const b2 = Math.round(255 + (targetB - 255) * colorBlendT);
         color2 = `rgb(${r2}, ${g2}, ${b2})`;
 
-        // Path 3 (from Indigo to #280e0e)
-        const r3 = Math.round(26 + (targetR - 26) * colorBlendT);
-        const g3 = Math.round(35 + (targetG - 35) * colorBlendT);
-        const b3 = Math.round(126 + (targetB - 126) * colorBlendT);
+        // Path 3 (from #089998 to #089998)
+        const r3 = Math.round(8 + (targetR - 8) * colorBlendT);
+        const g3 = Math.round(153 + (targetG - 153) * colorBlendT);
+        const b3 = Math.round(152 + (targetB - 152) * colorBlendT);
         color3 = `rgb(${r3}, ${g3}, ${b3})`;
 
-        // Interpolate viewport and document backgrounds to `#280e0e`
-        const bgR = Math.round(66 + (targetR - 66) * colorBlendT);
-        const bgG = Math.round(27 + (targetG - 27) * colorBlendT);
-        const bgB = Math.round(27 + (targetB - 27) * colorBlendT);
-        viewport.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
-        document.body.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
-        document.documentElement.style.backgroundColor = `rgb(${bgR}, ${bgG}, ${bgB})`;
+        // Interpolate viewport and document backgrounds to `#089998`
+        const bgR = Math.round(27 + (targetR - 27) * colorBlendT);
+        const bgG = Math.round(35 + (targetG - 35) * colorBlendT);
+        const bgB = Math.round(122 + (targetB - 122) * colorBlendT);
+
+        // Transition back to dark blue (#1B237A: 27, 35, 122) near the page bottom (footer)
+        const docScrollHeight = document.documentElement.scrollHeight - vh;
+        const pageProgress = docScrollHeight > 0 ? window.scrollY / docScrollHeight : 0;
+        
+        let finalBgR = bgR;
+        let finalBgG = bgG;
+        let finalBgB = bgB;
+
+        if (pageProgress > 0.82) {
+          const footerFactor = Math.min(1, (pageProgress - 0.82) / (0.95 - 0.82));
+          const footerT = easeInOutCubic(footerFactor);
+          const darkBlueR = 27;
+          const darkBlueG = 35;
+          const darkBlueB = 122;
+          finalBgR = Math.round(bgR + (darkBlueR - bgR) * footerT);
+          finalBgG = Math.round(bgG + (darkBlueG - bgG) * footerT);
+          finalBgB = Math.round(bgB + (darkBlueB - bgB) * footerT);
+        }
+
+        viewport.style.backgroundColor = `rgb(${finalBgR}, ${finalBgG}, ${finalBgB})`;
+        document.body.style.backgroundColor = `rgb(${finalBgR}, ${finalBgG}, ${finalBgB})`;
+        document.documentElement.style.backgroundColor = `rgb(${finalBgR}, ${finalBgG}, ${finalBgB})`;
+        document.documentElement.style.setProperty("--color-bg", `rgb(${finalBgR}, ${finalBgG}, ${finalBgB})`);
+        document.documentElement.style.setProperty("--color-dark", `rgb(${finalBgR}, ${finalBgG}, ${finalBgB})`);
       }
 
       for (let i = 0; i < paths.length; i++) {
@@ -469,32 +499,75 @@ export default function MorphingLines() {
     // Update scroll indicator / pills opacity and transform
     const scrollIndicator = scrollIndicatorRef.current;
     if (scrollIndicator) {
-      // Stay visible, and fade out only between p = 0.70 and 0.85
-      let indicatorOpacity = 1;
-      if (p > 0.70) {
-        const fade = Math.max(0, Math.min(1, (p - 0.70) / (0.85 - 0.70)));
-        indicatorOpacity = 1 - fade;
+      // Sits static in place to align perfectly with flat lines
+      scrollIndicator.style.transform = `translate3d(0, 0, 0)`;
+
+      const indicatorChrome = indicatorChromeRef.current;
+      const pill1 = pill1Ref.current;
+      const pill2 = pill2Ref.current;
+      const pill3 = pill3Ref.current;
+
+      // 1. Chrome (vertical line and follow process text) fades out between p = 0.20 and 0.45
+      if (indicatorChrome) {
+        const chromeOpacity = Math.max(0, Math.min(1, 1 - (p - 0.20) / (0.45 - 0.20)));
+        indicatorChrome.style.opacity = chromeOpacity.toString();
+        indicatorChrome.style.visibility = chromeOpacity === 0 ? "hidden" : "visible";
       }
-      scrollIndicator.style.opacity = indicatorOpacity.toString();
 
-      // Sits mostly in place (minor parallax)
-      const translateY = p * -20;
-      scrollIndicator.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      // 2. Pills align with flat horizontal lines between p = 0.20 and 0.45
+      if (pill1 && pill2 && pill3) {
+        const alignRaw = Math.max(0, Math.min(1, (p - 0.20) / (0.45 - 0.20)));
+        const alignT = easeInOutCubic(alignRaw);
 
-      if (indicatorOpacity > 0.01) {
-        scrollIndicator.style.pointerEvents = "auto";
-      } else {
-        scrollIndicator.style.pointerEvents = "none";
+        // Compute top offset values in pixels
+        const top1 = 0 + (0.1743 * vh - 0) * alignT;
+        const top2 = 44 + (0.2525 * vh - 44) * alignT;
+        const top3 = 88 + (0.3308 * vh - 88) * alignT;
+
+        pill1.style.top = `${top1}px`;
+        pill2.style.top = `${top2}px`;
+        pill3.style.top = `${top3}px`;
+
+        // Color transition: from #FDABFF (253, 171, 255) to #1B237A (27, 35, 122)
+        const r = Math.round(253 + (27 - 253) * alignT);
+        const g = Math.round(171 + (35 - 171) * alignT);
+        const b = Math.round(255 + (122 - 255) * alignT);
+        const colorStr = `rgb(${r}, ${g}, ${b})`;
+        
+        pill1.style.color = colorStr;
+        pill2.style.color = colorStr;
+        pill3.style.color = colorStr;
+
+        pill1.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+        pill2.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+        pill3.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+
+        // Pills fade out between p = 0.75 and 0.85
+        const pillsOpacity = Math.max(0, Math.min(1, 1 - (p - 0.75) / (0.85 - 0.75)));
+        pill1.style.opacity = pillsOpacity.toString();
+        pill2.style.opacity = pillsOpacity.toString();
+        pill3.style.opacity = pillsOpacity.toString();
+
+        pill1.style.visibility = pillsOpacity === 0 ? "hidden" : "visible";
+        pill2.style.visibility = pillsOpacity === 0 ? "hidden" : "visible";
+        pill3.style.visibility = pillsOpacity === 0 ? "hidden" : "visible";
+
+        if (pillsOpacity > 0.01) {
+          scrollIndicator.style.pointerEvents = "auto";
+        } else {
+          scrollIndicator.style.pointerEvents = "none";
+        }
       }
     }
 
-    // Section 2: About Content Opacity & Transform (Fades in from p = 0.85 to 1.0)
+    // Section 2: About Content Opacity & Transform (Grows and fades in from p = 0.62 to 0.88)
     const about = aboutRef.current;
     if (about) {
-      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.85) / 0.15));
+      const aboutOpacity = Math.max(0, Math.min(1, (p - 0.62) / 0.26));
       about.style.opacity = aboutOpacity.toString();
-      const translateY = (1 - aboutOpacity) * 30;
-      about.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      const scale = 0.85 + aboutOpacity * 0.15;
+      about.style.transformOrigin = "center";
+      about.style.transform = `scale(${scale})`;
       if (aboutOpacity > 0.01) {
         about.style.pointerEvents = "auto";
       } else {
@@ -616,9 +689,6 @@ export default function MorphingLines() {
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
               Concept to Launch
             </span>
-            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              Problem Solving
-            </span>
           </div>
 
           {/* Mobile-only Scroll Indicator: sits below hero copy and is visible on all screen aspect ratios */}
@@ -641,34 +711,45 @@ export default function MorphingLines() {
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex items-end gap-4 h-full">
-            {/* Extended Line & Dot */}
-            <div className="flex flex-col items-center h-full relative">
-              {/* Tall vertical line */}
-              <div className="w-[1.5px] flex-grow bg-primary/40 relative">
-                {/* Pills container on the right side of the line */}
-                <div className="absolute left-6 top-[0%] flex flex-col gap-4 items-start pointer-events-auto">
-                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
-                    15+ Years Experience
-                  </span>
-                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
-                    Design + Development
-                  </span>
-                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
-                    Concept to Launch
-                  </span>
-                  <span className="px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors">
-                    AI Problem Solving
-                  </span>
-                </div>
+          <div className="flex items-end gap-4 h-full relative">
+            {/* Extended Line & Dot Chrome */}
+            <div ref={indicatorChromeRef} className="flex items-end gap-4 h-full">
+              <div className="flex flex-col items-center h-full relative">
+                {/* Tall vertical line */}
+                <div className="w-[1.5px] flex-grow bg-primary/40" />
+                {/* Dot */}
+                <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
               </div>
-              {/* Dot */}
-              <div className="w-[6px] h-[6px] rounded-full bg-primary -mt-[2px]" />
+              {/* Text */}
+              <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px] whitespace-nowrap">
+                FOLLOW THE PROCESS
+              </span>
             </div>
-            {/* Text */}
-            <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px]">
-              FOLLOW THE PROCESS
-            </span>
+
+            {/* Pills container positioned on the right side of the vertical line */}
+            <div className="absolute left-6 top-0 h-full pointer-events-auto">
+              <span
+                ref={pill1Ref}
+                className="absolute px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                style={{ top: "0px", transform: "translate3d(0, 0, 0) translateY(-50%)" }}
+              >
+                15+ Years Experience
+              </span>
+              <span
+                ref={pill2Ref}
+                className="absolute px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                style={{ top: "44px", transform: "translate3d(0, 0, 0) translateY(-50%)" }}
+              >
+                Design + Development
+              </span>
+              <span
+                ref={pill3Ref}
+                className="absolute px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                style={{ top: "88px", transform: "translate3d(0, 0, 0) translateY(-50%)" }}
+              >
+                Concept to Launch
+              </span>
+            </div>
           </div>
         </div>
 

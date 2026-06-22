@@ -4,22 +4,22 @@
   --font-serif: var(--font-serif), Georgia, serif;
   --font-sans: var(--font-sans), Inter, sans-serif;
 
-  --color-primary: #FF8BD1;
-  --color-bg: #421B1B;
+  --color-primary: #FDABFF;
+  --color-bg: #1B237A;
 }
 
 @layer base {
   :root {
-    --color-dark: #421B1B;
-    --color-light: #FF8BD1;
-    --color-line-dark: #FF8BD1;
-    --color-line-light: #FF8BD1;
-    --line-color: #FF8BD1;
+    --color-dark: #1B237A;
+    --color-light: #FDABFF;
+    --color-line-dark: #FDABFF;
+    --color-line-light: #FDABFF;
+    --line-color: #FDABFF;
 
     /* 3-Path SVG Morphing variables */
-    --stroke-1-color: #3c1818;
-    --stroke-2-color: #351414;
-    --stroke-3-color: #280e0e;
+    --stroke-1-color: #0B1F6B;
+    --stroke-2-color: #111D72;
+    --stroke-3-color: #091E68;
     --stroke-width: 50px;
 
     --hero-scroll-height: 220vh;
@@ -56,7 +56,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 139, 209, 0.2);
+    background: rgba(253, 171, 255, 0.2);
     border-radius: 2px;
   }
 }
@@ -83,8 +83,8 @@
   width: min(76vw, 1260px);
   border-radius: 999px;
 
-  background-color: rgba(66, 27, 27, 0.15) !important;
-  border: 1px solid rgba(255, 139, 209, 0.5);
+  background-color: rgba(27, 35, 122, 0.15) !important;
+  border: 1px solid rgba(253, 171, 255, 0.5);
 
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
@@ -102,8 +102,8 @@
 .nav-outline-pill.is-scrolled {
   width: min(70vw, 1000px);
 
-  background-color: rgba(66, 27, 27, 0.82) !important;
-  border-color: rgba(255, 139, 209, 0.85);
+  background-color: rgba(27, 35, 122, 1) !important;
+  border-color: rgba(253, 171, 255, 1);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -122,7 +122,7 @@
   .nav-outline-pill.is-open {
     height: 270px;
     border-radius: 24px;
-    background: rgba(66, 27, 27, 0.96) !important;
+    background: rgba(27, 35, 122, 0.96) !important;
   }
 
   .nav-outline-pill.is-scrolled {
@@ -131,18 +131,18 @@
 }
 
 .svg-line-one {
-  stroke: var(--stroke-1-color) !important;
-  stroke-width: var(--stroke-width) !important;
+  stroke: var(--stroke-1-color);
+  stroke-width: var(--stroke-width);
 }
 
 .svg-line-two {
-  stroke: var(--stroke-2-color) !important;
-  stroke-width: var(--stroke-width) !important;
+  stroke: var(--stroke-2-color);
+  stroke-width: var(--stroke-width);
 }
 
 .svg-line-three {
-  stroke: var(--stroke-3-color) !important;
-  stroke-width: var(--stroke-width) !important;
+  stroke: var(--stroke-3-color);
+  stroke-width: var(--stroke-width);
 }
 
 .hero-viewport {
@@ -223,8 +223,8 @@
 @media (min-width: 768px) {
   :root {
     --hero-scroll-height: 340vh;
-    --carousel-padding-left: calc((100vw - min(36vw, 540px)) / 2 - 20px);
-    --carousel-padding-right: calc((100vw - min(36vw, 540px)) / 2 - 20px);
+    --carousel-padding-left: calc((100% - min(36vw, 540px)) / 2 - 20px);
+    --carousel-padding-right: calc((100% - min(36vw, 540px)) / 2 - 20px);
     --selected-work-pad-left: 48px;
   }
 }
@@ -241,4 +241,8 @@
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+#projects {
+  --max-border-width: 35px;
 }

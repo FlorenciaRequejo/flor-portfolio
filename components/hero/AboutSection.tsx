@@ -1,50 +1,92 @@
 "use client";
 
-import Image from "next/image";
+import { motion } from "framer-motion";
+
+const skills = [
+  { type: "category", label: "Design" },
+  { type: "pill", label: "UX/UI" },
+  { type: "pill", label: "Web design" },
+  { type: "pill", label: "Website architecture" },
+  { type: "pill", label: "Branding" },
+  { type: "pill", label: "Problem discovery" },
+  { type: "category", label: "Technology" },
+  { type: "pill", label: "HTML & CSS" },
+  { type: "pill", label: "WordPress, WooCommerce & Shopify" },
+  { type: "pill", label: "AI-assisted development" },
+  { type: "pill", label: "Automation systems" },
+  { type: "pill", label: "API integrations" },
+  { type: "pill", label: "Python-based workflows" },
+  { type: "pill", label: "PHP customisations" },
+  { type: "category", label: "Analysis & Optimisation" },
+  { type: "pill", label: "Website audits" },
+  { type: "pill", label: "SEO & GEO" },
+  { type: "pill", label: "User behaviour analysis" },
+  { type: "pill", label: "Performance optimisation" },
+  { type: "pill", label: "Business process improvement" }
+];
+
+function FloatingPill({ label, index }: { label: string; index: number }) {
+  // Generate pseudo-random animation parameters based on the index to ensure consistency and avoid SSR hydration issues
+  const duration = 3.2 + (index % 3) * 0.6; // 3.2s, 3.8s, 4.4s
+  const delay = (index % 4) * 0.25; // 0s, 0.25s, 0.5s, 0.75s
+  const yOffset = 1 + (index % 2) * 1; // 1px, 2px (extremely subtle floating motion)
+
+  return (
+    <motion.span
+      animate={{
+        y: [0, -yOffset, 0],
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
+      className="px-3.5 py-1 md:px-5 md:py-1.5 rounded-full border border-[#B8F74B] text-[#B8F74B] font-sans font-medium text-[11px] md:text-[13px] bg-[#B8F74B]/5 hover:bg-[#B8F74B]/15 transition-colors duration-200 cursor-default select-none whitespace-nowrap"
+    >
+      {label}
+    </motion.span>
+  );
+}
+
+function CategoryLabel({ label }: { label: string }) {
+  return (
+    <span className="font-sans font-bold text-[13px] md:text-[15px] text-[#B8F74B] self-center py-1 mr-1 select-none">
+      {label}
+    </span>
+  );
+}
 
 export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full pl-4 md:pl-[calc((100vw-min(76vw,1260px))/2)] pr-4 md:pr-0 pt-6 md:pt-8 pb-20 md:pb-32 flex flex-col md:flex-row items-end justify-between gap-8 md:gap-16 relative select-text"
+      className="w-full pl-4 md:pl-[calc((100%-min(76vw,1260px))/2)] pr-4 md:pr-[calc((100%-min(76vw,1260px))/2)] pt-6 md:pt-8 pb-20 md:pb-32 flex flex-col md:flex-row items-end justify-between gap-8 md:gap-16 relative select-text"
     >
       {/* Left Side: Text Content */}
       <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 max-w-[580px] pointer-events-auto w-full">
         <div className="flex flex-col gap-6 w-full">
-          <span className="font-sans text-[14px] uppercase tracking-[3px] text-primary/75">
-            HOW I ALIGN COMPLEXITY
+          <span className="font-sans text-[14px] uppercase tracking-[3px] text-[#B8F74B]/75">
+            Taking complexity and making it work.
           </span>
-          <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-primary font-normal tracking-tight">
-            15+ years of making sense of the mess
+          <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-[#B8F74B] font-normal tracking-tight">
+            15+ years of solving problems.
           </h2>
-          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 font-light">
-            Experience taught me that complexity is not the real problem. The real challenge is knowing what matters, what doesn't, and how everything connects.
+          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B]/80 font-light">
+            From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.
           </p>
         </div>
       </div>
 
-      {/* Right Side: Image and Overlapping Button */}
-      <div className="w-full md:w-[38vw] h-[320px] md:h-[260px] relative flex justify-end overflow-visible pointer-events-auto">
-        <div className="relative h-full w-full overflow-visible">
-          <div className="relative h-full w-full overflow-hidden rounded-[32px] md:rounded-r-none md:rounded-l-[32px]">
-            <Image
-              src="/flor.webp"
-              alt="Flor Artwork"
-              fill
-              sizes="(max-width: 768px) 100vw, 30vw"
-              priority={false}
-              className="object-cover object-center"
-            />
-          </div>
-
-          <a
-            href="#about"
-            className="absolute left-1/2 md:left-0 -translate-x-1/2 bottom-8 h-[54px] px-8 rounded-full bg-primary text-bg font-sans font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity duration-200 shadow-lg z-10 whitespace-nowrap"
-          >
-            <span>Read More About Me</span>
-            <span className="text-[16px] font-bold">↗</span>
-          </a>
-        </div>
+      {/* Right Side: Skills block of floating pills */}
+      <div className="w-full md:flex-1 flex flex-wrap gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-2 max-w-full md:max-w-[620px] justify-center md:justify-start pointer-events-auto overflow-visible relative">
+        {skills.map((item, index) =>
+          item.type === "category" ? (
+            <CategoryLabel key={item.label} label={item.label} />
+          ) : (
+            <FloatingPill key={item.label} label={item.label} index={index} />
+          )
+        )}
       </div>
     </section>
   );

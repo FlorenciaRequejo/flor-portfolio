@@ -66,12 +66,12 @@ export default function CaseStudyCard({
     initial: {
       y: 0,
       scale: 1,
-      boxShadow: "0 15px 45px rgba(66, 27, 27, 0.07)",
+      boxShadow: "0 15px 45px rgba(27, 35, 122, 0.07)",
     },
     hover: {
       y: -10,
       scale: 1.025,
-      boxShadow: "0 30px 60px rgba(66, 27, 27, 0.12)",
+      boxShadow: "0 30px 60px rgba(27, 35, 122, 0.12)",
     },
   };
 
@@ -118,12 +118,12 @@ export default function CaseStudyCard({
         <div className="relative pt-0 mt-4 flex-grow text-left px-[10px] pb-[10px]">
           {/* Text area: pr only on desktop, bottom padding on mobile to clear centered button */}
           <div className="pb-16 md:pb-0 md:pr-[115px]">
-            <h3 className="text-[#421B1B] font-sans font-semibold text-[18px] leading-tight">
+            <h3 className="text-[#1B237A] font-sans font-semibold text-[18px] leading-tight">
               {title}
             </h3>
 
             {description && (
-              <p className="font-sans text-[14px] leading-[22px] text-[#421B1B]/75 font-normal mt-3">
+              <p className="font-sans text-[14px] leading-[22px] text-[#1B237A]/75 font-normal mt-3">
                 {description}
               </p>
             )}
@@ -131,7 +131,7 @@ export default function CaseStudyCard({
 
           {/* Minimal Read More pill: bottom-center on mobile, bottom-right on desktop */}
           <div className="absolute bottom-[10px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[10px]">
-            <div className="h-[38px] px-5 rounded-full bg-[#FAF6F0] text-[#421B1B] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5">
+            <div className="h-[38px] px-5 rounded-full bg-[#B8F74B] text-[#1B237A] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5">
               <span>Read More</span>
               <span className="text-[14px]">↗</span>
             </div>
@@ -149,7 +149,7 @@ export default function CaseStudyCard({
             width: cardRect.width,
             height: cardRect.height,
             borderRadius: "32px",
-            backgroundColor: "#FAF6F0",
+            backgroundColor: "white",
             zIndex: 9999,
           }}
           animate={{
