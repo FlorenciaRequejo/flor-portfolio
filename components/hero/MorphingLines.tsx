@@ -543,7 +543,15 @@ export default function MorphingLines() {
         pill3.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
 
         // Pills fade out between p = 0.75 and 0.85
-        const pillsOpacity = Math.max(0, Math.min(1, 1 - (p - 0.75) / (0.85 - 0.75)));
+        let pillsOpacity = Math.max(0, Math.min(1, 1 - (p - 0.75) / (0.85 - 0.75)));
+
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+          // Fade in between p = 0.20 and 0.45 on mobile to avoid overlapping the hero text
+          const fadeIn = Math.max(0, Math.min(1, (p - 0.20) / (0.45 - 0.20)));
+          pillsOpacity = pillsOpacity * fadeIn;
+        }
+
         pill1.style.opacity = pillsOpacity.toString();
         pill2.style.opacity = pillsOpacity.toString();
         pill3.style.opacity = pillsOpacity.toString();
@@ -706,14 +714,14 @@ export default function MorphingLines() {
         {/* Scroll Indicator - Desktop only (fixed to bottom of viewport, line extended up) */}
         <div
           ref={scrollIndicatorRef}
-          className="hidden md:flex absolute top-[25vh] bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-[min(76vw,1260px)] justify-end transition-opacity duration-0"
+          className="flex absolute top-[25vh] bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-full md:w-[min(76vw,1260px)] justify-center md:justify-end transition-opacity duration-0"
           style={{
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex items-end gap-4 h-full relative">
+          <div className="flex items-end gap-4 h-full relative w-full justify-center md:justify-start">
             {/* Extended Line & Dot Chrome */}
-            <div ref={indicatorChromeRef} className="flex items-end gap-4 h-full">
+            <div ref={indicatorChromeRef} className="hidden md:flex items-end gap-4 h-full">
               <div className="flex flex-col items-center h-full relative">
                 {/* Tall vertical line */}
                 <div className="w-[1.5px] flex-grow bg-primary/40" />
@@ -727,25 +735,25 @@ export default function MorphingLines() {
             </div>
 
             {/* Pills container positioned on the right side of the vertical line */}
-            <div className="absolute left-6 top-0 h-full pointer-events-auto">
+            <div className="absolute left-0 md:left-6 top-0 h-full pointer-events-auto w-full md:w-auto">
               <span
                 ref={pill1Ref}
-                className="absolute px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
-                style={{ top: "0px", transform: "translate3d(0, 0, 0) translateY(-50%)" }}
+                className="flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                style={{ top: "0px" }}
               >
                 15+ Years Experience
               </span>
               <span
                 ref={pill2Ref}
-                className="absolute px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
-                style={{ top: "44px", transform: "translate3d(0, 0, 0) translateY(-50%)" }}
+                className="flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                style={{ top: "44px" }}
               >
                 Design + Development
               </span>
               <span
                 ref={pill3Ref}
-                className="absolute px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
-                style={{ top: "88px", transform: "translate3d(0, 0, 0) translateY(-50%)" }}
+                className="flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                style={{ top: "88px" }}
               >
                 Concept to Launch
               </span>

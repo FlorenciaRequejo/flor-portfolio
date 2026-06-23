@@ -244,5 +244,24 @@
 }
 
 #projects {
-  --max-border-width: 35px;
+  --max-border-width: 10px;
+}
+
+@media (min-width: 768px) {
+  #projects {
+    --max-border-width: 35px;
+  }
+}
+
+.flat-pill {
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+@media (min-width: 768px) {
+  .flat-pill {
+    left: 0;
+    transform: translate3d(0, -50%, 0);
+  }
 }
