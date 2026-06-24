@@ -69,6 +69,25 @@ const testimonials = [
 
 const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
+function CarouselIndicator({ activeIndex, onClick }: { activeIndex: number; onClick: (index: number) => void }) {
+  return (
+    <div className="md:hidden flex justify-center gap-2.5 my-3 pointer-events-auto">
+      {[0, 1, 2].map((i) => (
+        <button
+          key={i}
+          onClick={() => onClick(i)}
+          className={`h-[3px] rounded-full transition-all duration-300 ${
+            activeIndex === i 
+              ? "w-8 bg-[#B8F74B]" 
+              : "w-4 bg-[#B8F74B]/30"
+          }`}
+          aria-label={`Go to slide ${i + 1}`}
+        />
+      ))}
+    </div>
+  );
+}
+
 interface TestimonialCardProps {
   quote: string;
   name: string;
@@ -124,7 +143,19 @@ export default function SelectedWork() {
     ? useMotionValue(1)
     : useTransform(scrollYProgress, [0.0, 1.0], [0, 1]);
 
-  const borderWidthStyle = useTransform(borderProgress, (v) => `calc(${v} * var(--max-border-width))`);
+  const [maxBorderWidth, setMaxBorderWidth] = useState(35);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
+
+  useEffect(() => {
+    const updateBorderWidth = () => {
+      setMaxBorderWidth(window.innerWidth < 768 ? 10 : 35);
+    };
+    updateBorderWidth();
+    window.addEventListener("resize", updateBorderWidth);
+    return () => window.removeEventListener("resize", updateBorderWidth);
+  }, []);
+
+  const borderWidthStyle = useTransform(borderProgress, [0, 1], [0, maxBorderWidth]);
 
   // Log values for debugging scroll progress
   useEffect(() => {
@@ -133,6 +164,29 @@ export default function SelectedWork() {
       console.log("borderProgress changed:", latest, "scrollYProgress:", scrollYProgress.get());
     });
   }, [borderProgress, scrollYProgress, shouldReduceMotion]);
+
+  const scrollToWorkIndex = (index: number) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+    const cards = Array.from(flexWrapper.children) as HTMLElement[];
+    if (cards.length < 2) return;
+    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
+    if (cardWidthActual > 0) {
+      const originalCount = caseStudyCards.length;
+      setIsSnapping(false);
+      const targetScroll = cardWidthActual * originalCount + index * cardWidthActual;
+      container.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+      settleTimerRef.current = setTimeout(() => {
+        setIsSnapping(true);
+      }, 500);
+    }
+  };
 
   const [isSnapping, setIsSnapping] = useState(true);
   const isHovered = useRef(false);
@@ -430,6 +484,13 @@ export default function SelectedWork() {
       const offset = ((scrollLeft - loopWidth) % loopWidth + loopWidth) % loopWidth;
       container.scrollLeft = loopWidth + offset;
     }
+
+    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
+    if (cardWidthActual > 0) {
+      const relativeScroll = (container.scrollLeft - loopWidth) % loopWidth;
+      const index = Math.round(relativeScroll / cardWidthActual) % originalCount;
+      setActiveWorkIndex((index + originalCount) % originalCount);
+    }
   };
 
   // Center scroll positions on mount to the middle copy
@@ -584,6 +645,8 @@ export default function SelectedWork() {
         </div>
       </div>
 
+      <CarouselIndicator activeIndex={activeWorkIndex} onClick={scrollToWorkIndex} />
+
       <div
         ref={scrollContainerRef}
         onMouseEnter={handleMouseEnter}
@@ -627,6 +690,8 @@ export default function SelectedWork() {
           ))}
         </div>
       </div>
+
+      <CarouselIndicator activeIndex={activeWorkIndex} onClick={scrollToWorkIndex} />
 
       <div id="testimonials" className="mt-20 md:mt-28">
         <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">

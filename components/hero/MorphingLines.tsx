@@ -230,7 +230,8 @@ export default function MorphingLines() {
       if (!container) return;
 
       const rect = container.getBoundingClientRect();
-      const scrollHeight = rect.height - window.innerHeight;
+      const viewportHeight = viewportRef.current ? viewportRef.current.clientHeight : window.innerHeight;
+      const scrollHeight = rect.height - viewportHeight;
 
       // Calculate progress relative to the container scroll depth
       let p = 0;
@@ -277,7 +278,7 @@ export default function MorphingLines() {
     const outputSvg = outputSvgRef.current;
     if (!container || !viewport || !svgWrapper || !outputSvg) return;
 
-    const vh = window.innerHeight;
+    const vh = viewport.clientHeight;
 
     // Morph starts immediately at 0.0 and completes by 0.45
     const morphStart = 0.0;
@@ -520,9 +521,15 @@ export default function MorphingLines() {
         const alignT = easeInOutCubic(alignRaw);
 
         // Compute top offset values in pixels
-        const top1 = 0 + (0.1743 * vh - 0) * alignT;
-        const top2 = 44 + (0.2525 * vh - 44) * alignT;
-        const top3 = 88 + (0.3308 * vh - 88) * alignT;
+        const isMobile = window.innerWidth < 768;
+        const targetOffset = isMobile ? -0.08 * vh : 0;
+        const target1 = 0.1743 * vh + targetOffset;
+        const target2 = 0.2525 * vh + targetOffset;
+        const target3 = 0.3308 * vh + targetOffset;
+
+        const top1 = 0 + (target1 - 0) * alignT;
+        const top2 = 44 + (target2 - 44) * alignT;
+        const top3 = 88 + (target3 - 88) * alignT;
 
         pill1.style.top = `${top1}px`;
         pill2.style.top = `${top2}px`;
@@ -545,7 +552,6 @@ export default function MorphingLines() {
         // Pills fade out between p = 0.75 and 0.85
         let pillsOpacity = Math.max(0, Math.min(1, 1 - (p - 0.75) / (0.85 - 0.75)));
 
-        const isMobile = window.innerWidth < 768;
         if (isMobile) {
           // Fade in between p = 0.20 and 0.45 on mobile to avoid overlapping the hero text
           const fadeIn = Math.max(0, Math.min(1, (p - 0.20) / (0.45 - 0.20)));
@@ -719,7 +725,7 @@ export default function MorphingLines() {
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex items-end gap-4 h-full relative w-full justify-center md:justify-start">
+          <div className="flex items-end gap-4 h-full relative w-full md:w-auto justify-center md:justify-end">
             {/* Extended Line & Dot Chrome */}
             <div ref={indicatorChromeRef} className="hidden md:flex items-end gap-4 h-full">
               <div className="flex flex-col items-center h-full relative">
@@ -738,21 +744,21 @@ export default function MorphingLines() {
             <div className="absolute left-0 md:left-6 top-0 h-full pointer-events-auto w-full md:w-auto">
               <span
                 ref={pill1Ref}
-                className="flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
                 style={{ top: "0px" }}
               >
                 15+ Years Experience
               </span>
               <span
                 ref={pill2Ref}
-                className="flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
                 style={{ top: "44px" }}
               >
                 Design + Development
               </span>
               <span
                 ref={pill3Ref}
-                className="flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
                 style={{ top: "88px" }}
               >
                 Concept to Launch

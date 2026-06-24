@@ -244,13 +244,7 @@
 }
 
 #projects {
-  --max-border-width: 10px;
-}
-
-@media (min-width: 768px) {
-  #projects {
-    --max-border-width: 35px;
-  }
+  border-width: 0;
 }
 
 .flat-pill {
