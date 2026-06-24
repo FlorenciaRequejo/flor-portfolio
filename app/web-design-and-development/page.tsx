@@ -146,7 +146,7 @@ export default function WebDesignAndDevelopmentPage() {
         setIsExiting(true);
         router.prefetch(href);
         setTimeout(() => {
-          router.push(href);
+          router.push(href, { scroll: false });
         }, 600);
       }
     };

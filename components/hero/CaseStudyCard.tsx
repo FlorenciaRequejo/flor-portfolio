@@ -39,7 +39,7 @@ export default function CaseStudyCard({
 
       router.prefetch(href);
       setTimeout(() => {
-        router.push(href);
+        router.push(href, { scroll: false });
       }, 600);
     }
   };

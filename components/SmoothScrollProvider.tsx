@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 // Simple toggle flag to easily disable/enable smooth scroll functionality
@@ -11,9 +12,21 @@ interface SmoothScrollProviderProps {
 }
 
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+  const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
   const [isPastHero, setIsPastHero] = useState(false);
+  const isProgrammaticScrollingRef = useRef(false);
+  const programmaticScrollTimeoutRef = useRef<any>(null);
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (programmaticScrollTimeoutRef.current) {
+        clearTimeout(programmaticScrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!ENABLE_SMOOTH_SCROLL) return;
@@ -23,9 +36,9 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     if (mediaQuery.matches) return;
 
     // Set up IntersectionObserver to observe the #smooth-scroll-marker
-    const marker = document.getElementById("smooth-scroll-marker");
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isProgrammaticScrollingRef.current) return;
         for (const entry of entries) {
           // If the marker has reached or crossed above the bottom of the viewport
           const past = entry.boundingClientRect.top <= window.innerHeight;
@@ -39,25 +52,35 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       }
     );
 
-    if (marker) {
-      observer.observe(marker);
+    let observed = false;
+    let pollTimer: any = null;
+
+    const startObserving = (el: HTMLElement) => {
+      observer.observe(el);
+      observed = true;
+    };
+
+    const initialMarker = document.getElementById("smooth-scroll-marker");
+    if (initialMarker) {
+      startObserving(initialMarker);
     } else {
-      // Fallback: poll for the marker if it isn't ready immediately during client hydration
-      const pollTimer = setInterval(() => {
+      // Poll a limited number of times (e.g. 15 times over 1.5 seconds)
+      let attempts = 0;
+      pollTimer = setInterval(() => {
         const polledMarker = document.getElementById("smooth-scroll-marker");
+        attempts++;
         if (polledMarker) {
-          observer.observe(polledMarker);
-          clearInterval(pollTimer);
+          startObserving(polledMarker);
+          if (pollTimer) clearInterval(pollTimer);
+        } else if (attempts >= 15) {
+          if (pollTimer) clearInterval(pollTimer);
         }
       }, 100);
-      return () => {
-        clearInterval(pollTimer);
-        observer.disconnect();
-      };
     }
 
     // Scroll fallback event listener to guarantee activation state is always synced
     const handleScrollFallback = () => {
+      if (isProgrammaticScrollingRef.current) return;
       const currentMarker = document.getElementById("smooth-scroll-marker");
       if (currentMarker) {
         const rect = currentMarker.getBoundingClientRect();
@@ -68,10 +91,11 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     window.addEventListener("scroll", handleScrollFallback, { passive: true });
 
     return () => {
+      if (pollTimer) clearInterval(pollTimer);
       observer.disconnect();
       window.removeEventListener("scroll", handleScrollFallback);
     };
-  }, []);
+  }, [pathname]);
 
   // Sync Lenis instance based on isPastHero state
   useEffect(() => {
@@ -157,7 +181,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     // Calculate target Y position
     let targetScrollY = 0;
     if (hash.endsWith("#about")) {
-      const container = targetElement.closest(".relative.w-full") as HTMLElement;
+      const container = targetElement.closest(".morphing-lines-container") as HTMLElement;
       if (container) {
         const containerTop = container.getBoundingClientRect().top + window.scrollY;
         const viewportHeight = window.innerHeight;
@@ -175,6 +199,15 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     const marker = document.getElementById("smooth-scroll-marker");
     const markerTop = marker ? marker.getBoundingClientRect().top + window.scrollY : window.innerHeight;
     const isPast = targetScrollY > markerTop;
+
+    // Set programmatic scroll lock to prevent observer/fallback scroll events from destroying Lenis
+    isProgrammaticScrollingRef.current = true;
+    if (programmaticScrollTimeoutRef.current) {
+      clearTimeout(programmaticScrollTimeoutRef.current);
+    }
+    programmaticScrollTimeoutRef.current = setTimeout(() => {
+      isProgrammaticScrollingRef.current = false;
+    }, 1800);
 
     const performScroll = () => {
       if (lenisRef.current) {
@@ -235,32 +268,69 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     };
   }, []);
 
-  // Handle initial hash on page load
+  // Handle hash changes on page load or client-side navigation
   useEffect(() => {
     if (!ENABLE_SMOOTH_SCROLL) return;
 
-    const handleInitialHash = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        // Scroll to top immediately to prevent native jump, then smooth scroll
+    const handleHash = () => {
+      // Next.js routing might update history/hash asynchronously relative to pathname changes,
+      // so poll for the hash to be present in window.location if it's empty initially.
+      let hashAttempts = 0;
+      const checkHash = () => {
+        const hash = window.location.hash;
+        if (!hash) {
+          if (hashAttempts < 15) {
+            hashAttempts++;
+            setTimeout(checkHash, 50);
+          }
+          return;
+        }
+
+        // Parse the ID
+        const targetId = hash.slice(hash.indexOf("#") + 1);
+        if (!targetId) return;
+
+        // Scroll to top immediately to avoid jumpy behavior
         window.scrollTo(0, 0);
-        setTimeout(() => {
-          scrollToHash(hash);
-        }, 400);
-        // Recalculate and scroll again after layout is fully stabilized
-        setTimeout(() => {
-          scrollToHash(hash);
-        }, 1200);
-      }
+
+        // Start polling for the target element to become available in the DOM
+        let attempts = 0;
+        const maxAttempts = 40; // up to 2 seconds (40 * 50ms)
+        const pollInterval = setInterval(() => {
+          const targetElement = document.getElementById(targetId);
+          attempts++;
+
+          if (targetElement) {
+            clearInterval(pollInterval);
+            // Scroll now that the element is in the DOM
+            scrollToHash(hash);
+            
+            // Also schedule follow-up scrolls to stabilize after layout settles
+            setTimeout(() => {
+              scrollToHash(hash);
+            }, 600);
+            setTimeout(() => {
+              scrollToHash(hash);
+            }, 1200);
+          } else if (attempts >= maxAttempts) {
+            clearInterval(pollInterval);
+            console.warn(`[SmoothScroll] Target #${targetId} not found after polling.`);
+          }
+        }, 50);
+      };
+
+      checkHash();
     };
 
-    if (document.readyState === "complete") {
-      handleInitialHash();
-    } else {
-      window.addEventListener("load", handleInitialHash);
-      return () => window.removeEventListener("load", handleInitialHash);
-    }
-  }, []);
+    // Run on pathname change (and initial load)
+    handleHash();
+
+    // Also listen to hashchange events just in case
+    window.addEventListener("hashchange", handleHash);
+    return () => {
+      window.removeEventListener("hashchange", handleHash);
+    };
+  }, [pathname]);
 
   return <>{children}</>;
 }

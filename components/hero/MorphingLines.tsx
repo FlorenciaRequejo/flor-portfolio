@@ -605,7 +605,7 @@ export default function MorphingLines() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full"
+      className="relative w-full morphing-lines-container"
       style={{ height: "var(--hero-scroll-height, 300vh)" }}
     >
       {/* Sticky Frame viewport */}
