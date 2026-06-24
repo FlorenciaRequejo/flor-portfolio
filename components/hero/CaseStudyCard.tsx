@@ -146,7 +146,7 @@ export default function CaseStudyCard({
             height: cardRect.height,
             borderRadius: "32px",
             backgroundColor: "#1B237A",
-            zIndex: 9999,
+            zIndex: 999999,
           }}
           animate={{
             top: 0,

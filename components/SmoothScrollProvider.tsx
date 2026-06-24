@@ -190,7 +190,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     if (isPast && !isPastHeroRef.current) {
       setIsPastHero(true);
       // Wait for Lenis to initialize in the next render cycle, then scroll
-      setTimeout(performScroll, 50);
+      setTimeout(performScroll, 150);
     } else {
       performScroll();
     }
@@ -246,7 +246,11 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
         window.scrollTo(0, 0);
         setTimeout(() => {
           scrollToHash(hash);
-        }, 300);
+        }, 400);
+        // Recalculate and scroll again after layout is fully stabilized
+        setTimeout(() => {
+          scrollToHash(hash);
+        }, 1200);
       }
     };
 

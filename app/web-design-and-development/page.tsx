@@ -590,7 +590,7 @@ export default function WebDesignAndDevelopmentPage() {
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-        className="fixed inset-0 bg-[#1B237A] z-[9999] pointer-events-none"
+        className="fixed inset-0 bg-[#1B237A] z-[999999] pointer-events-none"
       />
 
       {/* Page exit transition overlay */}
@@ -601,7 +601,7 @@ export default function WebDesignAndDevelopmentPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed inset-0 bg-[#1B237A] z-[9999] pointer-events-none"
+            className="fixed inset-0 bg-[#1B237A] z-[999999] pointer-events-none"
           />
         )}
       </AnimatePresence>
