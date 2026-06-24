@@ -127,35 +127,6 @@ function HeroControls({
 export default function WebDesignAndDevelopmentPage() {
   const [isReadingMode, setIsReadingMode] = useState(false);
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
-  const router = useRouter();
-
-  // Intercept anchor clicks to animate transition out of this page
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest("a");
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href");
-      if (!href) return;
-
-      // Only intercept local routes going away from this page
-      if (href.startsWith("/") && href !== "/web-design-and-development") {
-        e.preventDefault();
-        setIsExiting(true);
-        router.prefetch(href);
-        setTimeout(() => {
-          router.push(href, { scroll: false });
-        }, 600);
-      }
-    };
-
-    document.addEventListener("click", handleAnchorClick, { capture: true });
-    return () => {
-      document.removeEventListener("click", handleAnchorClick, { capture: true });
-    };
-  }, [router]);
 
   // Automatically pull existing case studies and exclude the current one
   const otherCaseStudies = caseStudyCards.filter(
@@ -585,26 +556,7 @@ export default function WebDesignAndDevelopmentPage() {
       {/* FOOTER CTA SECTION */}
       <FooterSection />
 
-      {/* Slide-out entrance overlay logic */}
-      <motion.div
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-        className="fixed inset-0 bg-[#1B237A] z-[999999] pointer-events-none"
-      />
 
-      {/* Page exit transition overlay */}
-      <AnimatePresence>
-        {isExiting && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed inset-0 bg-[#1B237A] z-[999999] pointer-events-none"
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

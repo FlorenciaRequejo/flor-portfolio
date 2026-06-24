@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CaseStudyCardProps {
   title: string;
@@ -23,26 +22,9 @@ export default function CaseStudyCard({
   href,
   featured,
 }: CaseStudyCardProps) {
-  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isExpanding, setIsExpanding] = useState(false);
-  const [cardRect, setCardRect] = useState<DOMRect | null>(null);
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (href.startsWith("/")) {
-      e.preventDefault();
-      const rect = e.currentTarget.getBoundingClientRect();
-      setCardRect(rect);
-      setIsExpanding(true);
-
-      router.prefetch(href);
-      setTimeout(() => {
-        router.push(href, { scroll: false });
-      }, 600);
-    }
-  };
 
   // Control video playback based on hover state
   useEffect(() => {
@@ -72,17 +54,15 @@ export default function CaseStudyCard({
   };
 
   return (
-    <>
-      <motion.a
-        href={href}
+    <Link href={href} className="w-full h-full block">
+      <motion.div
         variants={cardVariants}
         initial="initial"
         whileHover="hover"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={handleClick}
         transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[480px] md:h-[540px] lg:h-[580px]"
+        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[480px] md:h-[540px] lg:h-[580px] cursor-pointer"
       >
         {/* Media Container */}
         <div className="relative w-full h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden">
@@ -133,37 +113,7 @@ export default function CaseStudyCard({
             </div>
           </div>
         </div>
-      </motion.a>
-
-      {/* Transition Portal Overlay */}
-      {isExpanding && cardRect && typeof document !== "undefined" && createPortal(
-        <motion.div
-          initial={{
-            position: "fixed",
-            top: cardRect.top,
-            left: cardRect.left,
-            width: cardRect.width,
-            height: cardRect.height,
-            borderRadius: "32px",
-            backgroundColor: "#1B237A",
-            zIndex: 999999,
-          }}
-          animate={{
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            borderRadius: "0px",
-          }}
-          transition={{
-            duration: 0.6,
-            ease: [0.25, 1, 0.5, 1],
-          }}
-          className="pointer-events-none"
-        />,
-        document.body
-      )}
-    </>
+      </motion.div>
+    </Link>
   );
 }
-

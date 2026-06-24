@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const navCol1 = [
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
-  { label: "Process", href: "/#process" },
-  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const navCol2 = [
@@ -81,13 +81,13 @@ export default function FooterSection() {
               {/* Col 1 */}
               <div className="flex flex-col gap-4">
                 {navCol1.map((link) => (
-                  <a
+                  <Link
                     key={link.label}
                     href={link.href}
                     className="font-sans text-[15px] font-medium text-[#FDABFF] hover:underline transition duration-300 w-fit"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
 
