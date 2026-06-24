@@ -22,16 +22,6 @@ const fadeInVariants = {
   },
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
 interface HeroControlsProps {
   isSynopsisOpen: boolean;
   setIsSynopsisOpen: (open: boolean) => void;
@@ -57,7 +47,7 @@ function HeroControls({
     >
       {/* Reading Time Pill */}
       <div className="px-4 py-1.5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)]">
-        12 min read
+        8 min read
       </div>
 
       {/* Synopsis Button */}
@@ -88,7 +78,7 @@ function HeroControls({
             }`}
           >
             <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
-              Waatea News represents a critical cultural and community broadcasting hub. This case study explores how we decoupled a monolithic legacy setup, automated editorial workflows, migrated 50,000+ historical articles, and deployed a modern UI design system with zero downtime.
+              Developing a complete visual identity and design system, translating brand goals into vector assets, scalable digital guidelines, and consistent digital collateral.
             </div>
           </motion.div>
         )}
@@ -124,7 +114,7 @@ function HeroControls({
   );
 }
 
-export default function WebDesignAndDevelopmentPage() {
+export default function BrandIdentityPage() {
   const [isReadingMode, setIsReadingMode] = useState(false);
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -141,7 +131,7 @@ export default function WebDesignAndDevelopmentPage() {
       if (!href) return;
 
       // Only intercept local routes going away from this page
-      if (href.startsWith("/") && href !== "/web-design-and-development") {
+      if (href.startsWith("/") && href !== "/brand-identity") {
         e.preventDefault();
         setIsExiting(true);
         router.prefetch(href);
@@ -159,7 +149,7 @@ export default function WebDesignAndDevelopmentPage() {
 
   // Automatically pull existing case studies and exclude the current one
   const otherCaseStudies = caseStudyCards.filter(
-    (card) => card.href !== "/web-design-and-development"
+    (card) => card.href !== "/brand-identity"
   );
 
   return (
@@ -177,10 +167,10 @@ export default function WebDesignAndDevelopmentPage() {
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left">
               <span className="text-[#B8F74B] font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
-                CASE STUDY / DESIGN + DEVELOPMENT
+                CASE STUDY / BRAND IDENTITY
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
-                Designing and Building an Automated Media Publishing Platform
+                Brand Identity: Visual Language & Complete Design System
               </h1>
             </div>
 
@@ -201,10 +191,9 @@ export default function WebDesignAndDevelopmentPage() {
                   Role
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Product Developer</p>
-                  <p>UX/UI Designer</p>
-                  <p>Systems Architect</p>
-                  <p>Automation Designer</p>
+                  <p>Creative Director</p>
+                  <p>Brand Strategist</p>
+                  <p>UI Designer</p>
                 </div>
               </div>
 
@@ -213,7 +202,7 @@ export default function WebDesignAndDevelopmentPage() {
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>6 Months</p>
+                  <p>3 Months</p>
                 </div>
               </div>
 
@@ -222,10 +211,10 @@ export default function WebDesignAndDevelopmentPage() {
                   Technologies
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>WordPress</p>
-                  <p>PHP, MySQL</p>
-                  <p>Python</p>
-                  <p>AWS S3</p>
+                  <p>Figma</p>
+                  <p>Adobe Suite</p>
+                  <p>Tailwind CSS</p>
+                  <p>SVG vectors</p>
                 </div>
               </div>
 
@@ -234,7 +223,7 @@ export default function WebDesignAndDevelopmentPage() {
                   Client
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Waatea News</p>
+                  <p>Lumina Studio</p>
                 </div>
               </div>
             </div>
@@ -269,10 +258,10 @@ export default function WebDesignAndDevelopmentPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Monolithic Constraints & Manual Bottlenecks
+                Fragmented Brand Visuals & Asset Disorganization
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                Over two decades, Waatea News accumulated over 50,000 legacy articles and 40GB+ of unstructured audio files. Built entirely as a monolithic WordPress application running on deprecated versions, the platform suffered from severe performance degradation during high-traffic breaking news spikes. Editorial workflows were heavily manual, requiring broadcasters to copy audio metadata and transcode tracks manually for web publication.
+                Lumina Studio was launching multiple services but lacked a unified corporate visual language. Their existing branding markers were fragmented, design vector assets were poorly organized, and their digital collateral looked inconsistent across mobile platforms, making a cohesive product pitch difficult.
               </p>
             </div>
 
@@ -281,10 +270,10 @@ export default function WebDesignAndDevelopmentPage() {
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Decoupled Ingestion & Modular Front-End
+                Consistent Design System & Digital Templates
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                We designed a decoupled architecture to separate user-facing delivery from background media transcoding and data processing. By engineering an event-driven automation worker pipeline, studio broadcast files are automatically ingested and transcoded. The user experience was modernized with an accessible modular design system using flexible layouts and native-like custom audio players.
+                We designed a comprehensive brand strategy establishing an integrated design system of type hierarchies and color tokens. We built clean vector logomarks, defined interface components, and exported a versatile digital design library alongside custom templates, ensuring pixel-perfect layout replication.
               </p>
             </div>
           </div>
@@ -292,8 +281,8 @@ export default function WebDesignAndDevelopmentPage() {
           {/* Featured Image */}
           <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] mt-8">
             <Image
-              src="/Web Design and Development.png"
-              alt="Waatea Platform Design Featured Mockup"
+              src="/Ux and User Experience.png"
+              alt="Lumina Studio Brand Presentation Mockup"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 85vw"
@@ -318,15 +307,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 01
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Design Thinking & Architecture Strategy
+                Core Concept & Brand Strategy
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We began with an intensive system-mapping exercise to identify core bottlenecks. It was clear that CPU-heavy audio transcoding operations and database reads were colliding under load.
+                We conducted design workshops to explore the core values. We mapped competitor visual markers, creating curated style directions and color palettes.
               </p>
               <p>
-                Our architectural strategy focused on decoupling these responsibilities. We designed a worker service running in the background to handle the parsing, transcoding, and media distribution tasks, saving critical server processing bandwidth for public users.
+                Establishing clear design parameters at this step made sure that when we moved to sketching shapes, the layouts perfectly reflected the corporate direction.
               </p>
             </div>
           </div>
@@ -334,7 +323,7 @@ export default function WebDesignAndDevelopmentPage() {
           <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
             <Image
               src="/case-study-poster.png"
-              alt="Architecture Blueprint Overview"
+              alt="Brand strategy matrix illustration"
               fill
               sizes="(max-width: 768px) 100vw, 85vw"
               className="object-cover"
@@ -358,15 +347,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 02
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Interface Design & Platform Foundation
+                Logo Design & Typographic System
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                To provide a modern, accessible experience, we created a streamlined UI framework centered on legibility and ease of use. A highly requested feature was standard audio playing controls that follow users as they scroll.
+                We drafted custom vector logo marks, adjusting curves for clarity at different dimensions. We paired these with modern fonts like Outfit and Inter.
               </p>
               <p>
-                We built custom components with flexible grids, setting up a solid foundation to handle breaking coverage, regular articles, and audio playlists across tablet and mobile displays gracefully.
+                We set up detailed guidelines to outline text sizes, spacing configurations, and grid structures to preserve presentation consistency.
               </p>
             </div>
           </div>
@@ -374,8 +363,8 @@ export default function WebDesignAndDevelopmentPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
               <Image
-                src="/Ux and User Experience.png"
-                alt="Interface Design Mobile Mockup"
+                src="/Web Design and Development.png"
+                alt="Logo vectors view"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
@@ -384,7 +373,7 @@ export default function WebDesignAndDevelopmentPage() {
             <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
               <Image
                 src="/placeholder.jpg"
-                alt="Layout and Colors System"
+                alt="Typography scales view"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
@@ -409,15 +398,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 03
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Automation Development & Publishing Infrastructure
+                Interface Guidelines & Digital Collateral
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We engineered a Python-based background worker pipeline that monitors broadcast automation XML feeds. As soon as a radio segment finishes recording, the worker intercepts the audio stream.
+                We built a reusable digital component library in Figma, outlining buttons, form inputs, navigation cards, and icons.
               </p>
               <p>
-                The asset is automatically parsed, tagged with correct categorization, transcoded into optimized streaming formats, distributed to secure AWS S3 bucket containers, and prepared as a draft post inside WordPress. This removed hours of manual work for editors daily.
+                These components align directly with CSS tokens, allowing developers to copy classes and build brand-compliant interfaces immediately.
               </p>
             </div>
           </div>
@@ -439,15 +428,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 04
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Historical Content Migration
+                Visual Collateral & Asset Packages
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                Migrating 50,000+ posts from a heavily customized database schema required bulletproof safeguards. We wrote secure migration scripts to map historical URLs, category associations, and audio media paths.
+                We expanded the design guidelines to offline materials, styling print envelopes, presentation templates, business cards, and corporate letterheads.
               </p>
               <p>
-                We ran validation scripts comparing old database records against the new schema, checking media path integrity, and setting up automated 301 redirects through Cloudflare to avoid breaking search engine placement.
+                Each template contains color guidelines and vector coordinates, supporting high quality physical print production across different media.
               </p>
             </div>
           </div>
@@ -469,15 +458,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 05
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Delta Migration & Go-Live
+                Brand Delivery & Launch Campaign
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                For a news broadcast site, scheduling downtime is not an option. We implemented a double-publishing window where the legacy database remained live, and changes were synchronized in real time.
+                We compiled the assets into a centralized repository, categorizing elements by formats (SVG, PNG, print PDF) and resolutions.
               </p>
               <p>
-                After a final differential delta migration to capture last-minute posts, we changed global DNS records. Caching layers were pre-warmed, resulting in a zero-downtime, frictionless go-live sequence.
+                We launched Lumina's brand guidelines site, distributing assets directly and introducing their team to modular template workflows.
               </p>
             </div>
           </div>
@@ -485,7 +474,7 @@ export default function WebDesignAndDevelopmentPage() {
           <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
             <Image
               src="/placeholder.jpg"
-              alt="Platform In Production Use"
+              alt="Centralized design portal mockup"
               fill
               sizes="(max-width: 768px) 100vw, 85vw"
               className="object-cover"
@@ -508,16 +497,15 @@ export default function WebDesignAndDevelopmentPage() {
           </span>
           <div className="flex flex-wrap gap-2 md:gap-3 max-w-4xl">
             {[
-              "Python",
-              "WordPress",
-              "Gutenberg",
-              "PHP",
-              "MySQL",
-              "ACF",
-              "Burli",
-              "Cloudways",
-              "ChatGPT",
-              "Claude",
+              "Figma",
+              "Adobe Illustrator",
+              "Adobe Photoshop",
+              "Tailwind CSS",
+              "SVG vectors",
+              "Framer Motion",
+              "Typography Systems",
+              "Brand Strategy",
+              "Digital Collateral",
             ].map((tech) => (
               <span
                 key={tech}

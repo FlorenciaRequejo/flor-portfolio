@@ -4,33 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import CaseStudyCard from "./CaseStudyCard";
 import { motion, useScroll, useTransform, useMotionValue, useReducedMotion } from "framer-motion";
+import { caseStudyCards } from "@/lib/caseStudies";
 
-const caseStudyCards = [
-  {
-    title: "Design + development",
-    description:
-      "Rebuilt a fragile legacy news platform into a scalable publishing ecosystem by redesigning its architecture and separating infrastructure responsibilities.",
-    href: "/web-design-and-development",
-    imageSrc: "/Web Design and Development.png",
-    videoSrc: "/Web Design and Development.mp4",
-  },
-  {
-    title: "Concept to launch",
-    description:
-      "An AI-powered system that automates website audits, transforming UX, SEO and performance data into actionable business recommendations.",
-    href: "#projects",
-    imageSrc: "/End To End Product Thinking.jpg",
-    videoSrc: "/End To End Product Thinking.mp4",
-  },
-  {
-    title: "Brand identity",
-    description:
-      "Developed a complete visual language, from logo design and app interfaces to marketing materials and brand collateral, creating a consistent and memorable experience across every touchpoint.",
-    href: "#projects",
-    imageSrc: "/Ux and User Experience.png",
-    videoSrc: "/Ux and User Experience.mp4",
-  },
-];
 
 const duplicatedCaseStudyCards = [...caseStudyCards, ...caseStudyCards, ...caseStudyCards];
 

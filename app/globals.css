@@ -259,3 +259,60 @@
     transform: translate3d(0, -50%, 0);
   }
 }
+
+/* Reading Mode System */
+.case-study-container {
+  --cs-bg: #1B237A;
+  --cs-text: #FAF6F0;
+  --cs-primary: #FDABFF;
+  --cs-border: rgba(253, 171, 255, 0.15);
+  --cs-muted: rgba(250, 246, 240, 0.7);
+  --cs-accent-bg: rgba(253, 171, 255, 0.05);
+  --cs-card-bg: rgba(253, 171, 255, 0.05);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.case-study-container.reading-mode {
+  --cs-bg: #FFFFFF;
+  --cs-text: #000000;
+  --cs-primary: #1B237A;
+  --cs-border: rgba(0, 0, 0, 0.15);
+  --cs-muted: rgba(0, 0, 0, 0.7);
+  --cs-accent-bg: rgba(27, 35, 122, 0.08);
+  --cs-card-bg: #F5F5F7;
+}
+
+/* Global Component Overrides under Reading Mode */
+.reading-mode nav.nav-outline-pill {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+.reading-mode nav.nav-outline-pill * {
+  color: #1B237A !important;
+}
+.reading-mode nav.nav-outline-pill a.bg-primary {
+  background-color: #1B237A !important;
+  color: #FFFFFF !important;
+}
+.reading-mode #contact.w-full {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+.reading-mode #contact h2,
+.reading-mode #contact p,
+.reading-mode #contact span:not(a.bg-\[\#FDABFF\] span),
+.reading-mode #contact a:not(a.bg-\[\#FDABFF\]) {
+  color: #1B237A !important;
+}
+.reading-mode #contact a.bg-\[\#FDABFF\],
+.reading-mode #contact a.bg-\[\#FDABFF\] * {
+  background-color: #1B237A !important;
+  color: #FFFFFF !important;
+}
+.reading-mode #contact .bg-gradient-to-r {
+  background-image: none !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+.reading-mode #contact div {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}

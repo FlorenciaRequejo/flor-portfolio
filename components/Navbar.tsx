@@ -65,7 +65,7 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           <div className="hidden md:flex gap-6 md:gap-12 font-sans items-center">
             {[
               { label: "About", href: "/#about" },
-              { label: "Projects", href: "/#projects" },
+              { label: "Projects", href: "/projects" },
               { label: "Contact", href: "/#contact" },
             ].map((item) => (
               <Link
@@ -117,7 +117,7 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           <div className="flex flex-col items-center gap-4 w-full">
             {[
               { label: "About", href: "/#about" },
-              { label: "Projects", href: "/#projects" },
+              { label: "Projects", href: "/projects" },
               { label: "Contact", href: "/#contact" },
             ].map((item) => (
               <Link

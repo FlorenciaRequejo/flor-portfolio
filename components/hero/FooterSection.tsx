@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const navCol1 = [
   { label: "About", href: "/#about" },
-  { label: "Projects", href: "/#projects" },
+  { label: "Projects", href: "/projects" },
   { label: "Process", href: "/#process" },
   { label: "Testimonials", href: "/#testimonials" },
 ];

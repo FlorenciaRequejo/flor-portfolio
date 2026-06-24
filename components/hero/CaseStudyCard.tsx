@@ -145,7 +145,7 @@ export default function CaseStudyCard({
             width: cardRect.width,
             height: cardRect.height,
             borderRadius: "32px",
-            backgroundColor: "white",
+            backgroundColor: "#1B237A",
             zIndex: 9999,
           }}
           animate={{

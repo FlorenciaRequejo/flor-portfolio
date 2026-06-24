@@ -22,16 +22,6 @@ const fadeInVariants = {
   },
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
 interface HeroControlsProps {
   isSynopsisOpen: boolean;
   setIsSynopsisOpen: (open: boolean) => void;
@@ -57,7 +47,7 @@ function HeroControls({
     >
       {/* Reading Time Pill */}
       <div className="px-4 py-1.5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)]">
-        12 min read
+        9 min read
       </div>
 
       {/* Synopsis Button */}
@@ -88,7 +78,7 @@ function HeroControls({
             }`}
           >
             <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
-              Waatea News represents a critical cultural and community broadcasting hub. This case study explores how we decoupled a monolithic legacy setup, automated editorial workflows, migrated 50,000+ historical articles, and deployed a modern UI design system with zero downtime.
+              An AI-powered website audit platform that automatically evaluates performance, accessibility, SEO, and visual consistency, translating metrics into clear business tasks.
             </div>
           </motion.div>
         )}
@@ -124,7 +114,7 @@ function HeroControls({
   );
 }
 
-export default function WebDesignAndDevelopmentPage() {
+export default function ConceptToLaunchPage() {
   const [isReadingMode, setIsReadingMode] = useState(false);
   const [isSynopsisOpen, setIsSynopsisOpen] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -141,7 +131,7 @@ export default function WebDesignAndDevelopmentPage() {
       if (!href) return;
 
       // Only intercept local routes going away from this page
-      if (href.startsWith("/") && href !== "/web-design-and-development") {
+      if (href.startsWith("/") && href !== "/concept-to-launch") {
         e.preventDefault();
         setIsExiting(true);
         router.prefetch(href);
@@ -159,7 +149,7 @@ export default function WebDesignAndDevelopmentPage() {
 
   // Automatically pull existing case studies and exclude the current one
   const otherCaseStudies = caseStudyCards.filter(
-    (card) => card.href !== "/web-design-and-development"
+    (card) => card.href !== "/concept-to-launch"
   );
 
   return (
@@ -177,10 +167,10 @@ export default function WebDesignAndDevelopmentPage() {
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left">
               <span className="text-[#B8F74B] font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
-                CASE STUDY / DESIGN + DEVELOPMENT
+                CASE STUDY / CONCEPT TO LAUNCH
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
-                Designing and Building an Automated Media Publishing Platform
+                Concept to Launch: Automating UX, SEO and Performance Audits
               </h1>
             </div>
 
@@ -201,10 +191,9 @@ export default function WebDesignAndDevelopmentPage() {
                   Role
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Product Developer</p>
-                  <p>UX/UI Designer</p>
-                  <p>Systems Architect</p>
-                  <p>Automation Designer</p>
+                  <p>Product Designer</p>
+                  <p>AI Engineer</p>
+                  <p>Full-Stack Developer</p>
                 </div>
               </div>
 
@@ -213,7 +202,7 @@ export default function WebDesignAndDevelopmentPage() {
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>6 Months</p>
+                  <p>4 Months</p>
                 </div>
               </div>
 
@@ -222,10 +211,10 @@ export default function WebDesignAndDevelopmentPage() {
                   Technologies
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>WordPress</p>
-                  <p>PHP, MySQL</p>
-                  <p>Python</p>
-                  <p>AWS S3</p>
+                  <p>React, FastAPI</p>
+                  <p>Python, OpenAI</p>
+                  <p>Tailwind CSS</p>
+                  <p>Docker, AWS</p>
                 </div>
               </div>
 
@@ -234,7 +223,7 @@ export default function WebDesignAndDevelopmentPage() {
                   Client
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Waatea News</p>
+                  <p>AuditBuilder Inc.</p>
                 </div>
               </div>
             </div>
@@ -269,10 +258,10 @@ export default function WebDesignAndDevelopmentPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Monolithic Constraints & Manual Bottlenecks
+                Slow Manual Reviews & Scalability Constraints
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                Over two decades, Waatea News accumulated over 50,000 legacy articles and 40GB+ of unstructured audio files. Built entirely as a monolithic WordPress application running on deprecated versions, the platform suffered from severe performance degradation during high-traffic breaking news spikes. Editorial workflows were heavily manual, requiring broadcasters to copy audio metadata and transcode tracks manually for web publication.
+                Conducting website reviews manually is historically slow and expensive. Analysts had to manually check hundreds of indicators across performance benchmarks, SEO configurations, and visual structures. Compiling audit recommendations took hours, which constrained the team from scaling reviews to multi-site structures or directories.
               </p>
             </div>
 
@@ -281,10 +270,10 @@ export default function WebDesignAndDevelopmentPage() {
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Decoupled Ingestion & Modular Front-End
+                Automated Crawlers & AI recommendation Engine
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                We designed a decoupled architecture to separate user-facing delivery from background media transcoding and data processing. By engineering an event-driven automation worker pipeline, studio broadcast files are automatically ingested and transcoded. The user experience was modernized with an accessible modular design system using flexible layouts and native-like custom audio players.
+                We designed an event-driven audit engine built on Python worker nodes. The system crawls client pages, parses DOM configurations, triggers performance diagnostics, and formats raw data. This data is processed through custom AI models, compiling clear, customized optimizations in real time and displaying results in an interactive dashboard.
               </p>
             </div>
           </div>
@@ -292,8 +281,8 @@ export default function WebDesignAndDevelopmentPage() {
           {/* Featured Image */}
           <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] mt-8">
             <Image
-              src="/Web Design and Development.png"
-              alt="Waatea Platform Design Featured Mockup"
+              src="/End To End Product Thinking.jpg"
+              alt="AuditBuilder Platform Concept Mockup"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 85vw"
@@ -318,15 +307,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 01
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Design Thinking & Architecture Strategy
+                Problem Discovery & System Mapping
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We began with an intensive system-mapping exercise to identify core bottlenecks. It was clear that CPU-heavy audio transcoding operations and database reads were colliding under load.
+                We began by listing all audit rules and metrics used during manual tests. We mapped how crawler packets would capture accessibility, speed, visual layout elements, and text structure.
               </p>
               <p>
-                Our architectural strategy focused on decoupling these responsibilities. We designed a worker service running in the background to handle the parsing, transcoding, and media distribution tasks, saving critical server processing bandwidth for public users.
+                Structuring the data schema precisely was critical to ensure that when crawling is completed, the inputs are clean enough to be read and evaluated by the AI recommendations model.
               </p>
             </div>
           </div>
@@ -334,7 +323,7 @@ export default function WebDesignAndDevelopmentPage() {
           <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
             <Image
               src="/case-study-poster.png"
-              alt="Architecture Blueprint Overview"
+              alt="System mapping illustration"
               fill
               sizes="(max-width: 768px) 100vw, 85vw"
               className="object-cover"
@@ -358,15 +347,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 02
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Interface Design & Platform Foundation
+                Prototyping & AI Ingestion Prompts
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                To provide a modern, accessible experience, we created a streamlined UI framework centered on legibility and ease of use. A highly requested feature was standard audio playing controls that follow users as they scroll.
+                We spent multiple iterations designing prompt structures to guide output generations. We tested visual layouts and colors system, ensuring technical code inputs compile into clear, readable paragraphs.
               </p>
               <p>
-                We built custom components with flexible grids, setting up a solid foundation to handle breaking coverage, regular articles, and audio playlists across tablet and mobile displays gracefully.
+                The UI layout was shaped around simplicity, creating responsive dashboards to show raw audit figures alongside their corresponding AI advice packages.
               </p>
             </div>
           </div>
@@ -375,7 +364,7 @@ export default function WebDesignAndDevelopmentPage() {
             <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
               <Image
                 src="/Ux and User Experience.png"
-                alt="Interface Design Mobile Mockup"
+                alt="UX mockups side portrait"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
@@ -384,7 +373,7 @@ export default function WebDesignAndDevelopmentPage() {
             <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
               <Image
                 src="/placeholder.jpg"
-                alt="Layout and Colors System"
+                alt="UI patterns view"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
@@ -409,15 +398,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 03
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Automation Development & Publishing Infrastructure
+                Core AI Integration & Engine
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We engineered a Python-based background worker pipeline that monitors broadcast automation XML feeds. As soon as a radio segment finishes recording, the worker intercepts the audio stream.
+                We built automated crawler scripts to scan site code, test link hierarchies, check loading benchmarks, verify accessibility tags, and measure mobile performance indexes.
               </p>
               <p>
-                The asset is automatically parsed, tagged with correct categorization, transcoded into optimized streaming formats, distributed to secure AWS S3 bucket containers, and prepared as a draft post inside WordPress. This removed hours of manual work for editors daily.
+                This structured diagnostic information is formatted and analyzed through OpenAI LLMs. The recommendations are categorized, stored, and sent immediately to Vercel production servers.
               </p>
             </div>
           </div>
@@ -439,15 +428,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 04
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Historical Content Migration
+                Reporting System & Dashboards
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                Migrating 50,000+ posts from a heavily customized database schema required bulletproof safeguards. We wrote secure migration scripts to map historical URLs, category associations, and audio media paths.
+                We built a responsive web interface to display results. Score meters, issue listings, and priority recommendations let users analyze what needs immediate action.
               </p>
               <p>
-                We ran validation scripts comparing old database records against the new schema, checking media path integrity, and setting up automated 301 redirects through Cloudflare to avoid breaking search engine placement.
+                We built PDF report generation scripts, allowing users to export results and share clear optimization lists with developers and project coordinators instantly.
               </p>
             </div>
           </div>
@@ -469,15 +458,15 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 05
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Delta Migration & Go-Live
+                Release & Platform Launch
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                For a news broadcast site, scheduling downtime is not an option. We implemented a double-publishing window where the legacy database remained live, and changes were synchronized in real time.
+                We conducted scale tests on the background database queues, verifying parser performance when scanning hundreds of pages simultaneously.
               </p>
               <p>
-                After a final differential delta migration to capture last-minute posts, we changed global DNS records. Caching layers were pre-warmed, resulting in a zero-downtime, frictionless go-live sequence.
+                The backend crawler nodes were optimized to limit host requests, ensuring the auditing platform scales smoothly without triggering server firewalls.
               </p>
             </div>
           </div>
@@ -485,7 +474,7 @@ export default function WebDesignAndDevelopmentPage() {
           <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
             <Image
               src="/placeholder.jpg"
-              alt="Platform In Production Use"
+              alt="Dashboard in production release"
               fill
               sizes="(max-width: 768px) 100vw, 85vw"
               className="object-cover"
@@ -509,15 +498,15 @@ export default function WebDesignAndDevelopmentPage() {
           <div className="flex flex-wrap gap-2 md:gap-3 max-w-4xl">
             {[
               "Python",
-              "WordPress",
-              "Gutenberg",
-              "PHP",
-              "MySQL",
-              "ACF",
-              "Burli",
-              "Cloudways",
-              "ChatGPT",
-              "Claude",
+              "React",
+              "Next.js",
+              "FastAPI",
+              "OpenAI API",
+              "AWS",
+              "Vercel",
+              "Tailwind CSS",
+              "PostgreSQL",
+              "Docker",
             ].map((tech) => (
               <span
                 key={tech}
