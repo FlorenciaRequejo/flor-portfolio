@@ -4,17 +4,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const navCol1 = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Process", href: "/#process" },
+  { label: "Testimonials", href: "/#testimonials" },
 ];
 
 const navCol2 = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Email", href: "mailto:florencia@example.com" },
-  { label: "GitHub", href: "https://github.com" },
-  { label: "Contact", href: "#contact" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/florencia-requejo/", target: "_blank" },
+  { label: "Email", href: "mailto:florencia.requejo@gmail.com" },
+  { label: "Instagram", href: "https://www.instagram.com/marielfreqche/", target: "_blank" },
 ];
 
 const containerVariants = {
@@ -51,7 +50,7 @@ export default function FooterSection() {
               Whether it’s a new product, a website, a brand or a complex business challenge, I’d love to hear about it.
             </p>
             <a
-              href="#about"
+              href="mailto:florencia.requejo@gmail.com"
               className="inline-flex items-center gap-2 px-8 py-4 bg-[#FDABFF] text-[#1B237A] font-sans font-medium text-[15px] rounded-full hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_10px_25px_rgba(253,171,255,0.15)] group mt-2"
             >
               <span>Email Me</span>
@@ -66,15 +65,7 @@ export default function FooterSection() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
             {/* Left Column: Avatar & Bio Info */}
             <div className="md:col-span-6 flex flex-col gap-4 text-left items-start">
-              <div className="relative w-[54px] h-[54px] rounded-full overflow-hidden bg-[#FDABFF]/10 flex-shrink-0">
-                <Image
-                  src="/flor.webp"
-                  alt="Flor Requejo"
-                  fill
-                  sizes="54px"
-                  className="object-cover"
-                />
-              </div>
+
               <div className="flex flex-col text-left gap-1">
                 <span className="font-sans font-semibold text-[18px] text-[#FDABFF] tracking-tight">
                   Flor Requejo
@@ -106,6 +97,8 @@ export default function FooterSection() {
                   <a
                     key={link.label}
                     href={link.href}
+                    target={link.target}
+                    rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                     className="font-sans text-[15px] font-medium text-[#FDABFF] hover:underline transition duration-300 w-fit"
                   >
                     {link.label}

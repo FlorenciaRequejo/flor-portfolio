@@ -140,6 +140,64 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     };
   }, [isPastHero]);
 
+  const isPastHeroRef = useRef(isPastHero);
+  useEffect(() => {
+    isPastHeroRef.current = isPastHero;
+  }, [isPastHero]);
+
+  const scrollToHash = (hash: string) => {
+    const targetId = hash.slice(hash.indexOf("#") + 1);
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return false;
+
+    // Determine offset to prevent sticky navbar from cutting off headings
+    const isMobile = window.innerWidth < 768;
+    const offset = isMobile ? 80 : 110;
+
+    // Calculate target Y position
+    let targetScrollY = 0;
+    if (hash.endsWith("#about")) {
+      const container = targetElement.closest(".relative.w-full") as HTMLElement;
+      if (container) {
+        const containerTop = container.getBoundingClientRect().top + window.scrollY;
+        const viewportHeight = window.innerHeight;
+        const scrollHeight = container.offsetHeight - viewportHeight;
+        // Scroll exactly to where the AboutSection is fully morphed and visible (p = 0.88)
+        targetScrollY = containerTop + 0.88 * scrollHeight;
+      } else {
+        targetScrollY = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+      }
+    } else {
+      targetScrollY = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+    }
+
+    // Check if target position is past the hero section to sync Lenis activation
+    const marker = document.getElementById("smooth-scroll-marker");
+    const markerTop = marker ? marker.getBoundingClientRect().top + window.scrollY : window.innerHeight;
+    const isPast = targetScrollY > markerTop;
+
+    const performScroll = () => {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(targetScrollY, {
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+      }
+    };
+
+    if (isPast && !isPastHeroRef.current) {
+      setIsPastHero(true);
+      // Wait for Lenis to initialize in the next render cycle, then scroll
+      setTimeout(performScroll, 50);
+    } else {
+      performScroll();
+    }
+
+    return true;
+  };
+
   // Handle smooth scrolling for all anchor links
   useEffect(() => {
     if (!ENABLE_SMOOTH_SCROLL) return;
@@ -162,43 +220,11 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       // Verify the link is for the current page
       const currentPath = window.location.pathname;
       if (path === "" || path === "/" || path === currentPath) {
-        const targetElement = document.getElementById(hash.slice(1));
-        if (targetElement) {
+        const scrolled = scrollToHash(hash);
+        if (scrolled) {
           e.preventDefault();
-
           // Update the URL hash
           window.history.pushState(null, "", hash);
-
-          // Scroll smoothly
-          if (lenisRef.current) {
-            // Lenis is active, let Lenis scroll smoothly
-            lenisRef.current.scrollTo(targetElement, {
-              duration: 1.2,
-              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            });
-          } else {
-            // If Lenis is not active (because we are in the hero section),
-            // check if the target is past the hero section.
-            const marker = document.getElementById("smooth-scroll-marker");
-            const targetRect = targetElement.getBoundingClientRect();
-            const markerRect = marker?.getBoundingClientRect();
-
-            // If the target element is below the marker, we should enable Lenis first!
-            if (markerRect && targetRect.top + window.scrollY > markerRect.top + window.scrollY) {
-              setIsPastHero(true);
-              // Wait a tiny bit for Lenis to be initialized in the next render cycle, then scroll with it
-              setTimeout(() => {
-                if (lenisRef.current) {
-                  lenisRef.current.scrollTo(targetElement, { duration: 1.2 });
-                } else {
-                  targetElement.scrollIntoView({ behavior: "smooth" });
-                }
-              }, 50);
-            } else {
-              // Otherwise (e.g. target is `#about` in the hero), scroll natively/smoothly
-              targetElement.scrollIntoView({ behavior: "smooth" });
-            }
-          }
         }
       }
     };
@@ -207,6 +233,29 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     return () => {
       document.removeEventListener("click", handleAnchorClick);
     };
+  }, []);
+
+  // Handle initial hash on page load
+  useEffect(() => {
+    if (!ENABLE_SMOOTH_SCROLL) return;
+
+    const handleInitialHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        // Scroll to top immediately to prevent native jump, then smooth scroll
+        window.scrollTo(0, 0);
+        setTimeout(() => {
+          scrollToHash(hash);
+        }, 300);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      handleInitialHash();
+    } else {
+      window.addEventListener("load", handleInitialHash);
+      return () => window.removeEventListener("load", handleInitialHash);
+    }
   }, []);
 
   return <>{children}</>;

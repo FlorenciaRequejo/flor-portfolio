@@ -61,16 +61,12 @@ export default function CaseStudyCard({
     }
   }, [isHovered]);
 
-  // Clean scale lift and soft shadow variants
+  // Clean soft shadow variants (size/scale and position stay completely fixed)
   const cardVariants = {
     initial: {
-      y: 0,
-      scale: 1,
       boxShadow: "0 15px 45px rgba(27, 35, 122, 0.07)",
     },
     hover: {
-      y: -10,
-      scale: 1.025,
       boxShadow: "0 30px 60px rgba(27, 35, 122, 0.12)",
     },
   };

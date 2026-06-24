@@ -76,11 +76,10 @@ function CarouselIndicator({ activeIndex, onClick }: { activeIndex: number; onCl
         <button
           key={i}
           onClick={() => onClick(i)}
-          className={`h-[3px] rounded-full transition-all duration-300 ${
-            activeIndex === i 
-              ? "w-8 bg-[#B8F74B]" 
-              : "w-4 bg-[#B8F74B]/30"
-          }`}
+          className={`h-[3px] rounded-full transition-all duration-300 ${activeIndex === i
+            ? "w-8 bg-[#B8F74B]"
+            : "w-4 bg-[#B8F74B]/30"
+            }`}
           aria-label={`Go to slide ${i + 1}`}
         />
       ))}
@@ -639,7 +638,7 @@ export default function SelectedWork() {
             </h2>
           </div>
 
-          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
+          <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
             Each project presented a different challenge. Solving it required understanding what mattered, what didn't, and where to focus first.
           </p>
         </div>
@@ -660,14 +659,14 @@ export default function SelectedWork() {
         onMouseUp={handleMouseUpOrLeave}
         onClickCapture={handleContainerClickCapture}
         onDragStart={(e) => e.preventDefault()}
-        className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-12 md:mt-16 relative z-20 py-8 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
+        className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-0 md:mt-16 relative z-20 py-0 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
           }`}
         style={{
           scrollSnapType: isSnapping ? "x mandatory" : "none",
         }}
       >
         <div
-          className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-8"
+          className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-0"
           style={{
             paddingLeft: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
             paddingRight: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
