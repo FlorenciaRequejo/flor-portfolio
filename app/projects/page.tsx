@@ -28,7 +28,7 @@ export default function ProjectsLandingPage() {
 
       {/* PROJECTS GRID HEADER */}
       <section className="relative w-full pt-32 pb-12 md:pt-40 md:pb-16">
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 text-left">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] text-left">
           <span className="text-[#FDABFF]/60 font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
             SELECTED WORK
           </span>
@@ -46,7 +46,7 @@ export default function ProjectsLandingPage() {
         variants={fadeInVariants}
         className="w-full pb-24"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             {caseStudyCards.map((project) => (
               <Link

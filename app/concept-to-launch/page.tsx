@@ -133,7 +133,7 @@ export default function ConceptToLaunchPage() {
 
       {/* HERO SECTION */}
       <section className="relative w-full pt-32 pb-16 md:pt-40 md:pb-24">
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left">
@@ -221,7 +221,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 space-y-12">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           {/* Challenge / Solution Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-left">
             <div className="space-y-4">
@@ -271,7 +271,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 space-y-10">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
@@ -311,7 +311,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 space-y-10">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
@@ -362,7 +362,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
@@ -392,7 +392,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
@@ -422,7 +422,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 space-y-10">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
@@ -462,7 +462,7 @@ export default function ConceptToLaunchPage() {
         variants={fadeInVariants}
         className="w-full py-12 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 text-left space-y-6">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] text-left space-y-6">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--cs-accent-bg)] text-[var(--cs-primary)] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit select-none">
             Technologies Used
           </span>
@@ -499,7 +499,7 @@ export default function ConceptToLaunchPage() {
             : "bg-[#089998]"
         }`}
       >
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] px-4 md:px-0 mb-8">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] mb-8">
           <div className="flex flex-col gap-4 text-left">
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${

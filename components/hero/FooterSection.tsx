@@ -31,7 +31,7 @@ const containerVariants = {
 export default function FooterSection() {
   return (
     <section id="contact" className="w-full bg-[#1B237A] pt-24 pb-16 md:pt-36 md:pb-24 relative z-10">
-      <div className="mx-auto w-[min(76vw,1260px)] px-4 md:px-0">
+      <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
         <motion.div
           initial="hidden"
           whileInView="visible"

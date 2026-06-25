@@ -63,8 +63,8 @@ export default function AboutPage() {
     <div className="w-full min-h-screen bg-[#1B237A] text-[#FDABFF] selection:bg-[#FDABFF] selection:text-[#1B237A]">
       <Navbar />
 
-      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-32 px-4 md:px-0">
-        <div className="mx-auto w-full max-w-[min(76vw,1260px)] flex flex-col md:flex-row items-start justify-between gap-8 md:gap-16 relative">
+      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-32">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] flex flex-col md:flex-row items-start justify-between gap-8 md:gap-16 relative">
           
           {/* Left Side: Bio Content */}
           <div className="flex flex-col gap-6 max-w-[580px] w-full text-left">
