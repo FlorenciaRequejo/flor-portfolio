@@ -46,7 +46,7 @@ function HeroControls({
       onMouseLeave={() => !isMobile && setIsSynopsisOpen(false)}
     >
       {/* Reading Time Pill */}
-      <div className="px-4 py-1.5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)]">
+      <div className="h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)] flex items-center justify-center">
         8 min read
       </div>
 

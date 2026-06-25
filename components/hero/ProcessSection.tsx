@@ -20,7 +20,7 @@ function ProcessStep({ number, title, description, isLast }: ProcessStepProps) {
 
   return (
     <div ref={ref} className="flex gap-8 md:gap-12 items-stretch min-h-[180px] md:min-h-[230px]">
-      <div className="flex flex-col items-center flex-shrink-0 w-[3px] mb-12 md:mb-16">
+      <div className={`flex flex-col items-center flex-shrink-0 w-[3px] ${isLast ? "mb-4" : "mb-12 md:mb-16"}`}>
         <div className="w-[3px] flex-grow bg-[#1B237A]/10 rounded-full overflow-hidden relative">
           <motion.div
             style={{ scaleY: scrollYProgress, transformOrigin: "top" }}

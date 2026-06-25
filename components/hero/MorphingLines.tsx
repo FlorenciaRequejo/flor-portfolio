@@ -527,9 +527,14 @@ export default function MorphingLines() {
         const target2 = 0.2525 * vh + targetOffset;
         const target3 = 0.3308 * vh + targetOffset;
 
-        const top1 = 0 + (target1 - 0) * alignT;
-        const top2 = 44 + (target2 - 44) * alignT;
-        const top3 = 88 + (target3 - 88) * alignT;
+        const startOffset = isMobile ? 0 : 30;
+        const start1 = 0 + startOffset;
+        const start2 = 44 + startOffset;
+        const start3 = 88 + startOffset;
+
+        const top1 = start1 + (target1 - start1) * alignT;
+        const top2 = start2 + (target2 - start2) * alignT;
+        const top3 = start3 + (target3 - start3) * alignT;
 
         pill1.style.top = `${top1}px`;
         pill2.style.top = `${top2}px`;
@@ -744,22 +749,19 @@ export default function MorphingLines() {
             <div className="absolute left-0 md:left-6 top-0 h-full pointer-events-auto w-full md:w-auto">
               <span
                 ref={pill1Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
-                style={{ top: "0px" }}
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-0 md:top-[30px]"
               >
                 15+ Years Experience
               </span>
               <span
                 ref={pill2Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
-                style={{ top: "44px" }}
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[44px] md:top-[74px]"
               >
                 Design + Development
               </span>
               <span
                 ref={pill3Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors"
-                style={{ top: "88px" }}
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[88px] md:top-[118px]"
               >
                 Concept to Launch
               </span>

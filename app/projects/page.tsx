@@ -47,7 +47,7 @@ export default function ProjectsLandingPage() {
         className="w-full pb-24"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[5px]">
             {caseStudyCards.map((project) => (
               <Link
                 key={project.title}
@@ -55,7 +55,7 @@ export default function ProjectsLandingPage() {
                 className="group flex flex-col cursor-pointer select-none"
               >
                 {/* Media Container */}
-                <div className="relative w-full aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden border border-[#FDABFF]/20 shadow-sm transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-md">
+                <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden border border-[#FDABFF]/20 shadow-sm transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-md">
                   <Image
                     src={project.imageSrc}
                     alt={project.title}
@@ -63,16 +63,6 @@ export default function ProjectsLandingPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                   />
-                </div>
-
-                {/* Content Container */}
-                <div className="flex flex-col items-start mt-4 px-1.5">
-                  <span className="text-[#FDABFF]/50 font-sans text-[10px] tracking-wider uppercase font-semibold">
-                    Case Study
-                  </span>
-                  <h3 className="font-serif text-[18px] md:text-[22px] leading-tight font-semibold text-[#FDABFF] mt-1.5 transition-colors duration-200 group-hover:text-[#FDABFF]/75 text-left">
-                    {project.title}
-                  </h3>
                 </div>
               </Link>
             ))}

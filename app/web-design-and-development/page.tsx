@@ -49,14 +49,13 @@ function HeroControls({
 }: HeroControlsProps) {
   return (
     <div
-      className={`flex flex-col gap-3 md:gap-4 relative w-full ${
-        isMobile ? "items-start" : "items-end"
-      }`}
+      className={`flex flex-col gap-3 md:gap-4 relative w-full ${isMobile ? "items-start" : "items-end"
+        }`}
       onMouseEnter={() => !isMobile && setIsSynopsisOpen(true)}
       onMouseLeave={() => !isMobile && setIsSynopsisOpen(false)}
     >
       {/* Reading Time Pill */}
-      <div className="px-4 py-1.5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)]">
+      <div className="h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)] flex items-center justify-center">
         12 min read
       </div>
 
@@ -83,13 +82,11 @@ function HeroControls({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`overflow-hidden w-full md:w-[320px] ${
-              isMobile ? "text-left" : "text-right"
-            }`}
+            className={`overflow-hidden w-full md:w-[320px] ${isMobile ? "text-left" : "text-right"
+              }`}
           >
             <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
-              Waatea News represents a critical cultural and community broadcasting hub. This case study explores how we decoupled a monolithic legacy setup, automated editorial workflows, migrated 50,000+ historical articles, and deployed a modern UI design system with zero downtime.
-            </div>
+              A complete platform rebuild for one of New Zealand’s largest Māori media organisations. The project involved designing a new publishing architecture, developing automated content workflows between Burli and WordPress, creating dedicated media infrastructure, and migrating more than 60,000 articles and media assets. Using Python, WordPress, PHP and custom automation tools, the solution transformed a fragile legacy system into a scalable publishing platform while delivering a seamless go-live with minimal disruption.            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -101,18 +98,16 @@ function HeroControls({
         </span>
         <button
           onClick={() => setIsReadingMode(!isReadingMode)}
-          className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${
-            isReadingMode
-              ? "bg-black border-black"
-              : "bg-transparent border-[var(--cs-primary)]"
-          }`}
+          className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${isReadingMode
+            ? "bg-black border-black"
+            : "bg-transparent border-[var(--cs-primary)]"
+            }`}
           aria-label="Toggle Reading Mode"
         >
           <motion.div
             layout
-            className={`w-5 h-5 rounded-full ${
-              isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
-            }`}
+            className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
+              }`}
             animate={{
               x: isReadingMode ? 22 : 0,
             }}
@@ -135,9 +130,8 @@ export default function WebDesignAndDevelopmentPage() {
 
   return (
     <div
-      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${
-        isReadingMode ? "reading-mode" : ""
-      }`}
+      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${isReadingMode ? "reading-mode" : ""
+        }`}
     >
       <Navbar />
 
@@ -184,7 +178,7 @@ export default function WebDesignAndDevelopmentPage() {
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>6 Months</p>
+                  <p>12 Months</p>
                 </div>
               </div>
 
@@ -196,16 +190,6 @@ export default function WebDesignAndDevelopmentPage() {
                   <p>WordPress</p>
                   <p>PHP, MySQL</p>
                   <p>Python</p>
-                  <p>AWS S3</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
-                  Client
-                </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Waatea News</p>
                 </div>
               </div>
             </div>
@@ -240,10 +224,10 @@ export default function WebDesignAndDevelopmentPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Monolithic Constraints & Manual Bottlenecks
+                Fragile Architecture + Complex Content Migration
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                Over two decades, Waatea News accumulated over 50,000 legacy articles and 40GB+ of unstructured audio files. Built entirely as a monolithic WordPress application running on deprecated versions, the platform suffered from severe performance degradation during high-traffic breaking news spikes. Editorial workflows were heavily manual, requiring broadcasters to copy audio metadata and transcode tracks manually for web publication.
+                This client’s existing platform had become increasingly difficult to maintain. Years of content, media files, legacy infrastructure and publishing workflows had created a system that was fragile, resource-heavy and risky to update. The challenge wasn’t simply to modernise the website, but to create a sustainable platform capable of supporting ongoing publishing, automation and future growth.
               </p>
             </div>
 
@@ -252,18 +236,17 @@ export default function WebDesignAndDevelopmentPage() {
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Decoupled Ingestion & Modular Front-End
-              </h2>
+                An out-of-the box solution              </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                We designed a decoupled architecture to separate user-facing delivery from background media transcoding and data processing. By engineering an event-driven automation worker pipeline, studio broadcast files are automatically ingested and transcoded. The user experience was modernized with an accessible modular design system using flexible layouts and native-like custom audio players.
+                Rather than approaching the project as a website redesign, it was treated as a systems problem. The solution focused on separating responsibilities across dedicated environments, introducing an automated publishing workflow, modernising the user experience and creating a more scalable architecture that could support both editorial teams and long-term maintenance.
               </p>
             </div>
           </div>
 
           {/* Featured Image */}
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] mt-8">
+          <div className="relative w-full aspect-[16/9] rounded-[12px] md:rounded-[12px] overflow-hidden mt-8">
             <Image
-              src="/Web Design and Development.png"
+              src="/Web Design and Development case-study-one.webp"
               alt="Waatea Platform Design Featured Mockup"
               fill
               priority
@@ -294,21 +277,22 @@ export default function WebDesignAndDevelopmentPage() {
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We began with an intensive system-mapping exercise to identify core bottlenecks. It was clear that CPU-heavy audio transcoding operations and database reads were colliding under load.
+                Before any design or development work began, the first priority was identifying where the real risk existed. The website was handling content management, media storage, publishing, processing and presentation within the same environment.
               </p>
               <p>
-                Our architectural strategy focused on decoupling these responsibilities. We designed a worker service running in the background to handle the parsing, transcoding, and media distribution tasks, saving critical server processing bandwidth for public users.
+                To reduce complexity and improve reliability, the platform was redesigned around a separated architecture: a dedicated media server for large assets, a processing layer responsible for automation and validation, and a lightweight public-facing website focused solely on delivering content. This decision became the foundation for every stage that followed.
               </p>
             </div>
           </div>
 
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
+          <div className="w-full rounded-[12px] md:rounded-[12px] overflow-hidden">
             <Image
-              src="/case-study-poster.png"
+              src="/Infographic_nw.png"
               alt="Architecture Blueprint Overview"
-              fill
-              sizes="(max-width: 768px) 100vw, 85vw"
-              className="object-cover"
+              width={3000}
+              height={1000}
+              sizes="100vw"
+              className="w-full h-auto"
             />
           </div>
         </div>
@@ -334,27 +318,26 @@ export default function WebDesignAndDevelopmentPage() {
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                To provide a modern, accessible experience, we created a streamlined UI framework centered on legibility and ease of use. A highly requested feature was standard audio playing controls that follow users as they scroll.
+                With the architecture defined, the next step was selecting a WordPress foundation capable of supporting a content-heavy publishing environment without introducing unnecessary complexity.
               </p>
               <p>
-                We built custom components with flexible grids, setting up a solid foundation to handle breaking coverage, regular articles, and audio playlists across tablet and mobile displays gracefully.
-              </p>
+                A lightweight Gutenberg-based theme was chosen to minimise overhead, improve performance and provide long-term flexibility. The interface was then customised extensively, particularly across mobile experiences, navigation patterns and content consumption workflows, creating a modern looking interfaz in a plataform that remained easy to use and familiar for the publishing team.              </p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
+            <div className="relative aspect-[3/4] rounded-[12px] md:rounded-[12px] overflow-hidden">
               <Image
-                src="/Ux and User Experience.png"
+                src="/mp3.jpg"
                 alt="Interface Design Mobile Mockup"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
+            <div className="relative aspect-[3/4] rounded-[12px] md:rounded-[12px] overflow-hidden">
               <Image
-                src="/placeholder.jpg"
+                src="/mp3-2.jpg"
                 alt="Layout and Colors System"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -380,16 +363,14 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 03
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Automation Development & Publishing Infrastructure
-              </h2>
+                Automation Development & Publishing Infrastructure              </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We engineered a Python-based background worker pipeline that monitors broadcast automation XML feeds. As soon as a radio segment finishes recording, the worker intercepts the audio stream.
+                Once the front-end foundation was in place, development shifted to the publishing pipeline. This stage focused on building and testing the automation layer responsible for receiving content from Burli, validating incoming files, processing media assets and distributing them across the platform. Custom Python applications, databases and integration workflows were developed to connect the newsroom system, media server and website.
               </p>
               <p>
-                The asset is automatically parsed, tagged with correct categorization, transcoded into optimized streaming formats, distributed to secure AWS S3 bucket containers, and prepared as a draft post inside WordPress. This removed hours of manual work for editors daily.
-              </p>
+                By separating content processing from content delivery, the public website remained lightweight while handling thousands of articles, images and audio files efficiently behind the scenes.              </p>
             </div>
           </div>
         </div>
@@ -410,16 +391,11 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 04
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Historical Content Migration
-              </h2>
+                Historical Content Migration              </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                Migrating 50,000+ posts from a heavily customized database schema required bulletproof safeguards. We wrote secure migration scripts to map historical URLs, category associations, and audio media paths.
-              </p>
-              <p>
-                We ran validation scripts comparing old database records against the new schema, checking media path integrity, and setting up automated 301 redirects through Cloudflare to avoid breaking search engine placement.
-              </p>
+                Migrating more than 60,000 existing articles and media assets required a process that prioritised control and validation over speed alone. Rather than attempting a single large migration, the project was broken into a series of staged Python-based migration tools supported by temporary databases and tracking tables. Each step could be executed, reviewed and validated independently before moving forward. This approach significantly reduced risk while maintaining efficiency, allowing batches of over 20,000 articles and their associated media to be migrated in under ten minutes. The migration itself became a controlled process rather than a high-risk event.              </p>
             </div>
           </div>
         </div>
@@ -440,22 +416,18 @@ export default function WebDesignAndDevelopmentPage() {
                 Stage 05
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Delta Migration & Go-Live
-              </h2>
+                Delta Migration & Go-Live              </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                For a news broadcast site, scheduling downtime is not an option. We implemented a double-publishing window where the legacy database remained live, and changes were synchronized in real time.
-              </p>
-              <p>
-                After a final differential delta migration to capture last-minute posts, we changed global DNS records. Caching layers were pre-warmed, resulting in a zero-downtime, frictionless go-live sequence.
-              </p>
+                The final stage focused on migrating the content created since the initial migration and preparing the platform for launch. Because every previous step had been carefully tested, documented and validated, the final migration was completed with minimal disruption to the live environment. Approximately 1,200 recently published articles were transferred in under three minutes while the existing platform remained operational. The launch itself was uneventful, which was precisely the objective. Months of planning, testing and process design resulted in a smooth transition that was largely invisible to end users.              </p>
+
             </div>
           </div>
 
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
+          <div className="relative w-full aspect-[16/9] rounded-[12px] md:rounded-[12px] overflow-hidden">
             <Image
-              src="/placeholder.jpg"
+              src="/laptop.jpg"
               alt="Platform In Production Use"
               fill
               sizes="(max-width: 768px) 100vw, 85vw"
@@ -484,7 +456,6 @@ export default function WebDesignAndDevelopmentPage() {
               "Gutenberg",
               "PHP",
               "MySQL",
-              "ACF",
               "Burli",
               "Cloudways",
               "ChatGPT",
@@ -504,27 +475,24 @@ export default function WebDesignAndDevelopmentPage() {
       {/* OTHER CASE STUDIES CAROUSEL */}
       <section
         id="projects"
-        className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${
-          isReadingMode
-            ? "bg-white border border-[var(--cs-border)]"
-            : "bg-[#089998]"
-        }`}
+        className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${isReadingMode
+          ? "bg-white border border-[var(--cs-border)]"
+          : "bg-[#089998]"
+          }`}
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] mb-8">
           <div className="flex flex-col gap-4 text-left">
             <span
-              className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${
-                isReadingMode
-                  ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[#B8F74B]/15 text-[#B8F74B]"
-              }`}
+              className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
+                ? "bg-[#1B237A]/10 text-[#1B237A]"
+                : "bg-[#B8F74B]/15 text-[#B8F74B]"
+                }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${
-                isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
-              }`}
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
+                }`}
             >
               Other Case Studies
             </h2>
