@@ -181,7 +181,7 @@ export default function BrandIdentityPage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 50) {
         if (!hasAutoActivatedRef.current && !hasManuallyToggledRef.current && !isReadingMode) {
           hasAutoActivatedRef.current = true;
           setIsReadingMode(true);
