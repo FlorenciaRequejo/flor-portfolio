@@ -41,9 +41,8 @@ function HeroControls({
 }: HeroControlsProps) {
   return (
     <div
-      className={`flex flex-col gap-3 md:gap-4 relative w-full ${
-        isMobile ? "items-start" : "items-end"
-      }`}
+      className={`flex flex-col gap-3 md:gap-4 relative w-full ${isMobile ? "items-start" : "items-end"
+        }`}
       onMouseEnter={() => !isMobile && setIsSynopsisOpen(true)}
       onMouseLeave={() => !isMobile && setIsSynopsisOpen(false)}
     >
@@ -75,12 +74,11 @@ function HeroControls({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`overflow-hidden w-full md:w-[320px] ${
-              isMobile ? "text-left" : "text-right"
-            }`}
+            className={`overflow-hidden w-full md:w-[320px] ${isMobile ? "text-left" : "text-right"
+              }`}
           >
             <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
-              Developing a complete visual identity and design system, translating brand goals into vector assets, scalable digital guidelines, and consistent digital collateral.
+              Bite is a healthy meal planning concept designed to make affordable eating feel more accessible, enjoyable and less restrictive. This case study explores the creation of the brand from its initial naming and visual direction to the development of a cohesive identity and foundational design system, establishing a flexible visual language that could scale across product and marketing touchpoints.
             </div>
           </motion.div>
         )}
@@ -94,11 +92,10 @@ function HeroControls({
         <div className="relative flex items-center">
           <motion.button
             onClick={() => setIsReadingMode(!isReadingMode)}
-            className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${
-              isReadingMode
+            className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${isReadingMode
                 ? "bg-black border-black"
                 : "bg-transparent border-[var(--cs-primary)]"
-            }`}
+              }`}
             aria-label="Toggle Reading Mode"
             animate={justAutoActivated ? {
               x: [0, -4, 4, -4, 4, 0],
@@ -108,16 +105,15 @@ function HeroControls({
           >
             <motion.div
               layout
-              className={`w-5 h-5 rounded-full ${
-                isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
-              }`}
+              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
+                }`}
               animate={{
                 x: isReadingMode ? 22 : 0,
               }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           </motion.button>
-          
+
           {/* Pulsing ring animation */}
           {justAutoActivated && (
             <motion.span
@@ -145,7 +141,7 @@ function HeroControls({
             >
               Auto-Activated!
               {/* Little arrow */}
-              <div 
+              <div
                 className="absolute top-full border-4 border-transparent"
                 style={{
                   borderTopColor: "var(--cs-primary)",
@@ -199,9 +195,8 @@ export default function BrandIdentityPage() {
 
   return (
     <div
-      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${
-        isReadingMode ? "reading-mode" : ""
-      }`}
+      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${isReadingMode ? "reading-mode" : ""
+        }`}
     >
       <Navbar />
 
@@ -215,7 +210,7 @@ export default function BrandIdentityPage() {
                 CASE STUDY / BRAND IDENTITY
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
-                Brand Identity: Visual Language & Complete Design System
+                Brand Identity: Visual Language & Design System
               </h1>
             </div>
 
@@ -231,7 +226,7 @@ export default function BrandIdentityPage() {
             </div>
 
             {/* Metadata Grid */}
-            <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 mt-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+            <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 mt-4 grid grid-cols-2 md:grid-cols-3 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
                 <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
                   Role
@@ -259,17 +254,6 @@ export default function BrandIdentityPage() {
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
                   <p>Figma</p>
                   <p>Adobe Suite</p>
-                  <p>Tailwind CSS</p>
-                  <p>SVG vectors</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
-                  Client
-                </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Lumina Studio</p>
                 </div>
               </div>
             </div>
@@ -305,10 +289,10 @@ export default function BrandIdentityPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Fragmented Brand Visuals & Asset Disorganization
+                Standing Out in a Crowded Market
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                Lumina Studio was launching multiple services but lacked a unified corporate visual language. Their existing branding markers were fragmented, design vector assets were poorly organized, and their digital collateral looked inconsistent across mobile platforms, making a cohesive product pitch difficult.
+                The healthy food and recipe market is already crowded with brands using similar visual codes and messaging. The challenge was to create a short, memorable name that immediately connected with food, then build a distinctive identity around it that could stand out in the market and scale consistently across a digital product and future marketing touchpoints.
               </p>
             </div>
 
@@ -317,29 +301,30 @@ export default function BrandIdentityPage() {
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Consistent Design System & Digital Templates
+                A Playful and Approachable Brand System
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                We designed a comprehensive brand strategy establishing an integrated design system of type hierarchies and color tokens. We built clean vector logomarks, defined interface components, and exported a versatile digital design library alongside custom templates, ensuring pixel-perfect layout replication.
+                Bite became the foundation of a playful and approachable brand built around making healthy eating feel accessible rather than restrictive. A bold red and pink palette, expressive typography and a character embedded within the logo established a distinctive visual identity. These elements were then translated into a basic design system, creating the foundations for consistent icons, UI components and marketing assets as the product evolved.
               </p>
             </div>
           </div>
 
           {/* Featured Image */}
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] mt-8">
+          <div className="mt-8">
             <Image
-              src="/Ux and User Experience.png"
-              alt="Lumina Studio Brand Presentation Mockup"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 85vw"
-              className="object-cover"
+              src="/Tote-Bag.png"
+              alt="Bite Brand Identity Tote Bag Mockup"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+              style={{ width: '100%', height: 'auto' }}
             />
           </div>
         </div>
       </motion.section>
 
-      {/* STAGE 01 */}
+      {/* BRAND VOICE */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -351,35 +336,25 @@ export default function BrandIdentityPage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
-                Stage 01
+                Brand Voice
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Core Concept & Brand Strategy
+                Friendly, Playful & Encouraging
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We conducted design workshops to explore the core values. We mapped competitor visual markers, creating curated style directions and color palettes.
+                Bite's voice is friendly, playful and encouraging. It avoids the restrictive or overly serious language often associated with healthy eating, focusing instead on making meal planning and cooking feel simple, accessible and enjoyable.
               </p>
               <p>
-                Establishing clear design parameters at this step made sure that when we moved to sketching shapes, the layouts perfectly reflected the corporate direction.
+                The tone is direct and conversational, using clear language, short messages and moments of personality to guide users without overwhelming them. Across the product and marketing touchpoints, the voice reinforces Bite as a helpful companion rather than an authority telling people how they should eat.
               </p>
             </div>
-          </div>
-
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
-            <Image
-              src="/case-study-poster.png"
-              alt="Brand strategy matrix illustration"
-              fill
-              sizes="(max-width: 768px) 100vw, 85vw"
-              className="object-cover"
-            />
           </div>
         </div>
       </motion.section>
 
-      {/* STAGE 02 */}
+      {/* BRAND IDENTITY */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -391,141 +366,179 @@ export default function BrandIdentityPage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
-                Stage 02
+                Brand Identity
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Logo Design & Typographic System
+                Standing Out from the Convention
               </h2>
             </div>
             <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                We drafted custom vector logo marks, adjusting curves for clarity at different dimensions. We paired these with modern fonts like Outfit and Inter.
+                Bite's visual identity was designed to stand out from the conventional visual language of health and nutrition brands. Bold reds, soft pinks, expressive typography and playful shapes create a distinctive system that feels energetic, approachable and recognisable.
               </p>
               <p>
-                We set up detailed guidelines to outline text sizes, spacing configurations, and grid structures to preserve presentation consistency.
+                The logo established the foundation for a broader visual language that expanded into colour, typography, iconography, illustrations and graphic assets. These elements formed a flexible design system capable of maintaining consistency across the product, website and marketing materials.
               </p>
             </div>
           </div>
+        </div>
+      </motion.section>
 
+      {/* BRAND VISUALS SHOWCASE */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)]"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-8">
+          {/* Logo Showcase */}
+          <Image
+            src="/bite-logos.jpg"
+            alt="Bite Logo Guidelines and Variations"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+
+          {/* Cards Showcase */}
+          <Image
+            src="/Bite-Cards.jpg"
+            alt="Bite Business Cards Mockup"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+
+          {/* 2-Column Grid Showcase */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
-              <Image
-                src="/Web Design and Development.png"
-                alt="Logo vectors view"
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="relative aspect-[3/4] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
-              <Image
-                src="/placeholder.jpg"
-                alt="Typography scales view"
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* STAGE 03 */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
-      >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
-            <div className="md:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
-                Stage 03
-              </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Interface Guidelines & Digital Collateral
-              </h2>
-            </div>
-            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
-              <p>
-                We built a reusable digital component library in Figma, outlining buttons, form inputs, navigation cards, and icons.
-              </p>
-              <p>
-                These components align directly with CSS tokens, allowing developers to copy classes and build brand-compliant interfaces immediately.
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* STAGE 04 */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
-      >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
-            <div className="md:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
-                Stage 04
-              </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Visual Collateral & Asset Packages
-              </h2>
-            </div>
-            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
-              <p>
-                We expanded the design guidelines to offline materials, styling print envelopes, presentation templates, business cards, and corporate letterheads.
-              </p>
-              <p>
-                Each template contains color guidelines and vector coordinates, supporting high quality physical print production across different media.
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* STAGE 05 */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
-      >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
-            <div className="md:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
-                Stage 05
-              </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Brand Delivery & Launch Campaign
-              </h2>
-            </div>
-            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
-              <p>
-                We compiled the assets into a centralized repository, categorizing elements by formats (SVG, PNG, print PDF) and resolutions.
-              </p>
-              <p>
-                We launched Lumina's brand guidelines site, distributing assets directly and introducing their team to modular template workflows.
-              </p>
-            </div>
-          </div>
-
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)]">
             <Image
-              src="/placeholder.jpg"
-              alt="Centralized design portal mockup"
-              fill
-              sizes="(max-width: 768px) 100vw, 85vw"
-              className="object-cover"
+              src="/bite-freezer.jpg"
+              alt="Bite Packaging Freezer Mockup"
+              width={0}
+              height={0}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+              style={{ width: '100%', height: 'auto' }}
             />
+            <Image
+              src="/bite-app-mockup.jpg"
+              alt="Bite Mobile App UI Mockup"
+              width={0}
+              height={0}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+
+          {/* Colors Showcase */}
+          <Image
+            src="/Bite-Colours.jpg"
+            alt="Bite Brand Colors Palette"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+
+          {/* Icons Showcase 1 */}
+          <Image
+            src="/Bite---Icons.jpg"
+            alt="Bite Custom Icons Sheet Part 1"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+
+          {/* Icons Showcase 2 */}
+          <Image
+            src="/Bite---Icons-2.jpg"
+            alt="Bite Custom Icons Sheet Part 2"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+
+          {/* Socials Showcase */}
+          <Image
+            src="/bite-socials.jpg"
+            alt="Bite Social Media Graphics Mockup"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+
+          {/* Web Showcase */}
+          <Image
+            src="/bite-web.jpg"
+            alt="Bite Responsive Web Mockup"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-[24px] md:rounded-[36px]"
+            style={{ width: '100%', height: 'auto' }}
+          />
+        </div>
+      </motion.section>
+
+      {/* FULL BRANDING SYSTEM */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch text-left">
+            {/* Left Content Column */}
+            <div className="lg:col-span-6 space-y-6 flex flex-col justify-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2.5px] uppercase w-fit">
+                Branding System
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                Complete Design & Branding Guidelines
+              </h2>
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                The full Bite branding system establishes a robust visual foundation. It defines logo usage rules and color-allowed backgrounds, specifies a semantic and core color system, details typography pairings and scaling, defines layout principles, and includes a comprehensive component design system (buttons, inputs, and forms) along with high-fidelity imagery and icon guidelines.
+              </p>
+              <div>
+                <a
+                  href="/BITE-Brand-System.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-[48px] px-8 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] hover:bg-[var(--cs-primary)] hover:text-[var(--cs-bg)] font-sans font-medium text-[12px] uppercase tracking-wider items-center justify-center transition-all duration-300 select-none"
+                >
+                  View Full Branding System
+                </a>
+              </div>
+            </div>
+
+            {/* Right Image Column */}
+            <div className="lg:col-span-6 flex justify-center">
+              <div className="relative w-full min-h-[320px] lg:min-h-full overflow-hidden rounded-[24px] md:rounded-[36px] hover:scale-[1.02] transition-transform duration-500">
+                <Image
+                  src="/BIte Design System.webp"
+                  alt="Bite Complete Branding System Showcase"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </motion.section>
@@ -546,13 +559,11 @@ export default function BrandIdentityPage() {
             {[
               "Figma",
               "Adobe Illustrator",
-              "Adobe Photoshop",
-              "Tailwind CSS",
-              "SVG vectors",
-              "Framer Motion",
-              "Typography Systems",
-              "Brand Strategy",
-              "Digital Collateral",
+              "Photoshop",
+              "Typography System",
+              "Design System",
+              "Color System",
+              "Collateral Assets",
             ].map((tech) => (
               <span
                 key={tech}
@@ -568,27 +579,24 @@ export default function BrandIdentityPage() {
       {/* OTHER CASE STUDIES CAROUSEL */}
       <section
         id="projects"
-        className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${
-          isReadingMode
+        className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${isReadingMode
             ? "bg-white border border-[var(--cs-border)]"
             : "bg-[#089998]"
-        }`}
+          }`}
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] mb-8">
           <div className="flex flex-col gap-4 text-left">
             <span
-              className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${
-                isReadingMode
+              className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
                   ? "bg-[#1B237A]/10 text-[#1B237A]"
                   : "bg-[#B8F74B]/15 text-[#B8F74B]"
-              }`}
+                }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${
-                isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
-              }`}
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
+                }`}
             >
               Other Case Studies
             </h2>

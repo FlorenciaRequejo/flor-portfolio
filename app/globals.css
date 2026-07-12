@@ -269,7 +269,6 @@
   --cs-muted: rgba(250, 246, 240, 0.7);
   --cs-accent-bg: rgba(253, 171, 255, 0.05);
   --cs-card-bg: rgba(253, 171, 255, 0.05);
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .case-study-container.reading-mode {
@@ -280,6 +279,24 @@
   --cs-muted: rgba(0, 0, 0, 0.7);
   --cs-accent-bg: rgba(27, 35, 122, 0.08);
   --cs-card-bg: #F5F5F7;
+}
+
+.case-study-container,
+.case-study-container section,
+.case-study-container div,
+.case-study-container h1,
+.case-study-container h2,
+.case-study-container h3,
+.case-study-container h4,
+.case-study-container h5,
+.case-study-container p,
+.case-study-container span,
+.case-study-container blockquote,
+.case-study-container a:not(.hover-transition) {
+  transition: background-color 1.0s cubic-bezier(0.25, 1, 0.5, 1), 
+              color 1.0s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 1.0s cubic-bezier(0.25, 1, 0.5, 1),
+              background 1.0s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Global Component Overrides under Reading Mode */

@@ -24,10 +24,18 @@ export const caseStudyCards: CaseStudyData[] = [
     videoSrc: "/End To End Product Thinking.mp4",
   },
   {
-    title: "Brand identity",
+    title: "Brand Identity: Visual Language & Design System",
     description:
       "Developed a complete visual language, from logo design and app interfaces to marketing materials and brand collateral, creating a consistent and memorable experience across every touchpoint.",
     href: "/brand-identity",
+    imageSrc: "/bite-brand-cover.png",
+    videoSrc: "",
+  },
+  {
+    title: "UX/UI Design: Product Case Study",
+    description:
+      "A budget-friendly meal planning and trading mobile app designed through user research, empathy mapping, wireframing, and interactive prototyping.",
+    href: "/ux-design",
     imageSrc: "/Ux and User Experience.png",
     videoSrc: "/Ux and User Experience.mp4",
   },

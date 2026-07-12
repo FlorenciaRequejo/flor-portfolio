@@ -107,9 +107,9 @@ export default function CaseStudyCard({
 
           {/* Minimal Read More pill: bottom-center on mobile, bottom-right on desktop */}
           <div className="absolute bottom-[10px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[10px]">
-            <div className="h-[38px] px-5 rounded-full bg-[#B8F74B] text-[#1B237A] font-sans font-medium text-[12px] flex items-center justify-center gap-1.5">
+            <div className="h-[50px] px-6 rounded-full bg-[#FDABFF] text-[#1B237A] font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity duration-200">
               <span>Read More</span>
-              <span className="text-[14px]">↗</span>
+              <span className="text-[12px] md:text-[14px]">↗</span>
             </div>
           </div>
         </div>

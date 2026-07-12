@@ -550,9 +550,20 @@ export default function MorphingLines() {
         pill2.style.color = colorStr;
         pill3.style.color = colorStr;
 
-        pill1.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
-        pill2.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
-        pill3.style.borderColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+        const borderOpacity = 0.2 * (1 - alignT);
+        pill1.style.borderColor = `rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
+        pill2.style.borderColor = `rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
+        pill3.style.borderColor = `rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
+
+        if (alignT > 0.8) {
+          pill1.style.borderWidth = '0px';
+          pill2.style.borderWidth = '0px';
+          pill3.style.borderWidth = '0px';
+        } else {
+          pill1.style.borderWidth = '1px';
+          pill2.style.borderWidth = '1px';
+          pill3.style.borderWidth = '1px';
+        }
 
         // Pills fade out between p = 0.75 and 0.85
         let pillsOpacity = Math.max(0, Math.min(1, 1 - (p - 0.75) / (0.85 - 0.75)));
