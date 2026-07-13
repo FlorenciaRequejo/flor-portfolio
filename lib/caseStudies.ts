@@ -31,4 +31,20 @@ export const caseStudyCards: CaseStudyData[] = [
     imageSrc: "/Ux and User Experience.png",
     videoSrc: "/Ux and User Experience.mp4",
   },
+  {
+    title: "Making Brands Machine-Readable",
+    description:
+      "Designed and built a system that translates brand decisions into structured JSON/Markdown, enabling designers, developers, and AI agents to work from a single source of truth.",
+    href: "/machine-readable-brands",
+    imageSrc: "/machine-readable-brands-hero.png",
+    videoSrc: "",
+  },
+  {
+    title: "Designing a Content System That Does the Work",
+    description:
+      "An AI-powered content pipeline that proactively converts keyword strategy into review-ready blogs and social media campaigns for small businesses.",
+    href: "/continuous-content",
+    imageSrc: "/continuous-content-hero.png",
+    videoSrc: "",
+  },
 ];
