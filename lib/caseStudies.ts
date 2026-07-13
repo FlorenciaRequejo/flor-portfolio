@@ -16,14 +16,6 @@ export const caseStudyCards: CaseStudyData[] = [
     videoSrc: "/Web Design and Development.mp4",
   },
   {
-    title: "Concept to launch",
-    description:
-      "An AI-powered system that automates website audits, transforming UX, SEO and performance data into actionable business recommendations.",
-    href: "/concept-to-launch",
-    imageSrc: "/End To End Product Thinking.jpg",
-    videoSrc: "/End To End Product Thinking.mp4",
-  },
-  {
     title: "Brand Identity: Visual Language & Design System",
     description:
       "Developed a complete visual language, from logo design and app interfaces to marketing materials and brand collateral, creating a consistent and memorable experience across every touchpoint.",
