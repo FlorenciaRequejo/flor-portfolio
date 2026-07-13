@@ -47,4 +47,12 @@ export const caseStudyCards: CaseStudyData[] = [
     imageSrc: "/continuous-content-hero.png",
     videoSrc: "",
   },
+  {
+    title: "NoFuxs: Artist Portfolio & Gallery App",
+    description:
+      "A mobile platform designed for local artists to build verified profiles, upload collections, vote on art, and showcase their work in physical galleries.",
+    href: "/nofuxs-gallery",
+    imageSrc: "/nofuxs-gallery-hero.png",
+    videoSrc: "",
+  },
 ];
