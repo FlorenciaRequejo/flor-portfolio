@@ -299,7 +299,7 @@ export default function UXDesignPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                The Problem
+                Balancing complexity with clarity
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
                 As the app was going to have 4 different sections: recipes, meal plan, shopping list and trade; I needed to be able to clearly display its parts. Furthermore, I wanted for the app to be use as a tool rather than just as a recourse library, so highlighting the meal-plan function was critical.              </p>
@@ -310,7 +310,7 @@ export default function UXDesignPage() {
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                The Solution              </h2>
+                Simple interface, intuitive navigation              </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
                 To be able to display everything correctly I needed to organize the information architecture very clearly to brake down the functionalities and differentiate them correctly for the users. Provide a very clear and simple user interface to guide the users was also crucial.              </p>
             </div>
@@ -319,7 +319,7 @@ export default function UXDesignPage() {
           {/* Featured Image */}
           <div className="mt-8">
             <Image
-              src="/Ux and User Experience.png"
+              src="/Bite-cover.webp"
               alt="Bite App User Experience Showcase"
               width={0}
               height={0}
@@ -357,7 +357,7 @@ export default function UXDesignPage() {
           {/* Featured Image */}
           <div className="mt-8">
             <Image
-              src="/Ux and User Experience.png"
+              src="/Bite user research.webp"
               alt="Bite App User Experience Showcase"
               width={0}
               height={0}
@@ -387,95 +387,20 @@ export default function UXDesignPage() {
                 Personas              </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
                 To form a deeper understanding of the users' goals, needs, experiences, and behaviors. I created 3 personas, I used them whenever I wanted to step out of myself and reconsider my initial ideas.
+                <a href="https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=0-1&p=f">Link to UX</a>
               </p>
             </div>
 
             <div className="space-y-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                UX Reseach
+                Information Architecture
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Journey map</h2>
+                User Flows & Structure</h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                I created a customer journey map based on Suzy, to build a better understanding of how users would find and interact with the app and to discover opportunities for improvement.
+                I mapped how users would move through the product, organised the information architecture and identified opportunities to simplify navigation before designing the interface.
+                <a href="https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=58-2576&m=dev&t=tXE5hBvipYofyxsk-1">Explore the Architecture</a>
               </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Sarah Card */}
-            <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] flex flex-col justify-between text-left space-y-6">
-              <div className="space-y-4">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Sarah</h3>
-                  <span className="font-sans text-[12px] text-[var(--cs-muted)]">Age: 35 · Auckland</span>
-                </div>
-                <p className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
-                  Retail Associate · Low Income
-                </p>
-                <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
-                  “My family is my everything”
-                </blockquote>
-                <p className="font-sans text-[14px] leading-[22px] text-[var(--cs-muted)] font-light">
-                  Sarah is a single mother of two children (ages 5 and 8). Her eldest has Type 1 Diabetes, making nutritional tracking critical. She often feels overwhelmed by the high cost of healthy foods.
-                </p>
-              </div>
-              <div className="space-y-2 border-t border-[var(--cs-border)] pt-4">
-                <h5 className="font-sans text-[11px] uppercase tracking-wider text-[var(--cs-primary)] font-bold">Goals</h5>
-                <p className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed font-light">
-                  Plan allergen-friendly meals on a tight budget, track carbs/nutrients, and trade food items to reduce waste.
-                </p>
-              </div>
-            </div>
-
-            {/* Jack Card */}
-            <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] flex flex-col justify-between text-left space-y-6">
-              <div className="space-y-4">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Jack</h3>
-                  <span className="font-sans text-[12px] text-[var(--cs-muted)]">Age: 45 · Auckland</span>
-                </div>
-                <p className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
-                  Warehouse Worker · Low Income
-                </p>
-                <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
-                  “We only have one world”
-                </blockquote>
-                <p className="font-sans text-[14px] leading-[22px] text-[var(--cs-muted)] font-light">
-                  Jack is a single father with two teenagers. Working part-time with strict budget limitations, he has scarce cooking experience and wants fast, clear recipe guidelines to cut down prep times.
-                </p>
-              </div>
-              <div className="space-y-2 border-t border-[var(--cs-border)] pt-4">
-                <h5 className="font-sans text-[11px] uppercase tracking-wider text-[var(--cs-primary)] font-bold">Goals</h5>
-                <p className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed font-light">
-                  Find simple budget recipes, reduce grocery bills, keep teenagers fed, and trade excess food to minimize environmental waste.
-                </p>
-              </div>
-            </div>
-
-            {/* Suzy Card */}
-            <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] flex flex-col justify-between text-left space-y-6">
-              <div className="space-y-4">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Suzy</h3>
-                  <span className="font-sans text-[12px] text-[var(--cs-muted)]">Age: 29 · Auckland</span>
-                </div>
-                <p className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
-                  Nurse · Low Income · Maori
-                </p>
-                <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
-                  “Kei te pai te ora”
-                </blockquote>
-                <p className="font-sans text-[14px] leading-[22px] text-[var(--cs-muted)] font-light">
-                  Suzy lives with her elderly grandmother. She wants to cook traditional Maori meals and preserve cultural practices but struggles with the high cost of authentic native ingredients in standard stores.
-                </p>
-              </div>
-              <div className="space-y-2 border-t border-[var(--cs-border)] pt-4">
-                <h5 className="font-sans text-[11px] uppercase tracking-wider text-[var(--cs-primary)] font-bold">Goals</h5>
-                <p className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed font-light">
-                  Access authentic cultural resources and local ingredients at low prices, planning traditional Maori meals on a strict budget.
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -489,23 +414,103 @@ export default function UXDesignPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-8">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--cs-accent-bg)] text-[var(--cs-primary)] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit select-none">
-            02. Define Phase
-          </span>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
-            <div className="space-y-3">
-              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[var(--cs-highlight)]">Suzy's Problem Statement</h4>
-              <p className="font-serif text-[22px] md:text-[26px] leading-[34px] text-[var(--cs-primary)] font-light">
-                “Suzy is a full-time nurse who needs a solution to her struggles with finding access to authentic ingredients and cultural resources because she wants to connect with her cultural heritage through food and provide her grandmother with healthy, traditional meals on a budget.”
-              </p>
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
+            <div className="md:col-span-12 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)] block mb-3">
+                02. Define Stage
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight mb-12 block">
+                Problem & hypothesis statement</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+                <div className="space-y-3">
+                  <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
+                    Problem statement: Suzy             </h2>
+                  <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                    Suzy is a full-time nurse who needs a solution to her struggles with finding access to authentic ingredients and cultural resources because she wants to connect with her cultural heritage through food and provide her grandmother with healthy, traditional meals on a budget.
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
+                    If/then statement              </h2>
+                  <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                    If Suzy is concerned about preserving traditional Maori food practices and values within her tight budget, then she needs a way to access authentic ingredients and cultural resources at low prices.</p>
+                </div>
+              </div>
             </div>
-            <div className="space-y-3">
-              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[var(--cs-highlight)]">Hypothesis Formula</h4>
-              <p className="font-serif text-[22px] md:text-[26px] leading-[34px] text-[var(--cs-primary)] font-light">
-                “If Suzy is concerned about preserving traditional Maori food practices and values within her tight budget, then she needs a way to access authentic ingredients and cultural resources at low prices.”
-              </p>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* IDEATE & LOW-FI PROTOTYPE */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)]"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
+          {/* Header */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
+            <div className="lg:col-span-12 flex flex-col gap-2">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                03. Ideate Stage
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight mb-4">
+                Ideate & Low-fi Prototype
+              </h2>
             </div>
+          </div>
+
+          {/* 4 Columns Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            {[
+              {
+                num: "1",
+                title: "Preview",
+                text: "Upon completing login, users will be presented with the preset selections made during the login process, displayed prominently next to the username for easy reference and understanding of their weekly plan."
+              },
+              {
+                num: "2",
+                title: "Price",
+                text: "Cost-efficiency is a crucial aspect of our app, and we strive to make healthy meals affordable for our users. The pricing information will be prominently displayed throughout the app."
+              },
+              {
+                num: "3",
+                title: "Healthy",
+                text: "Each meal option will have a clear and detailed nutritional information table, enabling users to make informed decisions about their meal choices and monitor their overall health."
+              },
+              {
+                num: "4",
+                title: "Family",
+                text: "We recognize that many of our users have families and cater to different dietary needs. Our app allows for the inclusion of multiple family members, making meal planning and organization more convenient for all."
+              }
+            ].map((col) => (
+              <div
+                key={col.num}
+                className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] flex flex-col justify-between min-h-[220px]"
+              >
+                <div>
+                  <span className="text-[28px] font-serif text-[var(--cs-primary)] block mb-2">{col.num}</span>
+                  <h4 className="font-sans text-[15px] font-semibold text-[var(--cs-primary)] mb-2">{col.title}</h4>
+                  <p className="font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] font-light">{col.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Featured Low-fi Image */}
+          <div className="mt-8">
+            <Image
+              src="/bite-app-mockup.jpg"
+              alt="Bite App Low-fidelity Prototype Showcase"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </motion.section>
@@ -522,7 +527,7 @@ export default function UXDesignPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                03. Design Architecture
+                04. Design Architecture
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
                 Cohesive Styling & Layout Schemas
@@ -615,7 +620,7 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
           <div className="space-y-3">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              04. Testing & Iteration
+              05. Testing & Iteration
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-tight font-normal">
               Usability Studies & Critical Design Adjustments
@@ -707,7 +712,7 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="text-left space-y-2">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              05. High-Fidelity Design
+              06. High-Fidelity Design
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
               Simplifying the Mobile Flow
