@@ -41,9 +41,8 @@ function HeroControls({
 }: HeroControlsProps) {
   return (
     <div
-      className={`flex flex-col gap-3 md:gap-4 relative w-full ${
-        isMobile ? "items-start" : "items-end"
-      }`}
+      className={`flex flex-col gap-3 md:gap-4 relative w-full ${isMobile ? "items-start" : "items-end"
+        }`}
       onMouseEnter={() => !isMobile && setIsSynopsisOpen(true)}
       onMouseLeave={() => !isMobile && setIsSynopsisOpen(false)}
     >
@@ -75,9 +74,8 @@ function HeroControls({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`overflow-hidden w-full md:w-[320px] ${
-              isMobile ? "text-left" : "text-right"
-            }`}
+            className={`overflow-hidden w-full md:w-[320px] ${isMobile ? "text-left" : "text-right"
+              }`}
           >
             <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
               Bite is a mobile application developed as a Google UX Design Professional Certificate final project. This study walks through the UX design thinking process (Empathize, Define, Ideate, Prototype, and Test) used to create a budget-friendly meal planning and local ingredient trading system tailored for low-income communities in Auckland, New Zealand.
@@ -94,11 +92,10 @@ function HeroControls({
         <div className="relative flex items-center">
           <motion.button
             onClick={() => setIsReadingMode(!isReadingMode)}
-            className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${
-              isReadingMode
-                ? "bg-black border-black"
-                : "bg-transparent border-[var(--cs-primary)]"
-            }`}
+            className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${isReadingMode
+              ? "bg-black border-black"
+              : "bg-transparent border-[var(--cs-primary)]"
+              }`}
             aria-label="Toggle Reading Mode"
             animate={justAutoActivated ? {
               x: [0, -4, 4, -4, 4, 0],
@@ -108,16 +105,15 @@ function HeroControls({
           >
             <motion.div
               layout
-              className={`w-5 h-5 rounded-full ${
-                isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
-              }`}
+              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
+                }`}
               animate={{
                 x: isReadingMode ? 22 : 0,
               }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           </motion.button>
-          
+
           {/* Pulsing ring animation */}
           {justAutoActivated && (
             <motion.span
@@ -145,7 +141,7 @@ function HeroControls({
             >
               Auto-Activated!
               {/* Little arrow */}
-              <div 
+              <div
                 className="absolute top-full border-4 border-transparent"
                 style={{
                   borderTopColor: "var(--cs-primary)",
@@ -199,9 +195,8 @@ export default function UXDesignPage() {
 
   return (
     <div
-      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${
-        isReadingMode ? "reading-mode" : ""
-      }`}
+      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${isReadingMode ? "reading-mode" : ""
+        }`}
     >
       <Navbar />
 
@@ -215,7 +210,7 @@ export default function UXDesignPage() {
                 CASE STUDY / UX/UI & PRODUCT DESIGN
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
-                Bite: End-to-End UX/UI Case Study
+                Helping people face grocery-related financial challenges in an economic recession.
               </h1>
             </div>
 
@@ -248,8 +243,7 @@ export default function UXDesignPage() {
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>July 2021 – Nov 2022</p>
-                  <p>(16 Months)</p>
+                  <p>July 2022 – Nov 2022</p>
                 </div>
               </div>
 
@@ -268,8 +262,8 @@ export default function UXDesignPage() {
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
                   <p>Figma</p>
-                  <p>Adobe Photoshop</p>
-                  <p>Adobe Illustrator</p>
+                  <p>Miro</p>
+                  <p>Adobe suite</p>
                 </div>
               </div>
             </div>
@@ -305,11 +299,10 @@ export default function UXDesignPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Cost Barriers to Healthy Living
+                The Problem
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                In Auckland, New Zealand, buying healthy food is incredibly expensive. Lower-income communities often lack the financial resources, education, or access to affordable local ingredients to prepare nutritious meals. This systemic imbalance leaves many residents struggling with diet-related health complications.
-              </p>
+                As the app was going to have 4 different sections: recipes, meal plan, shopping list and trade; I needed to be able to clearly display its parts. Furthermore, I wanted for the app to be use as a tool rather than just as a recourse library, so highlighting the meal-plan function was critical.              </p>
             </div>
 
             <div className="space-y-4">
@@ -317,11 +310,9 @@ export default function UXDesignPage() {
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Bite Budget App & Trading Community
-              </h2>
+                The Solution              </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                Bite is a mobile application designed to ensure all residents have access to healthy food options. The app generates custom weekly meal plans based on family budget limits, tracks calorie and allergy safety constraints, compiles structured local store lists to buy ingredients cheaply, and includes a P2P local trading system to exchange spare ingredients, reducing waste and fostering community support.
-              </p>
+                To be able to display everything correctly I needed to organize the information architecture very clearly to brake down the functionalities and differentiate them correctly for the users. Provide a very clear and simple user interface to guide the users was also crucial.              </p>
             </div>
           </div>
 
@@ -350,59 +341,30 @@ export default function UXDesignPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
-            <div className="md:col-span-5 flex flex-col gap-2">
+            <div className="md:col-span-12 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 01. Research & Empathize
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Understanding Auckland's Low-Income Context
+                Understanding the users.
               </h2>
-            </div>
-            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                To design a solution that works, I conducted a qualitative research study with a selected group of regional Auckland residents. The user interviews focused on identifying current meal planning processes, grocery shopping behaviors, constraints regarding budget size, and struggles with dietary requirements.
-              </p>
-              <p>
-                Through the synthesis of research empathy maps, four primary pain points emerged:
+                I conducted research to understand what users were struggling with and how the app could make a difference in their lives.
               </p>
             </div>
           </div>
 
-          {/* Pain Points Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-left">
-            {[
-              {
-                num: "2/5",
-                title: "Safety & Allergy Filters",
-                text: "Users with severe allergies expressed high anxiety that cross-contamination risks or ingredient warnings wouldn't be clearly handled by meal plans."
-              },
-              {
-                num: "3/5",
-                title: "Intimidating Recipes",
-                text: "Many users felt recipe directions found online were overly complex, requiring expensive cooking tools or hard-to-source elements."
-              },
-              {
-                num: "4/5",
-                title: "Location Sourcing Proximity",
-                text: "Low-income shoppers were highly concerned about the proximity and number of different stores they'd need to visit to get cheaper items."
-              },
-              {
-                num: "2/5",
-                title: "Setup & Onboarding Fatigue",
-                text: "Users reported frustration when required to configure a massive checklist of dietary likes and dislikes before previewing value."
-              }
-            ].map((pt, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] flex flex-col justify-between min-h-[220px]"
-              >
-                <div>
-                  <span className="text-[28px] font-serif text-[var(--cs-primary)] block mb-2">{pt.num}</span>
-                  <h4 className="font-sans text-[15px] font-semibold text-[var(--cs-primary)] mb-2">{pt.title}</h4>
-                  <p className="font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] font-light">{pt.text}</p>
-                </div>
-              </div>
-            ))}
+          {/* Featured Image */}
+          <div className="mt-8">
+            <Image
+              src="/Ux and User Experience.png"
+              alt="Bite App User Experience Showcase"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </motion.section>
@@ -416,13 +378,28 @@ export default function UXDesignPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
-          <div className="text-left space-y-2">
-            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              User Profiles
-            </span>
-            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-              Representing Our Auckland Community
-            </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-left">
+            <div className="space-y-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                UX Research
+              </span>
+              <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
+                Personas              </h2>
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                To form a deeper understanding of the users' goals, needs, experiences, and behaviors. I created 3 personas, I used them whenever I wanted to step out of myself and reconsider my initial ideas.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                UX Reseach
+              </span>
+              <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
+                Journey map</h2>
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                I created a customer journey map based on Suzy, to build a better understanding of how users would find and interact with the app and to discover opportunities for improvement.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -751,7 +728,7 @@ export default function UXDesignPage() {
               className="w-full h-auto rounded-[24px] md:rounded-[36px]"
               style={{ width: '100%', height: 'auto' }}
             />
-            
+
             {/* Description Right */}
             <div className="space-y-6 text-left">
               <div className="space-y-2">
@@ -788,27 +765,24 @@ export default function UXDesignPage() {
       {/* OTHER CASE STUDIES CAROUSEL */}
       <section
         id="projects"
-        className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${
-          isReadingMode
-            ? "bg-white border border-[var(--cs-border)]"
-            : "bg-[#089998]"
-        }`}
+        className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${isReadingMode
+          ? "bg-white border border-[var(--cs-border)]"
+          : "bg-[#089998]"
+          }`}
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] mb-8">
           <div className="flex flex-col gap-4 text-left">
             <span
-              className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${
-                isReadingMode
-                  ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
-              }`}
+              className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
+                ? "bg-[#1B237A]/10 text-[#1B237A]"
+                : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
+                }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${
-                isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
-              }`}
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
+                }`}
             >
               Other Case Studies
             </h2>
