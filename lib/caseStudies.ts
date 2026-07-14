@@ -4,6 +4,7 @@ export interface CaseStudyData {
   href: string;
   imageSrc: string;
   videoSrc: string;
+  tags: string[];
 }
 
 export const caseStudyCards: CaseStudyData[] = [
@@ -14,6 +15,7 @@ export const caseStudyCards: CaseStudyData[] = [
     href: "/web-design-and-development",
     imageSrc: "/waatea-ipad-mp3.webp",
     videoSrc: "",
+    tags: ["System Architecture", "Automation", "WordPress"],
   },
   {
     title: "Brand Identity: Visual Language & Design System",
@@ -22,6 +24,7 @@ export const caseStudyCards: CaseStudyData[] = [
     href: "/brand-identity",
     imageSrc: "/bite-brand-cover.png",
     videoSrc: "",
+    tags: ["Brand Strategy", "Visual Identity", "Design System"],
   },
   {
     title: "UX/UI Design: Product Case Study",
@@ -30,6 +33,16 @@ export const caseStudyCards: CaseStudyData[] = [
     href: "/ux-design",
     imageSrc: "/Ux and User Experience.png",
     videoSrc: "/Ux and User Experience.mp4",
+    tags: ["Product Design", "UX/UI", "Prototyping"],
+  },
+  {
+    title: "Concept to Launch: Website Audit App",
+    description:
+      "An AI-powered website audit platform that automatically evaluates performance, accessibility, SEO, and visual consistency, translating metrics into clear business tasks.",
+    href: "/concept-to-launch",
+    imageSrc: "/End To End Product Thinking.jpg",
+    videoSrc: "/End To End Product Thinking.mp4",
+    tags: ["Product Strategy", "AI Integration", "Automation"],
   },
   {
     title: "Making Brands Machine-Readable",
@@ -38,6 +51,7 @@ export const caseStudyCards: CaseStudyData[] = [
     href: "/machine-readable-brands",
     imageSrc: "/machine-readable-brands-hero.png",
     videoSrc: "",
+    tags: ["Brand Systems", "Automation", "AI Readiness"],
   },
   {
     title: "Designing a Content System That Does the Work",
@@ -46,6 +60,7 @@ export const caseStudyCards: CaseStudyData[] = [
     href: "/continuous-content",
     imageSrc: "/continuous-content-hero.png",
     videoSrc: "",
+    tags: ["AI Integration", "Automation", "Content Strategy"],
   },
   {
     title: "NoFuxs: Artist Portfolio & Gallery App",
@@ -54,5 +69,6 @@ export const caseStudyCards: CaseStudyData[] = [
     href: "/nofuxs-gallery",
     imageSrc: "/nofuxs-gallery-hero.png",
     videoSrc: "",
+    tags: ["Product Design", "UX/UI", "Web App"],
   },
 ];

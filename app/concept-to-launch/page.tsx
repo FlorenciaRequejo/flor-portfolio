@@ -611,6 +611,7 @@ export default function ConceptToLaunchPage() {
                   imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
+                  tags={card.tags}
                 />
               </div>
             ))}

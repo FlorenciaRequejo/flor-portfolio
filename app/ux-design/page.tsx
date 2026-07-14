@@ -830,6 +830,7 @@ export default function UXDesignPage() {
                   imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
+                  tags={card.tags}
                 />
               </div>
             ))}

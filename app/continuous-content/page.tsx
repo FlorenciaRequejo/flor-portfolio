@@ -683,6 +683,7 @@ export default function ContinuousContentPage() {
                   imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
+                  tags={card.tags}
                 />
               </div>
             ))}

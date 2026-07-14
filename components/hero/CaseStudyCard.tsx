@@ -12,6 +12,7 @@ interface CaseStudyCardProps {
   imageSrc?: string;
   href: string;
   featured: boolean;
+  tags?: string[];
 }
 
 export default function CaseStudyCard({
@@ -21,6 +22,7 @@ export default function CaseStudyCard({
   imageSrc,
   href,
   featured,
+  tags = [],
 }: CaseStudyCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
@@ -91,9 +93,9 @@ export default function CaseStudyCard({
         </div>
 
         {/* Content Container: Inset 10px more than media (total X + 10px) */}
-        <div className="relative pt-0 mt-4 flex-grow text-left px-[10px] pb-[10px]">
-          {/* Text area: pr only on desktop, bottom padding on mobile to clear centered button */}
-          <div className="pb-16 md:pb-0 md:pr-[115px]">
+        <div className="relative pt-0 mt-4 flex-grow flex flex-col justify-between text-left px-[10px]">
+          {/* Text area */}
+          <div>
             <h3 className="text-[#1B237A] font-sans font-semibold text-[18px] leading-tight">
               {title}
             </h3>
@@ -105,11 +107,29 @@ export default function CaseStudyCard({
             )}
           </div>
 
-          {/* Minimal Read More pill: bottom-center on mobile, bottom-right on desktop */}
-          <div className="absolute bottom-[10px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[10px]">
-            <div className="h-[50px] px-6 rounded-full bg-[#FDABFF] text-[#1B237A] font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity duration-200">
-              <span>Read More</span>
-              <span className="text-[12px] md:text-[14px]">↗</span>
+          {/* Footer Area: flex-row on desktop, flex-col on mobile */}
+          <div className="mt-auto pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
+            {/* Pills group */}
+            <div className="flex flex-1 min-w-0 flex-wrap gap-2 items-center">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full border border-[#1B237A]/25 text-[#1B237A] text-[10px] md:text-[11px] font-sans font-medium whitespace-nowrap"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Vertical Divider (hidden on mobile) */}
+            <div className="hidden sm:block h-8 w-px bg-[#1B237A]/20 shrink-0 mx-[20px] md:mx-[24px]" />
+
+            {/* Read More button */}
+            <div className="shrink-0 w-fit">
+              <div className="h-[50px] px-6 rounded-full bg-[#FDABFF] text-[#1B237A] font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity duration-200">
+                <span>Read More</span>
+                <span className="text-[12px] md:text-[14px]">↗</span>
+              </div>
             </div>
           </div>
         </div>

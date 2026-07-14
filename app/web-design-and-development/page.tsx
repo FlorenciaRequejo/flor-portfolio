@@ -589,6 +589,7 @@ export default function WebDesignAndDevelopmentPage() {
                   imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
+                  tags={card.tags}
                 />
               </div>
             ))}

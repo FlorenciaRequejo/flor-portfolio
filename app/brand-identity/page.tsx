@@ -618,6 +618,7 @@ export default function BrandIdentityPage() {
                   imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
+                  tags={card.tags}
                 />
               </div>
             ))}

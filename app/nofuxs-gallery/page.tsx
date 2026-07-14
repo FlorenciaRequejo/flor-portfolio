@@ -708,6 +708,7 @@ export default function NoFuxsGalleryPage() {
                   imageSrc={card.imageSrc}
                   href={card.href}
                   featured={false}
+                  tags={card.tags}
                 />
               </div>
             ))}
