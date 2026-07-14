@@ -61,25 +61,25 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full pl-4 md:pl-[calc((100%-min(76vw,1260px))/2)] pr-4 md:pr-[calc((100%-min(76vw,1260px))/2)] pt-6 md:pt-8 pb-20 md:pb-32 flex flex-col md:flex-row items-end justify-between gap-8 md:gap-16 relative select-text"
+      className="w-full pl-4 md:pl-[calc((100%-min(76vw,1260px))/2)] pr-4 md:pr-[calc((100%-min(76vw,1260px))/2)] pt-6 md:pt-8 pb-20 md:pb-32 grid grid-cols-1 md:grid-cols-[4fr_6fr] items-center gap-8 md:gap-16 relative select-text"
     >
       {/* Left Side: Text Content */}
-      <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 max-w-[580px] pointer-events-auto w-full">
+      <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 pointer-events-auto w-full">
         <div className="flex flex-col gap-6 w-full">
           <span className="font-sans text-[14px] uppercase tracking-[3px] text-[#B8F74B]/75">
-            Taking complexity and making it work.
+            Making complexity work.
           </span>
           <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-[#B8F74B] font-normal tracking-tight">
             15+ years of solving problems.
           </h2>
-          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B]/80 font-light">
+          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px]">
             From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.
           </p>
         </div>
       </div>
 
       {/* Right Side: Skills block of floating pills */}
-      <div className="w-full md:flex-1 flex flex-wrap gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-2 max-w-full md:max-w-[620px] justify-center md:justify-start pointer-events-auto overflow-visible relative">
+      <div className="w-full flex flex-wrap gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-2 justify-center md:justify-start pointer-events-auto overflow-visible relative">
         {skills.map((item, index) =>
           item.type === "category" ? (
             <CategoryLabel key={item.label} label={item.label} />

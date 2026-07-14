@@ -49,13 +49,29 @@ export default function FooterSection() {
             <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#FDABFF]/80 max-w-[620px] font-normal">
               Whether it’s a new product, a website, a brand or a complex business challenge, I’d love to hear about it.
             </p>
-            <a
-              href="mailto:florencia.requejo@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FDABFF] text-[#1B237A] font-sans font-medium text-[15px] rounded-full hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_10px_25px_rgba(253,171,255,0.15)] group mt-2"
-            >
-              <span>Email Me</span>
-              <span className="text-[18px] group-hover:translate-x-1 transition-transform duration-300">↗</span>
-            </a>
+            <div className="flex flex-wrap justify-center gap-4 pt-6">
+              <Link
+                href="/projects"
+                className="h-[50px] px-8 rounded-full border border-[#FDABFF] text-[#FDABFF] font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-[#FDABFF]/10"
+              >
+                View My Work
+              </Link>
+              <a
+                href="/florencia-requejo-cv.pdf"
+                download="florencia-requejo-cv.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-[50px] px-8 rounded-full bg-[#FDABFF] text-[#1B237A] font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:opacity-90"
+              >
+                Download CV
+              </a>
+              <a
+                href="mailto:florencia.requejo@gmail.com"
+                className="h-[50px] px-8 rounded-full border border-[#FDABFF] text-[#FDABFF] font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-[#FDABFF]/10"
+              >
+                Email Me
+              </a>
+            </div>
           </div>
 
           {/* Thin Horizontal Divider */}

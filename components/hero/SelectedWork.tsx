@@ -614,7 +614,7 @@ export default function SelectedWork() {
           </div>
 
           <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
-            Each project presented a different challenge. Solving it required understanding what mattered, what didn't, and where to focus first.
+            Each project presents a different challenge. Solving it requires understanding what matters, what doesn't, and how to set the priorities.
           </p>
         </div>
       </div>
@@ -681,7 +681,7 @@ export default function SelectedWork() {
               </h2>
             </div>
 
-            <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#B8F74B] font-normal max-w-[440px] md:mb-2">
+            <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
               A few words from people I’ve worked with across web, design, product and systems projects.
             </p>
           </div>

@@ -420,7 +420,7 @@ export default function MorphingLines() {
         // Transition back to dark blue (#1B237A: 27, 35, 122) near the page bottom (footer)
         const docScrollHeight = document.documentElement.scrollHeight - vh;
         const pageProgress = docScrollHeight > 0 ? window.scrollY / docScrollHeight : 0;
-        
+
         let finalBgR = bgR;
         let finalBgG = bgG;
         let finalBgB = bgB;
@@ -545,7 +545,7 @@ export default function MorphingLines() {
         const g = Math.round(171 + (35 - 171) * alignT);
         const b = Math.round(255 + (122 - 255) * alignT);
         const colorStr = `rgb(${r}, ${g}, ${b})`;
-        
+
         pill1.style.color = colorStr;
         pill2.style.color = colorStr;
         pill3.style.color = colorStr;
@@ -705,7 +705,7 @@ export default function MorphingLines() {
 
           {/* Supporting Copy */}
           <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-center md:text-left max-w-[480px]">
-            Combining design, development and strategic thinking, I turn them into products, systems and experiences.
+            I combine design, development and strategic thinking, to turn them into products, systems and experiences.
           </p>
 
           {/* Mobile Pills - visible on mobile/tablet, hidden on desktop */}
@@ -717,7 +717,7 @@ export default function MorphingLines() {
               Design + Development
             </span>
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              Concept to Launch
+              From Concept to Launch
             </span>
           </div>
 
@@ -774,7 +774,7 @@ export default function MorphingLines() {
                 ref={pill3Ref}
                 className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[88px] md:top-[118px]"
               >
-                Concept to Launch
+                From Concept to Launch
               </span>
             </div>
           </div>
