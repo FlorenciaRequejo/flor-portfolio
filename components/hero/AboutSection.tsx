@@ -61,7 +61,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full pl-4 md:pl-[calc((100%-min(76vw,1260px))/2)] pr-4 md:pr-[calc((100%-min(76vw,1260px))/2)] pt-6 md:pt-8 pb-20 md:pb-32 grid grid-cols-1 md:grid-cols-[4fr_6fr] items-center gap-8 md:gap-16 relative select-text"
+      className="w-full pl-4 md:pl-[calc((100%-min(76vw,1260px))/2)] pr-4 md:pr-[calc((100%-min(76vw,1260px))/2)] pt-6 md:pt-8 pb-20 md:pb-32 grid grid-cols-1 md:grid-cols-[5fr_5fr] items-center gap-8 md:gap-16 relative select-text"
     >
       {/* Left Side: Text Content */}
       <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 pointer-events-auto w-full">

@@ -122,7 +122,7 @@ function HeroControls({
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           </motion.button>
-          
+
           {/* Pulsing ring animation */}
           {justAutoActivated && (
             <motion.span
@@ -150,7 +150,7 @@ function HeroControls({
             >
               Auto-Activated!
               {/* Little arrow */}
-              <div 
+              <div
                 className="absolute top-full border-4 border-transparent"
                 style={{
                   borderTopColor: "var(--cs-primary)",
@@ -300,7 +300,7 @@ export default function WebDesignAndDevelopmentPage() {
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
-                Fragile Architecture + Complex Content Migration
+                A fragile Architecture + Complex Content Migration
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
                 This client’s existing platform had become increasingly difficult to maintain. Years of content, media files, legacy infrastructure and publishing workflows had created a system that was fragile, resource-heavy and risky to update. The challenge wasn’t simply to modernise the website, but to create a sustainable platform capable of supporting ongoing publishing, automation and future growth.
@@ -318,18 +318,6 @@ export default function WebDesignAndDevelopmentPage() {
               </p>
             </div>
           </div>
-
-          {/* Featured Image */}
-          <div className="relative w-full aspect-[16/9] rounded-[12px] md:rounded-[12px] overflow-hidden mt-8">
-            <Image
-              src="/Web Design and Development case-study-one.webp"
-              alt="Waatea Platform Design Featured Mockup"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 85vw"
-              className="object-cover"
-            />
-          </div>
         </div>
       </motion.section>
 
@@ -342,6 +330,16 @@ export default function WebDesignAndDevelopmentPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
+          <div className="w-full rounded-[12px] md:rounded-[12px] overflow-hidden">
+            <Image
+              src="/waatea-system-brainstorm.webp"
+              alt="Architecture Blueprint Overview"
+              width={3000}
+              height={1000}
+              sizes="100vw"
+              className="w-full h-auto"
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
               <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
@@ -361,16 +359,7 @@ export default function WebDesignAndDevelopmentPage() {
             </div>
           </div>
 
-          <div className="w-full rounded-[12px] md:rounded-[12px] overflow-hidden">
-            <Image
-              src="/Infographic_nw.png"
-              alt="Architecture Blueprint Overview"
-              width={3000}
-              height={1000}
-              sizes="100vw"
-              className="w-full h-auto"
-            />
-          </div>
+
         </div>
       </motion.section>
 
@@ -400,20 +389,30 @@ export default function WebDesignAndDevelopmentPage() {
                 A lightweight Gutenberg-based theme was chosen to minimise overhead, improve performance and provide long-term flexibility. The interface was then customised extensively, particularly across mobile experiences, navigation patterns and content consumption workflows, creating a modern looking interfaz in a plataform that remained easy to use and familiar for the publishing team.              </p>
             </div>
           </div>
-
+          {/* Featured Image */}
+          <div className="relative w-full aspect-[16/9] rounded-[12px] md:rounded-[12px] overflow-hidden mt-8">
+            <Image
+              src="/waatea-ipad.webp"
+              alt="Waatea Platform Design Featured Mockup"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 85vw"
+              className="object-cover"
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative aspect-[3/4] rounded-[12px] md:rounded-[12px] overflow-hidden">
+            <div className="relative aspect-[4/3] rounded-[12px] md:rounded-[12px] overflow-hidden">
               <Image
-                src="/mp3.jpg"
+                src="/waatea-ipad-mp3.webp"
                 alt="Interface Design Mobile Mockup"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[3/4] rounded-[12px] md:rounded-[12px] overflow-hidden">
+            <div className="relative aspect-[4/3] rounded-[12px] md:rounded-[12px] overflow-hidden">
               <Image
-                src="/mp3-2.jpg"
+                src="/listening-waatea-mp3.webp"
                 alt="Layout and Colors System"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"

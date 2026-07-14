@@ -8,12 +8,12 @@ export interface CaseStudyData {
 
 export const caseStudyCards: CaseStudyData[] = [
   {
-    title: "Design + development",
+    title: "Designing and Building an Automated Media Publishing Platform",
     description:
       "Rebuilt a fragile legacy news platform into a scalable publishing ecosystem by redesigning its architecture and separating infrastructure responsibilities.",
     href: "/web-design-and-development",
-    imageSrc: "/Web Design and Development.png",
-    videoSrc: "/Web Design and Development.mp4",
+    imageSrc: "/waatea-ipad-mp3.webp",
+    videoSrc: "",
   },
   {
     title: "Brand Identity: Visual Language & Design System",
