@@ -260,7 +260,6 @@
   }
 }
 
-/* Reading Mode System */
 .case-study-container {
   --cs-bg: #1B237A;
   --cs-text: #FAF6F0;
@@ -269,6 +268,8 @@
   --cs-muted: rgba(250, 246, 240, 0.7);
   --cs-accent-bg: rgba(253, 171, 255, 0.05);
   --cs-card-bg: rgba(253, 171, 255, 0.05);
+  --cs-highlight: #B8F74B;
+  --cs-highlight-bg: rgba(184, 247, 75, 0.15);
 }
 
 .case-study-container.reading-mode {
@@ -279,6 +280,8 @@
   --cs-muted: rgba(0, 0, 0, 0.7);
   --cs-accent-bg: rgba(27, 35, 122, 0.08);
   --cs-card-bg: #F5F5F7;
+  --cs-highlight: #FDABFF;
+  --cs-highlight-bg: rgba(253, 171, 255, 0.15);
 }
 
 .case-study-container,

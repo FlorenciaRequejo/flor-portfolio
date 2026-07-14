@@ -214,7 +214,7 @@ export default function MachineReadableBrandsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
-              <span className="text-[#B8F74B] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+              <span className="text-[var(--cs-highlight)] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
                 AI PRODUCT + DESIGN SYSTEMS
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
@@ -243,7 +243,7 @@ export default function MachineReadableBrandsPage() {
             {/* Metadata Grid */}
             <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Competencies
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -255,7 +255,7 @@ export default function MachineReadableBrandsPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -264,7 +264,7 @@ export default function MachineReadableBrandsPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Deliverables
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -275,7 +275,7 @@ export default function MachineReadableBrandsPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Tech Stack
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -328,7 +328,7 @@ export default function MachineReadableBrandsPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 01. The Problem
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -382,23 +382,23 @@ export default function MachineReadableBrandsPage() {
               </h3>
               <div className="space-y-4 font-sans text-[13px] tracking-wide">
                 <div className="flex items-center gap-3">
-                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[#B8F74B] font-mono">STEP 1</span>
+                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[var(--cs-highlight)] font-mono">STEP 1</span>
                   <p className="text-[var(--cs-muted)]">Brand identity configured as variables in a visual editor.</p>
                 </div>
                 <div className="text-[10px] text-[var(--cs-muted)]/45 pl-14">↓</div>
                 <div className="flex items-center gap-3">
-                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[#B8F74B] font-mono">STEP 2</span>
+                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[var(--cs-highlight)] font-mono">STEP 2</span>
                   <p className="text-[var(--cs-muted)]">Instantly exported into structured Markdown and JSON config files.</p>
                 </div>
                 <div className="text-[10px] text-[var(--cs-muted)]/45 pl-14">↓</div>
                 <div className="flex items-center gap-3">
-                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[#B8F74B] font-mono">STEP 3</span>
+                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[var(--cs-highlight)] font-mono">STEP 3</span>
                   <p className="text-[var(--cs-muted)]">Designers, developers, and AI agents reference the same code source.</p>
                 </div>
                 <div className="text-[10px] text-[var(--cs-muted)]/45 pl-14">↓</div>
                 <div className="flex items-center gap-3">
-                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[#B8F74B] font-mono">OUTPUT</span>
-                  <p className="font-semibold text-[#B8F74B]">Consistent, programmatically compliant assets at scale.</p>
+                  <span className="px-2 py-0.5 rounded bg-green-500/10 text-[var(--cs-highlight)] font-mono">OUTPUT</span>
+                  <p className="font-semibold text-[var(--cs-highlight)]">Consistent, programmatically compliant assets at scale.</p>
                 </div>
               </div>
             </div>
@@ -417,7 +417,7 @@ export default function MachineReadableBrandsPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 02. The Product Concept
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -466,7 +466,7 @@ export default function MachineReadableBrandsPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="text-left space-y-3">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               03. Programmatic Pipeline
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -512,7 +512,7 @@ export default function MachineReadableBrandsPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 04. Flexible Guidelines
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -569,7 +569,7 @@ export default function MachineReadableBrandsPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="text-left space-y-3">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               05. System Validation
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -594,7 +594,7 @@ export default function MachineReadableBrandsPage() {
                 className="p-5 rounded-[16px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-3 flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-[#B8F74B]">{item.type}</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--cs-highlight)]">{item.type}</span>
                   <p className="font-serif text-[18px] text-[var(--cs-primary)] mt-1 font-semibold">{item.status}</p>
                 </div>
                 <p className="text-[11px] text-[var(--cs-muted)] font-light">{item.issues}</p>
@@ -615,7 +615,7 @@ export default function MachineReadableBrandsPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 06. Contributions
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -652,7 +652,7 @@ export default function MachineReadableBrandsPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
           <div className="space-y-3">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               07. The Future
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -664,7 +664,7 @@ export default function MachineReadableBrandsPage() {
           </div>
 
           <div className="p-8 rounded-[24px] border border-[var(--cs-primary)]/20 bg-[var(--cs-accent-bg)]/10 text-center space-y-3">
-            <h4 className="font-sans text-[11px] uppercase tracking-widest text-[#B8F74B] font-bold">Open Closing Question</h4>
+            <h4 className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">Open Closing Question</h4>
             <p className="font-serif text-[24px] md:text-[32px] leading-tight text-[var(--cs-primary)]">
               “What happens when brand guidelines stop being documents and become infrastructure?”
             </p>
@@ -685,13 +685,13 @@ export default function MachineReadableBrandsPage() {
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
                   ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[#B8F74B]/15 text-[#B8F74B]"
+                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
                 }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
                 }`}
             >
               Other Case Studies

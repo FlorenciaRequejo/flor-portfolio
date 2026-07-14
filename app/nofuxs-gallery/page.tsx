@@ -204,7 +204,7 @@ export default function NoFuxsGalleryPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
-              <span className="text-[#B8F74B] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+              <span className="text-[var(--cs-highlight)] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
                 CASE STUDY / UX/UI & PRODUCT DESIGN
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
@@ -233,7 +233,7 @@ export default function NoFuxsGalleryPage() {
             {/* Metadata Grid */}
             <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Role
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -244,7 +244,7 @@ export default function NoFuxsGalleryPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -253,7 +253,7 @@ export default function NoFuxsGalleryPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Deliverables
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -264,7 +264,7 @@ export default function NoFuxsGalleryPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Design Tokens
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -317,7 +317,7 @@ export default function NoFuxsGalleryPage() {
           {/* Challenge / Solution Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-left">
             <div className="space-y-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2.5px] uppercase">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -329,7 +329,7 @@ export default function NoFuxsGalleryPage() {
             </div>
 
             <div className="space-y-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2.5px] uppercase">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -353,7 +353,7 @@ export default function NoFuxsGalleryPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="text-left space-y-2">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               Research & Empathy
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -369,7 +369,7 @@ export default function NoFuxsGalleryPage() {
                   <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Mariel</h3>
                   <span className="text-[12px] text-[var(--cs-muted)]">Age: 31 · Palmerston North</span>
                 </div>
-                <p className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <p className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Graphic Designer · Recent Immigrant
                 </p>
                 <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
@@ -394,7 +394,7 @@ export default function NoFuxsGalleryPage() {
                   <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Sam</h3>
                   <span className="text-[12px] text-[var(--cs-muted)]">Age: 67 · Auckland</span>
                 </div>
-                <p className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <p className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Boutique Owner · Older Artist
                 </p>
                 <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
@@ -429,13 +429,13 @@ export default function NoFuxsGalleryPage() {
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
             <div className="space-y-3">
-              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[#B8F74B]">Sam's Problem Statement</h4>
+              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[var(--cs-highlight)]">Sam's Problem Statement</h4>
               <p className="font-serif text-[22px] md:text-[26px] leading-[34px] text-[var(--cs-primary)] font-light">
                 “Sam is a shop owner grandfather who needs to feel part of an artist community because that gives him a sense of validation of himself as an artist.”
               </p>
             </div>
             <div className="space-y-3">
-              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[#B8F74B]">Hypothesis Formula</h4>
+              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[var(--cs-highlight)]">Hypothesis Formula</h4>
               <p className="font-serif text-[22px] md:text-[26px] leading-[34px] text-[var(--cs-primary)] font-light">
                 “If Sam downloads the Gallery app, uploads his bio and interacts with others, then he will feel consecrated as an artist.”
               </p>
@@ -455,7 +455,7 @@ export default function NoFuxsGalleryPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 User Flow
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -503,7 +503,7 @@ export default function NoFuxsGalleryPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
           <div className="space-y-3">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               Usability Testing & Recommendations
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -565,7 +565,7 @@ export default function NoFuxsGalleryPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 Style Sheet
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -612,11 +612,11 @@ export default function NoFuxsGalleryPage() {
               <h4 className="font-bold text-[15px] text-[var(--cs-primary)]">SF Pro Display Hierarchy</h4>
               <div className="space-y-2">
                 <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">Artist Titles (25px / 21px)</span>
+                  <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">Artist Titles (25px / 21px)</span>
                   <p className="font-serif text-[20px] text-[var(--cs-primary)]">AaBc (SF Pro)</p>
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">Controls & Labels (16px / 14px)</span>
+                  <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">Controls & Labels (16px / 14px)</span>
                   <p className="font-sans text-[16px] text-[var(--cs-primary)]">AaBc (SF Pro)</p>
                 </div>
               </div>
@@ -653,7 +653,7 @@ export default function NoFuxsGalleryPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left font-sans">
           <div className="space-y-3">
-            <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] text-[11px] tracking-[2.5px] uppercase">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               Current Project Status
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -679,13 +679,13 @@ export default function NoFuxsGalleryPage() {
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
                   ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[#B8F74B]/15 text-[#B8F74B]"
+                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
                 }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
                 }`}
             >
               Other Case Studies

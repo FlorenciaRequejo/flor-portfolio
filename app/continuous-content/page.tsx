@@ -204,7 +204,7 @@ export default function ContinuousContentPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
-              <span className="text-[#B8F74B] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+              <span className="text-[var(--cs-highlight)] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
                 AI PRODUCT + CONTENT OPERATIONS
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
@@ -233,7 +233,7 @@ export default function ContinuousContentPage() {
             {/* Metadata Grid */}
             <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Competencies
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -245,7 +245,7 @@ export default function ContinuousContentPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -254,7 +254,7 @@ export default function ContinuousContentPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Deliverables
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -265,7 +265,7 @@ export default function ContinuousContentPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Tech Integrations
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -318,7 +318,7 @@ export default function ContinuousContentPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 01. The Problem
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -348,10 +348,10 @@ export default function ContinuousContentPage() {
                 </div>
               </div>
               <div className="space-y-3">
-                <span className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-bold">0% Time Left For (Marketing)</span>
+                <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">0% Time Left For (Marketing)</span>
                 <div className="flex flex-wrap gap-2 text-[12px]">
                   {["Keyword Analytics", "Drafting Blogs", "Social Campaigns", "Sourcing Images", "Post Scheduling"].map((txt) => (
-                    <span key={txt} className="px-3 py-1 rounded bg-[#B8F74B]/10 text-[#B8F74B] border border-[#B8F74B]/15">{txt}</span>
+                    <span key={txt} className="px-3 py-1 rounded bg-[var(--cs-highlight)]/10 text-[var(--cs-highlight)] border border-[var(--cs-highlight)]/15">{txt}</span>
                   ))}
                 </div>
               </div>
@@ -371,7 +371,7 @@ export default function ContinuousContentPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 02. Reframing the Strategy
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -396,8 +396,8 @@ export default function ContinuousContentPage() {
             </div>
 
             <div className="p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-4">
-              <span className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-bold">Proactive Pipeline (This System)</span>
-              <div className="flex items-center gap-2 text-[13px] text-[#B8F74B]">
+              <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">Proactive Pipeline (This System)</span>
+              <div className="flex items-center gap-2 text-[13px] text-[var(--cs-highlight)]">
                 <span>Strategy</span> · <span>Extract Topic</span> · <span>Proactive Gen</span> · <span>Inbox Alert</span> · <span>Approval</span>
               </div>
               <p className="text-[12px] text-[var(--cs-muted)] font-light italic">Result: Continuous updates published consistently with under 5 minutes of work.</p>
@@ -417,7 +417,7 @@ export default function ContinuousContentPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 03. Content Funnel
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -436,19 +436,19 @@ export default function ContinuousContentPage() {
             <h4 className="font-serif text-[22px] text-[var(--cs-primary)] font-medium border-b border-[var(--cs-border)] pb-2">Pipeline Content Funnel</h4>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-[12px]">
               <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[#B8F74B] font-bold">1. STRATEGY INPUT</span>
+                <span className="text-[var(--cs-highlight)] font-bold">1. STRATEGY INPUT</span>
                 <p className="text-[var(--cs-muted)] font-light">Define target services, business locations, and SEO clusters.</p>
               </div>
               <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[#B8F74B] font-bold">2. AUTO GENERATION</span>
+                <span className="text-[var(--cs-highlight)] font-bold">2. AUTO GENERATION</span>
                 <p className="text-[var(--cs-muted)] font-light">Generate comprehensive blog article drafts and imagery packs.</p>
               </div>
               <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[#B8F74B] font-bold">3. SOCIAL DERIVATIVES</span>
+                <span className="text-[var(--cs-highlight)] font-bold">3. SOCIAL DERIVATIVES</span>
                 <p className="text-[var(--cs-muted)] font-light">Extract 5 tailored social media posts based on the main draft.</p>
               </div>
               <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[#B8F74B] font-bold">4. APPROVAL & POST</span>
+                <span className="text-[var(--cs-highlight)] font-bold">4. APPROVAL & POST</span>
                 <p className="text-[var(--cs-muted)] font-light">Owner reviews draft in web portal and schedules publishing.</p>
               </div>
             </div>
@@ -466,7 +466,7 @@ export default function ContinuousContentPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="text-left space-y-3">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               04. System Architecture
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -511,7 +511,7 @@ export default function ContinuousContentPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 05. UX / UI Design
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -530,19 +530,19 @@ export default function ContinuousContentPage() {
             <h4 className="font-serif text-[22px] text-[var(--cs-primary)] font-medium border-b border-[var(--cs-border)] pb-2">The Approval Flow</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-[12px] tracking-wide">
               <div>
-                <span className="text-[#B8F74B] font-bold block mb-1">1. ALERT</span>
+                <span className="text-[var(--cs-highlight)] font-bold block mb-1">1. ALERT</span>
                 <p className="text-[var(--cs-muted)] font-light">Receive email: "New content drafted for approval."</p>
               </div>
               <div>
-                <span className="text-[#B8F74B] font-bold block mb-1">2. REVIEW</span>
+                <span className="text-[var(--cs-highlight)] font-bold block mb-1">2. REVIEW</span>
                 <p className="text-[var(--cs-muted)] font-light">Read blog draft and compare social post alternatives.</p>
               </div>
               <div>
-                <span className="text-[#B8F74B] font-bold block mb-1">3. MODIFY</span>
+                <span className="text-[var(--cs-highlight)] font-bold block mb-1">3. MODIFY</span>
                 <p className="text-[var(--cs-muted)] font-light">Make quick edits directly in the textual textareas.</p>
               </div>
               <div>
-                <span className="text-[#B8F74B] font-bold block mb-1">4. COMMIT</span>
+                <span className="text-[var(--cs-highlight)] font-bold block mb-1">4. COMMIT</span>
                 <p className="text-[var(--cs-muted)] font-light">Click Approve to queue publication automatically.</p>
               </div>
             </div>
@@ -584,7 +584,7 @@ export default function ContinuousContentPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 07. Contribution
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -621,7 +621,7 @@ export default function ContinuousContentPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
           <div className="space-y-3">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               08. Evolving Status
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -633,7 +633,7 @@ export default function ContinuousContentPage() {
           </div>
 
           <div className="p-8 rounded-[24px] border border-[var(--cs-primary)]/20 bg-[var(--cs-accent-bg)]/10 text-center space-y-3">
-            <h4 className="font-sans text-[11px] uppercase tracking-widest text-[#B8F74B] font-bold">The Bigger Opportunity</h4>
+            <h4 className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">The Bigger Opportunity</h4>
             <p className="font-serif text-[24px] md:text-[32px] leading-tight text-[var(--cs-primary)]">
               “The goal wasn't to generate more content. It was to design a system that makes consistent digital presence easier to maintain.”
             </p>
@@ -654,13 +654,13 @@ export default function ContinuousContentPage() {
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
                   ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[#B8F74B]/15 text-[#B8F74B]"
+                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
                 }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
                 }`}
             >
               Other Case Studies

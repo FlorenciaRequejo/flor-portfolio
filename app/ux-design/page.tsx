@@ -211,7 +211,7 @@ export default function UXDesignPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left">
-              <span className="text-[#B8F74B] font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+              <span className="text-[var(--cs-highlight)] font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
                 CASE STUDY / UX/UI & PRODUCT DESIGN
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
@@ -233,7 +233,7 @@ export default function UXDesignPage() {
             {/* Metadata Grid */}
             <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 mt-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Role
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -244,7 +244,7 @@ export default function UXDesignPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -254,7 +254,7 @@ export default function UXDesignPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Client
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -263,7 +263,7 @@ export default function UXDesignPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Technologies
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
@@ -301,7 +301,7 @@ export default function UXDesignPage() {
           {/* Challenge / Solution Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-left">
             <div className="space-y-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2.5px] uppercase">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 The Challenge
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -313,7 +313,7 @@ export default function UXDesignPage() {
             </div>
 
             <div className="space-y-4">
-              <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2.5px] uppercase">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 The Solution
               </span>
               <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -351,7 +351,7 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 01. Research & Empathize
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -417,7 +417,7 @@ export default function UXDesignPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="text-left space-y-2">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               User Profiles
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -433,7 +433,7 @@ export default function UXDesignPage() {
                   <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Sarah</h3>
                   <span className="font-sans text-[12px] text-[var(--cs-muted)]">Age: 35 · Auckland</span>
                 </div>
-                <p className="font-sans text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <p className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Retail Associate · Low Income
                 </p>
                 <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
@@ -458,7 +458,7 @@ export default function UXDesignPage() {
                   <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Jack</h3>
                   <span className="font-sans text-[12px] text-[var(--cs-muted)]">Age: 45 · Auckland</span>
                 </div>
-                <p className="font-sans text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <p className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Warehouse Worker · Low Income
                 </p>
                 <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
@@ -483,7 +483,7 @@ export default function UXDesignPage() {
                   <h3 className="font-serif text-[24px] text-[var(--cs-primary)]">Suzy</h3>
                   <span className="font-sans text-[12px] text-[var(--cs-muted)]">Age: 29 · Auckland</span>
                 </div>
-                <p className="font-sans text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">
+                <p className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Nurse · Low Income · Maori
                 </p>
                 <blockquote className="font-serif italic text-[15px] text-[var(--cs-primary)]">
@@ -518,13 +518,13 @@ export default function UXDesignPage() {
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
             <div className="space-y-3">
-              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[#B8F74B]">Suzy's Problem Statement</h4>
+              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[var(--cs-highlight)]">Suzy's Problem Statement</h4>
               <p className="font-serif text-[22px] md:text-[26px] leading-[34px] text-[var(--cs-primary)] font-light">
                 “Suzy is a full-time nurse who needs a solution to her struggles with finding access to authentic ingredients and cultural resources because she wants to connect with her cultural heritage through food and provide her grandmother with healthy, traditional meals on a budget.”
               </p>
             </div>
             <div className="space-y-3">
-              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[#B8F74B]">Hypothesis Formula</h4>
+              <h4 className="font-sans text-[12px] font-bold tracking-widest uppercase text-[var(--cs-highlight)]">Hypothesis Formula</h4>
               <p className="font-serif text-[22px] md:text-[26px] leading-[34px] text-[var(--cs-primary)] font-light">
                 “If Suzy is concerned about preserving traditional Maori food practices and values within her tight budget, then she needs a way to access authentic ingredients and cultural resources at low prices.”
               </p>
@@ -544,7 +544,7 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 03. Design Architecture
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -591,11 +591,11 @@ export default function UXDesignPage() {
               <h4 className="font-sans text-[15px] font-bold text-[var(--cs-primary)]">Typography</h4>
               <div className="space-y-2">
                 <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">Title Headers</span>
+                  <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">Title Headers</span>
                   <p className="font-serif text-[20px] text-[var(--cs-primary)]">Cambria (AaBbCc)</p>
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[#B8F74B] font-semibold">Body & App Controls</span>
+                  <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">Body & App Controls</span>
                   <p className="font-sans text-[16px] text-[var(--cs-primary)]">Roboto (AaBbCc)</p>
                 </div>
               </div>
@@ -637,7 +637,7 @@ export default function UXDesignPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
           <div className="space-y-3">
-            <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2.5px] uppercase">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               04. Testing & Iteration
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-tight font-normal">
@@ -657,25 +657,25 @@ export default function UXDesignPage() {
               </h3>
               <div className="space-y-4">
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">FINDING 01</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 01</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Onboarding Friction (3/5 users):</strong> Users disliked having to enter family size, allergy lists, and activity levels prior to previewing any recipe catalog.
                   </p>
                 </div>
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">FINDING 02</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 02</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Trading Navigation (4/5 users):</strong> The transition between searching stores (Shop) and coordinate swaps (Trade) was confusing. Users expected a cleaner dashboard switch.
                   </p>
                 </div>
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">FINDING 03</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 03</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Family Settings (4/5 users):</strong> Managing specific allergies for multiple family members was complex and tedious within the main profile settings tab.
                   </p>
                 </div>
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">FINDING 04</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 04</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Location Privacy (1/5 users):</strong> Users expressed discomfort with always-on geolocation permissions and requested address search fallback options.
                   </p>
@@ -690,25 +690,25 @@ export default function UXDesignPage() {
               </h3>
               <div className="space-y-4">
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">SOLUTION 01</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 01</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Guest Access & Home Preview:</strong> Implemented a user registration flow that allows guests to access the recipes page before committing to planning parameters.
                   </p>
                 </div>
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">SOLUTION 02</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 02</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Direct Header Swap Switch:</strong> Redesigned the top navigation header with a clean, segmented tab controller: [Shop | Trade] for instantaneous swapping.
                   </p>
                 </div>
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">SOLUTION 03</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 03</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Interactive Family Grid:</strong> Integrated a family sizing grid directly in the onboarding flow, with visual cards for each member ("Adult 1", "Child 1") mapping customized requirements.
                   </p>
                 </div>
                 <div>
-                  <span className="font-mono text-[12px] text-[#B8F74B] font-bold block mb-1">SOLUTION 04</span>
+                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 04</span>
                   <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
                     <strong>Manual Geolocation Input:</strong> Added location preference settings allowing address input and maximum travel search radius constraints (e.g. "Distance: 20Km").
                   </p>
@@ -729,7 +729,7 @@ export default function UXDesignPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="text-left space-y-2">
-            <span className="font-sans text-[12px] md:text-[14px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
               05. High-Fidelity Design
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
@@ -755,7 +755,7 @@ export default function UXDesignPage() {
             {/* Description Right */}
             <div className="space-y-6 text-left">
               <div className="space-y-2">
-                <span className="inline-block px-3 py-1 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/10 text-[var(--cs-primary)] font-sans font-medium text-[11px] tracking-[2px] uppercase">
+                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                   Featured Flow
                 </span>
                 <h3 className="font-serif text-[28px] text-[var(--cs-primary)]">Card Pop-up Menu</h3>
@@ -800,14 +800,14 @@ export default function UXDesignPage() {
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${
                 isReadingMode
                   ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[#B8F74B]/15 text-[#B8F74B]"
+                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
               }`}
             >
               Other Projects
             </span>
             <h2
               className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${
-                isReadingMode ? "text-[#1B237A]" : "text-[#B8F74B]"
+                isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
               }`}
             >
               Other Case Studies
