@@ -503,7 +503,7 @@ export default function UXDesignPage() {
           {/* Featured Low-fi Image */}
           <div className="mt-8">
             <Image
-              src="/bite-app-mockup.jpg"
+              src="/bite-ideation.webp"
               alt="Bite App Low-fidelity Prototype Showcase"
               width={0}
               height={0}
@@ -524,87 +524,51 @@ export default function UXDesignPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            <div className="lg:col-span-5 flex flex-col gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
+            <div className="md:col-span-12 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                04. Design Architecture
+                3. Test
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Cohesive Styling & Layout Schemas
+                Usability study: findings
               </h2>
-            </div>
-            <div className="lg:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                As the Lead UI Designer, I created a cohesive style guide and design sheet to keep the mobile platform visually clean, modern, and easy to navigate under high cognitive loads (such as grocery shopping).
-              </p>
+                I conducted a moderated research study to evaluate users' ability to complete key tasks and gather feedback on specific features, such as the transition from the Shop to Trade function and the meal plan generation feature              </p>
             </div>
           </div>
 
-          {/* Style Sheet Specifics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            {/* Color Palette */}
-            <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-4">
-              <h4 className="font-sans text-[15px] font-bold text-[var(--cs-primary)]">Color Palette</h4>
-              <div className="grid grid-cols-4 gap-2">
-                <div className="flex flex-col items-center">
-                  <div className="w-full aspect-square rounded bg-[#ED1C24] border border-white/10" />
-                  <span className="text-[10px] mt-1 font-mono">#ED1C24</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-full aspect-square rounded bg-[#1A1A1A] border border-white/10" />
-                  <span className="text-[10px] mt-1 font-mono">#1A1A1A</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-full aspect-square rounded bg-[#8A9F89] border border-white/10" />
-                  <span className="text-[10px] mt-1 font-mono">#8A9F89</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-full aspect-square rounded bg-[#F4BEA6] border border-white/10" />
-                  <span className="text-[10px] mt-1 font-mono">#F4BEA6</span>
-                </div>
-              </div>
-              <p className="font-sans text-[12px] text-[var(--cs-muted)] font-light leading-relaxed">
-                A warm, fresh palette consisting of Bite Red (primary action), Dark Charcoal (high contrast text), Muted Sage (safety/health), and Soft Peach (warm secondary accent).
-              </p>
-            </div>
+          {/* Featured Image */}
+          <div className="mt-8">
+            <Image
+              src="/bite-test-findings.webp"
+              alt="Bite App User Experience Showcase"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
 
-            {/* Typography Pairing */}
-            <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-4">
-              <h4 className="font-sans text-[15px] font-bold text-[var(--cs-primary)]">Typography</h4>
-              <div className="space-y-2">
-                <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">Title Headers</span>
-                  <p className="font-serif text-[20px] text-[var(--cs-primary)]">Cambria (AaBbCc)</p>
-                </div>
-                <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">Body & App Controls</span>
-                  <p className="font-sans text-[16px] text-[var(--cs-primary)]">Roboto (AaBbCc)</p>
-                </div>
-              </div>
-              <p className="font-sans text-[12px] text-[var(--cs-muted)] font-light leading-relaxed">
-                Combining a traditional, elegant Serif (Cambria) for content headers and recipe cards with a highly legible, clean Sans-serif (Roboto) for UI states and body readouts.
-              </p>
-            </div>
-
-            {/* Categorization Tags */}
-            <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-4 flex flex-col justify-between">
-              <div>
-                <h4 className="font-sans text-[15px] font-bold text-[var(--cs-primary)] mb-2">Dietary & Cultural Variables</h4>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Kai", "Just Food", "Vegan", "Vegetarian", "Maori", "Gluten Free", "No Nuts", "No Eggs"].map((label) => (
-                    <span
-                      key={label}
-                      className="px-2 py-0.5 rounded bg-white/10 text-[10px] font-mono text-[var(--cs-primary)] font-light"
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <p className="font-sans text-[12px] text-[var(--cs-muted)] font-light leading-relaxed">
-                Standardized tags map cleanly across user preferences and meal cards to filter out undesired ingredients immediately and maintain custom constraints.
-              </p>
-            </div>
+          {/* Recommendations Block */}
+          <div className="mt-16 flex flex-col items-center text-center max-w-3xl mx-auto space-y-8">
+            <h3 className="font-serif text-[26px] md:text-[34px] text-[var(--cs-highlight)] tracking-tight font-normal italic border-b border-[var(--cs-highlight)]/20 pb-2 w-fit px-8">
+              Recomendations:
+            </h3>
+            <ul className="space-y-6 text-left font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light w-full">
+              {[
+                "Implementing a user registration feature that allows customers to access a homepage before creating a meal plan",
+                "Enhance the process for uploading and managing information for multiple family members",
+                "Provide an option for users to opt-out of sharing their location with the app for privacy reasons"
+              ].map((rec, index) => (
+                <li key={index} className="flex gap-4 items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--cs-highlight-bg)] border border-[var(--cs-highlight)]/30 flex items-center justify-center text-[12px] font-semibold text-[var(--cs-highlight)]">
+                    {index + 1}
+                  </span>
+                  <p>{rec}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </motion.section>
