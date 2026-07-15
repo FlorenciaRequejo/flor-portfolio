@@ -573,6 +573,77 @@ export default function UXDesignPage() {
         </div>
       </motion.section>
 
+      {/* LOW-FI PROTOTYPE #2 */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)]"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
+          {/* Header */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
+            <div className="lg:col-span-12 flex flex-col gap-2">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                06. Low-fi Prototype #2
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight mb-4">
+                Low-fi Prototype #2
+              </h2>
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                After conducting a usability study on the initial prototype, I have developed a second low-fidelity prototype incorporating the improvements and changes identified in the study findings. This prototype will be used as the foundation for creating a high-fidelity prototype.
+              </p>
+            </div>
+          </div>
+
+          {/* 3 Columns Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+            {[
+              {
+                num: "1",
+                title: "Home page",
+                text: "Upon successful login, users are directed to the home page, where they can browse a variety of recipes, create a personalized meal plan, and access the trading area."
+              },
+              {
+                num: "2",
+                title: "Family Members",
+                text: "Users can now easily add and manage the settings for each member of their family in the meal plan creation settings."
+              },
+              {
+                num: "3",
+                title: "Location",
+                text: "Users now have the option to manually enter their address as an alternative to sharing their location, allowing for greater privacy control."
+              }
+            ].map((col) => (
+              <div
+                key={col.num}
+                className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] flex flex-col justify-between min-h-[220px]"
+              >
+                <div>
+                  <span className="text-[28px] font-serif text-[var(--cs-primary)] block mb-2">{col.num}</span>
+                  <h4 className="font-sans text-[15px] font-semibold text-[var(--cs-primary)] mb-2">{col.title}</h4>
+                  <p className="font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] font-light">{col.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Featured Low-fi Image */}
+          <div className="mt-8">
+            <Image
+              src="/bite-ideation.webp"
+              alt="Bite App Low-fidelity Prototype Showcase"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        </div>
+      </motion.section>
+
       {/* ITERATIVE STUDY & LOW-FI PROTOTYPES */}
       <motion.section
         initial="hidden"
@@ -676,7 +747,7 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="text-left space-y-2">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              06. High-Fidelity Design
+              07. High-Fidelity Design
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
               Simplifying the Mobile Flow
