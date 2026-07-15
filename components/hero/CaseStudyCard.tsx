@@ -55,8 +55,15 @@ export default function CaseStudyCard({
     },
   };
 
+  const isExternal = href.startsWith("http");
+
   return (
-    <Link href={href} className="w-full h-full block">
+    <Link
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      className="w-full h-full block"
+    >
       <motion.div
         variants={cardVariants}
         initial="initial"
