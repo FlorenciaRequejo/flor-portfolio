@@ -761,14 +761,14 @@ export default function UXDesignPage() {
             </p>
           </div>
 
-          {/* 3 Mockups Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8">
+          {/* 3 Mockups Stack */}
+          <div className="flex flex-col gap-8 md:gap-12 mt-8">
             {[
               { src: "/bite-mockup1.webp", alt: "Bite App Mockup 1" },
               { src: "/bite-mockup2.webp", alt: "Bite App Mockup 2" },
               { src: "/bite-mockup3.webp", alt: "Bite App Mockup 3" }
             ].map((mockup, index) => (
-              <div key={index} className="overflow-hidden rounded-[24px] border border-[var(--cs-border)] bg-[var(--cs-card-bg)] shadow-sm">
+              <div key={index} className="overflow-hidden rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)] bg-[var(--cs-card-bg)] shadow-sm">
                 <Image
                   src={mockup.src}
                   alt={mockup.alt}
