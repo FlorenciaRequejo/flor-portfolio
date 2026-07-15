@@ -644,7 +644,7 @@ export default function UXDesignPage() {
         </div>
       </motion.section>
 
-      {/* ITERATIVE STUDY & LOW-FI PROTOTYPES */}
+      {/* DESIGN & STYLING */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -655,83 +655,87 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
           <div className="space-y-3">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              05. Testing & Iteration
+              06. Design & Styling
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-tight font-normal">
-              Usability Studies & Critical Design Adjustments
+              Style Sheet
             </h2>
             <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light max-w-4xl">
-              I conducted a moderated usability research study to evaluate users' interaction with the initial wireframes, focus on the transition from the Shop list to the Local Trade areas, and analyze the meal plan builder. This testing yielded valuable insights that reshaped key product elements.
+              As the lead UI designer on this project, I created the style sheet and components that gave the app its cohesive look and feel.
             </p>
           </div>
 
-          {/* Test Results vs Solutions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-            {/* Low-Fi Usability Pain Points */}
-            <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] space-y-6">
-              <h3 className="font-serif text-[24px] text-[#FFB6C1] border-b border-[var(--cs-border)] pb-2">
-                Usability Study Findings
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 01</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Onboarding Friction (3/5 users):</strong> Users disliked having to enter family size, allergy lists, and activity levels prior to previewing any recipe catalog.
-                  </p>
-                </div>
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 02</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Trading Navigation (4/5 users):</strong> The transition between searching stores (Shop) and coordinate swaps (Trade) was confusing. Users expected a cleaner dashboard switch.
-                  </p>
-                </div>
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 03</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Family Settings (4/5 users):</strong> Managing specific allergies for multiple family members was complex and tedious within the main profile settings tab.
-                  </p>
-                </div>
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">FINDING 04</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Location Privacy (1/5 users):</strong> Users expressed discomfort with always-on geolocation permissions and requested address search fallback options.
-                  </p>
-                </div>
-              </div>
-            </div>
+          {/* Featured Image */}
+          <div className="mt-8">
+            <Image
+              src="/bite-style.webp"
+              alt="Bite App Style Sheet Showcase"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        </div>
+      </motion.section>
 
-            {/* Low-Fi Prototype #2 Solutions */}
-            <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] space-y-6">
-              <h3 className="font-serif text-[24px] text-[var(--cs-primary)] border-b border-[var(--cs-border)] pb-2">
-                Prototype #2 Implementations
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 01</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Guest Access & Home Preview:</strong> Implemented a user registration flow that allows guests to access the recipes page before committing to planning parameters.
-                  </p>
-                </div>
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 02</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Direct Header Swap Switch:</strong> Redesigned the top navigation header with a clean, segmented tab controller: [Shop | Trade] for instantaneous swapping.
-                  </p>
-                </div>
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 03</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Interactive Family Grid:</strong> Integrated a family sizing grid directly in the onboarding flow, with visual cards for each member ("Adult 1", "Child 1") mapping customized requirements.
-                  </p>
-                </div>
-                <div>
-                  <span className="font-mono text-[12px] text-[var(--cs-highlight)] font-bold block mb-1">SOLUTION 04</span>
-                  <p className="font-sans text-[14px] text-[var(--cs-muted)] font-light leading-relaxed">
-                    <strong>Manual Geolocation Input:</strong> Added location preference settings allowing address input and maximum travel search radius constraints (e.g. "Distance: 20Km").
-                  </p>
-                </div>
-              </div>
+      {/* SECOND TESTING & ITERATION */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)]"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
+          {/* Header */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
+            <div className="md:col-span-12 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                07. Testing
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                Usability study: findings
+              </h2>
+              <p>
+                I conducted a moderated research study to evaluate users' ability to complete key tasks and gather feedback on specific features, such as generating a meal plan and check recipes.
+              </p>
             </div>
+          </div>
+
+          {/* Featured Image */}
+          <div className="mt-8">
+            <Image
+              src="/usability findings.webp"
+              alt="Bite App Usability Findings Showcase"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+
+          {/* Recommendations Block */}
+          <div className="mt-16 flex flex-col items-center text-center max-w-3xl mx-auto space-y-8">
+            <h3 className="font-serif text-[26px] md:text-[34px] text-[var(--cs-primary)] tracking-tight font-normal border-b border-[var(--cs-primary)]/20 pb-2 w-fit px-8">
+              Recommendations:
+            </h3>
+            <ul className="space-y-6 text-left font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light w-full">
+              {[
+                "Include menu on meal card with options to include it on a meal plan",
+                "Add option for users to add their own recipe",
+                "Expand food type variables"
+              ].map((rec, index) => (
+                <li key={index} className="flex gap-4 items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/30 flex items-center justify-center text-[12px] font-semibold text-[var(--cs-primary)]">
+                    {index + 1}
+                  </span>
+                  <p>{rec}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </motion.section>
@@ -747,7 +751,7 @@ export default function UXDesignPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="text-left space-y-2">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              07. High-Fidelity Design
+              08. High-Fidelity Design
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
               Simplifying the Mobile Flow
