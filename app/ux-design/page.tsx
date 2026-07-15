@@ -748,58 +748,99 @@ export default function UXDesignPage() {
         variants={fadeInVariants}
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
-          <div className="text-left space-y-2">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
+          <div className="text-left space-y-3">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              08. High-Fidelity Design
+              08. Mockups
             </span>
-            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-              Simplifying the Mobile Flow
+            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-tight font-normal">
+              Simplifying the design
             </h2>
             <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light max-w-4xl">
-              By removing layout clutter (such as excessive information cards), the high-fidelity UI guides users cleanly towards meal creation, grocery list compiling, and item trading.
+              I simplified the initial design of the app to focus on the key functions and reduce distractions for the users. I removed the information panel and replaced it with a direct function for creating meal plans. Now, users can create multiple meal plans and easily access them from the home page.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Mockup Left */}
-            <Image
-              src="/bite-app-mockup.jpg"
-              alt="Bite App High-Fidelity UI Screens"
-              width={0}
-              height={0}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="w-full h-auto rounded-[24px] md:rounded-[36px]"
-              style={{ width: '100%', height: 'auto' }}
-            />
+          {/* 3 Mockups Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8">
+            {[
+              { src: "/bite-mockup1.webp", alt: "Bite App Mockup 1" },
+              { src: "/bite-mockup2.webp", alt: "Bite App Mockup 2" },
+              { src: "/bite-mockup3.webp", alt: "Bite App Mockup 3" }
+            ].map((mockup, index) => (
+              <div key={index} className="overflow-hidden rounded-[24px] border border-[var(--cs-border)] bg-[var(--cs-card-bg)] shadow-sm">
+                <Image
+                  src={mockup.src}
+                  alt={mockup.alt}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className="w-full h-auto object-cover"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
 
-            {/* Description Right */}
-            <div className="space-y-6 text-left">
-              <div className="space-y-2">
-                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                  Featured Flow
-                </span>
-                <h3 className="font-serif text-[28px] text-[var(--cs-primary)]">Card Pop-up Menu</h3>
-                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                  A floating pop-up menu was added to each recipe card, allowing users to perform frequent tasks instantly. Without leaving the catalog, users can: Add a recipe to their plan, Save it for later, View details, Share, or Like the card. This minimized screen clutter and kept onboarding steps extremely fluid.
-                </p>
+      {/* FIGMA & BEHANCE LINKS INDEX */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)]"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
+          <div className="p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-8 text-left max-w-4xl mx-auto">
+            <h3 className="font-serif text-[24px] text-[var(--cs-primary)] border-b border-[var(--cs-border)] pb-3">
+              Figma Workspace & Case Study
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+              {/* Left Column: Figma files */}
+              <div className="space-y-4">
+                <h4 className="font-sans text-[12px] font-bold tracking-wider uppercase text-[var(--cs-highlight)]">
+                  Figma Work Files
+                </h4>
+                <ul className="space-y-3 font-sans text-[14px]">
+                  {[
+                    { label: "Wireframes", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=47-38&m=dev&t=tXE5hBvipYofyxsk-1" },
+                    { label: "Test prototype", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=58-2702&m=dev&t=tXE5hBvipYofyxsk-1" },
+                    { label: "Low-fi prototype", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=65-14192&m=dev&t=tXE5hBvipYofyxsk-1" },
+                    { label: "Mockup", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=127-73&m=dev&t=tXE5hBvipYofyxsk-1" }
+                  ].map((link, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                      <span className="text-[var(--cs-highlight)]">•</span>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-[var(--cs-primary)] underline hover:opacity-85 transition-opacity">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-3">
-                <h4 className="font-sans text-[15px] font-bold text-[var(--cs-primary)]">Interactive Mockup Links</h4>
-                <p className="font-sans text-[13px] text-[var(--cs-muted)] font-light leading-relaxed">
-                  The final mobile prototype presents polished visual flows for meal plans, ingredients sourcing, and Maori custom recipes lookup.
-                </p>
-                <div>
-                  <a
-                    href="https://shorturl.at/gtAP0"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] hover:bg-[var(--cs-primary)] hover:text-[var(--cs-bg)] font-sans font-medium text-[11px] uppercase tracking-wider items-center justify-center transition-all duration-300"
-                  >
-                    View Figma Prototype
-                  </a>
-                </div>
+              {/* Right Column: Iterations & Behance */}
+              <div className="space-y-4">
+                <h4 className="font-sans text-[12px] font-bold tracking-wider uppercase text-[var(--cs-highlight)]">
+                  Prototypes & Publication
+                </h4>
+                <ul className="space-y-3 font-sans text-[14px]">
+                  {[
+                    { label: "Iteration: prototype 1", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=320-4312&m=dev&t=tXE5hBvipYofyxsk-1" },
+                    { label: "Prototype 2", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=383-2536&m=dev&t=tXE5hBvipYofyxsk-1" },
+                    { label: "Style sheet", url: "https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=137-215&m=dev&t=tXE5hBvipYofyxsk-1" },
+                    { label: "Behance Case Study", url: "https://www.behance.net/gallery/168776561/Bite-App" }
+                  ].map((link, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                      <span className="text-[var(--cs-highlight)]">•</span>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-[var(--cs-primary)] underline hover:opacity-85 transition-opacity font-medium">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
