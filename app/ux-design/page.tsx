@@ -552,7 +552,7 @@ export default function UXDesignPage() {
 
           {/* Recommendations Block */}
           <div className="mt-16 flex flex-col items-center text-center max-w-3xl mx-auto space-y-8">
-            <h3 className="font-serif text-[26px] md:text-[34px] text-[var(--cs-highlight)] tracking-tight font-normal italic border-b border-[var(--cs-highlight)]/20 pb-2 w-fit px-8">
+            <h3 className="font-serif text-[26px] md:text-[34px] text-[var(--cs-primary)] tracking-tight font-normal border-b border-[var(--cs-primary)]/20 pb-2 w-fit px-8">
               Recomendations:
             </h3>
             <ul className="space-y-6 text-left font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light w-full">
@@ -562,7 +562,7 @@ export default function UXDesignPage() {
                 "Provide an option for users to opt-out of sharing their location with the app for privacy reasons"
               ].map((rec, index) => (
                 <li key={index} className="flex gap-4 items-start">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--cs-highlight-bg)] border border-[var(--cs-highlight)]/30 flex items-center justify-center text-[12px] font-semibold text-[var(--cs-highlight)]">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/30 flex items-center justify-center text-[12px] font-semibold text-[var(--cs-primary)]">
                     {index + 1}
                   </span>
                   <p>{rec}</p>
