@@ -6,8 +6,14 @@ import CaseStudyCard from "./CaseStudyCard";
 import { motion, useScroll, useTransform, useMotionValue, useReducedMotion } from "framer-motion";
 import { caseStudyCards } from "@/lib/caseStudies";
 
+const homeCards = caseStudyCards.filter(
+  (card) =>
+    card.href === "/web-design-and-development" ||
+    card.href === "/brand-identity" ||
+    card.href === "/ux-design"
+);
 
-const duplicatedCaseStudyCards = [...caseStudyCards, ...caseStudyCards, ...caseStudyCards];
+const duplicatedCaseStudyCards = [...homeCards, ...homeCards, ...homeCards];
 
 
 
@@ -148,7 +154,7 @@ export default function SelectedWork() {
     if (cards.length < 2) return;
     const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
     if (cardWidthActual > 0) {
-      const originalCount = caseStudyCards.length;
+      const originalCount = homeCards.length;
       setIsSnapping(false);
       const targetScroll = cardWidthActual * originalCount + index * cardWidthActual;
       container.scrollTo({
@@ -239,7 +245,7 @@ export default function SelectedWork() {
         const flexWrapper = container.firstElementChild as HTMLElement;
         if (flexWrapper) {
           const cards = Array.from(flexWrapper.children) as HTMLElement[];
-          const originalCount = caseStudyCards.length;
+          const originalCount = homeCards.length;
           if (cards.length >= originalCount * 2) {
             const child1 = cards[0];
             const child2 = cards[originalCount];
@@ -442,7 +448,7 @@ export default function SelectedWork() {
     const flexWrapper = container.firstElementChild as HTMLElement;
     if (!flexWrapper) return;
     const cards = Array.from(flexWrapper.children) as HTMLElement[];
-    const originalCount = caseStudyCards.length;
+    const originalCount = homeCards.length;
     if (cards.length < originalCount * 2) return;
 
     const child1 = cards[0];
@@ -476,7 +482,7 @@ export default function SelectedWork() {
 
     const initScroll = () => {
       const cards = Array.from(flexWrapper.children) as HTMLElement[];
-      const originalCount = caseStudyCards.length;
+      const originalCount = homeCards.length;
       if (cards.length >= originalCount * 2) {
         const child1 = cards[0];
         const child2 = cards[originalCount];

@@ -47,25 +47,30 @@ export default function ProjectsLandingPage() {
         className="w-full pb-24"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[5px]">
-            {caseStudyCards.map((project) => (
-              <Link
-                key={project.title}
-                href={project.href}
-                className="group flex flex-col cursor-pointer select-none"
-              >
-                {/* Media Container */}
-                <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden border border-[#FDABFF]/20 shadow-sm transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-md">
-                  <Image
-                    src={project.imageSrc}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-              </Link>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {caseStudyCards.map((project) => {
+              const isExternal = project.href.startsWith("http");
+              return (
+                <Link
+                  key={project.title}
+                  href={project.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="group flex flex-col cursor-pointer select-none"
+                >
+                  {/* Media Container */}
+                  <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden border border-[#FDABFF]/20 shadow-sm transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-md">
+                    <Image
+                      src={project.imageSrc}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </motion.section>
