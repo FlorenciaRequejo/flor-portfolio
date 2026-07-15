@@ -27,11 +27,11 @@ export const caseStudyCards: CaseStudyData[] = [
     tags: ["Brand Strategy", "Visual Identity", "Design System"],
   },
   {
-    title: "UX/UI Design: Product Case Study",
+    title: "Helping people face grocery-related financial challenges in an economic recession.",
     description:
       "A budget-friendly meal planning and trading mobile app designed through user research, empathy mapping, wireframing, and interactive prototyping.",
     href: "/ux-design",
-    imageSrc: "/Ux and User Experience.png",
+    imageSrc: "/Bite-Cover-new.webp",
     videoSrc: "/Ux and User Experience.mp4",
     tags: ["Product Design", "UX/UI", "Prototyping"],
   },

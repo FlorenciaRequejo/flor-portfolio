@@ -325,7 +325,7 @@ export default function UXDesignPage() {
           {/* Featured Image */}
           <div className="mt-8">
             <Image
-              src="/Bite-cover.webp"
+              src="/Bite-Cover-new.webp"
               alt="Bite App User Experience Showcase"
               width={0}
               height={0}
