@@ -195,6 +195,12 @@ export default function WebDesignAndDevelopmentPage() {
             setJustAutoActivated(false);
           }, 3000);
         }
+      } else {
+        if (isReadingMode) {
+          setIsReadingMode(false);
+        }
+        hasAutoActivatedRef.current = false;
+        hasManuallyToggledRef.current = false;
       }
     };
 
