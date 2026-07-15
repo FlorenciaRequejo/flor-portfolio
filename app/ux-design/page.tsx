@@ -632,7 +632,7 @@ export default function UXDesignPage() {
           {/* Featured Low-fi Image */}
           <div className="mt-8">
             <Image
-              src="/bite-ideation.webp"
+              src="/bite-testing-second-prototype.webp"
               alt="Bite App Low-fidelity Prototype Showcase"
               width={0}
               height={0}
