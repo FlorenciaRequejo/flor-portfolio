@@ -384,51 +384,38 @@ export default function ContinuousContentPage() {
         </div>
       </motion.section>
 
-      {/* CONNECTING CONTENT TO STRATEGY */}
+      {/* STAGE 01: MAPPING THE ARCHITECTURE */}
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20"
+        className="w-full py-16 border-t border-[var(--cs-border)]"
       >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                03. Content Funnel
-              </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                Automation Without Strategy is Just More Content
-              </h2>
-            </div>
-            <div className="lg:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-8">
+          {/* Header & Copy block: 100% width */}
+          <div className="flex flex-col gap-4 text-left max-w-3xl">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              Stage 01
+            </span>
+            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              Mapping the Architecture
+            </h2>
+            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
               <p>
-                AI systems easily produce low-quality noise. To avoid this, our pipeline anchors content creation to structured marketing inputs. Keyword clusters feed directly into blog parameters, ensuring all drafts target strategic business goals.
+                Before writing a single automation, I designed the complete user journey and system architecture inside Make to validate that the idea was technically possible.
+              </p>
+              <p>
+                The workflow connected user requests with a central Airtable database enriched with company information. It generated branded content and returned ready-to-publish assets for user approval.
               </p>
             </div>
           </div>
 
-          {/* Schematic Content Funnel map */}
-          <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] text-left space-y-8 font-sans">
-            <h4 className="font-serif text-[22px] text-[var(--cs-primary)] font-medium border-b border-[var(--cs-border)] pb-2">Pipeline Content Funnel</h4>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-[12px]">
-              <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[var(--cs-highlight)] font-bold">1. STRATEGY INPUT</span>
-                <p className="text-[var(--cs-muted)] font-light">Define target services, business locations, and SEO clusters.</p>
-              </div>
-              <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[var(--cs-highlight)] font-bold">2. AUTO GENERATION</span>
-                <p className="text-[var(--cs-muted)] font-light">Generate comprehensive blog article drafts and imagery packs.</p>
-              </div>
-              <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[var(--cs-highlight)] font-bold">3. SOCIAL DERIVATIVES</span>
-                <p className="text-[var(--cs-muted)] font-light">Extract 5 tailored social media posts based on the main draft.</p>
-              </div>
-              <div className="p-4 rounded bg-white/5 border border-white/10 space-y-2">
-                <span className="text-[var(--cs-highlight)] font-bold">4. APPROVAL & POST</span>
-                <p className="text-[var(--cs-muted)] font-light">Owner reviews draft in web portal and schedules publishing.</p>
-              </div>
+          {/* Underneath Image Showcase */}
+          <div className="mt-8">
+            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20 flex flex-col items-center justify-center gap-2 select-none min-h-[350px]">
+              <span className="text-[var(--cs-primary)] font-serif text-[24px]">Architecture Map & User Journey Diagram</span>
+              <span className="text-[var(--cs-muted)] font-sans text-[13px]">Placeholder Visual</span>
             </div>
           </div>
         </div>
