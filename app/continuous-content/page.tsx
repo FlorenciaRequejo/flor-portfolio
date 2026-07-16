@@ -491,11 +491,11 @@ export default function ContinuousContentPage() {
             </div>
 
             {/* Right Column: Key Insight Quote */}
-            <div className="lg:col-span-6 flex flex-col gap-4 lg:pt-16">
-              <span className="font-sans font-bold text-[11px] md:text-[12px] uppercase tracking-[3px] text-[var(--cs-primary)]">
-                The research revealed a more fundamental insight:
-              </span>
-              <div className="p-6 md:p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)]">
+            <div className="lg:col-span-6 flex flex-col lg:pt-16">
+              <div className="p-6 md:p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] flex flex-col gap-4">
+                <span className="font-sans font-bold text-[11px] md:text-[12px] uppercase tracking-[3px] text-[var(--cs-primary)]">
+                  The research revealed a more fundamental insight:
+                </span>
                 <p className="font-serif text-[24px] md:text-[30px] leading-snug text-[var(--cs-primary)] font-light italic">
                   Businesses that don't post consistently usually don't lack tools, they lack strategy.
                 </p>
