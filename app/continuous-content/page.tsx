@@ -602,6 +602,44 @@ export default function ContinuousContentPage() {
         </div>
       </motion.section>
 
+      {/* SKILLS DEMONSTRATED */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInVariants}
+        className="w-full py-16 border-t border-[var(--cs-border)]"
+      >
+        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-6 text-left">
+          <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+            Skills Demonstrated
+          </span>
+          <div className="flex flex-wrap gap-2 pt-2">
+            {[
+              "Product Strategy",
+              "AI Workflow Design",
+              "Automation Architecture",
+              "System Thinking",
+              "SEO Strategy",
+              "Information Architecture",
+              "UX Design",
+              "Database Design",
+              "API Integration",
+              "WordPress Development",
+              "AI Image Generation",
+              "Workflow Optimisation"
+            ].map((skill) => (
+              <span
+                key={skill}
+                className="px-4 py-1.5 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] text-[13px] font-sans text-[var(--cs-primary)] font-light select-none"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
       {/* OTHER CASE STUDIES CAROUSEL */}
       <section
         id="projects"
