@@ -18,6 +18,8 @@
   --color-border: rgba(var(--color-primary-rgb), 0.15);
   --color-surface: rgba(var(--color-primary-rgb), 0.05);
   --color-secondary-bg: #089998;
+  --color-fixed-dark: #1B237A;
+  --color-fixed-light: #FDABFF;
 
   /* Helper legacy mappings for compatibility */
   --color-dark: var(--color-background);
@@ -49,6 +51,8 @@
   --color-border: var(--color-border);
   --color-surface: var(--color-surface);
   --color-secondary-bg: var(--color-secondary-bg);
+  --color-fixed-dark: var(--color-fixed-dark);
+  --color-fixed-light: var(--color-fixed-light);
 }
 
 @layer base {

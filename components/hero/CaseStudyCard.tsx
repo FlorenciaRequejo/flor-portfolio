@@ -70,12 +70,12 @@ export default function CaseStudyCard({
         <div className="relative pt-0 mt-4 flex-grow flex flex-col justify-between text-left px-[10px]">
           {/* Text area */}
           <div>
-            <h3 className="text-background font-sans font-semibold text-[18px] leading-tight">
+            <h3 className="text-fixed-dark font-sans font-semibold text-[18px] leading-tight">
               {title}
             </h3>
 
             {description && (
-              <p className="font-sans text-[14px] leading-[22px] text-background/75 font-normal mt-3">
+              <p className="font-sans text-[14px] leading-[22px] text-fixed-dark/75 font-normal mt-3">
                 {description}
               </p>
             )}
@@ -88,7 +88,7 @@ export default function CaseStudyCard({
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full border border-[#1B237A]/25 text-background text-[10px] md:text-[11px] font-sans font-medium whitespace-nowrap"
+                  className="px-3 py-1 rounded-full border border-fixed-dark/25 text-fixed-dark text-[10px] md:text-[11px] font-sans font-medium whitespace-nowrap"
                 >
                   {tag}
                 </span>
@@ -96,7 +96,7 @@ export default function CaseStudyCard({
             </div>
 
             {/* Vertical Divider (hidden on mobile) */}
-            <div className="hidden sm:block h-8 w-px bg-background/20 shrink-0 mx-[20px] md:mx-[24px]" />
+            <div className="hidden sm:block h-8 w-px bg-fixed-dark/20 shrink-0 mx-[20px] md:mx-[24px]" />
 
             {/* Read More button */}
             <div className="shrink-0 w-fit">
