@@ -236,9 +236,10 @@ export default function ContinuousContentPage() {
                   Role
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Developer</p>
-                  <p>Ideation</p>
-                  <p>Design</p>
+                  <p>System Ideation</p>
+                  <p>Product Architecture</p>
+                  <p>UX Researcher</p>
+                  <p>Main Developer</p>
                 </div>
               </div>
 
@@ -256,10 +257,12 @@ export default function ContinuousContentPage() {
                   Technology
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed space-y-1">
-                  <p>Make · Webhooks · Airtable</p>
-                  <p>WordPress · Custom Plugin · functions.php</p>
-                  <p>Placid API · OpenAI (ChatGPT) · OpenAI Images</p>
-                  <p>Google Gemini · Google Imagen · Leonardo AI · Flux · DALL·E</p>
+                  <p>Automation Tool</p>
+                  <p>Webhooks</p>
+                  <p>Data Base</p>
+                  <p>WordPress · Custom Plugin</p>
+                  <p>Various API</p>
+                  <p>LLMS</p>
                 </div>
               </div>
             </div>
