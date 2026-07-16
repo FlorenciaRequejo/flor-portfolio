@@ -329,7 +329,7 @@ export default function ContinuousContentPage() {
         </div>
       </motion.section>
 
-      {/* REFRAMING THE PROBLEM */}
+      {/* THE SOLUTION & USER PERSONA */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -338,38 +338,47 @@ export default function ContinuousContentPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            <div className="lg:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                02. Reframing the Strategy
-              </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                What if the System Didn't Wait for the Client?
-              </h2>
-            </div>
-            <div className="lg:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-              <p>
-                Most content platforms depend on the user remembering to log in, identify keywords, draft copy, and schedule publishing. I reframed the platform around proactive content automation. Instead of asking busy business owners to operate a portal, the system evaluates strategy in the background and drops ready-to-approve assets directly into their workflow.
-              </p>
-            </div>
-          </div>
-
-          {/* Before vs After comparative loop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 text-left font-sans">
-            <div className="p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-4">
-              <span className="text-[11px] uppercase tracking-widest text-[#FFB6C1] font-bold">Reactive Workflow (Typical Tools)</span>
-              <div className="flex items-center gap-2 text-[13px] text-[var(--cs-muted)]">
-                <span>Login</span> · <span>Find Topic</span> · <span>Draft Copy</span> · <span>Review Errors</span> · <span>Publish</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-center">
+            {/* Left Column: Image */}
+            <div className="lg:col-span-6">
+              <div className="relative w-full aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
+                <Image
+                  src="/solution-user-persona.png"
+                  alt="Small business marketing automation dashboard interface visual"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                />
               </div>
-              <p className="text-[12px] text-[var(--cs-muted)] font-light italic">Result: Project is abandoned within the first month due to cognitive fatigue.</p>
             </div>
 
-            <div className="p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-4">
-              <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">Proactive Pipeline (This System)</span>
-              <div className="flex items-center gap-2 text-[13px] text-[var(--cs-highlight)]">
-                <span>Strategy</span> · <span>Extract Topic</span> · <span>Proactive Gen</span> · <span>Inbox Alert</span> · <span>Approval</span>
+            {/* Right Column: Texts */}
+            <div className="lg:col-span-6 flex flex-col gap-10">
+              {/* Solution Block */}
+              <div className="flex flex-col gap-3">
+                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                  The Solution
+                </span>
+                <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                  A Proactive Content Engine
+                </h2>
+                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                  Rather than building another content generator, the project evolved into a proactive marketing system that plans, generates and prepares content automatically while keeping the user in control of publishing.
+                </p>
               </div>
-              <p className="text-[12px] text-[var(--cs-muted)] font-light italic">Result: Continuous updates published consistently with under 5 minutes of work.</p>
+
+              {/* User Persona Block */}
+              <div className="flex flex-col gap-3">
+                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                  User Persona
+                </span>
+                <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                  For small business owners
+                </h2>
+                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                  Businesses that invest in marketing but don't have dedicated staff to manage their website or social media. They rarely know what to post, don't understand SEO and struggle to publish consistently while running their business.
+                </p>
+              </div>
             </div>
           </div>
         </div>
