@@ -83,6 +83,8 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
             <a
               href="/florencia-requejo-cv.pdf"
               download="florencia-requejo-cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="h-[50px] px-6 rounded-full flex items-center justify-center bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
             >
               Download CV
@@ -135,6 +137,8 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           <a
             href="/florencia-requejo-cv.pdf"
             download="florencia-requejo-cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
             className="w-full max-w-[200px] h-[44px] rounded-full flex items-center justify-center bg-primary text-background font-sans font-semibold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
           >

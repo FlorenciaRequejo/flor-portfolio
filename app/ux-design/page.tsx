@@ -314,8 +314,17 @@ const handleToggleReadingMode = (newValue: boolean) => {
                 Personas              </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                 To form a deeper understanding of the users' goals, needs, experiences, and behaviors. I created 3 personas, I used them whenever I wanted to step out of myself and reconsider my initial ideas.
-                <a href="https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=0-1&p=f">Link to UX</a>
               </p>
+              <div>
+                <a
+                  href="https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=0-1&p=f"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-2.5 mt-2 bg-blue-600 hover:bg-blue-700 text-white font-sans font-bold text-[11px] md:text-xs uppercase tracking-[2px] underline rounded-full transition-all duration-300 shadow-md select-none"
+                >
+                  Link to UX
+                </a>
+              </div>
             </div>
 
             <div className="space-y-4">
@@ -326,8 +335,17 @@ const handleToggleReadingMode = (newValue: boolean) => {
                 User Flows & Structure</h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                 I mapped how users would move through the product, organised the information architecture and identified opportunities to simplify navigation before designing the interface.
-                <a href="https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=58-2576&m=dev&t=tXE5hBvipYofyxsk-1">Explore the Architecture</a>
               </p>
+              <div>
+                <a
+                  href="https://www.figma.com/design/Mc4k5Jufrn1OmHLrRPKZMb/Bite-App---Web?node-id=58-2576&m=dev&t=tXE5hBvipYofyxsk-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-2.5 mt-2 bg-blue-600 hover:bg-blue-700 text-white font-sans font-bold text-[11px] md:text-xs uppercase tracking-[2px] underline rounded-full transition-all duration-300 shadow-md select-none"
+                >
+                  Explore the Architecture
+                </a>
+              </div>
             </div>
           </div>
         </div>
