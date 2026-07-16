@@ -460,10 +460,15 @@ export default function ContinuousContentPage() {
 
           {/* Prototype Image Visual */}
           <div className="mt-8">
-            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20 flex flex-col items-center justify-center gap-2 select-none min-h-[350px]">
-              <span className="text-[var(--cs-primary)] font-serif text-[24px]">First Prototype Interface Showcase</span>
-              <span className="text-[var(--cs-muted)] font-sans text-[13px]">Placeholder Visual</span>
-            </div>
+            <Image
+              src="/first-prototype.webp"
+              alt="First prototype Airtable content management and review interface"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
 
           {/* Part B: UX Research & Insight Grid */}
