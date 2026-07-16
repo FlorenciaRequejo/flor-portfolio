@@ -103,7 +103,8 @@ export default function MachineReadableBrandsPage() {
     (card) => card.href !== "/machine-readable-brands"
   );
 
-  const handleToggleReadingMode = (newValue: boolean) => {
+    const otherScrollContainerRef = useRef<HTMLDivElement>(null);
+const handleToggleReadingMode = (newValue: boolean) => {
     hasManuallyToggledRef.current = true;
     setIsReadingMode(newValue);
     setJustAutoActivated(false);
@@ -623,8 +624,46 @@ export default function MachineReadableBrandsPage() {
           </div>
         </div>
 
-        {/* Carousel Container */}
-        <div className="w-full overflow-x-auto scrollbar-none flex px-4 md:px-[calc((100%-min(76vw,1260px))/2)]">
+          {/* Carousel Wrapper with Arrows on Hover */}
+        <div className="relative group w-full z-20">
+          {/* Left Arrow */}
+          <button
+            onClick={() => {
+              const container = otherScrollContainerRef.current;
+              if (container) {
+                const cardWidth = container.firstElementChild?.firstElementChild?.clientWidth || 400;
+                container.scrollBy({ left: -cardWidth - 40, behavior: "smooth" });
+              }
+            }}
+            className="absolute left-4 md:left-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-secondary text-secondary-bg hover:bg-secondary/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
+            aria-label="Scroll left"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => {
+              const container = otherScrollContainerRef.current;
+              if (container) {
+                const cardWidth = container.firstElementChild?.firstElementChild?.clientWidth || 400;
+                container.scrollBy({ left: cardWidth + 40, behavior: "smooth" });
+              }
+            }}
+            className="absolute right-4 md:right-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-secondary text-secondary-bg hover:bg-secondary/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
+            aria-label="Scroll right"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+
+          <div
+            ref={otherScrollContainerRef}
+            className="w-full overflow-x-auto scrollbar-none flex px-4 md:px-[calc((100%-min(76vw,1260px))/2)] scroll-smooth"
+          >
           <div className="flex flex-nowrap gap-6 md:gap-10 pb-4">
             {otherCaseStudies.map((card) => (
               <div
@@ -643,6 +682,7 @@ export default function MachineReadableBrandsPage() {
               </div>
             ))}
           </div>
+        </div>
         </div>
       </section>
 
