@@ -319,12 +319,17 @@ export default function ContinuousContentPage() {
             </div>
           </div>
 
-          {/* Placeholder Workflow Image */}
+          {/* Workflow Automation Image */}
           <div className="mt-12">
-            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20 flex flex-col items-center justify-center gap-2 select-none min-h-[300px]">
-              <span className="text-[var(--cs-primary)] font-serif text-[24px]">Workflow Automation Architecture</span>
-              <span className="text-[var(--cs-muted)] font-sans text-[13px]">Placeholder Visual</span>
-            </div>
+            <Image
+              src="/make.JPG"
+              alt="Make workflow automation architecture diagram"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </motion.section>
