@@ -76,7 +76,7 @@ function HeroControls({
             className={`overflow-hidden w-full md:w-[320px] ${isMobile ? "text-left" : "text-right"}`}
           >
             <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
-              Maintaining an active digital presence is a massive operational burden for small service businesses. This case study details the strategy and design of an AI-powered pipeline that links search strategy to automated drafts, proactive notifications, and human approval loops.
+              Proactive Content Creation from an SEO Strategy: design and development of an AI content automation engine, connecting keyword strategies to automatic article draft generation.
             </div>
           </motion.div>
         )}
@@ -211,7 +211,7 @@ export default function ContinuousContentPage() {
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
               <span className="text-[var(--cs-highlight)] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
-                CASE STUDY / DESIGN + AI Automation • Product Design • SEO • Content Systems
+                CASE STUDY / AI AUTOMATION • PRODUCT DESIGN
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
                 Proactive Content Creation from an SEO Strategy
@@ -227,13 +227,6 @@ export default function ContinuousContentPage() {
                 setIsReadingMode={handleToggleReadingMode}
                 justAutoActivated={justAutoActivated}
               />
-            </div>
-
-            {/* Introduction Blurb */}
-            <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 mt-4 text-left">
-              <p className="font-serif text-[20px] md:text-[24px] leading-relaxed text-[var(--cs-primary)] font-light max-w-3xl">
-                Proactive Content Creation from an SEO Strategy: design and development of an AI content automation engine, connecting keyword strategies to automatic article draft generation.
-              </p>
             </div>
 
             {/* Metadata Grid */}
