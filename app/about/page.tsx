@@ -31,7 +31,7 @@ const staggerContainer = {
 
 export default function AboutPage() {
   return (
-    <div className="w-full min-h-screen bg-[#1B237A] text-[#FDABFF] selection:bg-[#FDABFF] selection:text-[#1B237A]">
+    <div className="w-full min-h-screen bg-background text-primary selection:bg-primary selection:text-background">
       <Navbar />
 
       {/* SECTION 01 — HERO */}
@@ -62,7 +62,7 @@ export default function AboutPage() {
 
                 {/* Design */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="mr-2 font-sans text-[14px] font-semibold text-[#FDABFF]">
+                  <span className="mr-2 font-sans text-[14px] font-semibold text-primary">
                     Design
                   </span>
 
@@ -75,7 +75,7 @@ export default function AboutPage() {
                   ].map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-[#FDABFF]/70 px-4 py-2 font-sans text-[12px] leading-none text-[#FDABFF]"
+                      className="rounded-full border border-primary/70 px-4 py-2 font-sans text-[12px] leading-none text-primary"
                     >
                       {skill}
                     </span>
@@ -84,7 +84,7 @@ export default function AboutPage() {
 
                 {/* Technology */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="mr-2 font-sans text-[14px] font-semibold text-[#FDABFF]">
+                  <span className="mr-2 font-sans text-[14px] font-semibold text-primary">
                     Technology
                   </span>
 
@@ -99,7 +99,7 @@ export default function AboutPage() {
                   ].map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-[#FDABFF]/70 px-4 py-2 font-sans text-[12px] leading-none text-[#FDABFF]"
+                      className="rounded-full border border-primary/70 px-4 py-2 font-sans text-[12px] leading-none text-primary"
                     >
                       {skill}
                     </span>
@@ -108,7 +108,7 @@ export default function AboutPage() {
 
                 {/* Analysis */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="mr-2 font-sans text-[14px] font-semibold text-[#FDABFF]">
+                  <span className="mr-2 font-sans text-[14px] font-semibold text-primary">
                     Analysis & Optimisation
                   </span>
 
@@ -121,7 +121,7 @@ export default function AboutPage() {
                   ].map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-[#FDABFF]/70 px-4 py-2 font-sans text-[12px] leading-none text-[#FDABFF]"
+                      className="rounded-full border border-primary/70 px-4 py-2 font-sans text-[12px] leading-none text-primary"
                     >
                       {skill}
                     </span>
@@ -135,18 +135,18 @@ export default function AboutPage() {
             {/* On mobile this appears first */}
             <div className="order-1 lg:order-2 flex flex-col gap-6 text-left">
 
-              <span className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#FDABFF]/75 font-semibold">
+              <span className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-primary/75 font-semibold">
                 ABOUT ME
               </span>
 
-              <h1 className="font-serif text-[38px] sm:text-[48px] md:text-[62px] leading-[1.1] text-[#FDABFF] font-normal tracking-tight">
+              <h1 className="font-serif text-[38px] sm:text-[48px] md:text-[62px] leading-[1.1] text-primary font-normal tracking-tight">
                 I didn't plan a multidisciplinary career.
                 <br />
                 I just kept following the problems.
               </h1>
 
               <div className="flex flex-col gap-6 pt-2">
-                <p className="w-full font-sans text-[15px] md:text-[17px] leading-[26px] text-[#FDABFF]/80 font-light">
+                <p className="w-full font-sans text-[15px] md:text-[17px] leading-[26px] text-primary/80 font-light">
                   I graduated as a graphic designer in 2008, but once I started
                   working, I quickly realised that nothing exists on its own.
                   Everything is part of something bigger, so I got curious about it.
@@ -154,7 +154,7 @@ export default function AboutPage() {
                   understand to make my part fit better.
                 </p>
 
-                <p className="w-full font-sans text-[15px] md:text-[17px] leading-[26px] text-[#FDABFF]/80 font-light">
+                <p className="w-full font-sans text-[15px] md:text-[17px] leading-[26px] text-primary/80 font-light">
                   That curiosity took me from graphic design to self-taught
                   structural design, web development, UX/UI, automation and
                   eventually AI-powered product development.
@@ -168,14 +168,14 @@ export default function AboutPage() {
                   download="florencia-requejo-cv.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-[50px] px-8 rounded-full bg-[#FDABFF] text-[#1B237A] font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:opacity-90"
+                  className="h-[50px] px-8 rounded-full bg-primary text-background font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:opacity-90"
                 >
                   Download CV
                 </a>
 
                 <Link
                   href="/#projects"
-                  className="h-[50px] px-8 rounded-full border border-[#FDABFF] text-[#FDABFF] font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-[#FDABFF]/10"
+                  className="h-[50px] px-8 rounded-full border border-primary text-primary font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-primary/10"
                 >
                   View My Work
                 </Link>
@@ -192,7 +192,7 @@ export default function AboutPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-20 border-t border-[#FDABFF]/15"
+        className="w-full py-20 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
 
@@ -201,17 +201,17 @@ export default function AboutPage() {
 
             {/* Left Column — 50% */}
             <div className="flex flex-col gap-2">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold text-secondary uppercase tracking-wider">
                 HOW I GOT HERE
               </span>
 
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[#FDABFF] leading-[1.15] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.15] font-normal tracking-tight">
                 I started by learning how to communicate ideas. Now I want to make them work.
               </h2>
             </div>
 
             {/* Right Column — 50% */}
-            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[#FDABFF]/80 font-light">
+            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-primary/80 font-light">
               <p>
                 I graduated as a graphic designer in Argentina, but curiosity kept
                 moving me forward, both professionally and geographically. From Italy
@@ -269,27 +269,27 @@ export default function AboutPage() {
 
               <div
                 key={idx}
-                className="min-w-0 p-5 rounded-[16px] bg-[#FDABFF]/5 border border-[#FDABFF]/10 flex flex-col min-h-[220px] hover:border-[#FDABFF]/30 transition-colors duration-300"
+                className="min-w-0 p-5 rounded-[16px] bg-surface border border-primary/10 flex flex-col min-h-[220px] hover:border-primary/30 transition-colors duration-300"
               >
 
                 {/* Discipline — Primary Information */}
-                <h3 className="font-sans text-[18px] md:text-[20px] xl:text-[18px] 2xl:text-[20px] text-[#FDABFF] font-semibold leading-[1.15] tracking-[-0.02em] break-words [overflow-wrap:anywhere]">
+                <h3 className="font-sans text-[18px] md:text-[20px] xl:text-[18px] 2xl:text-[20px] text-primary font-semibold leading-[1.15] tracking-[-0.02em] break-words [overflow-wrap:anywhere]">
                   {node.discipline}
                 </h3>
 
                 {/* Location and Year */}
                 <div className="flex flex-col gap-1 mt-5">
-                  <span className="font-sans text-[10px] leading-[1.4] tracking-[0.08em] uppercase text-[#B8F74B] font-bold break-words">
+                  <span className="font-sans text-[10px] leading-[1.4] tracking-[0.08em] uppercase text-secondary font-bold break-words">
                     {node.location}
                   </span>
 
-                  <span className="font-sans text-[11px] text-[#FDABFF]/50">
+                  <span className="font-sans text-[11px] text-primary/50">
                     {node.year}
                   </span>
                 </div>
 
                 {/* Description */}
-                <p className="font-sans text-[11px] text-[#FDABFF]/60 font-light mt-auto pt-6 leading-[1.65] break-words">
+                <p className="font-sans text-[11px] text-primary/60 font-light mt-auto pt-6 leading-[1.65] break-words">
                   {node.desc}
                 </p>
 
@@ -306,7 +306,7 @@ export default function AboutPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-20 border-t border-[#FDABFF]/15"
+        className="w-full py-20 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
 
@@ -314,17 +314,17 @@ export default function AboutPage() {
 
             {/* Left Column */}
             <div className="flex flex-col gap-2">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold text-secondary uppercase tracking-wider">
                 THE VALUE OF RANGE
               </span>
 
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[#FDABFF] leading-[1.15] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.15] font-normal tracking-tight">
                 I can go deep. But I know when to zoom out.
               </h2>
             </div>
 
             {/* Right Column */}
-            <div className="flex flex-col gap-6 font-sans text-[15px] md:text-[16px] leading-[26px] text-[#FDABFF]/80 font-light">
+            <div className="flex flex-col gap-6 font-sans text-[15px] md:text-[16px] leading-[26px] text-primary/80 font-light">
 
               <p>
                 Specialisation is valuable. But complex problems rarely stay inside
@@ -341,7 +341,7 @@ export default function AboutPage() {
                 everything myself.
               </p>
 
-              <p className="text-[#FDABFF] font-normal">
+              <p className="text-primary font-normal">
                 The value isn't that I can do everything. It's that I can help the
                 right problems get solved, by the right people, in the right context.
               </p>
@@ -359,7 +359,7 @@ export default function AboutPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-20 border-t border-[#FDABFF]/15"
+        className="w-full py-20 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
 
@@ -382,15 +382,15 @@ export default function AboutPage() {
             {/* Right Column — Personal Story */}
             <div className="order-1 lg:order-2 flex flex-col gap-6 text-left">
 
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold text-[#B8F74B] uppercase tracking-wider">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold text-secondary uppercase tracking-wider">
                 OUTSIDE THE SCREEN
               </span>
 
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[#FDABFF] leading-[1.15] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.15] font-normal tracking-tight">
                 I still make things just because I want to see if I can.
               </h2>
 
-              <div className="flex flex-col gap-5 font-sans text-[15px] md:text-[16px] leading-[26px] text-[#FDABFF]/80 font-light">
+              <div className="flex flex-col gap-5 font-sans text-[15px] md:text-[16px] leading-[26px] text-primary/80 font-light">
 
                 <p>
                   I'm curious outside work too. I read, make digital art, draw and

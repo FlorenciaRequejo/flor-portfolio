@@ -1,33 +1,57 @@
 @import "tailwindcss";
 
+/* ==========================================
+   COLOUR SYSTEM
+   ========================================== */
+:root {
+  /* RGB Components for opacity support */
+  --color-background-rgb: 27, 35, 122;     /* #1B237A */
+  --color-foreground-rgb: 250, 246, 240;   /* #FAF6F0 */
+  --color-primary-rgb: 253, 171, 255;       /* #FDABFF */
+  --color-secondary-rgb: 184, 247, 75;     /* #B8F74B */
+
+  /* Main Semantic CSS Variables */
+  --color-background: rgb(var(--color-background-rgb));
+  --color-foreground: rgb(var(--color-foreground-rgb));
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-secondary: rgb(var(--color-secondary-rgb));
+  --color-border: rgba(var(--color-primary-rgb), 0.15);
+  --color-surface: rgba(var(--color-primary-rgb), 0.05);
+  --color-secondary-bg: #089998;
+
+  /* Helper legacy mappings for compatibility */
+  --color-dark: var(--color-background);
+  --color-light: var(--color-primary);
+  --color-line-dark: var(--color-primary);
+  --color-line-light: var(--color-primary);
+  --line-color: var(--color-primary);
+
+  /* SVG Morphing variables */
+  --stroke-1-color: #0B1F6B;
+  --stroke-2-color: #111D72;
+  --stroke-3-color: #091E68;
+  --stroke-width: 50px;
+
+  --hero-scroll-height: 220vh;
+  --carousel-padding-left: 16px;
+  --carousel-padding-right: 0px;
+  --selected-work-pad-left: 16px;
+}
+
 @theme {
   --font-serif: var(--font-serif), Georgia, serif;
   --font-sans: var(--font-sans), Inter, sans-serif;
 
-  --color-primary: #FDABFF;
-  --color-bg: #1B237A;
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-border: var(--color-border);
+  --color-surface: var(--color-surface);
+  --color-secondary-bg: var(--color-secondary-bg);
 }
 
 @layer base {
-  :root {
-    --color-dark: #1B237A;
-    --color-light: #FDABFF;
-    --color-line-dark: #FDABFF;
-    --color-line-light: #FDABFF;
-    --line-color: #FDABFF;
-
-    /* 3-Path SVG Morphing variables */
-    --stroke-1-color: #0B1F6B;
-    --stroke-2-color: #111D72;
-    --stroke-3-color: #091E68;
-    --stroke-width: 50px;
-
-    --hero-scroll-height: 220vh;
-    --carousel-padding-left: 16px;
-    --carousel-padding-right: 0px;
-    --selected-work-pad-left: 16px;
-  }
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -56,7 +80,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(253, 171, 255, 0.2);
+    background: rgba(var(--color-primary-rgb), 0.2);
     border-radius: 2px;
   }
 }
@@ -83,8 +107,8 @@
   width: min(76vw, 1260px);
   border-radius: 999px;
 
-  background-color: rgba(27, 35, 122, 0.15) !important;
-  border: 1px solid rgba(253, 171, 255, 0.5);
+  background-color: rgba(var(--color-background-rgb), 0.15) !important;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.5);
 
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
@@ -102,8 +126,8 @@
 .nav-outline-pill.is-scrolled {
   width: min(70vw, 1000px);
 
-  background-color: rgba(27, 35, 122, 1) !important;
-  border-color: rgba(253, 171, 255, 1);
+  background-color: rgba(var(--color-background-rgb), 1) !important;
+  border-color: rgba(var(--color-primary-rgb), 1);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -122,7 +146,7 @@
   .nav-outline-pill.is-open {
     height: 270px;
     border-radius: 24px;
-    background: rgba(27, 35, 122, 0.96) !important;
+    background: rgba(var(--color-background-rgb), 0.96) !important;
   }
 
   .nav-outline-pill.is-scrolled {
@@ -270,6 +294,14 @@
   --cs-card-bg: rgba(253, 171, 255, 0.05);
   --cs-highlight: #B8F74B;
   --cs-highlight-bg: rgba(184, 247, 75, 0.15);
+
+  /* Bind semantic variables to page-specific variables */
+  --color-background: var(--cs-bg);
+  --color-foreground: var(--cs-text);
+  --color-primary: var(--cs-primary);
+  --color-border: var(--cs-border);
+  --color-surface: var(--cs-card-bg);
+  --color-secondary: var(--cs-highlight);
 }
 
 .case-study-container.reading-mode {
@@ -308,11 +340,11 @@
   border-color: rgba(0, 0, 0, 0.2) !important;
 }
 .reading-mode nav.nav-outline-pill * {
-  color: #1B237A !important;
+  color: var(--color-background) !important;
 }
 .reading-mode nav.nav-outline-pill a.bg-primary {
-  background-color: #1B237A !important;
-  color: #FFFFFF !important;
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground) !important;
 }
 .reading-mode #contact.w-full {
   background-color: #FFFFFF !important;
@@ -322,12 +354,12 @@
 .reading-mode #contact p,
 .reading-mode #contact span:not(a.bg-\[\#FDABFF\] span),
 .reading-mode #contact a:not(a.bg-\[\#FDABFF\]) {
-  color: #1B237A !important;
+  color: var(--color-background) !important;
 }
 .reading-mode #contact a.bg-\[\#FDABFF\],
 .reading-mode #contact a.bg-\[\#FDABFF\] * {
-  background-color: #1B237A !important;
-  color: #FFFFFF !important;
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground) !important;
 }
 .reading-mode #contact .bg-gradient-to-r {
   background-image: none !important;

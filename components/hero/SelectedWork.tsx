@@ -59,8 +59,8 @@ function CarouselIndicator({ activeIndex, onClick }: { activeIndex: number; onCl
           key={i}
           onClick={() => onClick(i)}
           className={`h-[3px] rounded-full transition-all duration-300 ${activeIndex === i
-            ? "w-8 bg-[#B8F74B]"
-            : "w-4 bg-[#B8F74B]/30"
+            ? "w-8 bg-secondary"
+            : "w-4 bg-secondary/30"
             }`}
           aria-label={`Go to slide ${i + 1}`}
         />
@@ -79,12 +79,12 @@ interface TestimonialCardProps {
 function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps) {
   return (
     <div className="bg-white rounded-[24px] p-6 md:p-8 flex flex-col justify-between min-h-[420px] md:min-h-[500px] w-[75vw] sm:w-[340px] md:w-[24vw] min-w-[320px] max-w-[420px] shadow-[0_10px_30px_rgba(27,35,122,0.04)] select-none shrink-0 snap-start">
-      <p className="font-sans text-[14px] leading-[26px] text-[#1B237A]/90 font-normal text-left">
+      <p className="font-sans text-[14px] leading-[26px] text-background/90 font-normal text-left">
         “{quote}”
       </p>
 
-      <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#1B237A]/8">
-        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#FAF6F0] flex-shrink-0">
+      <div className="flex items-center gap-4 mt-8 pt-6 border-t border-background/8">
+        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-foreground flex-shrink-0">
           <Image
             src={avatarSrc}
             alt={name}
@@ -96,11 +96,11 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
         </div>
 
         <div className="flex flex-col text-left">
-          <span className="font-sans text-[14px] font-semibold text-[#1B237A]">
+          <span className="font-sans text-[14px] font-semibold text-background">
             {name}
           </span>
 
-          <span className="font-sans text-[12px] text-[#1B237A]/60 font-medium">
+          <span className="font-sans text-[12px] text-background/60 font-medium">
             {role}
           </span>
         </div>
@@ -644,7 +644,7 @@ export default function SelectedWork() {
     <motion.section
       id="projects"
       ref={sectionRef}
-      className="w-full bg-[#089998] border-[#FDABFF] border-solid rounded-[48px] md:rounded-[110px] pt-10 pb-[284px] md:pt-16 md:pb-[416px] relative overflow-hidden z-[1] mt-12 md:mt-24"
+      className="w-full bg-secondary-bg border-primary border-solid rounded-[48px] md:rounded-[110px] pt-10 pb-[284px] md:pt-16 md:pb-[416px] relative overflow-hidden z-[1] mt-12 md:mt-24"
       style={{
         borderWidth: borderWidthStyle,
       }}
@@ -652,17 +652,17 @@ export default function SelectedWork() {
       <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
         <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
           <div className="flex flex-col gap-4 max-w-[620px]">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#B8F74B]/15 text-[#B8F74B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/15 text-secondary font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
               SELECTED WORK
             </span>
-            <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-[#B8F74B] font-normal tracking-tight">
+            <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-secondary font-normal tracking-tight">
               A few problems
               <br />
               I've made work
             </h2>
           </div>
 
-          <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
+          <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px] md:mt-16">
             Each project presents a different challenge. Solving it requires understanding what matters, what doesn't, and how to set the priorities.
           </p>
         </div>
@@ -670,11 +670,15 @@ export default function SelectedWork() {
 
       <CarouselIndicator activeIndex={activeWorkIndex} onClick={scrollToWorkIndex} />
 
-      <div className="relative group w-full mt-0 md:mt-16 z-20">
+      <div 
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleSelectedWorkMouseLeave}
+        className="relative group w-full mt-0 md:mt-16 z-20"
+      >
         {/* Left Arrow Button (visible on hover on desktop) */}
         <button
           onClick={scrollLeftButton}
-          className="absolute left-4 md:left-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-[#B8F74B] text-[#089998] hover:bg-[#a6e03a] shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
+          className="absolute left-4 md:left-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-secondary text-secondary-bg hover:bg-secondary/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
           aria-label="Scroll left"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
@@ -685,7 +689,7 @@ export default function SelectedWork() {
         {/* Right Arrow Button (visible on hover on desktop) */}
         <button
           onClick={scrollRightButton}
-          className="absolute right-4 md:right-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-[#B8F74B] text-[#089998] hover:bg-[#a6e03a] shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
+          className="absolute right-4 md:right-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-secondary text-secondary-bg hover:bg-secondary/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
           aria-label="Scroll right"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
@@ -695,8 +699,6 @@ export default function SelectedWork() {
 
         <div
           ref={scrollContainerRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleSelectedWorkMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
@@ -745,17 +747,17 @@ export default function SelectedWork() {
         <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
             <div className="flex flex-col gap-4 max-w-[620px]">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#B8F74B]/15 text-[#B8F74B] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/15 text-secondary font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
                 Testimonials
               </span>
-              <h2 className="font-serif text-[36px] md:text-[64px] leading-[1.1] text-[#B8F74B] font-normal tracking-tight">
+              <h2 className="font-serif text-[36px] md:text-[64px] leading-[1.1] text-secondary font-normal tracking-tight">
                 They Said It,
                 <br />
                 Not Me
               </h2>
             </div>
 
-            <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px] md:mt-16">
+            <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px] md:mt-16">
               A few words from people I’ve worked with across web, design, product and systems projects.
             </p>
           </div>

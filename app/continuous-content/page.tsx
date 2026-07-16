@@ -46,14 +46,14 @@ function HeroControls({
       onMouseLeave={() => !isMobile && setIsSynopsisOpen(false)}
     >
       {/* Reading Time Pill */}
-      <div className="h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)] flex items-center justify-center">
+      <div className="h-[38px] px-5 rounded-full border border-primary text-primary font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-surface flex items-center justify-center">
         6 min read
       </div>
 
       {/* Synopsis Button */}
       <button
         onClick={() => setIsSynopsisOpen(!isSynopsisOpen)}
-        className="h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] hover:bg-[var(--cs-accent-bg)] font-sans font-medium text-[11px] md:text-[12px] flex items-center gap-2 cursor-pointer transition-all duration-300 select-none uppercase tracking-wider"
+        className="h-[38px] px-5 rounded-full border border-primary text-primary hover:bg-surface font-sans font-medium text-[11px] md:text-[12px] flex items-center gap-2 cursor-pointer transition-all duration-300 select-none uppercase tracking-wider"
       >
         <span>Synopsis</span>
         <motion.span
@@ -75,7 +75,7 @@ function HeroControls({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={`overflow-hidden w-full md:w-[320px] ${isMobile ? "text-left" : "text-right"}`}
           >
-            <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
+            <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-foreground/70 text-left md:text-right">
               Proactive Content Creation from an SEO Strategy: design and development of an AI content automation engine, connecting keyword strategies to automatic article draft generation.
             </div>
           </motion.div>
@@ -84,7 +84,7 @@ function HeroControls({
 
       {/* Reading Mode Toggle */}
       <div className="flex items-center gap-3 mt-2 relative">
-        <span className="font-sans text-[11px] uppercase tracking-wider text-[var(--cs-primary)] select-none">
+        <span className="font-sans text-[11px] uppercase tracking-wider text-primary select-none">
           Reading Mode
         </span>
         <div className="relative flex items-center">
@@ -92,7 +92,7 @@ function HeroControls({
             onClick={() => setIsReadingMode(!isReadingMode)}
             className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${isReadingMode
               ? "bg-black border-black"
-              : "bg-transparent border-[var(--cs-primary)]"
+              : "bg-transparent border-primary"
               }`}
             aria-label="Toggle Reading Mode"
             animate={justAutoActivated ? {
@@ -103,7 +103,7 @@ function HeroControls({
           >
             <motion.div
               layout
-              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
+              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-primary"
                 }`}
               animate={{
                 x: isReadingMode ? 22 : 0,
@@ -118,7 +118,7 @@ function HeroControls({
               initial={{ scale: 0.8, opacity: 0.8 }}
               animate={{ scale: 1.6, opacity: 0 }}
               transition={{ repeat: Infinity, duration: 1.2, ease: "easeOut" }}
-              className="absolute inset-0 rounded-full border-2 border-[var(--cs-primary)] pointer-events-none"
+              className="absolute inset-0 rounded-full border-2 border-primary pointer-events-none"
             />
           )}
         </div>
@@ -142,7 +142,7 @@ function HeroControls({
               <div 
                 className="absolute top-full border-4 border-transparent"
                 style={{
-                  borderTopColor: "var(--cs-primary)",
+                  borderTopColor: "var(--color-primary)",
                   left: isMobile ? "20px" : "auto",
                   right: isMobile ? "auto" : "20px",
                 }}
@@ -199,7 +199,7 @@ export default function ContinuousContentPage() {
 
   return (
     <div
-      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${isReadingMode ? "reading-mode" : ""
+      className={`case-study-container w-full min-h-screen bg-background text-foreground selection:bg-primary selection:text-background ${isReadingMode ? "reading-mode" : ""
         }`}
     >
       <Navbar />
@@ -210,10 +210,10 @@ export default function ContinuousContentPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
-              <span className="text-[var(--cs-highlight)] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+              <span className="text-secondary text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
                 CASE STUDY / AI AUTOMATION • PRODUCT DESIGN
               </span>
-              <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
+              <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-primary font-normal tracking-tight">
                 Proactive Content Creation from an SEO Strategy
               </h1>
             </div>
@@ -230,12 +230,12 @@ export default function ContinuousContentPage() {
             </div>
 
             {/* Metadata Grid */}
-            <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+            <div className="col-span-1 lg:col-span-8 border-t border-border pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Role
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
+                <div className="font-sans text-[13px] text-foreground/70 leading-relaxed">
                   <p>System Ideation</p>
                   <p>Product Architecture</p>
                   <p>UX Researcher</p>
@@ -244,19 +244,19 @@ export default function ContinuousContentPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Timeline
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
+                <div className="font-sans text-[13px] text-foreground/70 leading-relaxed">
                   <p>1 Year & Ongoing</p>
                 </div>
               </div>
 
               <div className="flex flex-col gap-1.5 md:col-span-2">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Technology
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed space-y-1">
+                <div className="font-sans text-[13px] text-foreground/70 leading-relaxed space-y-1">
                   <p>Automation Tool</p>
                   <p>Webhooks</p>
                   <p>Data Base</p>
@@ -288,32 +288,32 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             {/* Left Column: The Challenge */}
             <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 The Challenge
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 How to simplify content creation for <br className="hidden sm:inline" /> Small businesses
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light mt-2">
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light mt-2">
                 Small businesses know they should be publishing content, but most don't have the time, confidence or resources to do it consistently. The challenge was to simplify content creation enough that anyone could generate it. The bigger challenge, discovered after launch, was that content creation wasn't actually the main problem.
               </p>
             </div>
 
             {/* Right Column: My Involvement */}
             <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 My involvement
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 From product ideation to end-to-end execution.
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light mt-2">
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light mt-2">
                 When automation platforms like Make started taking off, I saw an opportunity to rethink how small businesses create marketing content. I came up with the idea, designed the product and built. From mapping the architecture and validating the workflows to developing the Make scenarios, WordPress integration, Airtable database and refining the product through real user feedback.
               </p>
             </div>
@@ -327,7 +327,7 @@ export default function ContinuousContentPage() {
               width={0}
               height={0}
               sizes="100vw"
-              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-border"
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
@@ -340,7 +340,7 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-center">
@@ -361,26 +361,26 @@ export default function ContinuousContentPage() {
             <div className="lg:col-span-6 flex flex-col gap-10">
               {/* Solution Block */}
               <div className="flex flex-col gap-3">
-                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                   The Solution
                 </span>
-                <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                   A Proactive Content Engine
                 </h2>
-                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                   Rather than building another content generator, the project evolved into a proactive marketing system that plans, generates and prepares content automatically while keeping the user in control of publishing.
                 </p>
               </div>
 
               {/* User Persona Block */}
               <div className="flex flex-col gap-3">
-                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                   User Persona
                 </span>
-                <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                   For small business owners
                 </h2>
-                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                   Businesses that invest in marketing but don't have dedicated staff to manage their website or social media. They rarely know what to post, don't understand SEO and struggle to publish consistently while running their business.
                 </p>
               </div>
@@ -395,18 +395,18 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-8">
           {/* Header & Copy block: 100% width */}
           <div className="flex flex-col gap-4 text-left max-w-3xl">
-            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
               Stage 01
             </span>
-            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+            <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
               Mapping the Architecture
             </h2>
-            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
               <p>
                 Before writing a single automation, I designed the complete user journey and system architecture inside Make to validate that the idea was technically possible.
               </p>
@@ -424,7 +424,7 @@ export default function ContinuousContentPage() {
               width={0}
               height={0}
               sizes="100vw"
-              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-border"
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
@@ -437,18 +437,18 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           {/* Part A: First Prototype */}
           <div className="flex flex-col gap-4 text-left max-w-3xl">
-            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
               02. Stage. Development
             </span>
-            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+            <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
               First Prototype
             </h2>
-            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
               <p>
                 The first version allowed users to submit a content request, automatically generate copy and branded imagery, and review everything from Airtable before publishing.
               </p>
@@ -466,7 +466,7 @@ export default function ContinuousContentPage() {
               width={0}
               height={0}
               sizes="100vw"
-              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-border"
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
@@ -475,13 +475,13 @@ export default function ContinuousContentPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start pt-8">
             {/* Left Column: UX Research Feedback */}
             <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 UX Research
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 Although users liked the concept, adoption remained low.
               </h2>
-              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
                 <p>Feedback consistently pointed to two issues:</p>
                 <ul className="list-disc pl-5 space-y-1.5 font-sans">
                   <li>The workflow wasn't intuitive.</li>
@@ -492,11 +492,11 @@ export default function ContinuousContentPage() {
 
             {/* Right Column: Key Insight Quote */}
             <div className="lg:col-span-6 flex flex-col lg:pt-16">
-              <div className="p-6 md:p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] flex flex-col gap-4">
-                <span className="font-sans font-bold text-[11px] md:text-[12px] uppercase tracking-[3px] text-[var(--cs-primary)]">
+              <div className="p-6 md:p-8 rounded-[24px] bg-surface border border-border flex flex-col gap-4">
+                <span className="font-sans font-bold text-[11px] md:text-[12px] uppercase tracking-[3px] text-primary">
                   The research revealed a more fundamental insight:
                 </span>
-                <p className="font-serif text-[24px] md:text-[30px] leading-snug text-[var(--cs-primary)] font-light italic">
+                <p className="font-serif text-[24px] md:text-[30px] leading-snug text-primary font-light italic">
                   Businesses that don't post consistently usually don't lack tools, they lack strategy.
                 </p>
               </div>
@@ -511,19 +511,19 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-center">
             {/* Left Column: Text Content */}
             <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 Stage 03
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 From Reactive to Proactive
               </h2>
-              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
                 <p>
                   Instead of waiting for users to request content, the product became proactive.
                 </p>
@@ -565,24 +565,24 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           {/* Top Two Columns */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
             {/* Left Column: Stage 4 */}
             <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 Stage 04
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 Making it Invisible
               </h2>
-              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
                 <p>
                   To reduce friction even further, I designed a lightweight interface where users could review generated blogs, preview social posts and schedule publication across multiple social platforms from a single place.
                 </p>
-                <p className="font-semibold text-[var(--cs-primary)]">
+                <p className="font-semibold text-primary">
                   The experience shifted from creating content to simply approving it.
                 </p>
               </div>
@@ -590,13 +590,13 @@ export default function ContinuousContentPage() {
 
             {/* Right Column: Outcome */}
             <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)] opacity-0 h-0 select-none">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary opacity-0 h-0 select-none">
                 Outcome
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 Outcome
               </h2>
-              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                 <p>
                   The project evolved from a simple AI content generator into an automated content marketing system that combines SEO strategy, content generation and publishing workflows into a single product.
                 </p>
@@ -612,7 +612,7 @@ export default function ContinuousContentPage() {
               width={0}
               height={0}
               sizes="100vw"
-              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-border"
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
@@ -625,10 +625,10 @@ export default function ContinuousContentPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-6 text-left">
-          <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+          <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
             Skills Demonstrated
           </span>
           <div className="flex flex-wrap gap-2 pt-2">
@@ -648,7 +648,7 @@ export default function ContinuousContentPage() {
             ].map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-1.5 rounded-full bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] text-[13px] font-sans text-[var(--cs-primary)] font-light select-none"
+                className="px-4 py-1.5 rounded-full bg-surface border border-border text-[13px] font-sans text-primary font-light select-none"
               >
                 {skill}
               </span>
@@ -661,22 +661,22 @@ export default function ContinuousContentPage() {
       <section
         id="projects"
         className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${isReadingMode
-            ? "bg-white border border-[var(--cs-border)]"
-            : "bg-[#089998]"
+            ? "bg-white border border-border"
+            : "bg-secondary-bg"
           }`}
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] mb-8">
           <div className="flex flex-col gap-4 text-left">
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
-                  ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
+                  ? "bg-background/10 text-background"
+                  : "bg-[var(--cs-highlight-bg)] text-secondary"
                 }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-background" : "text-secondary"
                 }`}
             >
               Other Case Studies

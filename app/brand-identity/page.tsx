@@ -47,14 +47,14 @@ function HeroControls({
       onMouseLeave={() => !isMobile && setIsSynopsisOpen(false)}
     >
       {/* Reading Time Pill */}
-      <div className="h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-[var(--cs-accent-bg)] flex items-center justify-center">
+      <div className="h-[38px] px-5 rounded-full border border-primary text-primary font-sans font-medium text-[11px] md:text-[12px] uppercase tracking-wider select-none bg-surface flex items-center justify-center">
         8 min read
       </div>
 
       {/* Synopsis Button */}
       <button
         onClick={() => setIsSynopsisOpen(!isSynopsisOpen)}
-        className="h-[38px] px-5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] hover:bg-[var(--cs-accent-bg)] font-sans font-medium text-[11px] md:text-[12px] flex items-center gap-2 cursor-pointer transition-all duration-300 select-none uppercase tracking-wider"
+        className="h-[38px] px-5 rounded-full border border-primary text-primary hover:bg-surface font-sans font-medium text-[11px] md:text-[12px] flex items-center gap-2 cursor-pointer transition-all duration-300 select-none uppercase tracking-wider"
       >
         <span>Synopsis</span>
         <motion.span
@@ -77,7 +77,7 @@ function HeroControls({
             className={`overflow-hidden w-full md:w-[320px] ${isMobile ? "text-left" : "text-right"
               }`}
           >
-            <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-[var(--cs-muted)] text-left md:text-right">
+            <div className="pt-2 pb-4 font-sans text-[13px] leading-[20px] text-foreground/70 text-left md:text-right">
               Bite is a healthy meal planning concept designed to make affordable eating feel more accessible, enjoyable and less restrictive. This case study explores the creation of the brand from its initial naming and visual direction to the development of a cohesive identity and foundational design system, establishing a flexible visual language that could scale across product and marketing touchpoints.
             </div>
           </motion.div>
@@ -86,7 +86,7 @@ function HeroControls({
 
       {/* Reading Mode Toggle */}
       <div className="flex items-center gap-3 mt-2 relative">
-        <span className="font-sans text-[11px] uppercase tracking-wider text-[var(--cs-primary)] select-none">
+        <span className="font-sans text-[11px] uppercase tracking-wider text-primary select-none">
           Reading Mode
         </span>
         <div className="relative flex items-center">
@@ -94,7 +94,7 @@ function HeroControls({
             onClick={() => setIsReadingMode(!isReadingMode)}
             className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${isReadingMode
                 ? "bg-black border-black"
-                : "bg-transparent border-[var(--cs-primary)]"
+                : "bg-transparent border-primary"
               }`}
             aria-label="Toggle Reading Mode"
             animate={justAutoActivated ? {
@@ -105,7 +105,7 @@ function HeroControls({
           >
             <motion.div
               layout
-              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-[var(--cs-primary)]"
+              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-primary"
                 }`}
               animate={{
                 x: isReadingMode ? 22 : 0,
@@ -120,7 +120,7 @@ function HeroControls({
               initial={{ scale: 0.8, opacity: 0.8 }}
               animate={{ scale: 1.6, opacity: 0 }}
               transition={{ repeat: Infinity, duration: 1.2, ease: "easeOut" }}
-              className="absolute inset-0 rounded-full border-2 border-[var(--cs-primary)] pointer-events-none"
+              className="absolute inset-0 rounded-full border-2 border-primary pointer-events-none"
             />
           )}
         </div>
@@ -144,7 +144,7 @@ function HeroControls({
               <div
                 className="absolute top-full border-4 border-transparent"
                 style={{
-                  borderTopColor: "var(--cs-primary)",
+                  borderTopColor: "var(--color-primary)",
                   left: isMobile ? "20px" : "auto",
                   right: isMobile ? "auto" : "20px",
                 }}
@@ -201,7 +201,7 @@ export default function BrandIdentityPage() {
 
   return (
     <div
-      className={`case-study-container w-full min-h-screen bg-[var(--cs-bg)] text-[var(--cs-text)] selection:bg-[var(--cs-primary)] selection:text-[var(--cs-bg)] ${isReadingMode ? "reading-mode" : ""
+      className={`case-study-container w-full min-h-screen bg-background text-foreground selection:bg-primary selection:text-background ${isReadingMode ? "reading-mode" : ""
         }`}
     >
       <Navbar />
@@ -212,10 +212,10 @@ export default function BrandIdentityPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left">
-              <span className="text-[var(--cs-highlight)] font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+              <span className="text-secondary font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
                 CASE STUDY / BRAND IDENTITY
               </span>
-              <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
+              <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-primary font-normal tracking-tight">
                 Brand Identity: Visual Language & Design System
               </h1>
             </div>
@@ -232,12 +232,12 @@ export default function BrandIdentityPage() {
             </div>
 
             {/* Metadata Grid */}
-            <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 mt-4 grid grid-cols-2 md:grid-cols-3 gap-6 text-left">
+            <div className="col-span-1 lg:col-span-8 border-t border-border pt-8 mt-4 grid grid-cols-2 md:grid-cols-3 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Role
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
+                <div className="font-sans text-[13px] text-foreground/70 leading-relaxed">
                   <p>Creative Director</p>
                   <p>Brand Strategist</p>
                   <p>UI Designer</p>
@@ -245,19 +245,19 @@ export default function BrandIdentityPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Timeline
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
+                <div className="font-sans text-[13px] text-foreground/70 leading-relaxed">
                   <p>3 Months</p>
                 </div>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Technologies
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
+                <div className="font-sans text-[13px] text-foreground/70 leading-relaxed">
                   <p>Figma</p>
                   <p>Adobe Suite</p>
                 </div>
@@ -285,31 +285,31 @@ export default function BrandIdentityPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           {/* Challenge / Solution Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-left">
             <div className="space-y-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 The Challenge
               </span>
-              <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
+              <h2 className="font-serif text-[28px] md:text-[36px] text-primary leading-tight font-normal">
                 Standing Out in a Crowded Market
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                 The healthy food and recipe market is already crowded with brands using similar visual codes and messaging. The challenge was to create a short, memorable name that immediately connected with food, then build a distinctive identity around it that could stand out in the market and scale consistently across a digital product and future marketing touchpoints.
               </p>
             </div>
 
             <div className="space-y-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 The Solution
               </span>
-              <h2 className="font-serif text-[28px] md:text-[36px] text-[var(--cs-primary)] leading-tight font-normal">
+              <h2 className="font-serif text-[28px] md:text-[36px] text-primary leading-tight font-normal">
                 A Playful and Approachable Brand System
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                 Bite became the foundation of a playful and approachable brand built around making healthy eating feel accessible rather than restrictive. A bold red and pink palette, expressive typography and a character embedded within the logo established a distinctive visual identity. These elements were then translated into a basic design system, creating the foundations for consistent icons, UI components and marketing assets as the product evolved.
               </p>
             </div>
@@ -336,19 +336,19 @@ export default function BrandIdentityPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 Brand Voice
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 Friendly, Playful & Encouraging
               </h2>
             </div>
-            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
               <p>
                 Bite's voice is friendly, playful and encouraging. It avoids the restrictive or overly serious language often associated with healthy eating, focusing instead on making meal planning and cooking feel simple, accessible and enjoyable.
               </p>
@@ -366,19 +366,19 @@ export default function BrandIdentityPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-left items-start">
             <div className="md:col-span-5 flex flex-col gap-2">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 Brand Identity
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 Standing Out from the Convention
               </h2>
             </div>
-            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+            <div className="md:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light space-y-4">
               <p>
                 Bite's visual identity was designed to stand out from the conventional visual language of health and nutrition brands. Bold reds, soft pinks, expressive typography and playful shapes create a distinctive system that feels energetic, approachable and recognisable.
               </p>
@@ -396,7 +396,7 @@ export default function BrandIdentityPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
+        className="w-full py-16 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-8">
           {/* Logo Showcase */}
@@ -506,19 +506,19 @@ export default function BrandIdentityPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20"
+        className="w-full py-16 border-t border-border bg-surface/20"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch text-left">
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-6 flex flex-col justify-center">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-secondary">
                 Branding System
               </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              <h2 className="font-serif text-[32px] md:text-[44px] text-primary leading-[1.1] font-normal tracking-tight">
                 Complete Design & Branding Guidelines
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-foreground/70 font-light">
                 The full Bite branding system establishes a robust visual foundation. It defines logo usage rules and color-allowed backgrounds, specifies a semantic and core color system, details typography pairings and scaling, defines layout principles, and includes a comprehensive component design system (buttons, inputs, and forms) along with high-fidelity imagery and icon guidelines.
               </p>
               <div>
@@ -526,7 +526,7 @@ export default function BrandIdentityPage() {
                   href="/BITE-Brand-System.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-[48px] px-8 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] hover:bg-[var(--cs-primary)] hover:text-[var(--cs-bg)] font-sans font-medium text-[12px] uppercase tracking-wider items-center justify-center transition-all duration-300 select-none"
+                  className="inline-flex h-[48px] px-8 rounded-full border border-primary text-primary hover:bg-[var(--cs-primary)] hover:text-[var(--cs-bg)] font-sans font-medium text-[12px] uppercase tracking-wider items-center justify-center transition-all duration-300 select-none"
                 >
                   View Full Branding System
                 </a>
@@ -555,10 +555,10 @@ export default function BrandIdentityPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInVariants}
-        className="w-full py-12 border-t border-[var(--cs-border)]"
+        className="w-full py-12 border-t border-border"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] text-left space-y-6">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--cs-accent-bg)] text-[var(--cs-primary)] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit select-none">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-surface text-primary font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit select-none">
             Technologies Used
           </span>
           <div className="flex flex-wrap gap-2 md:gap-3 max-w-4xl">
@@ -573,7 +573,7 @@ export default function BrandIdentityPage() {
             ].map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-1.5 rounded-full border border-[var(--cs-primary)] text-[var(--cs-primary)] font-sans font-medium text-[11px] md:text-[13px] bg-[var(--cs-accent-bg)] hover:bg-[var(--cs-primary)]/10 transition-colors duration-200 cursor-default select-none whitespace-nowrap"
+                className="px-4 py-1.5 rounded-full border border-primary text-primary font-sans font-medium text-[11px] md:text-[13px] bg-surface hover:bg-[var(--cs-primary)]/10 transition-colors duration-200 cursor-default select-none whitespace-nowrap"
               >
                 {tech}
               </span>
@@ -586,22 +586,22 @@ export default function BrandIdentityPage() {
       <section
         id="projects"
         className={`w-full rounded-[48px] md:rounded-[110px] pt-12 pb-24 md:pt-20 md:pb-36 relative overflow-hidden z-[1] mt-12 md:mt-24 transition-colors duration-500 ${isReadingMode
-            ? "bg-white border border-[var(--cs-border)]"
-            : "bg-[#089998]"
+            ? "bg-white border border-border"
+            : "bg-secondary-bg"
           }`}
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] mb-8">
           <div className="flex flex-col gap-4 text-left">
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${isReadingMode
-                  ? "bg-[#1B237A]/10 text-[#1B237A]"
-                  : "bg-[var(--cs-highlight-bg)] text-[var(--cs-highlight)]"
+                  ? "bg-background/10 text-background"
+                  : "bg-[var(--cs-highlight-bg)] text-secondary"
                 }`}
             >
               Other Projects
             </span>
             <h2
-              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-[#1B237A]" : "text-[var(--cs-highlight)]"
+              className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${isReadingMode ? "text-background" : "text-secondary"
                 }`}
             >
               Other Case Studies

@@ -42,7 +42,7 @@ function FloatingPill({ label, index }: { label: string; index: number }) {
         ease: "easeInOut",
         delay,
       }}
-      className="px-3.5 py-1 md:px-5 md:py-1.5 rounded-full border border-[#B8F74B] text-[#B8F74B] font-sans font-medium text-[11px] md:text-[13px] bg-[#B8F74B]/5 hover:bg-[#B8F74B]/15 transition-colors duration-200 cursor-default select-none whitespace-nowrap"
+      className="px-3.5 py-1 md:px-5 md:py-1.5 rounded-full border border-[#B8F74B] text-secondary font-sans font-medium text-[11px] md:text-[13px] bg-secondary/5 hover:bg-secondary/15 transition-colors duration-200 cursor-default select-none whitespace-nowrap"
     >
       {label}
     </motion.span>
@@ -51,7 +51,7 @@ function FloatingPill({ label, index }: { label: string; index: number }) {
 
 function CategoryLabel({ label }: { label: string }) {
   return (
-    <span className="font-sans font-bold text-[13px] md:text-[15px] text-[#B8F74B] self-center py-1 mr-1 select-none">
+    <span className="font-sans font-bold text-[13px] md:text-[15px] text-secondary self-center py-1 mr-1 select-none">
       {label}
     </span>
   );
@@ -66,13 +66,13 @@ export default function AboutSection() {
       {/* Left Side: Text Content */}
       <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left gap-6 pointer-events-auto w-full">
         <div className="flex flex-col gap-6 w-full">
-          <span className="font-sans text-[14px] uppercase tracking-[3px] text-[#B8F74B]/75">
+          <span className="font-sans text-[14px] uppercase tracking-[3px] text-secondary/75">
             Making complexity work.
           </span>
-          <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-[#B8F74B] font-normal tracking-tight">
+          <h2 className="font-serif text-[40px] md:text-[64px] leading-[1.05] text-secondary font-normal tracking-tight">
             15+ years of solving problems.
           </h2>
-          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#B8F74B] font-normal max-w-[460px]">
+          <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px]">
             From branding and marketing to websites, products and AI, the tools have changed. The goal hasn't.
           </p>
         </div>

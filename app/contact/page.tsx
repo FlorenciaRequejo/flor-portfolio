@@ -5,7 +5,7 @@ import FooterSection from "@/components/hero/FooterSection";
 
 export default function ContactPage() {
   return (
-    <div className="w-full min-h-screen bg-[#1B237A] text-[#FDABFF] selection:bg-[#FDABFF] selection:text-[#1B237A] flex flex-col justify-between">
+    <div className="w-full min-h-screen bg-background text-primary selection:bg-primary selection:text-background flex flex-col justify-between">
       <Navbar />
       
       <main className="flex-grow flex flex-col justify-center">

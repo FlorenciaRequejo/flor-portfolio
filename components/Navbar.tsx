@@ -81,8 +81,9 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           {/* Desktop CV Download Button */}
           <div className="hidden md:block">
             <a
-              href="#online-cv"
-              className="h-[50px] px-6 rounded-full flex items-center justify-center bg-primary text-[#1B237A] font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
+              href="/florencia-requejo-cv.pdf"
+              download="florencia-requejo-cv.pdf"
+              className="h-[50px] px-6 rounded-full flex items-center justify-center bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
             >
               Download CV
             </a>
@@ -132,9 +133,10 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           </div>
 
           <a
-            href="#online-cv"
+            href="/florencia-requejo-cv.pdf"
+            download="florencia-requejo-cv.pdf"
             onClick={() => setIsMenuOpen(false)}
-            className="w-full max-w-[200px] h-[44px] rounded-full flex items-center justify-center bg-primary text-[#1B237A] font-sans font-semibold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
+            className="w-full max-w-[200px] h-[44px] rounded-full flex items-center justify-center bg-primary text-background font-sans font-semibold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
           >
             Download CV
           </a>

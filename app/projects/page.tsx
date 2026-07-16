@@ -22,17 +22,17 @@ const fadeInVariants = {
 export default function ProjectsLandingPage() {
   return (
     <div
-      className="w-full min-h-screen bg-[#1B237A] text-[#FDABFF] selection:bg-[#FDABFF] selection:text-[#1B237A]"
+      className="w-full min-h-screen bg-background text-primary selection:bg-primary selection:text-background"
     >
       <Navbar />
 
       {/* PROJECTS GRID HEADER */}
       <section className="relative w-full pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] text-left">
-          <span className="text-[#FDABFF]/60 font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+          <span className="text-primary/60 font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
             SELECTED WORK
           </span>
-          <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[#FDABFF] font-normal tracking-tight mt-3">
+          <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-primary font-normal tracking-tight mt-3">
             Projects Portfolio
           </h1>
         </div>
@@ -59,7 +59,7 @@ export default function ProjectsLandingPage() {
                   className="group flex flex-col cursor-pointer select-none"
                 >
                   {/* Media Container */}
-                  <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden border border-[#FDABFF]/20 shadow-sm transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-md">
+                  <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden border border-primary/20 shadow-sm transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-md">
                     <Image
                       src={project.imageSrc}
                       alt={project.title}

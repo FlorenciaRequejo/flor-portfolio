@@ -21,22 +21,22 @@ function ProcessStep({ number, title, description, isLast }: ProcessStepProps) {
   return (
     <div ref={ref} className="flex gap-8 md:gap-12 items-stretch min-h-[180px] md:min-h-[230px]">
       <div className={`flex flex-col items-center flex-shrink-0 w-[3px] ${isLast ? "mb-4" : "mb-12 md:mb-16"}`}>
-        <div className="w-[3px] flex-grow bg-[#1B237A]/10 rounded-full overflow-hidden relative">
+        <div className="w-[3px] flex-grow bg-background/10 rounded-full overflow-hidden relative">
           <motion.div
             style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
-            className="absolute inset-x-0 top-0 bottom-0 bg-[#FDABFF] rounded-full"
+            className="absolute inset-x-0 top-0 bottom-0 bg-primary rounded-full"
           />
         </div>
       </div>
 
       <div className={`${isLast ? "pb-4" : "pb-14 md:pb-20"}`}>
-        <span className="inline-block font-sans text-[14px] font-semibold tracking-wider text-[#1B237A]/55 uppercase mb-3">
+        <span className="inline-block font-sans text-[14px] font-semibold tracking-wider text-background/55 uppercase mb-3">
           {number}
         </span>
-        <h3 className="font-serif text-[24px] md:text-[28px] text-[#1B237A] font-normal leading-tight mb-3">
+        <h3 className="font-serif text-[24px] md:text-[28px] text-background font-normal leading-tight mb-3">
           {title}
         </h3>
-        <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-[#1B237A]/75 font-normal max-w-[520px]">
+        <p className="font-sans text-[15px] md:text-[16px] leading-[24px] text-background/75 font-normal max-w-[520px]">
           {description}
         </p>
       </div>
@@ -73,26 +73,26 @@ export default function ProcessSection() {
   return (
     <div className="relative w-full overflow-visible">
       {/* Background filler for bottom rounded corners to match the footer's dark blue */}
-      <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-[#1B237A] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-background pointer-events-none" />
 
       <section
         id="process"
         ref={containerRef}
-        className="w-full bg-[#B8F74B] pt-[8px] px-[8px] pb-[8px] md:pt-[30px] md:px-[30px] md:pb-[30px] rounded-[48px] md:rounded-[110px] relative z-10 -mt-[180px] md:-mt-[250px]"
+        className="w-full bg-secondary pt-[8px] px-[8px] pb-[8px] md:pt-[30px] md:px-[30px] md:pb-[30px] rounded-[48px] md:rounded-[110px] relative z-10 -mt-[180px] md:-mt-[250px]"
       >
         <div className="w-full bg-white rounded-[38px] md:rounded-[80px] py-16 md:py-24 relative">
           <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-18 items-start">
               <div className="md:col-span-5 md:sticky md:top-32 h-fit flex flex-col gap-6 md:gap-8 text-left">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[#1B237A]/10 text-[#1B237A] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-background/10 text-background font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit">
                   PROCESS
                 </span>
-                <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-[#1B237A] font-normal tracking-tight">
+                <h2 className="font-serif text-[42px] md:text-[64px] leading-[1.05] text-background font-normal tracking-tight">
                   How I work.
                   <br />
                   What’s my process
                 </h2>
-                <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-[#1B237A]/75 font-normal max-w-[460px]">
+                <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-background/75 font-normal max-w-[460px]">
                   Every project is different, but the way I approach problems stays the same: understand the mess, simplify the structure, and build something people can actually use.
                 </p>
               </div>
