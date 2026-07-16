@@ -292,7 +292,20 @@ export default function ContinuousContentPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            {/* Left Column: My Involvement */}
+            {/* Left Column: The Challenge */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                The Challenge
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                How to simplify content creation for <br className="hidden sm:inline" /> Small businesses
+              </h2>
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light mt-2">
+                Small businesses know they should be publishing content, but most don't have the time, confidence or resources to do it consistently. The challenge was to simplify content creation enough that anyone could generate it. The bigger challenge, discovered after launch, was that content creation wasn't actually the main problem.
+              </p>
+            </div>
+
+            {/* Right Column: My Involvement */}
             <div className="lg:col-span-6 flex flex-col gap-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
                 My involvement
@@ -301,26 +314,8 @@ export default function ContinuousContentPage() {
                 From product ideation to end-to-end execution.
               </h2>
               <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light mt-2">
-                I designed the product strategy, mapped the automation architecture, validated the workflow, built the Make scenarios, developed the WordPress integration, structured the Airtable database and iterated on the product based on real user feedback.
+                When automation platforms like Make started taking off, I saw an opportunity to rethink how small businesses create marketing content. I came up with the idea, designed the product and built. From mapping the architecture and validating the workflows to developing the Make scenarios, WordPress integration, Airtable database and refining the product through real user feedback.
               </p>
-            </div>
-
-            {/* Right Column: The Challenge */}
-            <div className="lg:col-span-6 flex flex-col gap-4">
-              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                The Challenge
-              </span>
-              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                How to simplify content creation
-              </h2>
-              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
-                <p>
-                  Small businesses know they should be publishing content, but most don't have the time, confidence or resources to do it consistently.
-                </p>
-                <p>
-                  The original challenge was to simplify content creation enough that anyone could generate social media posts in minutes. The bigger challenge, discovered after launch, was that content creation wasn't actually the problem.
-                </p>
-              </div>
             </div>
           </div>
 
