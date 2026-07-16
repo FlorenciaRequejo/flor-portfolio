@@ -352,7 +352,7 @@ export default function ContinuousContentPage() {
                 width={0}
                 height={0}
                 sizes="(max-width: 1024px) 100vw, 38vw"
-                className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+                className="w-full h-auto rounded-[24px] md:rounded-[36px]"
                 style={{ width: '100%', height: 'auto' }}
               />
             </div>
@@ -495,9 +495,11 @@ export default function ContinuousContentPage() {
               <span className="font-sans font-bold text-[11px] md:text-[12px] uppercase tracking-[3px] text-[var(--cs-primary)]">
                 The research revealed a more fundamental insight:
               </span>
-              <p className="font-serif text-[28px] md:text-[36px] leading-snug text-[var(--cs-primary)] font-light italic">
-                “Businesses that don't post consistently usually don't lack tools, they lack strategy.”
-              </p>
+              <div className="p-6 md:p-8 rounded-[24px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)]">
+                <p className="font-serif text-[24px] md:text-[30px] leading-snug text-[var(--cs-primary)] font-light italic">
+                  Businesses that don't post consistently usually don't lack tools, they lack strategy.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -549,7 +551,7 @@ export default function ContinuousContentPage() {
                 width={0}
                 height={0}
                 sizes="(max-width: 1024px) 100vw, 38vw"
-                className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+                className="w-full h-auto rounded-[24px] md:rounded-[36px]"
                 style={{ width: '100%', height: 'auto' }}
               />
             </div>
