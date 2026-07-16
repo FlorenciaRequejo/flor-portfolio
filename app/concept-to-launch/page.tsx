@@ -503,16 +503,14 @@ export default function ConceptToLaunchPage() {
           <div className="flex flex-col gap-4 text-left">
             <span
               className={`inline-block px-4 py-1.5 rounded-full font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit ${
-                isReadingMode
-                  ? "bg-background/10 text-background"
-                  : "bg-[var(--cs-highlight-bg)] text-secondary"
+                isReadingMode ? "bg-primary/10 text-primary" : "bg-secondary/15 text-secondary"
               }`}
             >
               Other Projects
             </span>
             <h2
               className={`font-serif text-[42px] md:text-[64px] leading-[1.05] font-normal tracking-tight ${
-                isReadingMode ? "text-background" : "text-secondary"
+                isReadingMode ? "text-primary" : "text-secondary"
               }`}
             >
               Other Case Studies

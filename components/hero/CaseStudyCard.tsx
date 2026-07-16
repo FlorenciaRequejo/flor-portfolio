@@ -52,7 +52,7 @@ export default function CaseStudyCard({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[480px] md:h-[540px] lg:h-[580px] cursor-pointer"
+        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[550px] md:h-[620px] lg:h-[660px] cursor-pointer"
       >
         {/* Media Container */}
         <div className="relative w-full h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden flex-shrink-0">
