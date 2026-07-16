@@ -36,42 +36,6 @@ export const caseStudyCards: CaseStudyData[] = [
     tags: ["Product Design", "UX/UI", "Prototyping"],
   },
   {
-    title: "Concept to Launch: Website Audit App",
-    description:
-      "An AI-powered website audit platform that automatically evaluates performance, accessibility, SEO, and visual consistency, translating metrics into clear business tasks.",
-    href: "/concept-to-launch",
-    imageSrc: "/End To End Product Thinking.jpg",
-    videoSrc: "/End To End Product Thinking.mp4",
-    tags: ["Product Strategy", "AI Integration", "Automation"],
-  },
-  {
-    title: "Making Brands Machine-Readable",
-    description:
-      "Designed and built a system that translates brand decisions into structured JSON/Markdown, enabling designers, developers, and AI agents to work from a single source of truth.",
-    href: "/machine-readable-brands",
-    imageSrc: "/machine-readable-brands-hero.png",
-    videoSrc: "",
-    tags: ["Brand Systems", "Automation", "AI Readiness"],
-  },
-  {
-    title: "Designing a Content System That Does the Work",
-    description:
-      "An AI-powered content pipeline that proactively converts keyword strategy into review-ready blogs and social media campaigns for small businesses.",
-    href: "/continuous-content",
-    imageSrc: "/continuous-content-hero.png",
-    videoSrc: "",
-    tags: ["AI Integration", "Automation", "Content Strategy"],
-  },
-  {
-    title: "NoFuxs: Artist Portfolio & Gallery App",
-    description:
-      "A mobile platform designed for local artists to build verified profiles, upload collections, vote on art, and showcase their work in physical galleries.",
-    href: "/nofuxs-gallery",
-    imageSrc: "/nofuxs-gallery-hero.png",
-    videoSrc: "",
-    tags: ["Product Design", "UX/UI", "Web App"],
-  },
-  {
     title: "Bite App — UX/UI Case Study",
     description:
       "Explore the detailed UX design process on Behance, showing user research, empathy mapping, and wireframing for the grocery-planning mobile app.",
