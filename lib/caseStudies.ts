@@ -36,6 +36,15 @@ export const caseStudyCards: CaseStudyData[] = [
     tags: ["Product Design", "UX/UI", "Prototyping"],
   },
   {
+    title: "Proactive Content Creation from an SEO Strategy",
+    description:
+      "An AI-powered content engine connecting local search strategy to automated article generation, custom graphics, and notification approval loops.",
+    href: "/continuous-content",
+    imageSrc: "/seo-automation-cover.png",
+    videoSrc: "",
+    tags: ["AI Automation", "SEO Strategy", "Product Design"],
+  },
+  {
     title: "Bite App — UX/UI Case Study",
     description:
       "Explore the detailed UX design process on Behance, showing user research, empathy mapping, and wireframing for the grocery-planning mobile app.",
