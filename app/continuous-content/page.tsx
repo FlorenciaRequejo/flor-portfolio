@@ -542,16 +542,16 @@ export default function ContinuousContentPage() {
             </div>
 
             {/* Right Column: Image */}
-            <div className="lg:col-span-6">
-              <div className="relative w-full aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
-                <Image
-                  src="/proactive-content-generation.png"
-                  alt="Proactive content generation engine diagram"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 38vw"
-                />
-              </div>
+            <div className="lg:col-span-6 flex items-center justify-center">
+              <Image
+                src="/blog-booster-app.webp"
+                alt="Proactive content generation engine dashboard"
+                width={0}
+                height={0}
+                sizes="(max-width: 1024px) 100vw, 38vw"
+                className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+                style={{ width: '100%', height: 'auto' }}
+              />
             </div>
           </div>
         </div>
@@ -604,15 +604,15 @@ export default function ContinuousContentPage() {
 
           {/* Underneath Image Visual */}
           <div className="mt-8">
-            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
-              <Image
-                src="/invisible-marketing-system.png"
-                alt="Invisible automated content marketing system dashboard"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 76vw"
-              />
-            </div>
+            <Image
+              src="/new-prototype.webp"
+              alt="Invisible automated content marketing system dashboard preview"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </motion.section>
