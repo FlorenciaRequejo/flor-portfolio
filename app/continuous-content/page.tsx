@@ -255,19 +255,11 @@ export default function ContinuousContentPage() {
                 <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
                   Technology
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed flex flex-wrap gap-x-2 gap-y-1">
-                  {[
-                    "Make", "Webhooks", "Airtable", "WordPress", "Custom Plugin",
-                    "functions.php", "Placid API", "OpenAI (ChatGPT)", "OpenAI Images",
-                    "Google Gemini", "Google Imagen", "Leonardo AI", "Flux", "DALL·E"
-                  ].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-0.5 rounded bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] text-[11px] font-mono text-[var(--cs-primary)] font-light"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed space-y-1">
+                  <p>Make · Webhooks · Airtable</p>
+                  <p>WordPress · Custom Plugin · functions.php</p>
+                  <p>Placid API · OpenAI (ChatGPT) · OpenAI Images</p>
+                  <p>Google Gemini · Google Imagen · Leonardo AI · Flux · DALL·E</p>
                 </div>
               </div>
             </div>
