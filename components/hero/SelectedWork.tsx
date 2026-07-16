@@ -10,7 +10,8 @@ const homeCards = caseStudyCards.filter(
   (card) =>
     card.href === "/web-design-and-development" ||
     card.href === "/brand-identity" ||
-    card.href === "/ux-design"
+    card.href === "/ux-design" ||
+    card.href === "/continuous-content"
 );
 
 const duplicatedCaseStudyCards = [...homeCards, ...homeCards, ...homeCards];

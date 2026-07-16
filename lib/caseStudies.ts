@@ -40,7 +40,7 @@ export const caseStudyCards: CaseStudyData[] = [
     description:
       "An AI-powered content engine connecting local search strategy to automated article generation, custom graphics, and notification approval loops.",
     href: "/continuous-content",
-    imageSrc: "/seo-automation-cover.png",
+    imageSrc: "/cover-blogbooster.webp",
     videoSrc: "",
     tags: ["AI Automation", "SEO Strategy", "Product Design"],
   },
