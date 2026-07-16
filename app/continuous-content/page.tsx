@@ -456,27 +456,33 @@ export default function ContinuousContentPage() {
             </div>
           </div>
 
-          {/* Part B: UX Research */}
-          <div className="flex flex-col gap-4 text-left max-w-3xl pt-8">
-            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              UX Research
-            </span>
-            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-              Although users liked the concept, adoption remained low.
-            </h2>
-            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
-              <p>Feedback consistently pointed to two issues:</p>
-              <ul className="list-disc pl-5 space-y-1.5 font-sans">
-                <li>The workflow wasn't intuitive.</li>
-                <li>Users still didn't know what to create or when to create it.</li>
-              </ul>
-              
-              <div className="pt-6">
-                <p className="font-sans text-[13px] uppercase tracking-wider text-[var(--cs-highlight)] font-semibold">The research revealed a more fundamental insight:</p>
-                <div className="mt-3 p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/20 text-center font-serif text-[22px] md:text-[28px] leading-snug text-[var(--cs-primary)] font-normal italic">
-                  “Businesses that don't post consistently usually don't lack tools, they lack strategy.”
-                </div>
+          {/* Part B: UX Research & Insight Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start pt-8">
+            {/* Left Column: UX Research Feedback */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                UX Research
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                Although users liked the concept, adoption remained low.
+              </h2>
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+                <p>Feedback consistently pointed to two issues:</p>
+                <ul className="list-disc pl-5 space-y-1.5 font-sans">
+                  <li>The workflow wasn't intuitive.</li>
+                  <li>Users still didn't know what to create or when to create it.</li>
+                </ul>
               </div>
+            </div>
+
+            {/* Right Column: Key Insight Quote */}
+            <div className="lg:col-span-6 flex flex-col gap-4 lg:pt-16">
+              <span className="font-sans font-bold text-[11px] md:text-[12px] uppercase tracking-[3px] text-[var(--cs-primary)]">
+                The research revealed a more fundamental insight:
+              </span>
+              <p className="font-serif text-[28px] md:text-[36px] leading-snug text-[var(--cs-primary)] font-light italic">
+                “Businesses that don't post consistently usually don't lack tools, they lack strategy.”
+              </p>
             </div>
           </div>
         </div>
