@@ -340,26 +340,26 @@
   border-color: rgba(0, 0, 0, 0.2) !important;
 }
 .reading-mode nav.nav-outline-pill * {
-  color: var(--color-background) !important;
+  color: var(--color-primary) !important;
 }
 .reading-mode nav.nav-outline-pill a.bg-primary {
-  background-color: var(--color-background) !important;
-  color: var(--color-foreground) !important;
+  background-color: var(--color-primary) !important;
+  color: var(--color-background) !important;
 }
 .reading-mode #contact.w-full {
   background-color: #FFFFFF !important;
-  color: #000000 !important;
+  color: var(--color-primary) !important;
 }
 .reading-mode #contact h2,
 .reading-mode #contact p,
-.reading-mode #contact span:not(a.bg-\[\#FDABFF\] span),
-.reading-mode #contact a:not(a.bg-\[\#FDABFF\]) {
-  color: var(--color-background) !important;
+.reading-mode #contact span:not(a.bg-primary span),
+.reading-mode #contact a:not(a.bg-primary) {
+  color: var(--color-primary) !important;
 }
-.reading-mode #contact a.bg-\[\#FDABFF\],
-.reading-mode #contact a.bg-\[\#FDABFF\] * {
-  background-color: var(--color-background) !important;
-  color: var(--color-foreground) !important;
+.reading-mode #contact a.bg-primary,
+.reading-mode #contact a.bg-primary * {
+  background-color: var(--color-primary) !important;
+  color: var(--color-background) !important;
 }
 .reading-mode #contact .bg-gradient-to-r {
   background-image: none !important;

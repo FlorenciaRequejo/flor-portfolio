@@ -25,19 +25,13 @@ const fadeInVariants = {
 interface HeroControlsProps {
   isSynopsisOpen: boolean;
   setIsSynopsisOpen: (open: boolean) => void;
-  isReadingMode: boolean;
-  setIsReadingMode: (mode: boolean) => void;
   isMobile?: boolean;
-  justAutoActivated?: boolean;
 }
 
 function HeroControls({
   isSynopsisOpen,
   setIsSynopsisOpen,
-  isReadingMode,
-  setIsReadingMode,
   isMobile = false,
-  justAutoActivated = false,
 }: HeroControlsProps) {
   return (
     <div
@@ -82,75 +76,7 @@ function HeroControls({
         )}
       </AnimatePresence>
 
-      {/* Reading Mode Toggle */}
-      <div className="flex items-center gap-3 mt-2 relative">
-        <span className="font-sans text-[11px] uppercase tracking-wider text-primary select-none">
-          Reading Mode
-        </span>
-        <div className="relative flex items-center">
-          <motion.button
-            onClick={() => setIsReadingMode(!isReadingMode)}
-            className={`w-[50px] h-[26px] rounded-full border p-0.5 relative transition-colors duration-300 flex items-center cursor-pointer ${isReadingMode
-              ? "bg-black border-black"
-              : "bg-transparent border-primary"
-              }`}
-            aria-label="Toggle Reading Mode"
-            animate={justAutoActivated ? {
-              x: [0, -4, 4, -4, 4, 0],
-              scale: [1, 1.1, 1.1, 1.1, 1],
-            } : {}}
-            transition={justAutoActivated ? { duration: 0.5, times: [0, 0.2, 0.4, 0.6, 0.8, 1] } : {}}
-          >
-            <motion.div
-              layout
-              className={`w-5 h-5 rounded-full ${isReadingMode ? "bg-white" : "bg-primary"
-                }`}
-              animate={{
-                x: isReadingMode ? 22 : 0,
-              }}
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            />
-          </motion.button>
-          
-          {/* Pulsing ring animation */}
-          {justAutoActivated && (
-            <motion.span
-              initial={{ scale: 0.8, opacity: 0.8 }}
-              animate={{ scale: 1.6, opacity: 0 }}
-              transition={{ repeat: Infinity, duration: 1.2, ease: "easeOut" }}
-              className="absolute inset-0 rounded-full border-2 border-primary pointer-events-none"
-            />
-          )}
-        </div>
-
-        {/* Floating Tooltip */}
-        <AnimatePresence>
-          {justAutoActivated && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.8 }}
-              className="absolute bottom-full mb-3 bg-[var(--cs-primary)] text-[var(--cs-bg)] px-3 py-1.5 rounded text-[10px] uppercase tracking-wider font-semibold font-sans pointer-events-none shadow-lg z-50 whitespace-nowrap"
-              style={{
-                transformOrigin: isMobile ? "bottom left" : "bottom right",
-                left: isMobile ? "0" : "auto",
-                right: isMobile ? "2px" : "auto",
-              }}
-            >
-              Auto-Activated!
-              {/* Little arrow */}
-              <div 
-                className="absolute top-full border-4 border-transparent"
-                style={{
-                  borderTopColor: "var(--color-primary)",
-                  left: isMobile ? "20px" : "auto",
-                  right: isMobile ? "auto" : "20px",
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      
     </div>
   );
 }
@@ -223,9 +149,6 @@ export default function NoFuxsGalleryPage() {
               <HeroControls
                 isSynopsisOpen={isSynopsisOpen}
                 setIsSynopsisOpen={setIsSynopsisOpen}
-                isReadingMode={isReadingMode}
-                setIsReadingMode={handleToggleReadingMode}
-                justAutoActivated={justAutoActivated}
               />
             </div>
 
@@ -285,10 +208,7 @@ export default function NoFuxsGalleryPage() {
               <HeroControls
                 isSynopsisOpen={isSynopsisOpen}
                 setIsSynopsisOpen={setIsSynopsisOpen}
-                isReadingMode={isReadingMode}
-                setIsReadingMode={handleToggleReadingMode}
                 isMobile
-                justAutoActivated={justAutoActivated}
               />
             </div>
           </div>
