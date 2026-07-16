@@ -24,26 +24,7 @@ export default function CaseStudyCard({
   featured,
   tags = [],
 }: CaseStudyCardProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoReady, setIsVideoReady] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
-  // Control video playback based on hover state
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (isHovered) {
-      video.play().catch((err) => {
-        console.warn("Autoplay on hover prevented:", err);
-      });
-    } else {
-      video.pause();
-      if (video.readyState >= 1) {
-        video.currentTime = 0;
-      }
-    }
-  }, [isHovered]);
 
   // Clean soft shadow variants (size/scale and position stay completely fixed)
   const cardVariants = {
@@ -74,29 +55,15 @@ export default function CaseStudyCard({
         className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[480px] md:h-[540px] lg:h-[580px] cursor-pointer"
       >
         {/* Media Container */}
-        <div className="relative w-full h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden">
+        <div className="relative w-full h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden flex-shrink-0">
           <Image
             src={imageSrc || "/case-study-poster.png"}
             alt={title}
             fill
             priority={false}
             sizes="(max-width: 768px) 100vw, 33vw"
-            className={`object-cover object-center transition-opacity duration-500 ${isHovered && isVideoReady ? "opacity-0" : "opacity-100"
-              }`}
+            className="object-cover object-center transition-opacity duration-500"
           />
-          {videoSrc && (
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              preload="none"
-              muted
-              loop
-              playsInline
-              onLoadedData={() => setIsVideoReady(true)}
-              className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${isHovered && isVideoReady ? "opacity-100" : "opacity-0"
-                }`}
-            />
-          )}
         </div>
 
         {/* Content Container: Inset 10px more than media (total X + 10px) */}

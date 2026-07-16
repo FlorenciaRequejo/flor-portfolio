@@ -202,6 +202,48 @@ export default function SelectedWork() {
   const [isTestimonialsMouseDown, setIsTestimonialsMouseDown] = useState(false);
   const testSpeedFactorRef = useRef(0);
 
+  const scrollLeftButton = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+    const cards = Array.from(flexWrapper.children) as HTMLElement[];
+    if (cards.length < 2) return;
+    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
+    if (cardWidthActual > 0) {
+      setIsSnapping(false);
+      container.scrollBy({
+        left: -cardWidthActual,
+        behavior: "smooth",
+      });
+      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+      settleTimerRef.current = setTimeout(() => {
+        setIsSnapping(true);
+      }, 500);
+    }
+  };
+
+  const scrollRightButton = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const flexWrapper = container.firstElementChild as HTMLElement;
+    if (!flexWrapper) return;
+    const cards = Array.from(flexWrapper.children) as HTMLElement[];
+    if (cards.length < 2) return;
+    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
+    if (cardWidthActual > 0) {
+      setIsSnapping(false);
+      container.scrollBy({
+        left: cardWidthActual,
+        behavior: "smooth",
+      });
+      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+      settleTimerRef.current = setTimeout(() => {
+        setIsSnapping(true);
+      }, 500);
+    }
+  };
+
 
 
   // Selected Work Visibility Observer
@@ -628,48 +670,72 @@ export default function SelectedWork() {
 
       <CarouselIndicator activeIndex={activeWorkIndex} onClick={scrollToWorkIndex} />
 
-      <div
-        ref={scrollContainerRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleSelectedWorkMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
-        onScroll={handleSelectedWorkScroll}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUpOrLeave}
-        onClickCapture={handleContainerClickCapture}
-        onDragStart={(e) => e.preventDefault()}
-        className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-0 md:mt-16 relative z-20 py-0 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
-          }`}
-        style={{
-          scrollSnapType: isSnapping ? "x mandatory" : "none",
-        }}
-      >
+      <div className="relative group w-full mt-0 md:mt-16 z-20">
+        {/* Left Arrow Button (visible on hover on desktop) */}
+        <button
+          onClick={scrollLeftButton}
+          className="absolute left-4 md:left-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-[#B8F74B] text-[#089998] hover:bg-[#a6e03a] shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
+          aria-label="Scroll left"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+
+        {/* Right Arrow Button (visible on hover on desktop) */}
+        <button
+          onClick={scrollRightButton}
+          className="absolute right-4 md:right-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-[#B8F74B] text-[#089998] hover:bg-[#a6e03a] shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
+          aria-label="Scroll right"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+
         <div
-          className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-0"
+          ref={scrollContainerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleSelectedWorkMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          onScroll={handleSelectedWorkScroll}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onClickCapture={handleContainerClickCapture}
+          onDragStart={(e) => e.preventDefault()}
+          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-0 relative z-20 py-0 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
+            }`}
           style={{
-            paddingLeft: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
-            paddingRight: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+            scrollSnapType: isSnapping ? "x mandatory" : "none",
           }}
         >
-          {duplicatedCaseStudyCards.map((card, index) => (
-            <div
-              key={`${card.title}-${index}`}
-              className="snap-start shrink-0 w-[82vw] md:w-[60vw] lg:w-[44vw] max-w-[680px] flex"
-            >
-              <CaseStudyCard
-                title={card.title}
-                description={card.description}
-                videoSrc={card.videoSrc}
-                imageSrc={card.imageSrc}
-                href={card.href}
-                featured={false}
-                tags={card.tags}
-              />
-            </div>
-          ))}
+          <div
+            className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-0"
+            style={{
+              paddingLeft: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+              paddingRight: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
+            }}
+          >
+            {duplicatedCaseStudyCards.map((card, index) => (
+              <div
+                key={`${card.title}-${index}`}
+                className="snap-start shrink-0 w-[82vw] md:w-[60vw] lg:w-[44vw] max-w-[680px] flex"
+              >
+                <CaseStudyCard
+                  title={card.title}
+                  description={card.description}
+                  videoSrc={card.videoSrc}
+                  imageSrc={card.imageSrc}
+                  href={card.href}
+                  featured={false}
+                  tags={card.tags}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
