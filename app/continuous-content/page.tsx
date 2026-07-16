@@ -345,16 +345,16 @@ export default function ContinuousContentPage() {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-center">
             {/* Left Column: Image */}
-            <div className="lg:col-span-6">
-              <div className="relative w-full aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
-                <Image
-                  src="/article-1024x670.webp"
-                  alt="Small business marketing automation dashboard interface visual"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 38vw"
-                />
-              </div>
+            <div className="lg:col-span-6 flex items-center justify-center">
+              <Image
+                src="/article-1024x670.webp"
+                alt="Small business marketing automation dashboard interface visual"
+                width={0}
+                height={0}
+                sizes="(max-width: 1024px) 100vw, 38vw"
+                className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+                style={{ width: '100%', height: 'auto' }}
+              />
             </div>
 
             {/* Right Column: Texts */}
@@ -418,10 +418,15 @@ export default function ContinuousContentPage() {
 
           {/* Underneath Image Showcase */}
           <div className="mt-8">
-            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20 flex flex-col items-center justify-center gap-2 select-none min-h-[350px]">
-              <span className="text-[var(--cs-primary)] font-serif text-[24px]">Architecture Map & User Journey Diagram</span>
-              <span className="text-[var(--cs-muted)] font-sans text-[13px]">Placeholder Visual</span>
-            </div>
+            <Image
+              src="/blog-booster.webp"
+              alt="Blog post booster dashboard view"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto rounded-[24px] md:rounded-[36px] border border-[var(--cs-border)]"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </motion.section>
