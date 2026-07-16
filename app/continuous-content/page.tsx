@@ -348,7 +348,7 @@ export default function ContinuousContentPage() {
             <div className="lg:col-span-6">
               <div className="relative w-full aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
                 <Image
-                  src="/solution-user-persona.png"
+                  src="/article-1024x670.webp"
                   alt="Small business marketing automation dashboard interface visual"
                   fill
                   className="object-cover"
