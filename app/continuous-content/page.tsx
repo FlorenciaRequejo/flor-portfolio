@@ -421,7 +421,7 @@ export default function ContinuousContentPage() {
         </div>
       </motion.section>
 
-      {/* DESIGNING THE SYSTEM */}
+      {/* STAGE 02: DEVELOPMENT & UX RESEARCH */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -430,36 +430,53 @@ export default function ContinuousContentPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
-          <div className="text-left space-y-3">
+          {/* Part A: First Prototype */}
+          <div className="flex flex-col gap-4 text-left max-w-3xl">
             <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              04. System Architecture
+              02. Stage. Development
             </span>
             <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-              A Content Operations Pipeline
+              First Prototype
             </h2>
-            <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light max-w-3xl">
-              I designed and built the automation pipeline linking databases, serverless webhooks, and generative APIs to output review-ready assets seamlessly.
-            </p>
+            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+              <p>
+                The first version allowed users to submit a content request, automatically generate copy and branded imagery, and review everything from Airtable before publishing.
+              </p>
+              <p>
+                The system successfully automated content production while keeping a human approval step.
+              </p>
+            </div>
           </div>
 
-          {/* Architecture Map blocks */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left font-sans mt-8">
-            <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-3">
-              <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono">STAGE 1: DB & TOPIC TRIGGER</span>
-              <h4 className="font-serif text-[18px] text-[var(--cs-primary)] font-medium">SEO Strategy Database</h4>
-              <p className="text-[12px] leading-[18px] text-[var(--cs-muted)] font-light">Airtable stores the keyword registry, target parameters, and publication statuses. Every week, a webhook picks the highest-priority keywords for generation.</p>
+          {/* Prototype Image Visual */}
+          <div className="mt-8">
+            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20 flex flex-col items-center justify-center gap-2 select-none min-h-[350px]">
+              <span className="text-[var(--cs-primary)] font-serif text-[24px]">First Prototype Interface Showcase</span>
+              <span className="text-[var(--cs-muted)] font-sans text-[13px]">Placeholder Visual</span>
             </div>
+          </div>
 
-            <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-3">
-              <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono">STAGE 2: LLM ENGINE</span>
-              <h4 className="font-serif text-[18px] text-[var(--cs-primary)] font-medium">AI Content Generation</h4>
-              <p className="text-[12px] leading-[18px] text-[var(--cs-muted)] font-light">Make.com routes requests to GPT-4 to write the article and structure social options, while DALL-E/Midjourney APIs generate corresponding feature images.</p>
-            </div>
-
-            <div className="p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] space-y-3">
-              <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono">STAGE 3: NOTIFY & PUBLISH</span>
-              <h4 className="font-serif text-[18px] text-[var(--cs-primary)] font-medium">Review App Integration</h4>
-              <p className="text-[12px] leading-[18px] text-[var(--cs-muted)] font-light">An email triggers to notify the business owner. They open the web app to edit, approve, or reschedule publishing parameters before WordPress API pushes it live.</p>
+          {/* Part B: UX Research */}
+          <div className="flex flex-col gap-4 text-left max-w-3xl pt-8">
+            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+              UX Research
+            </span>
+            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+              Although users liked the concept, adoption remained low.
+            </h2>
+            <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+              <p>Feedback consistently pointed to two issues:</p>
+              <ul className="list-disc pl-5 space-y-1.5 font-sans">
+                <li>The workflow wasn't intuitive.</li>
+                <li>Users still didn't know what to create or when to create it.</li>
+              </ul>
+              
+              <div className="pt-6">
+                <p className="font-sans text-[13px] uppercase tracking-wider text-[var(--cs-highlight)] font-semibold">The research revealed a more fundamental insight:</p>
+                <div className="mt-3 p-6 rounded-[20px] bg-[var(--cs-accent-bg)] border border-[var(--cs-primary)]/20 text-center font-serif text-[22px] md:text-[28px] leading-snug text-[var(--cs-primary)] font-normal italic">
+                  “Businesses that don't post consistently usually don't lack tools, they lack strategy.”
+                </div>
+              </div>
             </div>
           </div>
         </div>
