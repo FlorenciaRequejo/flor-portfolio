@@ -488,7 +488,7 @@ export default function ContinuousContentPage() {
         </div>
       </motion.section>
 
-      {/* THE CLIENT EXPERIENCE */}
+      {/* STAGE 03: FROM REACTIVE TO PROACTIVE */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -497,41 +497,45 @@ export default function ContinuousContentPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            <div className="lg:col-span-5 flex flex-col gap-2">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-center">
+            {/* Left Column: Text Content */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                05. UX / UI Design
+                Stage 03
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                The Complexity Stays Behind the System
+                From Reactive to Proactive
               </h2>
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+                <p>
+                  Instead of waiting for users to request content, the product became proactive.
+                </p>
+                <p>
+                  I expanded the Airtable database to include SEO research, keywords, search intent and topic clusters for each business.
+                </p>
+                <p>
+                  Using this SEO Strategy as a base structure, suddently the automation could independently generate:
+                </p>
+                <ul className="list-disc pl-5 space-y-1.5 font-sans">
+                  <li>One GEO focused blog article</li>
+                  <li>Five supporting social media posts</li>
+                </ul>
+                <p>
+                  All this branded in look and copy tailored for the company and filled with Metadata ready for publishing supporting the SEO strategy.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-              <p>
-                To avoid dashboard fatigue, the interface presents choices rather than actions. The user opens the review card, reads the generated article, selects their favorite social copy variations, clicks accept, and is done.
-              </p>
-            </div>
-          </div>
 
-          {/* Client steps list diagram */}
-          <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] text-left space-y-6 font-sans">
-            <h4 className="font-serif text-[22px] text-[var(--cs-primary)] font-medium border-b border-[var(--cs-border)] pb-2">The Approval Flow</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-[12px] tracking-wide">
-              <div>
-                <span className="text-[var(--cs-highlight)] font-bold block mb-1">1. ALERT</span>
-                <p className="text-[var(--cs-muted)] font-light">Receive email: "New content drafted for approval."</p>
-              </div>
-              <div>
-                <span className="text-[var(--cs-highlight)] font-bold block mb-1">2. REVIEW</span>
-                <p className="text-[var(--cs-muted)] font-light">Read blog draft and compare social post alternatives.</p>
-              </div>
-              <div>
-                <span className="text-[var(--cs-highlight)] font-bold block mb-1">3. MODIFY</span>
-                <p className="text-[var(--cs-muted)] font-light">Make quick edits directly in the textual textareas.</p>
-              </div>
-              <div>
-                <span className="text-[var(--cs-highlight)] font-bold block mb-1">4. COMMIT</span>
-                <p className="text-[var(--cs-muted)] font-light">Click Approve to queue publication automatically.</p>
+            {/* Right Column: Image */}
+            <div className="lg:col-span-6">
+              <div className="relative w-full aspect-[4/3] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
+                <Image
+                  src="/proactive-content-generation.png"
+                  alt="Proactive content generation engine diagram"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                />
               </div>
             </div>
           </div>
