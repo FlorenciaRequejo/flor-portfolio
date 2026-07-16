@@ -211,10 +211,10 @@ export default function ContinuousContentPage() {
             {/* Left Title Area */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
               <span className="text-[var(--cs-highlight)] text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
-                AI PRODUCT + CONTENT OPERATIONS
+                CASE STUDY / DESIGN + AI Automation • Product Design • SEO • Content Systems
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-[var(--cs-primary)] font-normal tracking-tight">
-                Designing a Content System That Does the Work
+                Proactive Content Creation from an SEO Strategy
               </h1>
             </div>
 
@@ -232,7 +232,7 @@ export default function ContinuousContentPage() {
             {/* Introduction Blurb */}
             <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 mt-4 text-left">
               <p className="font-serif text-[20px] md:text-[24px] leading-relaxed text-[var(--cs-primary)] font-light max-w-3xl">
-                Small businesses know they should stay active online. The problem is that consistent content requires time, strategy, and production capacity they often do not have.
+                Proactive Content Creation from an SEO Strategy: design and development of an AI content automation engine, connecting keyword strategies to automatic article draft generation.
               </p>
             </div>
 
@@ -240,13 +240,12 @@ export default function ContinuousContentPage() {
             <div className="col-span-1 lg:col-span-8 border-t border-[var(--cs-border)] pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div className="flex flex-col gap-1.5">
                 <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
-                  Competencies
+                  Role
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Product Strategy</p>
-                  <p>AI Workflows</p>
-                  <p>Product Design</p>
-                  <p>Business Automation</p>
+                  <p>Developer</p>
+                  <p>Ideation</p>
+                  <p>Design</p>
                 </div>
               </div>
 
@@ -255,29 +254,27 @@ export default function ContinuousContentPage() {
                   Timeline
                 </span>
                 <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>4 Months (Evolving)</p>
+                  <p>1 Year & Ongoing</p>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 md:col-span-2">
                 <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
-                  Deliverables
+                  Technology
                 </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>Pipeline Architecture</p>
-                  <p>Make.com Automations</p>
-                  <p>Approval App UI Mockups</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--cs-highlight)] font-semibold">
-                  Tech Integrations
-                </span>
-                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed">
-                  <p>OpenAI GPT-4 / DALL-E</p>
-                  <p>Make.com APIs</p>
-                  <p>Airtable / Webflow</p>
+                <div className="font-sans text-[13px] text-[var(--cs-muted)] leading-relaxed flex flex-wrap gap-x-2 gap-y-1">
+                  {[
+                    "Make", "Webhooks", "Airtable", "WordPress", "Custom Plugin",
+                    "functions.php", "Placid API", "OpenAI (ChatGPT)", "OpenAI Images",
+                    "Google Gemini", "Google Imagen", "Leonardo AI", "Flux", "DALL·E"
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 rounded bg-[var(--cs-accent-bg)] border border-[var(--cs-border)] text-[11px] font-mono text-[var(--cs-primary)] font-light"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -297,23 +294,7 @@ export default function ContinuousContentPage() {
         </div>
       </section>
 
-      {/* FEATURED HERO VISUAL */}
-      <section className="w-full pb-16">
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
-          <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
-            <Image
-              src="/continuous-content-hero.png"
-              alt="SEO strategy content automation pipeline overview"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 76vw"
-              priority
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* THE PROBLEM I KEPT SEEING */}
+      {/* MY INVOLVEMENT & THE CHALLENGE */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -323,44 +304,43 @@ export default function ContinuousContentPage() {
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            <div className="lg:col-span-5 flex flex-col gap-2">
+            {/* Left Column: My Involvement */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                01. The Problem
+                My involvement
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                The Website Was Live. Then Nothing Happened.
+                From product ideation to end-to-end execution.
               </h2>
+              <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light mt-2">
+                I designed the product strategy, mapped the automation architecture, validated the workflow, built the Make scenarios, developed the WordPress integration, structured the Airtable database and iterated on the product based on real user feedback.
+              </p>
             </div>
-            <div className="lg:col-span-7 font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
-              <p>
-                While working with small service businesses, I observed a repeating bottleneck. A new site would launch with clean layout structures, but the owner lacked the capacity or SEO expertise to keep it updated with continuous content.
-              </p>
-              <p>
-                SEO, blogs, and social platforms were treated as separate tasks. The result was a stale digital presence that required manual content generation from people already busy running their day-to-day operations.
-              </p>
+
+            {/* Right Column: The Challenge */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
+                The Challenge
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight opacity-0 h-0 select-none">
+                The Challenge
+              </h2>
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+                <p>
+                  Small businesses know they should be publishing content, but most don't have the time, confidence or resources to do it consistently.
+                </p>
+                <p>
+                  The original challenge was to simplify content creation enough that anyone could generate social media posts in minutes. The bigger challenge, discovered after launch, was that content creation wasn't actually the problem.
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Business Owner Time Block diagram */}
-          <div className="p-8 rounded-[24px] bg-[var(--cs-card-bg)] border border-[var(--cs-border)] text-left space-y-6">
-            <h4 className="font-serif text-[22px] text-[var(--cs-primary)] font-medium border-b border-[var(--cs-border)] pb-2">The Business Owner Time Allocation</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-sans">
-              <div className="space-y-3">
-                <span className="text-[11px] uppercase tracking-widest text-[#FFB6C1] font-bold">100% Focused On (Operations)</span>
-                <div className="flex flex-wrap gap-2 text-[12px]">
-                  {["Serving Customers", "Managing Crew", "Estimates & Quotes", "Stock & Materials", "Billing & Admin"].map((txt) => (
-                    <span key={txt} className="px-3 py-1 rounded bg-[#FFB6C1]/10 text-[#FFB6C1] border border-[#FFB6C1]/15">{txt}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-3">
-                <span className="text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">0% Time Left For (Marketing)</span>
-                <div className="flex flex-wrap gap-2 text-[12px]">
-                  {["Keyword Analytics", "Drafting Blogs", "Social Campaigns", "Sourcing Images", "Post Scheduling"].map((txt) => (
-                    <span key={txt} className="px-3 py-1 rounded bg-[var(--cs-highlight)]/10 text-[var(--cs-highlight)] border border-[var(--cs-highlight)]/15">{txt}</span>
-                  ))}
-                </div>
-              </div>
+          {/* Placeholder Workflow Image */}
+          <div className="mt-12">
+            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-accent-bg)]/20 flex flex-col items-center justify-center gap-2 select-none min-h-[300px]">
+              <span className="text-[var(--cs-primary)] font-serif text-[24px]">Workflow Automation Architecture</span>
+              <span className="text-[var(--cs-muted)] font-sans text-[13px]">Placeholder Visual</span>
             </div>
           </div>
         </div>
