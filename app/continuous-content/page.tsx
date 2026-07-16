@@ -542,30 +542,7 @@ export default function ContinuousContentPage() {
         </div>
       </motion.section>
 
-      {/* HUMAN CONTROL AS A PRODUCT DECISION */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
-      >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-8 text-left font-sans">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--cs-accent-bg)] text-[var(--cs-primary)] font-sans font-medium text-[12px] tracking-[2px] uppercase w-fit select-none">
-            06. Human Accountability
-          </span>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-8 space-y-4">
-              <h3 className="font-serif text-[28px] text-[var(--cs-primary)] leading-tight">Automated Production. Human Accountability.</h3>
-              <p className="text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
-                Although content is drafted autonomously, releasing text without human oversight is a dangerous brand risk. The decision to enforce a manual review step ensures clients remain accountable for published statements, preventing hallucinated parameters from reaching public web feeds.
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* WHAT I OWNED */}
+      {/* STAGE 04: MAKING IT INVISIBLE & OUTCOME */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -574,61 +551,53 @@ export default function ContinuousContentPage() {
         className="w-full py-16 border-t border-[var(--cs-border)]"
       >
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12">
+          {/* Top Two Columns */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left items-start">
-            <div className="lg:col-span-5 flex flex-col gap-2">
+            {/* Left Column: Stage 4 */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
               <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-                07. Contribution
+                Stage 04
               </span>
               <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-                From Observed Problem to Product System
+                Making it Invisible
               </h2>
-            </div>
-            <div className="lg:col-span-7 grid grid-cols-2 gap-4 font-sans text-[14px] text-[var(--cs-muted)] font-light">
-              <div className="space-y-2">
-                <p>· Problem Identification</p>
-                <p>· Opportunity Strategy</p>
-                <p>· Workflow Architecture</p>
-                <p>· SEO-Content Integration</p>
-                <p>· AI System Design</p>
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light space-y-4">
+                <p>
+                  To reduce friction even further, I designed a lightweight interface where users could review generated blogs, preview social posts and schedule publication across multiple social platforms from a single place.
+                </p>
+                <p className="font-semibold text-[var(--cs-primary)]">
+                  The experience shifted from creating content to simply approving it.
+                </p>
               </div>
-              <div className="space-y-2">
-                <p>· UX/UI Mockups</p>
-                <p>· Custom Web App Portal</p>
-                <p>· API Webhook Construction</p>
-                <p>· System Integrity Testing</p>
-                <p>· Validation Frameworks</p>
+            </div>
+
+            {/* Right Column: Outcome */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)] opacity-0 h-0 select-none">
+                Outcome
+              </span>
+              <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
+                Outcome
+              </h2>
+              <div className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light">
+                <p>
+                  The project evolved from a simple AI content generator into an automated content marketing system that combines SEO strategy, content generation and publishing workflows into a single product.
+                </p>
               </div>
             </div>
           </div>
-        </div>
-      </motion.section>
 
-      {/* CURRENT STATUS / VALIDATION */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInVariants}
-        className="w-full py-16 border-t border-[var(--cs-border)]"
-      >
-        <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)] space-y-12 text-left">
-          <div className="space-y-3">
-            <span className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[3px] text-[var(--cs-highlight)]">
-              08. Evolving Status
-            </span>
-            <h2 className="font-serif text-[32px] md:text-[44px] text-[var(--cs-primary)] leading-[1.1] font-normal tracking-tight">
-              Building the System is Only the First Hypothesis
-            </h2>
-            <p className="font-sans text-[15px] md:text-[16px] leading-[26px] text-[var(--cs-muted)] font-light max-w-3xl">
-              We are actively testing the pipeline with a cohort of local service business pilots. The next stages are validating which copy layouts require the most editing, observing saved time margins, and measuring organic visibility gains.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-[24px] border border-[var(--cs-primary)]/20 bg-[var(--cs-accent-bg)]/10 text-center space-y-3">
-            <h4 className="font-sans text-[11px] uppercase tracking-widest text-[var(--cs-highlight)] font-bold">The Bigger Opportunity</h4>
-            <p className="font-serif text-[24px] md:text-[32px] leading-tight text-[var(--cs-primary)]">
-              “The goal wasn't to generate more content. It was to design a system that makes consistent digital presence easier to maintain.”
-            </p>
+          {/* Underneath Image Visual */}
+          <div className="mt-8">
+            <div className="relative w-full aspect-[16/9] rounded-[24px] md:rounded-[36px] overflow-hidden border border-[var(--cs-border)] bg-[var(--cs-card-bg)]">
+              <Image
+                src="/invisible-marketing-system.png"
+                alt="Invisible automated content marketing system dashboard"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 76vw"
+              />
+            </div>
           </div>
         </div>
       </motion.section>
