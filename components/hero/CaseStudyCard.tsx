@@ -52,10 +52,10 @@ export default function CaseStudyCard({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[550px] md:h-[620px] lg:h-[660px] cursor-pointer"
+        className="relative flex flex-col justify-between overflow-hidden bg-white rounded-[32px] md:rounded-[40px] w-full select-none p-6 md:p-8 h-[580px] md:h-[620px] lg:h-[660px] cursor-pointer"
       >
         {/* Media Container */}
-        <div className="relative w-full h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden flex-shrink-0">
+        <div className="relative w-full h-[200px] sm:h-[240px] md:h-[300px] lg:h-[340px] rounded-[20px] md:rounded-[28px] overflow-hidden flex-shrink-0">
           <Image
             src={imageSrc || "/case-study-poster.png"}
             alt={title}
@@ -102,7 +102,20 @@ export default function CaseStudyCard({
             <div className="shrink-0 w-fit">
               <div className="h-[50px] px-6 rounded-full bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity duration-200">
                 <span>Read More</span>
-                <span className="text-[12px] md:text-[14px]">↗</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2.5"
+                  stroke="currentColor"
+                  className="w-3.5 h-3.5 md:w-4 md:h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                  />
+                </svg>
               </div>
             </div>
           </div>
