@@ -1,26 +1,35 @@
-"use client";
+import type { Metadata } from "next";
+import HomeClient from "./HomeClient";
+import { getPersonSchema, getWebsiteSchema } from "@/lib/schema";
 
-import dynamic from "next/dynamic";
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/hero/HeroSection";
-
-const IndustriesSection = dynamic(() => import("@/components/hero/IndustriesSection"));
-const SelectedWork = dynamic(() => import("@/components/hero/SelectedWork"));
-const ProcessSection = dynamic(() => import("@/components/hero/ProcessSection"));
-const FooterSection = dynamic(() => import("@/components/hero/FooterSection"));
+export const metadata: Metadata = {
+  title: "Flor Requejo | Product Designer & Developer",
+  description:
+    "Creative thinking, grounded in execution. Design, tech and product. Portfolio of Flor Requejo.",
+  openGraph: {
+    title: "Flor Requejo | Product Designer & Developer",
+    description: "Creative thinking, grounded in execution. Design, tech and product.",
+    url: "https://flor-portfolio-flax.vercel.app",
+    siteName: "Flor Requejo Portfolio",
+    type: "website",
+  },
+};
 
 export default function Home() {
+  const personSchema = getPersonSchema();
+  const websiteSchema = getWebsiteSchema();
+
   return (
     <>
-      <Navbar />
-      <main>
-        <HeroSection />
-        <div id="smooth-scroll-marker" className="w-full h-px pointer-events-none" />
-        <IndustriesSection />
-        <SelectedWork />
-        <ProcessSection />
-        <FooterSection />
-      </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <HomeClient />
     </>
   );
 }

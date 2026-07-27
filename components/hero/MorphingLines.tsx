@@ -520,17 +520,21 @@ export default function MorphingLines() {
         const alignRaw = Math.max(0, Math.min(1, (p - 0.20) / (0.45 - 0.20)));
         const alignT = easeInOutCubic(alignRaw);
 
-        // Compute top offset values in pixels
         const isMobile = window.innerWidth < 768;
-        const targetOffset = isMobile ? -0.08 * vh : 0;
-        const target1 = 0.1743 * vh + targetOffset;
-        const target2 = 0.2525 * vh + targetOffset;
-        const target3 = 0.3308 * vh + targetOffset;
 
-        const startOffset = isMobile ? 0 : 30;
-        const start1 = 0 + startOffset;
-        const start2 = 44 + startOffset;
-        const start3 = 88 + startOffset;
+        // Height of each pill element for vertical centering
+        const h1 = pill1.offsetHeight || 28;
+        const h2 = pill2.offsetHeight || 28;
+        const h3 = pill3.offsetHeight || 28;
+
+        // Target Y offsets relative to scrollIndicatorRef container
+        const target1 = 0.1743 * vh - h1 / 2;
+        const target2 = 0.2525 * vh - h2 / 2;
+        const target3 = 0.3308 * vh - h3 / 2;
+
+        const start1 = 30;
+        const start2 = 74;
+        const start3 = 118;
 
         const top1 = start1 + (target1 - start1) * alignT;
         const top2 = start2 + (target2 - start2) * alignT;
@@ -539,6 +543,38 @@ export default function MorphingLines() {
         pill1.style.top = `${top1}px`;
         pill2.style.top = `${top2}px`;
         pill3.style.top = `${top3}px`;
+
+        // Horizontal transition: Initial state (alignT = 0) is left-aligned to right of chrome line.
+        // Scrolled state (alignT = 1) centers each pill on exact screen center (window.innerWidth / 2).
+        const chromeEl = indicatorChromeRef.current;
+        if (!isMobile && chromeEl) {
+          const chromeRect = chromeEl.getBoundingClientRect();
+          const screenCenter = window.innerWidth / 2;
+          const initialPillLeft = chromeRect.left + 24;
+
+          const p1Width = pill1.offsetWidth || 140;
+          const p2Width = pill2.offsetWidth || 190;
+          const p3Width = pill3.offsetWidth || 170;
+
+          const deltaX1 = screenCenter - p1Width / 2 - initialPillLeft;
+          const deltaX2 = screenCenter - p2Width / 2 - initialPillLeft;
+          const deltaX3 = screenCenter - p3Width / 2 - initialPillLeft;
+
+          pill1.style.left = "0px";
+          pill2.style.left = "0px";
+          pill3.style.left = "0px";
+
+          pill1.style.transform = `translate3d(${deltaX1 * alignT}px, 0, 0)`;
+          pill2.style.transform = `translate3d(${deltaX2 * alignT}px, 0, 0)`;
+          pill3.style.transform = `translate3d(${deltaX3 * alignT}px, 0, 0)`;
+        } else {
+          pill1.style.left = "";
+          pill2.style.left = "";
+          pill3.style.left = "";
+          pill1.style.transform = "translate3d(0, 0, 0)";
+          pill2.style.transform = "translate3d(0, 0, 0)";
+          pill3.style.transform = "translate3d(0, 0, 0)";
+        }
 
         // Color transition: from #FDABFF (253, 171, 255) to #1B237A (27, 35, 122)
         const r = Math.round(253 + (27 - 253) * alignT);
@@ -711,20 +747,20 @@ export default function MorphingLines() {
           {/* Mobile Pills - visible on mobile/tablet, hidden on desktop */}
           <div className="md:hidden flex flex-wrap gap-2.5 justify-center mt-2 w-full max-w-[480px] pointer-events-auto">
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              15+ Years Experience
+              Digital Design
             </span>
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              Design + Development
+              System Architecture
             </span>
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              From Concept to Launch
+              Product Development
             </span>
           </div>
 
           {/* Mobile-only Scroll Indicator: sits below hero copy and is visible on all screen aspect ratios */}
           <div className="md:hidden flex flex-col items-center gap-3 mt-4 pointer-events-none w-full">
             <span className="font-sans text-[12px] tracking-[2.5px] uppercase text-primary">
-              FOLLOW THE PROCESS
+              FOLLOW MY PROCESS
             </span>
             <div className="flex flex-col items-center">
               <div className="w-[1.5px] h-[32px] bg-primary/40" />
@@ -752,7 +788,7 @@ export default function MorphingLines() {
               </div>
               {/* Text */}
               <span className="font-sans text-[14px] leading-none tracking-[2.5px] uppercase text-primary pb-[1px] whitespace-nowrap">
-                FOLLOW THE PROCESS
+                FOLLOW MY PROCESS
               </span>
             </div>
 
@@ -762,19 +798,19 @@ export default function MorphingLines() {
                 ref={pill1Ref}
                 className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-0 md:top-[30px]"
               >
-                15+ Years Experience
+                Digital Design
               </span>
               <span
                 ref={pill2Ref}
                 className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[44px] md:top-[74px]"
               >
-                Design + Development
+                System Architecture
               </span>
               <span
                 ref={pill3Ref}
                 className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[88px] md:top-[118px]"
               >
-                From Concept to Launch
+                Product Development
               </span>
             </div>
           </div>

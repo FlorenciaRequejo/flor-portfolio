@@ -1,17 +1,31 @@
-"use client";
+import type { Metadata } from "next";
+import ContactClient from "./ContactClient";
+import { getPersonSchema } from "@/lib/schema";
 
-import Navbar from "@/components/Navbar";
-import FooterSection from "@/components/hero/FooterSection";
+export const metadata: Metadata = {
+  title: "Contact Flor Requejo | Product Designer & Developer",
+  description:
+    "Get in touch with Flor Requejo for product design, web development, brand identity, or AI automation collaborations.",
+  openGraph: {
+    title: "Contact Flor Requejo | Product Designer & Developer",
+    description:
+      "Get in touch with Flor Requejo for product design, web development, brand identity, or AI automation collaborations.",
+    url: "https://flor-portfolio-flax.vercel.app/contact",
+    siteName: "Flor Requejo Portfolio",
+    type: "website",
+  },
+};
 
 export default function ContactPage() {
+  const personSchema = getPersonSchema();
+
   return (
-    <div className="w-full min-h-screen bg-background text-primary selection:bg-primary selection:text-background flex flex-col justify-between">
-      <Navbar />
-      
-      <main className="flex-grow flex flex-col justify-center">
-        {/* Renders the full Contact CTA and social links as the main body of this dedicated contact page */}
-        <FooterSection />
-      </main>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <ContactClient />
+    </>
   );
 }

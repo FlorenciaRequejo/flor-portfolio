@@ -2,21 +2,38 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import CaseStudyCard from "./CaseStudyCard";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useMotionValue, useReducedMotion } from "framer-motion";
-import { caseStudyCards } from "@/lib/caseStudies";
 
-const homeCards = caseStudyCards.filter(
-  (card) =>
-    card.href === "/web-design-and-development" ||
-    card.href === "/brand-identity" ||
-    card.href === "/ux-design" ||
-    card.href === "/continuous-content"
-);
-
-const duplicatedCaseStudyCards = [...homeCards, ...homeCards, ...homeCards];
-
-
+const featuredCaseStudies = [
+  {
+    categoryPill: "Digital Design",
+    title: "Brand Identity: Visual Language & Design System",
+    description:
+      "Developed a complete visual language, from logo design and app interfaces to marketing materials and brand collateral, creating a consistent and memorable experience across every touchpoint.",
+    href: "/brand-identity",
+    imageSrc: "/bite-brand-cover.png",
+    tags: ["Brand Strategy", "Visual Identity", "Design System"],
+  },
+  {
+    categoryPill: "Product Development",
+    title: "Proactive Content Creation from an SEO Strategy",
+    description:
+      "An AI-powered content engine connecting local search strategy to automated article generation, custom graphics, and notification approval loops.",
+    href: "/continuous-content",
+    imageSrc: "/cover-blogbooster.webp",
+    tags: ["AI Automation", "SEO Strategy", "Product Design"],
+  },
+  {
+    categoryPill: "System Architecture",
+    title: "Designing and Building an Automated Media Publishing Platform",
+    description:
+      "Rebuilt a fragile legacy news platform into a scalable publishing ecosystem by redesigning its architecture and separating infrastructure responsibilities.",
+    href: "/web-design-and-development",
+    imageSrc: "/waatea-ipad-mp3.webp",
+    tags: ["System Architecture", "Automation", "WordPress"],
+  },
+];
 
 const testimonials = [
   {
@@ -50,24 +67,6 @@ const testimonials = [
 ];
 
 const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
-
-function CarouselIndicator({ activeIndex, onClick }: { activeIndex: number; onClick: (index: number) => void }) {
-  return (
-    <div className="md:hidden flex justify-center gap-2.5 my-3 pointer-events-auto">
-      {[0, 1, 2].map((i) => (
-        <button
-          key={i}
-          onClick={() => onClick(i)}
-          className={`h-[3px] rounded-full transition-all duration-300 ${activeIndex === i
-            ? "w-8 bg-secondary"
-            : "w-4 bg-secondary/30"
-            }`}
-          aria-label={`Go to slide ${i + 1}`}
-        />
-      ))}
-    </div>
-  );
-}
 
 interface TestimonialCardProps {
   quote: string;
@@ -111,11 +110,10 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
 
 export default function SelectedWork() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "start start"]
+    offset: ["start end", "start start"],
   });
 
   const shouldReduceMotion = useReducedMotion();
@@ -125,7 +123,6 @@ export default function SelectedWork() {
     : useTransform(scrollYProgress, [0.0, 1.0], [0, 1]);
 
   const [maxBorderWidth, setMaxBorderWidth] = useState(35);
-  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
 
   useEffect(() => {
     const updateBorderWidth = () => {
@@ -138,209 +135,20 @@ export default function SelectedWork() {
 
   const borderWidthStyle = useTransform(borderProgress, [0, 1], [0, maxBorderWidth]);
 
-  // Log values for debugging scroll progress
-  useEffect(() => {
-    console.log("SelectedWork mounted. shouldReduceMotion:", shouldReduceMotion);
-    return borderProgress.on("change", (latest) => {
-      console.log("borderProgress changed:", latest, "scrollYProgress:", scrollYProgress.get());
-    });
-  }, [borderProgress, scrollYProgress, shouldReduceMotion]);
-
-  const scrollToWorkIndex = (index: number) => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const flexWrapper = container.firstElementChild as HTMLElement;
-    if (!flexWrapper) return;
-    const cards = Array.from(flexWrapper.children) as HTMLElement[];
-    if (cards.length < 2) return;
-    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
-    if (cardWidthActual > 0) {
-      const originalCount = homeCards.length;
-      setIsSnapping(false);
-      const targetScroll = cardWidthActual * originalCount + index * cardWidthActual;
-      container.scrollTo({
-        left: targetScroll,
-        behavior: "smooth",
-      });
-      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
-      settleTimerRef.current = setTimeout(() => {
-        setIsSnapping(true);
-      }, 500);
-    }
-  };
-
-  const [isSnapping, setIsSnapping] = useState(true);
-  const isHovered = useRef(false);
-  const isTouching = useRef(false);
-  const settleTimerRef = useRef<NodeJS.Timeout | null>(null);
-
+  // Testimonials state and handlers
   const testimonialsContainerRef = useRef<HTMLDivElement>(null);
   const [isTestimonialsSnapping, setIsTestimonialsSnapping] = useState(true);
   const isTestimonialsHovered = useRef(false);
   const isTestimonialsTouching = useRef(false);
   const testimonialsSettleTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const scrollSpeed = 20;
-
-  // Viewport visibility states
-  const [isVisible, setIsVisible] = useState(false);
   const [isTestimonialsVisible, setIsTestimonialsVisible] = useState(false);
-
-  // Mouse drag states for Selected Work
-  const startXRef = useRef(0);
-  const startScrollLeftRef = useRef(0);
-  const isMouseDownRef = useRef(false);
-  const wasDraggingRef = useRef(false);
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const speedFactorRef = useRef(0);
-
-  // Mouse drag states for Testimonials
   const testStartXRef = useRef(0);
   const testStartScrollLeftRef = useRef(0);
   const testIsMouseDownRef = useRef(false);
   const testWasDraggingRef = useRef(false);
   const [isTestimonialsMouseDown, setIsTestimonialsMouseDown] = useState(false);
   const testSpeedFactorRef = useRef(0);
-
-  const scrollLeftButton = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const flexWrapper = container.firstElementChild as HTMLElement;
-    if (!flexWrapper) return;
-    const cards = Array.from(flexWrapper.children) as HTMLElement[];
-    if (cards.length < 2) return;
-    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
-    if (cardWidthActual > 0) {
-      setIsSnapping(false);
-      container.scrollBy({
-        left: -cardWidthActual,
-        behavior: "smooth",
-      });
-      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
-      settleTimerRef.current = setTimeout(() => {
-        setIsSnapping(true);
-      }, 500);
-    }
-  };
-
-  const scrollRightButton = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const flexWrapper = container.firstElementChild as HTMLElement;
-    if (!flexWrapper) return;
-    const cards = Array.from(flexWrapper.children) as HTMLElement[];
-    if (cards.length < 2) return;
-    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
-    if (cardWidthActual > 0) {
-      setIsSnapping(false);
-      container.scrollBy({
-        left: cardWidthActual,
-        behavior: "smooth",
-      });
-      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
-      settleTimerRef.current = setTimeout(() => {
-        setIsSnapping(true);
-      }, 500);
-    }
-  };
-
-
-
-  // Selected Work Visibility Observer
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(container);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  // Selected Work Auto-rotation effect
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    let animationId: number;
-    let lastTime = performance.now();
-
-    const animate = (time: number) => {
-      const delta = (time - lastTime) / 1000;
-      lastTime = time;
-
-      if (!isHovered.current && !isTouching.current && !isMouseDownRef.current && isVisible) {
-        setIsSnapping((prev) => {
-          if (prev) return false;
-          return prev;
-        });
-
-        // Gently speed up when resuming auto movement
-        speedFactorRef.current = Math.min(1, speedFactorRef.current + delta * 2);
-
-        const flexWrapper = container.firstElementChild as HTMLElement;
-        if (flexWrapper) {
-          const cards = Array.from(flexWrapper.children) as HTMLElement[];
-          const originalCount = homeCards.length;
-          if (cards.length >= originalCount * 2) {
-            const child1 = cards[0];
-            const child2 = cards[originalCount];
-            if (child1 && child2) {
-              const loopWidth = child2.offsetLeft - child1.offsetLeft;
-              if (loopWidth > 0) {
-                container.scrollLeft += scrollSpeed * delta * speedFactorRef.current;
-              }
-            }
-          }
-        }
-      } else {
-        speedFactorRef.current = 0;
-        setIsSnapping((prev) => {
-          const shouldSnap = !isMouseDownRef.current;
-          if (prev !== shouldSnap) return shouldSnap;
-          return prev;
-        });
-      }
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    const startTimeout = setTimeout(() => {
-      lastTime = performance.now();
-      animationId = requestAnimationFrame(animate);
-    }, 1500);
-
-    return () => {
-      clearTimeout(startTimeout);
-      cancelAnimationFrame(animationId);
-    };
-  }, [isVisible]);
-
-  const handleMouseEnter = () => {
-    isHovered.current = true;
-  };
-
-  const handleTouchStart = () => {
-    isTouching.current = true;
-    setIsSnapping((prev) => {
-      if (!prev) return true;
-      return prev;
-    });
-  };
-
-  const handleTouchEnd = () => {
-    if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
-    settleTimerRef.current = setTimeout(() => {
-      isTouching.current = false;
-    }, 2000);
-  };
+  const scrollSpeed = 20;
 
   // Testimonials Visibility Observer
   useEffect(() => {
@@ -378,7 +186,6 @@ export default function SelectedWork() {
           return prev;
         });
 
-        // Gently speed up when resuming auto movement
         testSpeedFactorRef.current = Math.min(1, testSpeedFactorRef.current + delta * 2);
 
         const flexWrapper = container.firstElementChild as HTMLElement;
@@ -438,112 +245,6 @@ export default function SelectedWork() {
     }, 2000);
   };
 
-  // Selected Work Mouse Drag handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    isMouseDownRef.current = true;
-    setIsMouseDown(true);
-    setIsSnapping(false);
-    wasDraggingRef.current = false;
-    startXRef.current = e.clientX;
-    startScrollLeftRef.current = container.scrollLeft;
-    speedFactorRef.current = 0;
-    document.documentElement.setAttribute('data-carousel-dragging', 'true');
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isMouseDownRef.current) return;
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const walk = e.clientX - startXRef.current;
-    if (Math.abs(walk) > 5) {
-      wasDraggingRef.current = true;
-    }
-    container.scrollLeft = startScrollLeftRef.current - walk;
-  };
-
-  const handleMouseUpOrLeave = () => {
-    if (!isMouseDownRef.current) return;
-    isMouseDownRef.current = false;
-    setIsMouseDown(false);
-    setIsSnapping(true);
-    speedFactorRef.current = 0;
-    document.documentElement.removeAttribute('data-carousel-dragging');
-  };
-
-  const handleSelectedWorkMouseLeave = () => {
-    isHovered.current = false;
-    handleMouseUpOrLeave();
-  };
-
-  const handleContainerClickCapture = (e: React.MouseEvent) => {
-    if (wasDraggingRef.current) {
-      e.preventDefault();
-      e.stopPropagation();
-      wasDraggingRef.current = false;
-    }
-  };
-
-  const handleSelectedWorkScroll = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const flexWrapper = container.firstElementChild as HTMLElement;
-    if (!flexWrapper) return;
-    const cards = Array.from(flexWrapper.children) as HTMLElement[];
-    const originalCount = homeCards.length;
-    if (cards.length < originalCount * 2) return;
-
-    const child1 = cards[0];
-    const child2 = cards[originalCount];
-    if (!child1 || !child2) return;
-
-    const loopWidth = child2.offsetLeft - child1.offsetLeft;
-    if (loopWidth <= 0) return;
-
-    const scrollLeft = container.scrollLeft;
-
-    if (scrollLeft < loopWidth || scrollLeft >= 2 * loopWidth) {
-      const offset = ((scrollLeft - loopWidth) % loopWidth + loopWidth) % loopWidth;
-      container.scrollLeft = loopWidth + offset;
-    }
-
-    const cardWidthActual = cards[1].offsetLeft - cards[0].offsetLeft;
-    if (cardWidthActual > 0) {
-      const relativeScroll = (container.scrollLeft - loopWidth) % loopWidth;
-      const index = Math.round(relativeScroll / cardWidthActual) % originalCount;
-      setActiveWorkIndex((index + originalCount) % originalCount);
-    }
-  };
-
-  // Center scroll positions on mount to the middle copy
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const flexWrapper = container.firstElementChild as HTMLElement;
-    if (!flexWrapper) return;
-
-    const initScroll = () => {
-      const cards = Array.from(flexWrapper.children) as HTMLElement[];
-      const originalCount = homeCards.length;
-      if (cards.length >= originalCount * 2) {
-        const child1 = cards[0];
-        const child2 = cards[originalCount];
-        if (child1 && child2) {
-          const loopWidth = child2.offsetLeft - child1.offsetLeft;
-          if (loopWidth > 0) {
-            container.scrollLeft = loopWidth;
-          }
-        }
-      }
-    };
-
-    initScroll();
-    const t = setTimeout(initScroll, 150);
-    return () => clearTimeout(t);
-  }, []);
-
-  // Testimonials Mouse Drag handlers
   const handleTestimonialsMouseDown = (e: React.MouseEvent) => {
     const container = testimonialsContainerRef.current;
     if (!container) return;
@@ -554,7 +255,7 @@ export default function SelectedWork() {
     testStartXRef.current = e.clientX;
     testStartScrollLeftRef.current = container.scrollLeft;
     testSpeedFactorRef.current = 0;
-    document.documentElement.setAttribute('data-carousel-dragging', 'true');
+    document.documentElement.setAttribute("data-carousel-dragging", "true");
   };
 
   const handleTestimonialsMouseMove = (e: React.MouseEvent) => {
@@ -574,7 +275,7 @@ export default function SelectedWork() {
     setIsTestimonialsMouseDown(false);
     setIsTestimonialsSnapping(true);
     testSpeedFactorRef.current = 0;
-    document.documentElement.removeAttribute('data-carousel-dragging');
+    document.documentElement.removeAttribute("data-carousel-dragging");
   };
 
   const handleTestimonialsMouseLeaveCombined = () => {
@@ -644,11 +345,12 @@ export default function SelectedWork() {
     <motion.section
       id="projects"
       ref={sectionRef}
-      className="w-full bg-secondary-bg border-primary border-solid rounded-[48px] md:rounded-[110px] pt-10 pb-[284px] md:pt-16 md:pb-[416px] relative overflow-hidden z-[1] mt-12 md:mt-24"
+      className="w-full bg-secondary-bg border-primary border-solid rounded-[48px] md:rounded-[110px] pt-10 pb-[240px] md:pt-16 md:pb-[360px] relative overflow-hidden z-[1] mt-12 md:mt-24"
       style={{
         borderWidth: borderWidthStyle,
       }}
     >
+      {/* Section Header */}
       <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-4">
         <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
           <div className="flex flex-col gap-4 max-w-[620px]">
@@ -662,87 +364,87 @@ export default function SelectedWork() {
             </h2>
           </div>
 
-          <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px] md:mt-16">
+          <p className="font-sans text-[16px] pb-4 md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px] md:mt-16">
             Each project presents a different challenge. Solving it requires understanding what matters, what doesn't, and how to set the priorities.
           </p>
         </div>
       </div>
 
-      <CarouselIndicator activeIndex={activeWorkIndex} onClick={scrollToWorkIndex} />
-
-      <div 
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleSelectedWorkMouseLeave}
-        className="relative group w-full mt-0 md:mt-16 z-20"
-      >
-        {/* Left Arrow Button (visible on hover on desktop) */}
-        <button
-          onClick={scrollLeftButton}
-          className="absolute left-4 md:left-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-secondary text-secondary-bg hover:bg-secondary/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
-          aria-label="Scroll left"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-          </svg>
-        </button>
-
-        {/* Right Arrow Button (visible on hover on desktop) */}
-        <button
-          onClick={scrollRightButton}
-          className="absolute right-4 md:right-[min(6vw,80px)] top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 h-14 rounded-full bg-secondary text-secondary-bg hover:bg-secondary/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto cursor-pointer select-none hidden md:flex"
-          aria-label="Scroll right"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-          </svg>
-        </button>
-
-        <div
-          ref={scrollContainerRef}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onTouchCancel={handleTouchEnd}
-          onScroll={handleSelectedWorkScroll}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUpOrLeave}
-          onClickCapture={handleContainerClickCapture}
-          onDragStart={(e) => e.preventDefault()}
-          className={`w-full overflow-x-auto overflow-y-visible scrollbar-none flex mt-0 relative z-20 py-0 select-none ${isMouseDown ? "cursor-grabbing" : "cursor-grab"
-            }`}
-          style={{
-            scrollSnapType: isSnapping ? "x mandatory" : "none",
-          }}
-        >
-          <div
-            className="flex flex-nowrap gap-6 md:gap-10 shrink-0 py-0"
-            style={{
-              paddingLeft: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
-              paddingRight: "calc((100% - min(85vw, 1260px)) / 2 + var(--selected-work-pad-left))",
-            }}
+      {/* Featured 3 Fixed Case Studies stacked vertically */}
+      <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mt-10 md:mt-16 flex flex-col gap-8 md:gap-12 relative z-20 pointer-events-auto">
+        {featuredCaseStudies.map((study) => (
+          <Link
+            key={study.href}
+            href={study.href}
+            className="group w-full bg-white rounded-[32px] md:rounded-[44px] p-6 md:p-8 lg:p-10 flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 items-center shadow-[0_15px_45px_rgba(27,35,122,0.08)] hover:shadow-[0_25px_60px_rgba(27,35,122,0.16)] transition-all duration-300 select-none cursor-pointer"
           >
-            {duplicatedCaseStudyCards.map((card, index) => (
-              <div
-                key={`${card.title}-${index}`}
-                className="snap-start shrink-0 w-[82vw] md:w-[60vw] lg:w-[44vw] max-w-[680px] flex"
-              >
-                <CaseStudyCard
-                  title={card.title}
-                  description={card.description}
-                  videoSrc={card.videoSrc}
-                  imageSrc={card.imageSrc}
-                  href={card.href}
-                  featured={false}
-                  tags={card.tags}
-                />
+            {/* Left Column: Image */}
+            <div className="relative w-full md:w-1/2 h-[260px] sm:h-[320px] md:h-[360px] lg:h-[400px] rounded-[24px] md:rounded-[32px] overflow-hidden shrink-0">
+              <Image
+                src={study.imageSrc}
+                alt={study.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+              />
+            </div>
+
+            {/* Right Column: Information */}
+            <div className="w-full md:w-1/2 flex flex-col justify-between text-left h-full py-1 md:py-2 gap-4">
+              {/* Category Pill above title */}
+              <div>
+                <span className="inline-block px-4 py-1.5 rounded-full bg-background/8 border border-background/15 text-background font-sans font-semibold text-[11px] md:text-[12px] uppercase tracking-[1.5px]">
+                  {study.categoryPill}
+                </span>
+
+                {/* Title */}
+                <h3 className="font-serif text-[26px] sm:text-[32px] md:text-[38px] leading-[1.12] text-background font-normal tracking-tight mt-4 group-hover:text-background/80 transition-colors">
+                  {study.title}
+                </h3>
+
+                {/* Description */}
+                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[24px] md:leading-[26px] text-background/75 font-normal mt-3">
+                  {study.description}
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
+
+              {/* Tags & Action Button */}
+              <div className="pt-4 mt-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full border-t border-background/10">
+                <div className="flex flex-wrap gap-2 items-center">
+                  {study.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full border border-background/20 text-background/80 text-[10px] md:text-[11px] font-sans font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="h-[46px] px-6 rounded-full bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 group-hover:opacity-90 transition-opacity duration-200 shrink-0 w-fit">
+                  <span>View Case Study</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    className="w-3.5 h-3.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
 
-      <CarouselIndicator activeIndex={activeWorkIndex} onClick={scrollToWorkIndex} />
-
+      {/* Testimonials */}
       <div id="testimonials" className="mt-20 md:mt-28">
         <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mb-8 md:mb-12 text-left">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-[72px] w-full">
@@ -757,7 +459,7 @@ export default function SelectedWork() {
               </h2>
             </div>
 
-            <p className="font-sans text-[16px] pb-15 md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px] md:mt-16">
+            <p className="font-sans text-[16px] pb-4 md:text-[18px] leading-[26px] text-secondary font-normal max-w-[460px] md:mt-16">
               A few words from people I’ve worked with across web, design, product and systems projects.
             </p>
           </div>
