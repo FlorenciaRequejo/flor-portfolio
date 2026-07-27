@@ -6,7 +6,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full max-w-[850px] mx-auto px-4 md:px-6 pt-6 md:pt-8 pb-16 md:pb-24 flex flex-col items-center justify-center text-center gap-6 relative select-text pointer-events-auto"
+      className="w-full max-w-[850px] mx-auto px-4 md:px-6 pt-6 md:pt-8 pb-6 md:pb-24 flex flex-col items-center justify-center text-center gap-6 relative select-text pointer-events-auto"
     >
       <div className="flex flex-col items-center justify-center text-center gap-5 w-full">
         <span className="font-sans text-[13px] md:text-[14px] uppercase tracking-[3px] text-secondary/80">

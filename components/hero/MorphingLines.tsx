@@ -528,9 +528,10 @@ export default function MorphingLines() {
         const h3 = pill3.offsetHeight || 28;
 
         // Target Y offsets relative to scrollIndicatorRef container
-        const target1 = 0.1743 * vh - h1 / 2;
-        const target2 = 0.2525 * vh - h2 / 2;
-        const target3 = 0.3308 * vh - h3 / 2;
+        const targetOffset = isMobile ? -0.08 * vh : 0;
+        const target1 = 0.1743 * vh + targetOffset - h1 / 2;
+        const target2 = 0.2525 * vh + targetOffset - h2 / 2;
+        const target3 = 0.3308 * vh + targetOffset - h3 / 2;
 
         const start1 = 30;
         const start2 = 74;
@@ -817,10 +818,10 @@ export default function MorphingLines() {
           </div>
         </div>
 
-        // Section 2: About Content (Fades in during morph)
+        {/* Section 2: About Content (Fades in during morph) */}
         <div
           ref={aboutRef}
-          className="absolute inset-0 w-full h-full flex items-center md:items-end justify-center z-20 pointer-events-none pb-[18vh] md:pb-[7vh]"
+          className="absolute inset-0 w-full h-full flex items-end justify-center z-20 pointer-events-none pb-[4vh] md:pb-[7vh]"
           style={{
             opacity: 0,
             willChange: "opacity, transform",
