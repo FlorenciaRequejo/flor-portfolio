@@ -568,12 +568,13 @@ export default function MorphingLines() {
           pill2.style.transform = `translate3d(${deltaX2 * alignT}px, 0, 0)`;
           pill3.style.transform = `translate3d(${deltaX3 * alignT}px, 0, 0)`;
         } else {
-          pill1.style.left = "";
-          pill2.style.left = "";
-          pill3.style.left = "";
-          pill1.style.transform = "translate3d(0, 0, 0)";
-          pill2.style.transform = "translate3d(0, 0, 0)";
-          pill3.style.transform = "translate3d(0, 0, 0)";
+          // MOBILE ONLY: Center pills horizontally on screen
+          pill1.style.left = "50%";
+          pill2.style.left = "50%";
+          pill3.style.left = "50%";
+          pill1.style.transform = "translate3d(-50%, 0, 0)";
+          pill2.style.transform = "translate3d(-50%, 0, 0)";
+          pill3.style.transform = "translate3d(-50%, 0, 0)";
         }
 
         // Color transition: from #FDABFF (253, 171, 255) to #1B237A (27, 35, 122)
@@ -816,10 +817,10 @@ export default function MorphingLines() {
           </div>
         </div>
 
-        {/* Section 2: About Content (Fades in during morph) */}
+        // Section 2: About Content (Fades in during morph)
         <div
           ref={aboutRef}
-          className="absolute inset-0 w-full h-full flex items-end justify-center z-20 pointer-events-none pb-[4vh] md:pb-[7vh]"
+          className="absolute inset-0 w-full h-full flex items-center md:items-end justify-center z-20 pointer-events-none pb-[18vh] md:pb-[7vh]"
           style={{
             opacity: 0,
             willChange: "opacity, transform",
