@@ -48,7 +48,7 @@ export default function AboutClient() {
               <div className="w-full rounded-[24px] overflow-hidden">
                 <Image
                   src="/florencia_requejo_about_us_2.webp"
-                  alt="Florencia Requejo"
+                  alt="Florencia Requejo - Senior Product Designer, UX/UI Researcher and Systems Developer"
                   width={1200}
                   height={1346}
                   className="w-full h-auto"
@@ -174,8 +174,8 @@ export default function AboutClient() {
                 </a>
 
                 <Link
-                  href="/#projects"
-                  className="h-[50px] px-8 rounded-full border border-primary text-primary font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-primary/10"
+                  href="/projects"
+                  className="h-[50px] px-8 rounded-full border border-primary text-primary font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-primary/10 cursor-pointer pointer-events-auto relative z-20"
                 >
                   View My Work
                 </Link>

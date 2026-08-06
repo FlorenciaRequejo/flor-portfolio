@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, useScroll, useTransform, useMotionValue, useReducedMotion } from "framer-motion";
+import { usePasswordProtection } from "@/context/PasswordContext";
 
 const featuredCaseStudies = [
   {
@@ -19,10 +21,11 @@ const featuredCaseStudies = [
     categoryPill: "Product Development",
     title: "Proactive Content Creation from an SEO Strategy",
     description:
-      "An AI-powered content engine connecting local search strategy to automated article generation, custom graphics, and notification approval loops.",
+      "An AI-powered content engine that connects a GEO strategy with automated article generation, custom graphics, and approval workflows with built-in notifications.",
     href: "/continuous-content",
     imageSrc: "/cover-blogbooster.webp",
     tags: ["AI Automation", "SEO Strategy", "Product Design"],
+    isProtected: true,
   },
   {
     categoryPill: "System Architecture",
@@ -32,6 +35,7 @@ const featuredCaseStudies = [
     href: "/web-design-and-development",
     imageSrc: "/waatea-ipad-mp3.webp",
     tags: ["System Architecture", "Automation", "WordPress"],
+    isProtected: true,
   },
 ];
 
@@ -109,6 +113,8 @@ function TestimonialCard({ quote, name, role, avatarSrc }: TestimonialCardProps)
 }
 
 export default function SelectedWork() {
+  const router = useRouter();
+  const { isUnlocked, openPasswordModal } = usePasswordProtection();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -372,76 +378,131 @@ export default function SelectedWork() {
 
       {/* Featured 3 Fixed Case Studies stacked vertically */}
       <div className="mx-auto w-[min(85vw,1260px)] px-4 md:px-12 mt-10 md:mt-16 flex flex-col gap-8 md:gap-12 relative z-20 pointer-events-auto">
-        {featuredCaseStudies.map((study) => (
-          <Link
-            key={study.href}
-            href={study.href}
-            className="group w-full bg-white rounded-[32px] md:rounded-[44px] p-6 md:p-8 lg:p-10 flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 items-center shadow-[0_15px_45px_rgba(27,35,122,0.08)] hover:shadow-[0_25px_60px_rgba(27,35,122,0.16)] transition-all duration-300 select-none cursor-pointer"
-          >
-            {/* Left Column: Image */}
-            <div className="relative w-full md:w-1/2 h-[260px] sm:h-[320px] md:h-[360px] lg:h-[400px] rounded-[24px] md:rounded-[32px] overflow-hidden shrink-0">
-              <Image
-                src={study.imageSrc}
-                alt={study.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
-              />
-            </div>
+        {featuredCaseStudies.map((study) => {
+          const isLocked = study.isProtected && !isUnlocked;
 
-            {/* Right Column: Information */}
-            <div className="w-full md:w-1/2 flex flex-col justify-between text-left h-full py-1 md:py-2 gap-4">
-              {/* Category Pill above title */}
-              <div>
-                <span className="inline-block px-4 py-1.5 rounded-full bg-background/8 border border-background/15 text-background font-sans font-semibold text-[11px] md:text-[12px] uppercase tracking-[1.5px]">
-                  {study.categoryPill}
-                </span>
+          const handleClick = (e: React.MouseEvent) => {
+            if (isLocked) {
+              e.preventDefault();
+              openPasswordModal(() => {
+                router.push(study.href);
+              });
+            }
+          };
 
-                {/* Title */}
-                <h3 className="font-serif text-[26px] sm:text-[32px] md:text-[38px] leading-[1.12] text-background font-normal tracking-tight mt-4 group-hover:text-background/80 transition-colors">
-                  {study.title}
-                </h3>
+          return (
+            <Link
+              key={study.href}
+              href={study.href}
+              onClick={handleClick}
+              className="group w-full bg-white rounded-[32px] md:rounded-[44px] p-6 md:p-8 lg:p-10 flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 items-center shadow-[0_15px_45px_rgba(27,35,122,0.08)] hover:shadow-[0_25px_60px_rgba(27,35,122,0.16)] transition-all duration-300 select-none cursor-pointer relative"
+            >
+              {/* Left Column: Image */}
+              <div className="relative w-full md:w-1/2 h-[260px] sm:h-[320px] md:h-[360px] lg:h-[400px] rounded-[24px] md:rounded-[32px] overflow-hidden shrink-0">
+                <Image
+                  src={study.imageSrc}
+                  alt={study.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className={`object-cover object-center transition-all duration-500 ${
+                    isLocked ? "blur-md scale-105" : "group-hover:scale-[1.03]"
+                  }`}
+                />
 
-                {/* Description */}
-                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[24px] md:leading-[26px] text-background/75 font-normal mt-3">
-                  {study.description}
-                </p>
-              </div>
-
-              {/* Tags & Action Button */}
-              <div className="pt-4 mt-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full border-t border-background/10">
-                <div className="flex flex-wrap gap-2 items-center">
-                  {study.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full border border-background/20 text-background/80 text-[10px] md:text-[11px] font-sans font-medium"
+                {/* Corner Lock Badge */}
+                {isLocked && (
+                  <div className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-sans font-medium text-[11px] uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      className="w-3.5 h-3.5"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                      />
+                    </svg>
+                    <span>Protected</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Information */}
+              <div className="w-full md:w-1/2 flex flex-col justify-between text-left h-full py-1 md:py-2 gap-4">
+                {/* Category Pill above title */}
+                <div>
+                  <span className="inline-block px-4 py-1.5 rounded-full bg-background/8 border border-background/15 text-background font-sans font-semibold text-[11px] md:text-[12px] uppercase tracking-[1.5px]">
+                    {study.categoryPill}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="font-serif text-[26px] sm:text-[32px] md:text-[38px] leading-[1.12] text-background font-normal tracking-tight mt-4 group-hover:text-background/80 transition-colors">
+                    {study.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[24px] md:leading-[26px] text-background/75 font-normal mt-3">
+                    {study.description}
+                  </p>
                 </div>
 
-                <div className="h-[46px] px-6 rounded-full bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 group-hover:opacity-90 transition-opacity duration-200 shrink-0 w-fit">
-                  <span>View Case Study</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2.5"
-                    stroke="currentColor"
-                    className="w-3.5 h-3.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                    />
-                  </svg>
+                {/* Tags & Action Button */}
+                <div className="pt-4 mt-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full border-t border-background/10">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    {study.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full border border-background/20 text-background/80 text-[10px] md:text-[11px] font-sans font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="h-[46px] px-6 rounded-full bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 group-hover:opacity-90 transition-opacity duration-200 shrink-0 w-fit">
+                    {isLocked && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        className="w-3.5 h-3.5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                        />
+                      </svg>
+                    )}
+                    <span>{isLocked ? "Unlock Case Study" : "View Case Study"}</span>
+                    {!isLocked && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        className="w-3.5 h-3.5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                        />
+                      </svg>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Testimonials */}

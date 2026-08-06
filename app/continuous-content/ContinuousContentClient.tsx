@@ -7,6 +7,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/hero/FooterSection";
 import CaseStudyCard from "@/components/hero/CaseStudyCard";
+import PasswordGuard from "@/components/PasswordGuard";
 import { caseStudyCards } from "@/lib/caseStudies";
 
 // Animation Variants
@@ -125,10 +126,11 @@ const handleToggleReadingMode = (newValue: boolean) => {
   }, [isReadingMode]);
 
   return (
-    <div
-      className={`case-study-container w-full min-h-screen bg-background text-foreground selection:bg-primary selection:text-background ${isReadingMode ? "reading-mode" : ""
-        }`}
-    >
+    <PasswordGuard title="Proactive Content Creation from an SEO Strategy">
+      <div
+        className={`case-study-container w-full min-h-screen bg-background text-foreground selection:bg-primary selection:text-background ${isReadingMode ? "reading-mode" : ""
+          }`}
+      >
       <Navbar />
 
       {/* HERO SECTION */}
@@ -657,6 +659,7 @@ const handleToggleReadingMode = (newValue: boolean) => {
                   href={card.href}
                   featured={false}
                   tags={card.tags}
+                  isProtected={card.isProtected}
                 />
               </div>
             ))}
@@ -668,5 +671,6 @@ const handleToggleReadingMode = (newValue: boolean) => {
       {/* FOOTER CTA SECTION */}
       <FooterSection />
     </div>
+    </PasswordGuard>
   );
 }

@@ -49,10 +49,10 @@ export default function FooterSection() {
             <p className="font-sans text-[16px] md:text-[18px] leading-[26px] text-primary/80 max-w-[620px] font-normal">
               Whether it’s a new product, a website, a brand or a complex business challenge, I’d love to hear about it.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 pt-6">
+            <div className="flex flex-wrap justify-center gap-4 pt-6 relative z-20">
               <Link
                 href="/projects"
-                className="h-[50px] px-8 rounded-full border border-primary text-primary font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-primary/10"
+                className="h-[50px] px-8 rounded-full border border-primary text-primary font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:bg-primary/10 cursor-pointer pointer-events-auto relative z-20"
               >
                 View My Work
               </Link>

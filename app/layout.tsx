@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import { PasswordProtectionProvider } from "@/context/PasswordContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,9 +18,62 @@ const bagossExtended = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Flor Requejo",
+  metadataBase: new URL("https://flor-portfolio-flax.vercel.app"),
+  title: {
+    default: "Flor Requejo | Product Designer & Systems Developer",
+    template: "%s | Flor Requejo",
+  },
   description:
-    "Creative thinking, grounded in execution. Design, tech and product.",
+    "Flor Requejo is a Product Designer, UX/UI Researcher, and Systems Developer specializing in brand identity, scalable web architecture, GEO strategy, and AI automation engines.",
+  keywords: [
+    "Flor Requejo",
+    "Product Designer",
+    "UX/UI Designer",
+    "UX Researcher",
+    "Systems Architect",
+    "Web Developer",
+    "Brand Identity",
+    "Design Systems",
+    "GEO Strategy",
+    "AI Automation",
+    "WordPress Development",
+    "Figma",
+  ],
+  authors: [{ name: "Flor Requejo" }],
+  creator: "Flor Requejo",
+  icons: {
+    icon: "/favicon.jpg",
+    shortcut: "/favicon.jpg",
+    apple: "/favicon.jpg",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://flor-portfolio-flax.vercel.app",
+    title: "Flor Requejo | Product Designer & Systems Developer",
+    description:
+      "Creative thinking, grounded in execution. Product Design, UX/UI, Systems Architecture, and AI Automation.",
+    siteName: "Flor Requejo Portfolio",
+    images: [
+      {
+        url: "/flor.webp",
+        width: 500,
+        height: 500,
+        alt: "Flor Requejo - Product Designer and Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Flor Requejo | Product Designer & Systems Developer",
+    description:
+      "Creative thinking, grounded in execution. Product Design, UX/UI, Systems Architecture, and AI Automation.",
+    images: ["/flor.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -51,9 +105,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        <PasswordProtectionProvider>
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
+        </PasswordProtectionProvider>
       </body>
     </html>
   );

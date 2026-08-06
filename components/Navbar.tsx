@@ -47,7 +47,7 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
             <Link href="/" className="flex items-center gap-[10px] select-none">
               <Image
                 src="/Florencia-500x500.jpg"
-                alt="Flor Requejo"
+                alt="Flor Requejo - Product Designer and Developer"
                 width={50}
                 height={50}
                 priority

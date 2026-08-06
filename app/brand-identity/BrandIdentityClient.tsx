@@ -568,32 +568,31 @@ const handleToggleReadingMode = (newValue: boolean) => {
             ref={otherScrollContainerRef}
             className="w-full overflow-x-auto scrollbar-none flex px-4 md:px-[calc((100%-min(76vw,1260px))/2)] scroll-smooth"
           >
-          <div className="flex flex-nowrap gap-6 md:gap-10 pb-4">
-            {otherCaseStudies.map((card) => (
-              <div
-                key={card.title}
-                className="shrink-0 w-[82vw] md:w-[40vw] max-w-[540px] flex"
-              >
-                <CaseStudyCard
-                  title={card.title}
-                  description={card.description}
-                  videoSrc={card.videoSrc}
-                  imageSrc={card.imageSrc}
-                  href={card.href}
-                  featured={false}
-                  tags={card.tags}
-                />
-              </div>
-            ))}
+            <div className="flex flex-nowrap gap-6 md:gap-10 pb-4">
+              {otherCaseStudies.map((card) => (
+                <div
+                  key={card.title}
+                  className="shrink-0 w-[82vw] md:w-[40vw] max-w-[540px] flex"
+                >
+                  <CaseStudyCard
+                    title={card.title}
+                    description={card.description}
+                    videoSrc={card.videoSrc}
+                    imageSrc={card.imageSrc}
+                    href={card.href}
+                    featured={false}
+                    tags={card.tags}
+                    isProtected={card.isProtected}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
         </div>
       </section>
 
       {/* FOOTER CTA SECTION */}
       <FooterSection />
-
-
     </div>
   );
 }

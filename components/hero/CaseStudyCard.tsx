@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { usePasswordProtection } from "@/context/PasswordContext";
 
 interface CaseStudyCardProps {
   title: string;
@@ -13,6 +15,7 @@ interface CaseStudyCardProps {
   href: string;
   featured: boolean;
   tags?: string[];
+  isProtected?: boolean;
 }
 
 export default function CaseStudyCard({
@@ -23,8 +26,13 @@ export default function CaseStudyCard({
   href,
   featured,
   tags = [],
+  isProtected = false,
 }: CaseStudyCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
+  const { isUnlocked, openPasswordModal } = usePasswordProtection();
+
+  const isLocked = isProtected && !isUnlocked;
 
   // Clean soft shadow variants (size/scale and position stay completely fixed)
   const cardVariants = {
@@ -38,11 +46,25 @@ export default function CaseStudyCard({
 
   const isExternal = href.startsWith("http");
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (isLocked) {
+      e.preventDefault();
+      openPasswordModal(() => {
+        if (isExternal) {
+          window.open(href, "_blank", "noopener,noreferrer");
+        } else {
+          router.push(href);
+        }
+      });
+    }
+  };
+
   return (
     <Link
       href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
+      target={isExternal && !isLocked ? "_blank" : undefined}
+      rel={isExternal && !isLocked ? "noopener noreferrer" : undefined}
+      onClick={handleClick}
       className="w-full h-full block"
     >
       <motion.div
@@ -62,8 +84,31 @@ export default function CaseStudyCard({
             fill
             priority={false}
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover object-center transition-opacity duration-500"
+            className={`object-cover object-center transition-all duration-500 ${
+              isLocked ? "blur-md scale-105" : ""
+            }`}
           />
+
+          {/* Corner Lock Badge */}
+          {isLocked && (
+            <div className="absolute top-3 right-3 z-10 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-sans font-medium text-[10px] uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="w-3 h-3"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+              <span>Protected</span>
+            </div>
+          )}
         </div>
 
         {/* Content Container: Inset 10px more than media (total X + 10px) */}
@@ -98,24 +143,42 @@ export default function CaseStudyCard({
             {/* Vertical Divider (hidden on mobile) */}
             <div className="hidden sm:block h-8 w-px bg-fixed-dark/20 shrink-0 mx-[20px] md:mx-[24px]" />
 
-            {/* Read More button */}
+            {/* Read More / Unlock button */}
             <div className="shrink-0 w-fit">
               <div className="h-[50px] px-6 rounded-full bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity duration-200">
-                <span>Read More</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2.5"
-                  stroke="currentColor"
-                  className="w-3.5 h-3.5 md:w-4 md:h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                  />
-                </svg>
+                {isLocked && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    className="w-3.5 h-3.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                    />
+                  </svg>
+                )}
+                <span>{isLocked ? "Unlock" : "Read More"}</span>
+                {!isLocked && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    className="w-3.5 h-3.5 md:w-4 md:h-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
+                )}
               </div>
             </div>
           </div>

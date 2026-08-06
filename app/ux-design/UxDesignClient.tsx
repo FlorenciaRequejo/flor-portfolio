@@ -95,8 +95,8 @@ export default function UxDesignClient() {
     (card) => card.href !== "/ux-design"
   );
 
-    const otherScrollContainerRef = useRef<HTMLDivElement>(null);
-const handleToggleReadingMode = (newValue: boolean) => {
+  const otherScrollContainerRef = useRef<HTMLDivElement>(null);
+  const handleToggleReadingMode = (newValue: boolean) => {
     hasManuallyToggledRef.current = true;
     setIsReadingMode(newValue);
     setJustAutoActivated(false);
@@ -138,12 +138,12 @@ const handleToggleReadingMode = (newValue: boolean) => {
         <div className="mx-auto w-full px-4 md:px-0 max-w-full md:max-w-[min(76vw,1260px)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start w-full">
             {/* Left Title Area */}
-            <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left">
-              <span className="text-secondary font-sans text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
-                CASE STUDY / UX/UI & PRODUCT DESIGN
+            <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 text-left font-sans">
+              <span className="text-secondary text-[11px] md:text-[12px] tracking-[4px] uppercase font-semibold">
+                CASE STUDY / UX/UI &amp; PRODUCT DESIGN
               </span>
               <h1 className="font-serif text-[38px] sm:text-[52px] md:text-[68px] lg:text-[76px] leading-[1.05] text-primary font-normal tracking-tight">
-                Helping people face grocery-related financial challenges in an economic recession.
+                Meal Planning App. Product Research, Strategy &amp; UX/UI Design
               </h1>
             </div>
 

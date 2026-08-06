@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
 
 const AboutSection = dynamic(() => import("./AboutSection"), { ssr: false });
 
@@ -54,9 +55,9 @@ export default function MorphingLines() {
   const chaosSvgRef = useRef<SVGSVGElement>(null);
   const orderedSvgRef = useRef<SVGSVGElement>(null);
   const indicatorChromeRef = useRef<HTMLDivElement>(null);
-  const pill1Ref = useRef<HTMLSpanElement>(null);
-  const pill2Ref = useRef<HTMLSpanElement>(null);
-  const pill3Ref = useRef<HTMLSpanElement>(null);
+  const pill1Ref = useRef<HTMLAnchorElement>(null);
+  const pill2Ref = useRef<HTMLAnchorElement>(null);
+  const pill3Ref = useRef<HTMLAnchorElement>(null);
 
 
 
@@ -588,20 +589,15 @@ export default function MorphingLines() {
         pill2.style.color = colorStr;
         pill3.style.color = colorStr;
 
-        const borderOpacity = 0.2 * (1 - alignT);
+        // Keep visible pill outline border throughout all phases
+        const borderOpacity = 0.2 + 0.25 * alignT;
         pill1.style.borderColor = `rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
         pill2.style.borderColor = `rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
         pill3.style.borderColor = `rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
 
-        if (alignT > 0.8) {
-          pill1.style.borderWidth = '0px';
-          pill2.style.borderWidth = '0px';
-          pill3.style.borderWidth = '0px';
-        } else {
-          pill1.style.borderWidth = '1px';
-          pill2.style.borderWidth = '1px';
-          pill3.style.borderWidth = '1px';
-        }
+        pill1.style.borderWidth = '1px';
+        pill2.style.borderWidth = '1px';
+        pill3.style.borderWidth = '1px';
 
         // Pills fade out between p = 0.75 and 0.85
         let pillsOpacity = Math.max(0, Math.min(1, 1 - (p - 0.75) / (0.85 - 0.75)));
@@ -621,9 +617,15 @@ export default function MorphingLines() {
         pill3.style.visibility = pillsOpacity === 0 ? "hidden" : "visible";
 
         if (pillsOpacity > 0.01) {
-          scrollIndicator.style.pointerEvents = "auto";
+          scrollIndicator.style.pointerEvents = "none";
+          pill1.style.pointerEvents = "auto";
+          pill2.style.pointerEvents = "auto";
+          pill3.style.pointerEvents = "auto";
         } else {
           scrollIndicator.style.pointerEvents = "none";
+          pill1.style.pointerEvents = "none";
+          pill2.style.pointerEvents = "none";
+          pill3.style.pointerEvents = "none";
         }
       }
     }
@@ -774,14 +776,14 @@ export default function MorphingLines() {
         {/* Scroll Indicator - Desktop only (fixed to bottom of viewport, line extended up) */}
         <div
           ref={scrollIndicatorRef}
-          className="flex absolute top-[25vh] bottom-[50px] left-0 right-0 mx-auto z-20 pointer-events-none w-full md:w-[min(76vw,1260px)] justify-center md:justify-end transition-opacity duration-0"
+          className="flex absolute top-[25vh] bottom-[50px] left-0 right-0 mx-auto z-40 pointer-events-none w-full md:w-[min(76vw,1260px)] justify-center md:justify-end transition-opacity duration-0"
           style={{
             willChange: "opacity, transform",
           }}
         >
-          <div className="flex items-end gap-4 h-full relative w-full md:w-auto justify-center md:justify-end">
+          <div className="flex items-end gap-4 h-full relative w-full md:w-auto justify-center md:justify-end pointer-events-none">
             {/* Extended Line & Dot Chrome */}
-            <div ref={indicatorChromeRef} className="hidden md:flex items-end gap-4 h-full">
+            <div ref={indicatorChromeRef} className="hidden md:flex items-end gap-4 h-full pointer-events-none">
               <div className="flex flex-col items-center h-full relative">
                 {/* Tall vertical line */}
                 <div className="w-[1.5px] flex-grow bg-primary/40" />
@@ -795,25 +797,28 @@ export default function MorphingLines() {
             </div>
 
             {/* Pills container positioned on the right side of the vertical line */}
-            <div className="absolute left-0 md:left-6 top-0 h-full pointer-events-auto w-full md:w-auto">
-              <span
+            <div className="absolute left-0 md:left-6 top-0 h-full pointer-events-auto w-full md:w-auto z-50">
+              <Link
+                href="/projects?category=Digital+Design"
                 ref={pill1Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-0 md:top-[30px]"
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-0 md:top-[30px] cursor-pointer z-50 pointer-events-auto"
               >
                 Digital Design
-              </span>
-              <span
+              </Link>
+              <Link
+                href="/projects?category=System+Architecture"
                 ref={pill2Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[44px] md:top-[74px]"
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-[44px] md:top-[74px] cursor-pointer z-50 pointer-events-auto"
               >
                 System Architecture
-              </span>
-              <span
+              </Link>
+              <Link
+                href="/projects?category=Product+Development"
                 ref={pill3Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:border-primary/55 transition-colors top-[88px] md:top-[118px]"
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-[88px] md:top-[118px] cursor-pointer z-50 pointer-events-auto"
               >
                 Product Development
-              </span>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ProjectsClient from "./ProjectsClient";
 import { getPersonSchema, getProjectSchemaByHref, BASE_URL } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Projects Portfolio | Flor Requejo",
+  title: "Projects Portfolio | Selected Works & Case Studies",
   description:
-    "Explore Flor Requejo's portfolio of selected works, including automated media platforms, branding systems, UX/UI case studies, and SEO strategy systems.",
+    "Explore Flor Requejo's portfolio of selected works in Product Design, UX/UI Research, Systems Architecture, AI Content Engines, and Brand Design Systems.",
   openGraph: {
-    title: "Projects Portfolio | Flor Requejo",
+    title: "Projects Portfolio | Flor Requejo - Selected Works",
     description:
-      "Explore Flor Requejo's portfolio of selected works, including automated media platforms, branding systems, UX/UI case studies, and SEO strategy systems.",
+      "Explore Flor Requejo's portfolio of selected works in Product Design, UX/UI Research, Systems Architecture, AI Content Engines, and Brand Design Systems.",
     url: "https://flor-portfolio-flax.vercel.app/projects",
     siteName: "Flor Requejo Portfolio",
     type: "website",
@@ -61,7 +62,9 @@ export default function ProjectsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsListSchema) }}
       />
-      <ProjectsClient />
+      <Suspense fallback={<div className="min-h-screen bg-background" />}>
+        <ProjectsClient />
+      </Suspense>
     </>
   );
 }
