@@ -57,8 +57,8 @@ export default function FooterSection() {
                 View My Work
               </Link>
               <a
-                href="/florencia-requejo-cv.pdf"
-                download="florencia-requejo-cv.pdf"
+                href="/Florencia%20Requejo%20-%20CV%20-%202026.pdf"
+                download="Florencia Requejo - CV - 2026.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="h-[50px] px-8 rounded-full bg-primary text-background font-sans font-semibold text-[11px] md:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 hover:opacity-90"

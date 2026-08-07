@@ -81,8 +81,8 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           {/* Desktop CV Download Button */}
           <div className="hidden md:block">
             <a
-              href="/florencia-requejo-cv.pdf"
-              download="florencia-requejo-cv.pdf"
+              href="/Florencia%20Requejo%20-%20CV%20-%202026.pdf"
+              download="Florencia Requejo - CV - 2026.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="h-[50px] px-6 rounded-full flex items-center justify-center bg-primary text-background font-sans font-semibold text-[10px] md:text-xs uppercase tracking-wider hover:opacity-90 transition-opacity duration-200"
@@ -135,8 +135,8 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
           </div>
 
           <a
-            href="/florencia-requejo-cv.pdf"
-            download="florencia-requejo-cv.pdf"
+            href="/Florencia%20Requejo%20-%20CV%20-%202026.pdf"
+            download="Florencia Requejo - CV - 2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
