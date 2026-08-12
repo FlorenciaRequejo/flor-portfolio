@@ -9,13 +9,13 @@ import { usePasswordProtection } from "@/context/PasswordContext";
 
 const featuredCaseStudies = [
   {
-    categoryPill: "Digital Design",
-    title: "Brand Identity: Visual Language & Design System",
+    categoryPill: "Web & UX/UI Design",
+    title: "Sport Manawatū: UX/UI & WordPress Website Redesign",
     description:
-      "Developed a complete visual language, from logo design and app interfaces to marketing materials and brand collateral, creating a consistent and memorable experience across every touchpoint.",
-    href: "/brand-identity",
-    imageSrc: "/bite-brand-cover.png",
-    tags: ["Brand Strategy", "Visual Identity", "Design System"],
+      "A full website redesign for Sport Manawatū, focused on improving information architecture, usability and the overall digital experience. The project included UX research, user flows, wireframing, interface design and the final responsive WordPress implementation.",
+    href: "https://www.behance.net/gallery/254163819/Sport-Manawatu-UXUI-WordPress-Website-Redesign",
+    imageSrc: "/sport-manawatu.webp",
+    tags: ["WordPress", "UX/UI", "Web Design", "Responsive Design", "Information Architecture"],
   },
   {
     categoryPill: "Product Development",
@@ -28,13 +28,13 @@ const featuredCaseStudies = [
     isProtected: true,
   },
   {
-    categoryPill: "System Architecture",
+    categoryPill: "Automation & Digital Systems",
     title: "Designing and Building an Automated Media Publishing Platform",
     description:
       "Rebuilt a fragile legacy news platform into a scalable publishing ecosystem by redesigning its architecture and separating infrastructure responsibilities.",
     href: "/web-design-and-development",
     imageSrc: "/waatea-ipad-mp3.webp",
-    tags: ["System Architecture", "Automation", "WordPress"],
+    tags: ["Automation & Digital Systems", "Automation", "WordPress"],
     isProtected: true,
   },
 ];
@@ -503,6 +503,19 @@ export default function SelectedWork() {
             </Link>
           );
         })}
+
+        {/* View All Case Studies Button */}
+        <div className="flex justify-center mt-4 md:mt-6 pointer-events-auto">
+          <Link
+            href="/projects"
+            className="px-8 py-4 rounded-full bg-secondary text-background font-sans font-semibold text-[11px] md:text-[12px] uppercase tracking-[2px] hover:bg-secondary/90 transition-all duration-200 shadow-md inline-flex items-center gap-2 group cursor-pointer"
+          >
+            <span>Ver todos los case study</span>
+            <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+        </div>
       </div>
 
       {/* Testimonials */}

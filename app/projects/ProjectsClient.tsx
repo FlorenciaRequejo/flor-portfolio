@@ -12,9 +12,26 @@ import { usePasswordProtection } from "@/context/PasswordContext";
 
 const categories = [
   "All",
-  "Digital Design",
+  "Web & UX/UI Design",
   "Product Development",
-  "System Architecture",
+  "Automation & Digital Systems",
+] as const;
+
+const availableTags = [
+  "WordPress",
+  "Graphic Design",
+  "Branding",
+  "UX/UI",
+  "Web Design",
+  "Product Design",
+  "Automation",
+  "AI",
+  "Figma",
+  "UX Research",
+  "Dashboard",
+  "Editorial Design",
+  "Logo Design",
+  "Front End",
 ] as const;
 
 type Category = (typeof categories)[number];
@@ -33,6 +50,7 @@ const fadeInVariants = {
 
 export default function ProjectsClient() {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isUnlocked, openPasswordModal } = usePasswordProtection();
@@ -53,10 +71,14 @@ export default function ProjectsClient() {
     }
   };
 
-  const filteredProjects =
-    selectedCategory === "All"
-      ? caseStudyCards
-      : caseStudyCards.filter((card) => card.categoryPill === selectedCategory);
+  const filteredProjects = caseStudyCards.filter((card) => {
+    const matchesCategory =
+      selectedCategory === "All" || card.categoryPill === selectedCategory;
+    const matchesTag =
+      !selectedTag ||
+      card.tags.some((t) => t.toLowerCase() === selectedTag.toLowerCase());
+    return matchesCategory && matchesTag;
+  });
 
   return (
     <div className="w-full min-h-screen bg-background text-primary selection:bg-primary selection:text-background">
@@ -72,7 +94,7 @@ export default function ProjectsClient() {
             Projects Portfolio
           </h1>
           <p className="font-sans text-[15px] md:text-[17px] leading-[26px] text-foreground/75 font-normal max-w-[620px] mt-4">
-            Filter case studies by domain to explore product design, design systems, system architecture, and AI automation projects.
+            Different problems, different approaches. Explore my work across web, UX/UI, product development and digital systems.
           </p>
 
           {/* CATEGORY FILTER BAR */}
@@ -93,6 +115,37 @@ export default function ProjectsClient() {
                 </button>
               );
             })}
+          </div>
+
+          {/* SUB-TAG FILTER BAR */}
+          <div className="flex flex-wrap items-center gap-2 mt-4 pt-3">
+            <span className="font-sans text-[11px] font-semibold uppercase tracking-wider text-primary/50 mr-1">
+              Filter by tag:
+            </span>
+            {availableTags.map((tag) => {
+              const isTagActive = selectedTag === tag;
+              return (
+                <button
+                  key={tag}
+                  onClick={() => setSelectedTag(isTagActive ? null : tag)}
+                  className={`h-[30px] px-3.5 rounded-full font-sans text-[10px] md:text-[11px] font-medium transition-all duration-200 select-none cursor-pointer ${
+                    isTagActive
+                      ? "bg-primary text-background shadow-sm scale-105"
+                      : "bg-surface/80 text-foreground/70 border border-border hover:border-primary/40 hover:text-primary"
+                  }`}
+                >
+                  {tag}
+                </button>
+              );
+            })}
+            {selectedTag && (
+              <button
+                onClick={() => setSelectedTag(null)}
+                className="h-[30px] px-3 rounded-full font-sans text-[10px] text-primary/60 hover:text-primary underline cursor-pointer"
+              >
+                Clear tag filter
+              </button>
+            )}
           </div>
         </div>
       </section>

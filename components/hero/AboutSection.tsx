@@ -13,7 +13,7 @@ export default function AboutSection() {
           Making complexity work.
         </span>
         <h2 className="font-serif text-[36px] sm:text-[48px] md:text-[60px] leading-[1.08] text-secondary font-normal tracking-tight max-w-[760px]">
-          I design brands, websites, products &amp; AI experiences.
+          I design and build websites, digital products and smart systems.
         </h2>
         <p className="font-sans text-[15px] sm:text-[17px] md:text-[18px] leading-[24px] md:leading-[28px] text-secondary/90 font-normal max-w-[640px]">
           For over 15 years, I've helped businesses turn complex ideas into clear, useful experiences. The tools have evolved, but the goal has always been the same: solving the right problems.

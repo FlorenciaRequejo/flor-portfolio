@@ -745,19 +745,19 @@ export default function MorphingLines() {
 
           {/* Supporting Copy */}
           <p className="font-sans text-[18px] leading-[24px] text-primary font-normal text-center md:text-left max-w-[480px]">
-            I combine design, development and strategic thinking, to turn them into products, systems and experiences.
+            I combine UX/UI, web development and technical problem-solving to turn complex requirements into clear, usable digital experiences.
           </p>
 
           {/* Mobile Pills - visible on mobile/tablet, hidden on desktop */}
           <div className="md:hidden flex flex-wrap gap-2.5 justify-center mt-2 w-full max-w-[480px] pointer-events-auto">
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              Digital Design
-            </span>
-            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
-              System Architecture
+              Web &amp; UX/UI Design
             </span>
             <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
               Product Development
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[10px] font-medium uppercase tracking-[1.2px] bg-transparent whitespace-nowrap">
+              Automation &amp; Digital Systems
             </span>
           </div>
 
@@ -799,25 +799,25 @@ export default function MorphingLines() {
             {/* Pills container positioned on the right side of the vertical line */}
             <div className="absolute left-0 md:left-6 top-0 h-full pointer-events-auto w-full md:w-auto z-50">
               <Link
-                href="/projects?category=Digital+Design"
+                href="/projects?category=Web+%26+UX%2FUI+Design"
                 ref={pill1Ref}
                 className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-0 md:top-[30px] cursor-pointer z-50 pointer-events-auto"
               >
-                Digital Design
-              </Link>
-              <Link
-                href="/projects?category=System+Architecture"
-                ref={pill2Ref}
-                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-[44px] md:top-[74px] cursor-pointer z-50 pointer-events-auto"
-              >
-                System Architecture
+                Web &amp; UX/UI Design
               </Link>
               <Link
                 href="/projects?category=Product+Development"
+                ref={pill2Ref}
+                className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-[44px] md:top-[74px] cursor-pointer z-50 pointer-events-auto"
+              >
+                Product Development
+              </Link>
+              <Link
+                href="/projects?category=Automation+%26+Digital+Systems"
                 ref={pill3Ref}
                 className="absolute flat-pill px-4 py-1.5 rounded-full border border-primary/20 text-primary font-sans text-[11px] font-medium uppercase tracking-[1.5px] bg-transparent whitespace-nowrap hover:bg-primary/10 hover:border-primary/55 transition-all top-[88px] md:top-[118px] cursor-pointer z-50 pointer-events-auto"
               >
-                Product Development
+                Automation &amp; Digital Systems
               </Link>
             </div>
           </div>

@@ -21,7 +21,8 @@ export function getPersonSchema() {
     "knowsAbout": [
       "Product Design",
       "UX/UI Design",
-      "System Architecture",
+      "Web & UX/UI Design",
+      "Automation & Digital Systems",
       "Web Design & Development",
       "SEO Strategy",
       "AI Automation",
